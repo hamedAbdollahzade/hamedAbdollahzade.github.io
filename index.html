@@ -3,9 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test</title>
+    <title>miniProjects :</title>
+
+    <style>
+      body {
+        background-color: black;
+        border: 3px solid red;
+        padding: 0px;
+        margin: 0px;
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        color: red;
+      }
+      ol {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: 2.5rem;
+        color: white;
+        font-weight: 900;
+      }
+    </style>
   </head>
   <body>
-    <h1>test Github.io</h1>
+    <h1>" Choose Your Mini Projects "</h1>
+    <ol id="project-list"></ol>
+
+    <script>
+      const Projects = [
+        {
+          id: 1,
+          name: "mini-task-contact-box",
+          url: "https://hamedabdollahzade.github.io/mini-task-contact-box",
+        },
+        {
+          id: 2,
+          name: "mini-task-login-form",
+          url: "https://hamedabdollahzade.github.io/mini-task-login-form",
+        },
+        {
+          id: 3,
+          name: "dark-mode",
+          url: "https://hamedabdollahzade.github.io/dark-mode",
+        },
+        {
+          id: 4,
+          name: "Age-calculator",
+          url: "https://hamedabdollahzade.github.io/Age-calculator",
+        },
+        {
+          id: 5,
+          name: "Bootstrap-task",
+          url: "https://hamedabdollahzade.github.io/Bootstrap-task",
+        },
+        {
+          id: 6,
+          name: "silde-show",
+          url: "https://hamedabdollahzade.github.io/silde-show",
+        },
+        {
+          id: 7,
+          name: "f1iran",
+          url: "https://hamedabdollahzade.github.io/f1iran",
+        },
+      ];
+
+      const projectList = document.getElementById("project-list");
+
+      Projects.forEach((project) => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+
+        link.href = project.url;
+        link.textContent = project.name;
+        link.target = "_blank";
+
+        listItem.appendChild(link);
+        projectList.appendChild(listItem);
+      });
+    </script>
   </body>
 </html>
