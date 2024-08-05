@@ -3,9 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>contact-box</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .box {
+        position: relative;
+        margin-top: 30px;
+        border: 1px solid black;
+        width: 250px;
+        height: 150px;
+        margin: 10px;
+        cursor: pointer;
+      }
+      .item1 {
+        background-color: rgb(13, 42, 66);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+      .item1:hover {
+        translate: 0px -30px;
+       
+      }
+      .item2 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb(19, 106, 156);
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: wheat;
+        z-index: -1;
+      }
+    </style>
   </head>
   <body>
-    <h1>mini-task-contact-box</h1>
+    <section>
+      <div class="box">
+        <div class="item1">item1</div>
+        <div class="item2">item2</div>
+      </div>
+      <div class="box">box2</div>
+      <div class="box">box3</div>
+    </section>
   </body>
 </html>
