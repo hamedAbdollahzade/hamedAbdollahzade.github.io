@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>contact-box</title>
     <style>
       body {
@@ -21,8 +28,8 @@
       }
       .box {
         position: relative;
+        box-sizing: border-box;
         margin-top: 30px;
-        border: 1px solid black;
         width: 250px;
         height: 150px;
         margin: 10px;
@@ -33,16 +40,19 @@
         height: 100%;
         width: 100%;
         display: flex;
+        font-size: 2.5rem;
         justify-content: center;
         align-items: center;
         color: white;
+        transition: 0.5s;
       }
       .item1:hover {
         translate: 0px -30px;
-       
       }
       .item2 {
         position: absolute;
+        font-size: 15px;
+        font-weight: bolder;
         left: 0;
         right: 0;
         bottom: 0;
@@ -59,11 +69,27 @@
   <body>
     <section>
       <div class="box">
-        <div class="item1">item1</div>
-        <div class="item2">item2</div>
+        <div class="item1">
+          <i class="fa-regular fa-envelope"></i>
+        </div>
+        <div class="item2">hamedabdollahzade.ab@gmail.com</div>
       </div>
-      <div class="box">box2</div>
-      <div class="box">box3</div>
+      <div class="box">
+        <div class="item1">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+        </div>
+        <div class="item2">+98 9107902735</div>
+      </div>
+      <div class="box">
+        <div class="item1"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="item2">Mashhad IR</div>
+      </div>
     </section>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+      integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
