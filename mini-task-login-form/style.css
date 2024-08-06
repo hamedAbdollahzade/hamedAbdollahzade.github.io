@@ -12,7 +12,54 @@ body {
   align-items: center;
 }
 .login-container {
-    
+  background-color: rgb(22, 21, 21);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 350px;
+  width: 350px;
+  color: white;
 }
 .form-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #cfcdcd;
+  font-weight: lighter;
+  margin-bottom: 40px;
+  font-size: 3rem;
+}
+.my-input {
+  background-color: rgb(22, 21, 21);
+  border: 1px solid rgb(61, 120, 187);
+  border-radius: 30px;
+  margin-bottom: 30px;
+  padding: 10px 15px;
+  text-align: center;
+  color: #c4bfbf;
+  width: 150px;
+  transition: width 0.3s ease-in-out;
+  cursor: pointer;
+}
+.input-f {
+  width: 220px;
+  border: 1px solid green;
+}
+
+button {
+  background-color: rgb(22, 21, 21);
+  border: 1px solid rgb(14, 180, 69);
+  border-radius: 30px;
+  padding: 10px 30px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+button:hover {
+  background-color: rgb(8, 143, 8);
 }

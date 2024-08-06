@@ -6,16 +6,31 @@
     <link rel="stylesheet" href="style.css" />
     <title>login-form</title>
   </head>
-  <body>
+  <body onclick="fnHandler(event)">
     <section class="container">
       <div class="login-container">
         <form class="form-container">
-          <h1>Login Form</h1>
-          <input type="text" placeholder="Username" required />
-          <input type="password" placeholder="Password" required />
+          <h1>LOGIN</h1>
+          <input
+            class="my-input"
+            type="text"
+            id="username"
+            onclick="fnHandler(event)"
+            placeholder="Username"
+            required
+          />
+          <input
+            onclick="fnHandler(event)"
+            type="password"
+            id="password"
+            class="my-input"
+            placeholder="Password"
+            required
+          />
           <button type="submit">Login</button>
         </form>
       </div>
     </section>
+    <script src="./js.js"></script>
   </body>
 </html>
