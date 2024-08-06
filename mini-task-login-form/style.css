@@ -31,7 +31,8 @@ h1 {
   color: #cfcdcd;
   font-weight: lighter;
   margin-bottom: 40px;
-  font-size: 3rem;
+  font-size: 2rem;
+  margin-top: 50px;
 }
 .my-input {
   background-color: rgb(22, 21, 21);
