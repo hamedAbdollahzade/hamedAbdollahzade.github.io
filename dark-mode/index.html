@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dark-mode</title>
+    <style>
+      .dark-mode {
+        transition: 0.1s;
+        background-color: rgb(23, 25, 40);
+        color: white;
+      }
+      .light-mode {
+        transition: 0.1s;
+        background-color: white;
+        color: black;
+      }
+      .container-dark-mode {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .container-parent-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-size: x-large;
+      }
+
+      .container-button {
+        position: relative;
+        background-color: #ccc;
+        width: 100px;
+        height: 50px;
+        border-top-left-radius: 35%;
+        border-bottom-left-radius: 35%;
+        border-top-right-radius: 35%;
+        border-bottom-right-radius: 35%;
+      }
+      .circle-light {
+        transition: 0.5s;
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+      }
+
+      .circle-dark {
+        transition: 0.5s;
+        position: absolute;
+        left: 50px;
+        bottom: 5px;
+        cursor: pointer;
+        background-color: white;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body class="light-mode">
+    <section class="container-dark-mode">
+      <h1>dark mode</h1>
+      <div class="container-parent-button">
+        <span>light</span>
+        <div class="container-button">
+          <div id="circle" onclick="toggleTheme()" class="circle-light"></div>
+        </div>
+        <span>dark</span>
+      </div>
+    </section>
+
+    <script>
+      const toggleTheme = () => {
+        const body = document.body;
+
+        if (body.classList.contains("dark-mode")) {
+          body.classList.remove("dark-mode");
+          body.classList.add("light-mode");
+          circle.classList.remove("circle-dark");
+        } else if (body.classList.contains("light-mode")) {
+          body.classList.remove("light-mode");
+          body.classList.add("dark-mode");
+          circle.classList.add("circle-dark");
+        }
+      };
+    </script>
+  </body>
+</html>
