@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age calculator</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Age calculator</h1>
+      <h2 id="result"></h2>
+      <input type="date" id="birthdate" />
+      <button onclick="calculateAge()">calculating</button>
+    </div>
+    <script>
+      function calculateAge() {
+        const birthdateInput = document.getElementById("birthdate").value;
+        const birthdate = new Date(birthdateInput);
+        const today = new Date();
+
+        if (!birthdateInput) {
+          document.getElementById("result").innerText =
+            "Please enter your date of birth.";
+          return;
+        }
+
+        let years = today.getFullYear() - birthdate.getFullYear();
+        let months = today.getMonth() - birthdate.getMonth();
+        let days = today.getDate() - birthdate.getDate();
+
+        if (months < 0 || (months === 0 && days < 0)) {
+          years--;
+          months += 12;
+        }
+
+        if (days < 0) {
+          const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+          days += lastMonth.getDate();
+          months--;
+        }
+        if (years < 0) {
+          years = 0;
+        }
+
+        document.getElementById(
+          "result"
+        ).innerText = `years:${years} | months:${months} | days:${days} `;
+      }
+    </script>
+  </body>
+</html>
