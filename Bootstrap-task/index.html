@@ -10,7 +10,16 @@
       crossorigin="anonymous"
     />
     <title>Bootstrap-task</title>
-    <style></style>
+    <style>
+      .my-banner {
+        width: 800px;
+        height: 500px;
+        background-image: url("https://github.com/Hosseinshpr1380/Bootstrap-task/blob/main/service-8.jpg?raw=true");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 20px auto;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -51,15 +60,27 @@
     </header>
 
     <main>
-      <section
-        class="d-flex flex-column justify-content-center align-items-center m-4"
-      >
-        <div class="position-relative">
-          <img
-            src="https://github.com/Hosseinshpr1380/Bootstrap-task/blob/main/service-8.jpg?raw=true"
-            alt=""
-          />
-          
+      <section class="container my-5">
+        <div class="my-banner position-relative">
+          <section
+            class="position-absolute bg-secondary rounded flex-column overflow-hidden"
+            style="width: 400px; height: 300px; top: 30px; left: 30px"
+          >
+            <div class="row justify-content-center p-3">
+              <img
+                src="https://hosseinshpr1380.github.io/Bootstrap-task/cache_60889691.png"
+                alt=""
+              />
+            </div>
+            <div class="row p-2">
+              <p>In der Schornau 25 A44892 Bochum</p>
+              <p>Telefon: 0234 640 55 877 Telefax: 0234 640 55 879</p>
+              <p>E-Mail: info@radiochirurgie-rub.de</p>
+            </div>
+            <button class="btn btn-secondary text-black mx-4">
+              see Profile
+            </button>
+          </section>
         </div>
       </section>
 
@@ -114,23 +135,30 @@
         </section>
 
         <section class="card m-3 mx-auto" style="width: 300px">
-          <section class="card" style="width: 300px">
-            <img
-              class="card-img-top"
-              src="https://hosseinshpr1380.github.io/Bootstrap-task/cache_60890169.jpg"
-              alt="Card image"
-            />
-            <section class="card-body">
-              <h4 class="card-title">John Doe</h4>
-              <p class="card-text">Some example text.</p>
-              <a href="#" class="btn btn-primary">See Profile</a>
-            </section>
+          <img
+            class="card-img-top"
+            src="https://hosseinshpr1380.github.io/Bootstrap-task/cache_60890169.jpg"
+            alt="Card image"
+          />
+          <section class="card-body">
+            <h4 class="card-title">John Doe</h4>
+            <p class="card-text">Some example text.</p>
+            <a href="#" class="btn btn-primary">See Profile</a>
           </section>
         </section>
       </section>
     </main>
 
-    <footer class="my-5 text-center p-5 rounded bg-primary bg-gradient">
+    <footer
+      class="my-5 text-center p-5 rounded"
+      style="
+        background: linear-gradient(
+          236deg,
+          rgb(123, 196, 252),
+          rgb(95, 97, 96)
+        );
+      "
+    >
       <section>
         <h4 class="my-3">Mehr Erfolg durch enge Vernetzung:</h4>
 
