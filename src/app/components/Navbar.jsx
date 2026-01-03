@@ -57,9 +57,9 @@ export default function Navbar({isDarkMode, toggleTheme}) {
             initial={{y: -80}}
             animate={{y: 0}}
             transition={{duration: 0.4, ease: 'easeOut'}}
-            className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
+            className="w-screen fixed !bg-red-500 top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className=" mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* ================= Logo ================= */}
                     <Link to="/" className="flex items-center gap-3">
@@ -68,8 +68,8 @@ export default function Navbar({isDarkMode, toggleTheme}) {
                             <span className="text-white font-bold text-lg">HA</span>
                         </div>
                         <span className="hidden sm:block text-lg font-semibold text-gray-900 dark:text-white">
-              Hamed Abdollahzade
-            </span>
+                              Hamed Abdollahzade
+                        </span>
                     </Link>
 
                     {/* ================= Desktop Menu ================= */}
@@ -85,13 +85,13 @@ export default function Navbar({isDarkMode, toggleTheme}) {
 
                     {/* ================= Actions ================= */}
                     <div className="flex items-center gap-2">
-                        {/*<Button
-                  type="text"
-                  aria-label="Toggle theme"
-                  icon={isDarkMode ? <SunOutlined /> : <MoonOutlined />}
-                  onClick={toggleTheme}
-                  className="text-gray-700 dark:text-gray-300"
-              />*/}
+                        <Button
+                            type="text"
+                            aria-label="Toggle theme"
+                            icon={isDarkMode ? <SunOutlined/> : <MoonOutlined/>}
+                            onClick={toggleTheme}
+                            className="text-gray-700 dark:text-gray-300"
+                        />
 
                         <Button
                             type="text"
