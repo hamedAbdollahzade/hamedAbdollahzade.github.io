@@ -4,6 +4,7 @@ import {
     LinkedinOutlined,
     MailOutlined,
 } from '@ant-design/icons';
+import {Link} from "react-router-dom";
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -49,28 +50,28 @@ export default function Footer() {
                         </h3>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <a
-                                    href="/"
+                                <Link
+                                    to="/"
                                     className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="/projects"
+                                <Link
+                                    to="/projects"
                                     className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
                                 >
                                     Projects
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="/contact"
+                                <Link
+                                    to="/contact"
                                     className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
                                 >
                                     Contact
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
