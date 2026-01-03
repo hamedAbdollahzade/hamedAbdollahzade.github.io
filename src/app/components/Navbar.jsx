@@ -57,7 +57,7 @@ export default function Navbar({isDarkMode, toggleTheme}) {
             initial={{y: -80}}
             animate={{y: 0}}
             transition={{duration: 0.4, ease: 'easeOut'}}
-            className="w-screen fixed !bg-red-500 top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
+            className="w-screen fixed  top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm"
         >
             <div className=" mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
