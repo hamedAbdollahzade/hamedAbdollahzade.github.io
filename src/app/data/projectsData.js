@@ -51,7 +51,7 @@ export const projectsData = [
         ],
         githubLink: 'https://github.com/hamedAbdollahzade/messanger',
         liveLink: "https://hamedabdollahzade.github.io/messanger/",
-        image: Messenger2,
+        image: Messenger,
     }
 
 
