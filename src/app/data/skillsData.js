@@ -6,7 +6,6 @@ export const skillsData = {
     { name: 'HTML/CSS', level: 95, icon: '🎨' },
     { name: 'Tailwind CSS', level: 90, icon: '💨' },
     { name: 'Next.js', level: 85, icon: '▲' },
-    { name: 'Next Js', level: 75, icon: '💚' },
     { name: 'Redux', level: 80, icon: '🔄' },
   ],
   tools: [
