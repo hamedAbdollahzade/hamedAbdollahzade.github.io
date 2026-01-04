@@ -1,6 +1,7 @@
 import linkCrmProject1 from "@/public/img/link-Crm-Project1.png";
 import linkCrmProject2 from "@/public/img/link-Crm-Project2.png";
 import Portfolio from "@/public/img/Portfolio.png";
+import WikiQAdmin from "@/public/img/wiqiQ (1).png";
 
 export const projectsData = [
     {
@@ -22,18 +23,18 @@ export const projectsData = [
     },
     {
         id: 2,
-        title: 'Personal Portfolio Website',
+        title: 'WikiQ Admin Panel',
         description:
-            'A personal portfolio website to showcase projects, skills, and experience. Built with modern frontend tools and smooth animations.',
+            'Admin panel developed during a one-month internship at WikiQ startup (Tizpardazan Asia). Focused on managing platform content and internal workflows using modern frontend architecture and clean UI.',
         technologies: [
             'React',
             'Vite',
             'Tailwind CSS',
-            'Ant Design',
-            'Framer Motion',
+            'Context API',
         ],
-        githubLink: 'https://github.com/hamedAbdollahzade/hamedAbdollahzade.github.io',
-        liveLink: 'https://hamedabdollahzade.github.io',
-        image: Portfolio,
-    },
+        githubLink: null,
+        liveLink: 'https://wikiq.co/',
+        image: WikiQAdmin,
+    }
+
 ];
