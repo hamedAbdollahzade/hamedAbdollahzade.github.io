@@ -3,6 +3,7 @@ import Portfolio from "@/public/img/Portfolio.png";
 import linkCrmProject2 from "@/public/img/link-Crm-Project2.png";
 import WikiQAdmin from "@/public/img/wiqiQ (1).png";
 import Messenger from "@/public/img/Messenger.png";
+import Messenger2 from "@/public/img/Messenger2.png";
 
 export const projectsData = [
     {
@@ -49,8 +50,8 @@ export const projectsData = [
             'Farawin API',
         ],
         githubLink: 'https://github.com/hamedAbdollahzade/messanger',
-        liveLink: null,
-        image: Messenger,
+        liveLink: "https://hamedabdollahzade.github.io/messanger/",
+        image: Messenger2,
     }
 
 
