@@ -1,7 +1,8 @@
 import linkCrmProject1 from "@/public/img/link-Crm-Project1.png";
-import linkCrmProject2 from "@/public/img/link-Crm-Project2.png";
 import Portfolio from "@/public/img/Portfolio.png";
+import linkCrmProject2 from "@/public/img/link-Crm-Project2.png";
 import WikiQAdmin from "@/public/img/wiqiQ (1).png";
+import Messenger from "@/public/img/Messenger.png";
 
 export const projectsData = [
     {
@@ -35,6 +36,22 @@ export const projectsData = [
         githubLink: null,
         liveLink: 'https://wikiq.co/',
         image: WikiQAdmin,
+    },
+    {
+        id: 3,
+        title: 'Messenger Application',
+        description:
+            'A messenger application developed as a first hands-on project for learning React during a bootcamp. The project focuses on building a modular, responsive UI and integrating with a real messaging API for sending and receiving messages.',
+        technologies: [
+            'React',
+            'Vite',
+            'Tailwind CSS',
+            'Farawin API',
+        ],
+        githubLink: 'https://github.com/hamedAbdollahzade/messanger',
+        liveLink: null,
+        image: Messenger,
     }
+
 
 ];
