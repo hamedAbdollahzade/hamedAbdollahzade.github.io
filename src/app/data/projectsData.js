@@ -27,7 +27,7 @@ export const projectsData = [
         id: 2,
         title: 'WikiQ Admin Panel',
         description:
-            'Admin panel developed during a one-month internship at WikiQ startup (Tizpardazan Asia). Focused on managing platform content and internal workflows using modern frontend architecture and clean UI.',
+            'Contributed to the development of the WikiQ Admin Panel, focusing on managing platform content and internal workflows with a clean, modern, and scalable frontend architecture.',
         technologies: [
             'React',
             'Vite',
