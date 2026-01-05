@@ -2,7 +2,7 @@ import React from 'react';
 import {Typography, Card, Progress, Tabs} from 'antd';
 import {motion} from 'motion/react';
 import {skillsData} from '../data/skillsData';
-import profilePic from "../../public/img/photo_2025-12-05_20-23-22.jpg"
+import profilePic from "@/public/img/photo_2025-12-05_20-23-22.png"
 
 const {Title, Paragraph} = Typography;
 
