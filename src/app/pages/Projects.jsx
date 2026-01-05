@@ -80,7 +80,7 @@ export default function Projects() {
                         target="_blank"
                         className="flex-1"
                     >
-                        Live Demo
+                        Visit App
                     </Button>
                 </div>
             </Card>
