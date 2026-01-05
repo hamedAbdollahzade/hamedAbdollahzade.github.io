@@ -5,6 +5,7 @@ export const skillsData = {
     { name: 'TypeScript', level: 85, icon: '🔷' },
     { name: 'HTML/CSS', level: 95, icon: '🎨' },
     { name: 'Tailwind CSS', level: 90, icon: '💨' },
+    { name: 'Ant Design', level: 90, icon: '💨' },
     { name: 'Next.js', level: 85, icon: '▲' },
     { name: 'Redux', level: 80, icon: '🔄' },
   ],
