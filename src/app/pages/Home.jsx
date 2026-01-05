@@ -6,6 +6,7 @@ import {
 } from '@ant-design/icons';
 import {motion} from 'motion/react';
 import Resume from "@/public/Resume.pdf";
+import profilePic from "@/public/img/photo_2025-12-05_20-23-22.png"
 
 
 const {Title, Paragraph} = Typography;
@@ -142,7 +143,7 @@ export default function Home() {
                                 className="w-2/4 aspect-square max-w-md mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-1">
                                 <div className="w-full h-full bg-white dark:bg-gray-800 rounded-3xl overflow-hidden">
                                     <img
-                                        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+                                        src={profilePic}
                                         alt="Frontend Developer Workspace"
                                         className="w-full h-full object-cover"
                                     />
