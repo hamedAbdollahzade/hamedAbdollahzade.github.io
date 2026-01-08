@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import {motion} from 'motion/react';
 import Resume from "@/public/Resume.pdf";
-import profilePic from "@/public/img/photo_2025-12-05_20-23-22.png"
+import profilePic from "@/public/img/photo_2025-12-05_20-23-22.jpg"
 
 
 const {Title, Paragraph} = Typography;
