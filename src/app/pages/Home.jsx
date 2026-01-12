@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {Button, Typography} from 'antd';
 import {
     DownloadOutlined, GithubOutlined, LinkedinOutlined, MailOutlined, RocketOutlined,
@@ -31,7 +31,7 @@ export default function Home() {
 
     return (
         <div
-            className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ">
+            className="min-h-[calc(100vh-4rem)] flex flex-col  items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ">
             <motion.div
                 variants={containerVariants}
                 initial="hidden"
@@ -174,26 +174,29 @@ export default function Home() {
                     variants={itemVariants}
                     className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20"
                 >
-                    {[{label: 'Years of Practice', value: '3+'}, {
-                        label: 'Projects Built',
-                        value: '15+'
-                    }, {label: 'Technologies Used', value: '10+'}, {
-                        label: 'GitHub Repos',
-                        value: '20+'
-                    },].map((stat) => (<motion.div
+                    {[
+                        {label: 'Years of Practice', value: '4+', link: ""},
+                        {label: 'Projects Built', value: '15+', link: ""},
+                        {label: 'Technologies Used', value: '10+', link: ""},
+                        {label: 'GitHub Repos', value: '20+', link: ""},
+                    ].map((stat) => (<motion.div
                         key={stat.label}
                         whileHover={{scale: 1.05}}
                         className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm"
                     >
-                        <div className="text-3xl font-bold text-blue-500 mb-2">
-                            {stat.value}
-                        </div>
-                        <div className="text-gray-600 dark:text-gray-400">
-                            {stat.label}
-                        </div>
+                        <Link to={stat?.link}>
+                            <div className="text-3xl font-bold text-blue-500 mb-2">
+                                {stat.value}
+                            </div>
+                            <div className="text-gray-600 dark:text-gray-400">
+                                {stat.label}
+                            </div>
+                        </Link>
                     </motion.div>))}
                 </motion.div>
             </motion.div>
+
+
         </div>
     );
 }
