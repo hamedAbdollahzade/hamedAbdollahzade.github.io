@@ -186,7 +186,7 @@ export default function About() {
                             </Title>
 
                             <Paragraph className="text-gray-700 dark:text-gray-300">
-                                I’m a frontend developer with around 3 years of hands-on
+                                I’m a frontend developer with around 4 years of hands-on
                                 experience building modern web applications using React and
                                 Next Js . I focus on creating clean, maintainable code and
                                 intuitive user interfaces.
