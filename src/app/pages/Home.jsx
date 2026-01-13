@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Button, Typography} from 'antd';
 import {
-    DownloadOutlined, GithubOutlined, LinkedinOutlined, MailOutlined, RocketOutlined,
+    DownloadOutlined, GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, RocketOutlined,
 } from '@ant-design/icons';
 import {motion} from 'motion/react';
 import Resume from "@/public/Resume.pdf";
@@ -102,30 +102,35 @@ export default function Home() {
 
                         </div>
 
-                        <div className="flex gap-4 justify-center lg:justify-start">
+                        <div className="flex gap-6 justify-center items-center lg:justify-start">
                             <Button
                                 type="text"
-                                size="large"
                                 icon={<GithubOutlined/>}
                                 href="https://github.com/hamedAbdollahzade"
                                 target="_blank"
-                                className="text-gray-600 dark:text-gray-400 hover:text-blue-500"
+                                className="!text-2xl text-gray-600 dark:text-gray-400 hover:text-blue-500"
                             />
                             <Button
                                 type="text"
-                                size="large"
                                 icon={<LinkedinOutlined/>}
                                 href="https://linkedin.com"
                                 target="_blank"
-                                className="text-gray-600 dark:text-gray-400 hover:text-blue-500"
+                                className=" !text-2xl text-gray-600 dark:text-gray-400 hover:text-blue-500"
                             />
                             <Button
                                 type="text"
-                                size="large"
                                 icon={<MailOutlined/>}
                                 href="mailto:hamedabdollahzade.ab@gmail.com"
-                                className="text-gray-600 dark:text-gray-400 hover:text-blue-500"
+                                className="!text-2xl text-gray-600 dark:text-gray-400 hover:text-blue-500"
                             />
+
+                            <Button
+                                type="text"
+                                icon={<PhoneOutlined/>}
+                                href={'tel:+989107902735'}
+                                className="!text-2xl text-gray-600 dark:text-gray-400 hover:text-blue-500"
+                            />
+
                         </div>
                     </motion.div>
 
