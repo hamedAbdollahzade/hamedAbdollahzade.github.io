@@ -95,9 +95,9 @@ export default function Navbar({isDarkMode, toggleTheme}) {
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
             className="dark:bg-gray-900"
-            contentWrapperStyle={{boxShadow: "none", width: "60%"}}
+            contentWrapperStyle={{boxShadow: "none", width: "auto"}}
         >
-            <div className="flex flex-col  gap-4 ">
+            <div className="flex flex-col  gap-4 mr-20 ">
                 {NAV_LINKS.map((link) => (<NavItem
                     key={link.path}
                     to={link.path}
