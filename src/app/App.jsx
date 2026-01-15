@@ -7,14 +7,19 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Experience from './pages/Experience';
 import Contact from './pages/Contact';
+import {ArrowUpFromDot} from "lucide-react";
+import {handleScrollTop} from "@/app/util/helper.js";
+
 
 export default function App() {
     const [isDarkMode, setIsDarkMode] = useState(true);
+
 
     useEffect(() => {
         setIsDarkMode(true);
         document.documentElement.classList.add('dark');
     }, []);
+
 
     const toggleTheme = () => {
         setIsDarkMode(!isDarkMode);
@@ -37,6 +42,10 @@ export default function App() {
                 },
             }}
         >
+            <div className={"fixed z-[99] cursor-pointer p-3 rounded-full bg-purple-600 opacity-80  bottom-5 left-5 "}>
+                <ArrowUpFromDot size={25} onClick={handleScrollTop}/>
+            </div>
+
             <Router>
                 <Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme}>
                     <Routes>
