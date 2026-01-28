@@ -26,3 +26,5 @@ export const skillsData = {
     { name: 'Prototyping', level: 80, icon: '🎭' },
   ],
 };
+
+// test
