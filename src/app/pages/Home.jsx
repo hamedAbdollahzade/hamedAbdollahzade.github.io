@@ -1,12 +1,13 @@
 import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {Button, Typography} from 'antd';
+import {Badge, Button, Card, Typography} from 'antd';
 import {
     DownloadOutlined, GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, RocketOutlined,
 } from '@ant-design/icons';
 import {motion} from 'motion/react';
 import Resume from "@/public/Resume.pdf";
 import profilePic from "@/public/img/office-profile-sm.png"
+import {sections} from "@/app/data/sections.js";
 
 
 const {Title, Paragraph} = Typography;
@@ -200,6 +201,44 @@ export default function Home() {
                     </motion.div>))}
                 </motion.div>
             </motion.div>
+
+
+            <div className="space-y-16 px-4 md:px-12 lg:px-24">
+                {/* Hero */}
+                <section className="text-center space-y-4">
+                    <h1 className="text-3xl md:text-5xl font-bold">
+                        Frontend Developer Roadmap
+                    </h1>
+                    <p className="text-muted-foreground max-w-2xl mx-auto">
+                        A practical mid-level roadmap focused on building scalable,
+                        testable, and production-ready frontend applications.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                        <Badge>React</Badge>
+                        <Badge>Next Js</Badge>
+                        <Badge>Redux</Badge>
+                        <Badge>Testing</Badge>
+                        <Badge>Docker</Badge>
+                        <Badge>Linux</Badge>
+                    </div>
+                </section>
+
+
+                {/* Roadmap Sections */}
+                <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-6">
+                    {sections.map((section) => (
+                        <Card key={section.title} className="p-6 space-y-4">
+                            <h3 className="text-lg font-semibold">{section.title}</h3>
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                                {section.items.map((item) => (
+                                    <li key={item}>• {item}</li>
+                                ))}
+                            </ul>
+                        </Card>
+                    ))}
+                </section>
+
+            </div>
 
 
         </div>
