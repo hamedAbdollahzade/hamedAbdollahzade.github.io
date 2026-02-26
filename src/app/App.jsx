@@ -18,6 +18,8 @@ export default function App() {
     useEffect(() => {
         setIsDarkMode(true);
         document.documentElement.classList.add('dark');
+        localStorage.setItem('i18nextLng', "fa");
+
     }, []);
 
 

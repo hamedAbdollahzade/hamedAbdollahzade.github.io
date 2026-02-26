@@ -5,6 +5,8 @@ import {
     DownloadOutlined, GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, RocketOutlined,
 } from '@ant-design/icons';
 import {motion} from 'motion/react';
+import {useTranslation} from 'react-i18next';
+import {useLanguage} from '../../contexts/LanguageContext';
 import Resume from "@/public/Resume.pdf";
 import profilePic from "@/public/img/office-profile-sm.png"
 import {sections} from "@/app/data/sections.js";
@@ -29,6 +31,8 @@ const itemVariants = {
 
 export default function Home() {
     const navigate = useNavigate();
+    const {t} = useTranslation();
+    const {isRTL} = useLanguage();
 
     return (
         <div
@@ -41,7 +45,8 @@ export default function Home() {
             >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
                     {/* ================= Text Section ================= */}
-                    <motion.div variants={itemVariants} className="text-center lg:text-left">
+                    <motion.div variants={itemVariants}
+                                className={`text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
                         <motion.div
                             initial={{scale: 0}}
                             animate={{scale: 1}}
@@ -49,29 +54,27 @@ export default function Home() {
                             className="inline-block mb-5 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30"
                         >
               <span className="text-blue-600 dark:text-blue-400 font-medium">
-                👋 Welcome to my portfolio
+                👋 {t('hero.greeting')}
               </span>
                         </motion.div>
 
                         <Title level={1} className="!text-5xl lg:!text-6xl !mb-4 dark:!text-white">
-                            Hi, I’m
+                            <span> {t('hero.greeting')} </span>
                             <span
-                                className="ml-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Hamed Abdollahzade
-              </span>
+                                className="ml-2 text-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                {t('hero.name')}
+                            </span>
                         </Title>
 
                         <Title
                             level={2}
                             className="!text-2xl lg:!text-3xl !mb-6 !text-gray-600 dark:!text-gray-300 !font-normal"
                         >
-                            Frontend Developer (React & Next Js)
+                            {t('hero.title')}
                         </Title>
 
                         <Paragraph className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-                            I’m a frontend developer focused on building modern, fast and maintainable
-                            web applications. I enjoy working with React, Tailwind CSS and Ant Design,
-                            and I care deeply about clean code and good user experience.
+                            {t('hero.description')}
                         </Paragraph>
 
                         <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
@@ -82,7 +85,7 @@ export default function Home() {
                                 onClick={() => navigate('/projects')}
                                 className=" px-8"
                             >
-                                View Projects
+                                {t('hero.cta')}
                             </Button>
 
                             <Button
@@ -96,7 +99,7 @@ export default function Home() {
                                     download
                                     className="inline-flex items-center gap-2 px-4  bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
                                 >
-                                    Download Resume
+                                    {t('hero.DownloadResumeCta')}
                                 </a>
                             </Button>
 

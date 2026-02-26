@@ -5,20 +5,25 @@ import {
     MenuOutlined, SunOutlined, MoonOutlined,
 } from '@ant-design/icons';
 import {motion} from 'motion/react';
-
-/* =======================
-   Navigation Config
-======================= */
-const NAV_LINKS = [{path: '/', label: 'Home'}, {path: '/about', label: 'About'}, {
-    path: '/projects',
-    label: 'Projects'
-}, {path: '/experience', label: 'Experience'}, {path: '/contact', label: 'Contact'},];
+import {useTranslation} from 'react-i18next';
+import LanguageSwitcher from "@/components/LanguageSwitcher.jsx";
+import {useLanguage} from "@/contexts/LanguageContext.jsx";
 
 export default function Navbar({isDarkMode, toggleTheme}) {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const location = useLocation();
+    const {t} = useTranslation();
+    const {isRTL} = useLanguage();
 
     const isActive = (path) => location.pathname === path;
+
+    const navLinks = [
+        {path: '/', label: t('common.home')},
+        {path: '/about', label: t('common.about')},
+        {path: '/projects', label: t('common.projects')},
+        {path: '/experience', label: t('common.experience')},
+        {path: '/contact', label: t('common.contact')}
+    ];
 
     const NavItem = ({to, label, mobile = false}) => (<Link
         to={to}
@@ -60,7 +65,7 @@ export default function Navbar({isDarkMode, toggleTheme}) {
 
                 {/* ================= Desktop Menu ================= */}
                 <div className="hidden md:flex items-center gap-1">
-                    {NAV_LINKS.map((link) => (<NavItem
+                    {navLinks.map((link) => (<NavItem
                         key={link.path}
                         to={link.path}
                         label={link.label}
@@ -69,6 +74,8 @@ export default function Navbar({isDarkMode, toggleTheme}) {
 
                 {/* ================= Actions ================= */}
                 <div className="flex items-center gap-2">
+                    <LanguageSwitcher/>
+
                     <Button
                         type="text"
                         aria-label="Toggle theme"
@@ -90,15 +97,15 @@ export default function Navbar({isDarkMode, toggleTheme}) {
 
         {/* ================= Mobile Drawer ================= */}
         <Drawer
-            title="Menu"
-            placement="right"
+            title={t('common.menu')}
+            placement={isRTL ? "left" : "right"}
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
             className="dark:bg-gray-900"
             contentWrapperStyle={{boxShadow: "none", width: "auto"}}
         >
-            <div className="flex flex-col  gap-4 mr-20 ">
-                {NAV_LINKS.map((link) => (<NavItem
+            <div className={`flex flex-col gap-4 ${isRTL ? 'ml-20' : 'mr-20'}`}>
+                {navLinks.map((link) => (<NavItem
                     key={link.path}
                     to={link.path}
                     label={link.label}
