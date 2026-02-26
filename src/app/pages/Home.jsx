@@ -61,7 +61,7 @@ export default function Home() {
                         <Title level={1} className="!text-5xl lg:!text-6xl !mb-4 dark:!text-white">
                             <span> {t('hero.greeting')} </span>
                             <span
-                                className="ml-2 text-nowrap bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                className="ml-2  bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                                 {t('hero.name')}
                             </span>
                         </Title>
