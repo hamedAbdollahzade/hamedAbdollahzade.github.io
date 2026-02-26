@@ -75,6 +75,10 @@ export default function Home() {
 
                         <Paragraph className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
                             {t('hero.description')}
+                            {isRTL &&
+                                <div className={"text-yellow-200 my-2"}>نسخه فارسی در حال توسعه است و به‌زودی کامل‌تر
+                                    خواهد
+                                    شد 🙌</div>}
                         </Paragraph>
 
                         <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
