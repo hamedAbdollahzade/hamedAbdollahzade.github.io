@@ -48,7 +48,7 @@ export default function Footer() {
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                             Quick Links
                         </h3>
-                        <ul className="space-y-2 text-lg ">
+                        <ul className="space-y-2 text-lg">
                             <li>
                                 <Link
                                     to="/"
@@ -57,39 +57,27 @@ export default function Footer() {
                                     Home
                                 </Link>
                             </li>
-                            <li>
-                                <Link
-                                    to="/projects"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                                >
-                                    Projects
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/contact"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                                >
-                                    Contact
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/about"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                                >
-                                    about
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/experience"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                                >
-                                    experience
-                                </Link>
-                            </li>
+                            {[
+                                {id: "projects", label: "Projects"},
+                                {id: "contact", label: "Contact"},
+                                {id: "about", label: "About"},
+                                {id: "experience", label: "Experience"},
+                            ].map((item) => (
+                                <li key={item.id}>
+                                    <button
+                                        onClick={() => {
+                                            document
+                                                .getElementById(item.id)
+                                                ?.scrollIntoView({behavior: "smooth", block: "start"});
+                                        }}
+                                        className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
+                                    >
+                                        {item.label}
+                                    </button>
+                                </li>
+                            ))}
                         </ul>
+
                     </div>
 
                     {/* ================= Social ================= */}

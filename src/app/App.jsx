@@ -18,7 +18,7 @@ export default function App() {
     useEffect(() => {
         setIsDarkMode(true);
         document.documentElement.classList.add('dark');
-        localStorage.setItem('i18nextLng', "fa");
+        localStorage.setItem('i18nextLng', "en");
 
     }, []);
 
@@ -52,10 +52,10 @@ export default function App() {
                 <Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme}>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
-                        <Route path="/about" element={<About/>}/>
-                        <Route path="/projects" element={<Projects/>}/>
-                        <Route path="/experience" element={<Experience/>}/>
-                        <Route path="/contact" element={<Contact/>}/>
+                        {/*<Route path="/about" element={<About/>}/>*/}
+                        {/*<Route path="/projects" element={<Projects/>}/>*/}
+                        {/*<Route path="/experience" element={<Experience/>}/>*/}
+                        {/*<Route path="/contact" element={<Contact/>}/>*/}
                     </Routes>
                 </Layout>
             </Router>

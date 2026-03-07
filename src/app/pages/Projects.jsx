@@ -163,7 +163,15 @@ export default function Projects() {
                         <Paragraph className="text-white/90 !mb-6 text-lg">
                             I'm always open to discussing new projects and opportunities.
                         </Paragraph>
-                        <Button size="large" href="/contact" className="h-12 px-8">
+                        <Button
+                            size="large"
+                            onClick={() => {
+                                document
+                                    .getElementById('contact')
+                                    ?.scrollIntoView({behavior: "smooth", block: "start"});
+                            }}
+                            className="h-12 px-8"
+                        >
                             Get In Touch
                         </Button>
                     </Card>

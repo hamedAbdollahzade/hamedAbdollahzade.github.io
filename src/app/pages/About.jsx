@@ -136,43 +136,8 @@ export default function About() {
                 </motion.div>
 
                 {/* ================= Profile & Summary ================= */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-                    {/* Profile */}
-                    <motion.div
-                        initial={{opacity: 0, x: -40}}
-                        animate={{opacity: 1, x: 0}}
-                        transition={{duration: 0.6}}
-                    >
-                        <Card className="h-full">
-                            <div className="flex flex-col items-center text-center">
-                                <div className="w-44 h-44 rounded-full overflow-hidden mb-6 ring-4 ring-blue-500/20">
-                                    <img
-                                        src={profilePic}
-                                        alt="Hamed Abdollahzade"
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
+                <div className="grid  gap-12 mb-6">
 
-                                <Title level={3} className="!mb-1 dark:!text-white">
-                                    Hamed Abdollahzade
-                                </Title>
-                                <Paragraph className="text-gray-600 dark:text-gray-400 !mb-4">
-                                    Frontend Developer
-                                </Paragraph>
-
-                                <div className="flex flex-wrap gap-2 justify-center">
-                                    {['React', 'Next Js', 'Tailwind CSS', 'Ant Design'].map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className="px-3 py-1 text-sm rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-                                        >
-                      {tech}
-                    </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </Card>
-                    </motion.div>
 
                     {/* Summary */}
                     <motion.div

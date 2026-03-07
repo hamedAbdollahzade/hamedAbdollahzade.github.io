@@ -18,11 +18,10 @@ export default function Navbar({isDarkMode, toggleTheme}) {
     const isActive = (path) => location.pathname === path;
 
     const navLinks = [
-        {path: '/', label: t('common.home')},
-        {path: '/about', label: t('common.about')},
-        {path: '/projects', label: t('common.projects')},
-        {path: '/experience', label: t('common.experience')},
-        {path: '/contact', label: t('common.contact')}
+        {path: 'about', label: t('common.about')},
+        {path: 'projects', label: t('common.projects')},
+        {path: 'experience', label: t('common.experience')},
+        {path: 'contact', label: t('common.contact')}
     ];
 
     const NavItem = ({to, label, mobile = false}) => (<Link
@@ -65,11 +64,19 @@ export default function Navbar({isDarkMode, toggleTheme}) {
 
                 {/* ================= Desktop Menu ================= */}
                 <div className="hidden md:flex items-center gap-1">
-                    {navLinks.map((link) => (<NavItem
-                        key={link.path}
-                        to={link.path}
-                        label={link.label}
-                    />))}
+                    {navLinks.map((link) => (
+                        <Link
+                            to={""}
+                            className={"mx-2 text-lg"}
+                            onClick={() => {
+                                const element = document.getElementById(link.path);
+                                element?.scrollIntoView({behavior: "smooth", block: "start"});
+                            }}
+                            key={link.path}
+                        >
+                            {link.path}
+                        </Link>
+                    ))}
                 </div>
 
                 {/* ================= Actions ================= */}
@@ -105,12 +112,19 @@ export default function Navbar({isDarkMode, toggleTheme}) {
             contentWrapperStyle={{boxShadow: "none", width: "auto"}}
         >
             <div className={`flex flex-col gap-4 ${isRTL ? 'ml-20' : 'mr-20'}`}>
-                {navLinks.map((link) => (<NavItem
-                    key={link.path}
-                    to={link.path}
-                    label={link.label}
-                    mobile
-                />))}
+                {navLinks.map((link) => (
+                    <Link
+                        to={""}
+                        className={"mx-2 text-lg"}
+                        onClick={() => {
+                            const element = document.getElementById(link.path);
+                            element?.scrollIntoView({behavior: "smooth", block: "start"});
+                        }}
+                        key={link.path}
+                    >
+                        {link.path}
+                    </Link>
+                ))}
             </div>
         </Drawer>
     </motion.nav>);

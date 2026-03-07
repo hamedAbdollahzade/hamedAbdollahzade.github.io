@@ -10,6 +10,10 @@ import {useLanguage} from '../../contexts/LanguageContext';
 import Resume from "@/public/Resume.pdf";
 import profilePic from "@/public/img/office-profile-sm.png"
 import {sections} from "@/app/data/sections.js";
+import Projects from "@/app/pages/Projects.jsx";
+import Experience from "@/app/pages/Experience.jsx";
+import About from "@/app/pages/About.jsx";
+import Contact from "@/app/pages/Contact.jsx";
 
 
 const {Title, Paragraph} = Typography;
@@ -209,8 +213,25 @@ export default function Home() {
                 </motion.div>
             </motion.div>
 
+            <div id="about" className="my-4">
+                <About />
+            </div>
 
-            <div className="space-y-16 px-4 md:px-12 lg:px-24">
+            <div id="projects" className="my-4">
+                <Projects />
+            </div>
+
+            <div id="experience" className="my-4">
+                <Experience />
+            </div>
+
+            <div id="contact" className="my-4">
+                <Contact />
+            </div>
+
+
+
+            <div className="my-8 space-y-16 px-4 md:px-12 lg:px-24">
                 {/* Hero */}
                 <section className="text-center space-y-4">
                     <h1 className="text-3xl md:text-5xl font-bold">
@@ -246,7 +267,6 @@ export default function Home() {
                 </section>
 
             </div>
-
 
         </div>
     );
