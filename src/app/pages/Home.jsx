@@ -90,7 +90,10 @@ export default function Home() {
                                 type="primary"
                                 size="large"
                                 icon={<RocketOutlined/>}
-                                onClick={() => navigate('/projects')}
+                                onClick={() => {
+                                    const element = document.getElementById("projects");
+                                    element?.scrollIntoView({behavior: "smooth", block: "start"});
+                                }}
                                 className=" px-8"
                             >
                                 {t('hero.cta')}
