@@ -37,7 +37,7 @@ export const experienceData = [
   {
     id: 3,
     type: 'education',
-    title: 'Associate Degree in Computer Science',
+    title: 'Bachelor: Computer science',
     company: 'Birjand University',
     location: 'Iran',
     period: '2020 - 2022',
