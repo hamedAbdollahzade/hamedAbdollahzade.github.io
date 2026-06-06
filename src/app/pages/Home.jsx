@@ -92,7 +92,7 @@ export default function Home() {
             <motion.div style={{y: orbY}} className="aurora aurora-one" />
             <motion.div style={{y: useTransform(scrollYProgress, [0, 1], [0, -360])}} className="aurora aurora-two" />
 
-            <section id="home" className="relative min-h-screen px-4 pt-28 sm:px-6 lg:px-8">
+            <section id="home" className="relative min-h-screen px-4  pt-12 sm:px-6 lg:px-8">
                 <motion.div
                     style={{y: heroY, scale: heroScale}}
                     variants={stagger}
@@ -144,8 +144,8 @@ export default function Home() {
                         <div className="hero-card group">
                             <div className="hero-card-grid" />
                             <motion.div
-                                animate={{rotate: [0, 2.5, -2.5, 0], y: [0, -10, 0]}}
-                                transition={{duration: 7, repeat: Infinity, ease: 'easeInOut'}}
+                                // animate={{rotate: [0, 2.5, -2.5, 0], y: [0, -10, 0]}}
+                                // transition={{duration: 7, repeat: Infinity, ease: 'easeInOut'}}
                                 className="relative z-10 overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-3 backdrop-blur"
                             >
                                 <img src={profilePic} alt="Hamed Abdollahzade" className="aspect-[4/5] w-full rounded-[1.4rem] object-cover" />
