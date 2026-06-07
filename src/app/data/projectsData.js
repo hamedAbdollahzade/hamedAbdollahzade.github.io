@@ -4,6 +4,7 @@ import linkCrmProject2 from "@/public/img/link-Crm-Project2.png";
 import WikiQAdmin from "@/public/img/wiqiQ (1).png";
 import Messenger from "@/public/img/Messenger.png";
 import Messenger2 from "@/public/img/Messenger2.png";
+import Warehouse from "@/public/img/warehouse.webp";
 
 export const projectsData = [
     {
@@ -52,6 +53,25 @@ export const projectsData = [
         githubLink: 'https://github.com/hamedAbdollahzade/messanger',
         liveLink: "https://hamedabdollahzade.github.io/messanger/",
         image: Messenger,
+    },
+    {
+        id: 4,
+        title: 'Warehouse Management System (Stockio)',
+        description:
+            'A full-stack warehouse management system built with Laravel and Vue.js. Implements event-based inventory tracking with Opening Balance, IN/OUT movements, Adjustments, and real-time Kardex (inventory ledger) calculation. Designed with clean architecture and scalable stock logic similar to ERP systems.',
+        technologies: [
+            'Laravel',
+            'MySQL',
+            'REST API',
+            'Vue.js',
+            'Vite',
+            'Tailwind CSS',
+            'Axios',
+        ],
+        fontEndLink: 'https://github.com/hamedAbdollahzade/warehouse-frontend',
+        liveLink: null,
+        backendLink: 'https://github.com/hamedAbdollahzade/warehouse-backend',
+        image: Warehouse,
     }
 
 
