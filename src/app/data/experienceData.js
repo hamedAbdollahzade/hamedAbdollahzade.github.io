@@ -3,11 +3,31 @@ export const experienceData = [
     id: 1,
     type: 'work',
     title: 'Frontend Developer',
+    company: 'Robot Market',
+    location: 'Remote',
+    period: '',
+    description:
+        'Developing a lightweight web-based management dashboard for smart vending machines powered by ESP32. Implemented a responsive SPA interface for device monitoring, system logs, pricing management, and client balances. Built real-time log streaming via WebSocket and optimized the UI for embedded system environments.',
+    technologies: [
+      'JavaScript',
+      'HTML',
+      'CSS',
+      'REST API',
+      'WebSocket',
+      'ESP32',
+      'Embedded Systems UI',
+    ],
+  },
+
+  {
+    id: 2,
+    type: 'work',
+    title: 'Frontend Developer',
     company: 'Kandoo (Link CRM / Link ERP)',
     location: 'Remote',
-    period: '2024 - Present',
+    period: '',
     description:
-        'Working on a large-scale CRM/ERP system as a Frontend Developer. Responsible for developing reusable React components, improving UI/UX, integrating RESTful APIs, and collaborating closely with backend and product teams. Focused on performance optimization, clean architecture, and scalable component design.',
+        'Working on a large-scale CRM/ERP platform as a Frontend Developer. Responsible for building scalable React components, improving UI/UX, integrating RESTful APIs, and collaborating closely with backend and product teams. Focused on performance optimization, reusable architecture, and maintainable frontend code.',
     technologies: [
       'React',
       'Ant Design',
@@ -17,15 +37,16 @@ export const experienceData = [
       'Vite',
     ],
   },
+
   {
-    id: 2,
+    id: 3,
     type: 'work',
     title: 'Frontend Intern',
     company: 'WikiQ Startup',
     location: 'Iran',
-    period: '2023',
+    period: '',
     description:
-        'Completed a one-month internship as a Frontend Developer. Worked on implementing UI components, fixing bugs, and integrating frontend features with backend APIs. Gained hands-on experience in real-world teamwork and agile development.',
+        'Completed a frontend internship focused on implementing UI components, fixing bugs, and integrating frontend features with backend APIs. Gained practical experience in team collaboration, Git workflow, and agile development.',
     technologies: [
       'React',
       'JavaScript',
@@ -34,15 +55,16 @@ export const experienceData = [
       'Git',
     ],
   },
+
   {
-    id: 3,
+    id: 4,
     type: 'education',
-    title: 'Bachelor: Computer science',
+    title: 'Bachelor: Computer Science',
     company: 'Birjand University',
     location: 'Iran',
-    period: '2020 - 2022',
+    period: '',
     description:
-        'Studied core computer science concepts including programming fundamentals, data structures, algorithms, and database basics. Built a strong foundation for software development and problem-solving.',
+        'Studied core computer science concepts including programming fundamentals, algorithms, data structures, and database systems. Built a strong analytical and problem-solving foundation for software engineering.',
     technologies: [
       'Computer Science',
       'Algorithms',
@@ -50,15 +72,16 @@ export const experienceData = [
       'Programming Fundamentals',
     ],
   },
+
   {
-    id: 4,
+    id: 5,
     type: 'education',
     title: 'Frontend Development Bootcamp',
     company: 'Farawin Bootcamp',
     location: 'Iran',
-    period: '2023',
+    period: '',
     description:
-        'Completed an intensive frontend bootcamp focused on modern web development. Built multiple real-world projects including an online store and a messenger application using React and modern JavaScript tools.',
+        'Completed an intensive frontend bootcamp focused on modern web development. Built multiple projects including a messenger application and dynamic web interfaces using React and modern JavaScript tooling.',
     technologies: [
       'React',
       'JavaScript',
@@ -68,15 +91,16 @@ export const experienceData = [
       'Node.js',
     ],
   },
+
   {
-    id: 5,
+    id: 6,
     type: 'education',
     title: 'Self-Taught Frontend Development',
     company: 'Independent Learning',
     location: 'Remote',
-    period: '2022 - Present',
+    period: '',
     description:
-        'Continuously improving frontend skills through self-study, building personal projects, reading documentation, and following best practices such as clean code, SOLID principles, and modern UI/UX patterns.',
+        'Continuously improving frontend expertise through self-learning, building personal projects, studying documentation, and following modern engineering practices such as clean architecture, SOLID principles, and scalable UI design.',
     technologies: [
       'React',
       'TypeScript',
