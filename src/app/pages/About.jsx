@@ -1,6 +1,5 @@
 import React from 'react';
 import {Typography, Card, Progress, Tabs} from 'antd';
-import {motion} from 'motion/react';
 import {skillsData} from '../data/skillsData';
 import profilePic from "@/public/img/office-profile-sm.png"
 
@@ -30,7 +29,7 @@ const itemVariants = {
    Skill Card
 ======================= */
 const SkillCard = ({skill}) => (
-    <motion.div variants={itemVariants} whileHover={{scale: 1.03}}>
+    <div>
         <Card className="mb-4 hover:shadow-lg transition-shadow">
             <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
@@ -52,7 +51,7 @@ const SkillCard = ({skill}) => (
                 }}
             />
         </Card>
-    </motion.div>
+    </div>
 );
 
 export default function About() {
@@ -65,16 +64,13 @@ export default function About() {
         </span>
             ),
             children: (
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
+                <div
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
                     {skillsData.frontend.map((skill) => (
                         <SkillCard key={skill.name} skill={skill}/>
                     ))}
-                </motion.div>
+                </div>
             ),
         },
         {
@@ -85,16 +81,13 @@ export default function About() {
         </span>
             ),
             children: (
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
+                <div
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
                     {skillsData.tools.map((skill) => (
                         <SkillCard key={skill.name} skill={skill}/>
                     ))}
-                </motion.div>
+                </div>
             ),
         },
         {
@@ -105,16 +98,13 @@ export default function About() {
         </span>
             ),
             children: (
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
+                <div
                     className="grid grid-cols-1 md:grid-cols-2 gap-4"
                 >
                     {skillsData.uiux.map((skill) => (
                         <SkillCard key={skill.name} skill={skill}/>
                     ))}
-                </motion.div>
+                </div>
             ),
         },
     ];
@@ -123,27 +113,21 @@ export default function About() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* ================= Header ================= */}
-                <motion.div
-                    initial={{opacity: 0, y: -20}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.5}}
+                <div
                     className="text-center mb-16"
                 >
                     <Title level={1} className="dark:!text-white">
                         About Me
                     </Title>
                     <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mt-2"/>
-                </motion.div>
+                </div>
 
                 {/* ================= Profile & Summary ================= */}
                 <div className="grid  gap-12 mb-6">
 
 
                     {/* Summary */}
-                    <motion.div
-                        initial={{opacity: 0, x: 40}}
-                        animate={{opacity: 1, x: 0}}
-                        transition={{duration: 0.6}}
+                    <div
                     >
                         <Card className="h-full">
                             <Title level={3} className="!mb-4 dark:!text-white">
@@ -169,14 +153,11 @@ export default function About() {
                                 the products I work on.
                             </Paragraph>
                         </Card>
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* ================= Skills ================= */}
-                <motion.div
-                    initial={{opacity: 0, y: 40}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.6}}
+                <div
                 >
                     <Card>
                         <Title level={3} className="!mb-6 dark:!text-white">
@@ -188,13 +169,10 @@ export default function About() {
                             size="large"
                         />
                     </Card>
-                </motion.div>
+                </div>
 
                 {/* ================= Quick Facts ================= */}
-                <motion.div
-                    initial={{opacity: 0, y: 40}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.6, delay: 0.2}}
+                <div
                     className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
                 >
                     {[
@@ -214,9 +192,8 @@ export default function About() {
                             description: 'Modern frontend frameworks and UI systems',
                         },
                     ].map((item) => (
-                        <motion.div
+                        <div
                             key={item.title}
-                            whileHover={{scale: 1.05}}
                         >
                             <Card className="text-center h-full hover:shadow-lg transition-shadow">
                                 <div className="text-4xl mb-4">{item.icon}</div>
@@ -227,9 +204,9 @@ export default function About() {
                                     {item.description}
                                 </Paragraph>
                             </Card>
-                        </motion.div>
+                        </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </div>
     );

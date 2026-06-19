@@ -1,7 +1,6 @@
 import React from 'react';
 import {Typography, Timeline, Card, Tag} from 'antd';
 import {BookOutlined, DownloadOutlined} from '@ant-design/icons';
-import {motion} from 'motion/react';
 import {experienceData} from '../data/experienceData';
 import Resume from "@/public/Resume.pdf";
 
@@ -62,10 +61,7 @@ export default function Experience() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <motion.div
-                    initial={{opacity: 0, y: -20}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.5}}
+                <div
                     className="text-center mb-16"
                 >
                     <Title level={1} className="dark:!text-white">
@@ -75,11 +71,11 @@ export default function Experience() {
                     <Paragraph className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         My professional journey as a Frontend Developer
                     </Paragraph>
-                </motion.div>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {/* Work Experience */}
-                    <motion.div variants={containerVariants} initial="hidden" animate="visible">
+                    <div>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
                                 {/*<BriefcaseOutlined className="text-white text-xl" />*/}
@@ -94,24 +90,21 @@ export default function Experience() {
                             items={workExperience.map((item, index) => ({
                                 key: item.id,
                                 dot: (
-                                    <motion.div
-                                        initial={{scale: 0}}
-                                        animate={{scale: 1}}
-                                        transition={{delay: index * 0.2}}
+                                    <div
                                         className="w-4 h-4 bg-blue-500 rounded-full"
                                     />
                                 ),
                                 children: (
-                                    <motion.div variants={itemVariants}>
+                                    <div>
                                         <ExperienceCard item={item}/>
-                                    </motion.div>
+                                    </div>
                                 ),
                             }))}
                         />
-                    </motion.div>
+                    </div>
 
                     {/* Education */}
-                    <motion.div variants={containerVariants} initial="hidden" animate="visible">
+                    <div>
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
                                 <BookOutlined className="text-white text-xl"/>
@@ -126,28 +119,22 @@ export default function Experience() {
                             items={education.map((item, index) => ({
                                 key: item.id,
                                 dot: (
-                                    <motion.div
-                                        initial={{scale: 0}}
-                                        animate={{scale: 1}}
-                                        transition={{delay: index * 0.2}}
+                                    <div
                                         className="w-4 h-4 bg-purple-500 rounded-full"
                                     />
                                 ),
                                 children: (
-                                    <motion.div variants={itemVariants}>
+                                    <div>
                                         <ExperienceCard item={item}/>
-                                    </motion.div>
+                                    </div>
                                 ),
                             }))}
                         />
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Certifications */}
-                <motion.div
-                    initial={{opacity: 0, y: 50}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.6, delay: 0.4}}
+                <div
                     className="mt-16"
                 >
                     <Card>
@@ -173,9 +160,8 @@ export default function Experience() {
                                     year: '2022',
                                 },
                             ].map((cert, index) => (
-                                <motion.div
+                                <div
                                     key={index}
-                                    whileHover={{scale: 1.05}}
                                     className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg"
                                 >
                                     <div className="text-3xl mb-3">🎓</div>
@@ -186,17 +172,14 @@ export default function Experience() {
                                         {cert.issuer}
                                     </Paragraph>
                                     <Tag color="blue">{cert.year}</Tag>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </Card>
-                </motion.div>
+                </div>
 
                 {/* Resume CTA */}
-                <motion.div
-                    initial={{opacity: 0, y: 50}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.6, delay: 0.6}}
+                <div
                     className="mt-12 text-center"
                 >
                     <Card className="bg-gradient-to-r from-blue-500 to-purple-600 border-0">
@@ -216,7 +199,7 @@ export default function Experience() {
                             Download Resume
                         </a>
                     </Card>
-                </motion.div>
+                </div>
             </div>
         </div>
     );

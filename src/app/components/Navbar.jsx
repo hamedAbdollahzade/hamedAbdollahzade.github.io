@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Drawer} from 'antd';
 import {MenuOutlined, MoonOutlined, SunOutlined} from '@ant-design/icons';
-import {motion} from 'motion/react';
 import LanguageSwitcher from '@/components/LanguageSwitcher.jsx';
 import {useLanguage} from '@/contexts/LanguageContext.jsx';
 
 const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({behavior: 'smooth', block: 'start'});
+    document.getElementById(id)?.scrollIntoView({behavior: 'auto', block: 'start'});
 };
 
 export default function Navbar({isDarkMode, toggleTheme}) {
@@ -27,10 +26,7 @@ export default function Navbar({isDarkMode, toggleTheme}) {
     };
 
     return (
-        <motion.nav
-            initial={{y: -80, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            transition={{duration: 0.5, ease: 'easeOut'}}
+        <nav
             className="fixed left-0 right-0 top-0 z-50 border-b border-white/10 bg-slate-950/65 backdrop-blur-2xl"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -97,6 +93,6 @@ export default function Navbar({isDarkMode, toggleTheme}) {
                     ))}
                 </div>
             </Drawer>
-        </motion.nav>
+        </nav>
     );
 }

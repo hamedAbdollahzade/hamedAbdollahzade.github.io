@@ -8,7 +8,6 @@ import {
     LinkedinOutlined,
     SendOutlined,
 } from '@ant-design/icons';
-import {motion} from 'motion/react';
 
 const {Title, Paragraph} = Typography;
 const {TextArea} = Input;
@@ -66,10 +65,7 @@ export default function Contact() {
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <motion.div
-                    initial={{opacity: 0, y: -20}}
-                    animate={{opacity: 1, y: 0}}
-                    transition={{duration: 0.5}}
+                <div
                     className="text-center mb-16"
                 >
                     <Title level={1} className="dark:!text-white">
@@ -79,14 +75,11 @@ export default function Contact() {
                     <Paragraph className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                         Interested in working together or have a question? Feel free to contact me anytime.
                     </Paragraph>
-                </motion.div>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Contact Info */}
-                    <motion.div
-                        initial={{opacity: 0, x: -50}}
-                        animate={{opacity: 1, x: 0}}
-                        transition={{duration: 0.6}}
+                    <div
                         className="lg:col-span-1"
                     >
                         <Card className="h-full">
@@ -96,11 +89,8 @@ export default function Contact() {
 
                             <div className="space-y-6">
                                 {contactInfo.map((item, index) => (
-                                    <motion.div
+                                    <div
                                         key={index}
-                                        initial={{opacity: 0, y: 20}}
-                                        animate={{opacity: 1, y: 0}}
-                                        transition={{delay: index * 0.1}}
                                         className="flex items-start gap-4"
                                     >
                                         <div
@@ -124,7 +114,7 @@ export default function Contact() {
                                                 </Paragraph>
                                             )}
                                         </div>
-                                    </motion.div>
+                                    </div>
                                 ))}
                             </div>
 
@@ -135,18 +125,16 @@ export default function Contact() {
                                 </Title>
                                 <div className="flex gap-4">
                                     {socialLinks.map((link, index) => (
-                                        <motion.a
+                                        <a
                                             key={index}
                                             href={link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            whileHover={{scale: 1.1}}
-                                            whileTap={{scale: 0.95}}
                                             className={`w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 text-xl transition-colors ${link.color}`}
                                             aria-label={link.label}
                                         >
                                             {link.icon}
-                                        </motion.a>
+                                        </a>
                                     ))}
                                 </div>
                             </div>
@@ -155,7 +143,7 @@ export default function Contact() {
                             <div
                                 className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"/>
+                                    <div className="w-3 h-3 bg-green-500 rounded-full"/>
                                     <span className="text-green-700 dark:text-green-400 font-medium">
                     Open to opportunities
                   </span>
@@ -165,13 +153,10 @@ export default function Contact() {
                                 </Paragraph>
                             </div>
                         </Card>
-                    </motion.div>
+                    </div>
 
                     {/* Contact Form */}
-                    <motion.div
-                        initial={{opacity: 0, x: 50}}
-                        animate={{opacity: 1, x: 0}}
-                        transition={{duration: 0.6}}
+                    <div
                         className="lg:col-span-2"
                     >
                         <Card>
@@ -228,7 +213,7 @@ export default function Contact() {
                                 </Button>
                             </Form>
                         </Card>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </div>

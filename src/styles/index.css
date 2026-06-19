@@ -26,7 +26,7 @@ body {
 
 /* Smooth scrolling */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 /* Custom scrollbar */
@@ -147,11 +147,9 @@ body {
     color: #fff;
     text-decoration: none;
     backdrop-filter: blur(16px);
-    transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
 }
 
 .portfolio-secondary-btn:hover {
-    transform: translateY(-2px);
     border-color: rgba(103, 232, 249, 0.55);
     background: rgba(255, 255, 255, 0.13);
     color: #fff;
@@ -274,11 +272,10 @@ body {
     height: 100%;
     object-fit: contain;
     padding: 1rem;
-    transition: transform 500ms ease;
 }
 
 .project-card:hover .project-image {
-    transform: scale(1.08) rotate(1deg);
+    transform: none;
 }
 
 .timeline-card {
@@ -337,15 +334,12 @@ body {
     margin-top: 0.45rem;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-    }
+*,
+*::before,
+*::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
 }
 
 @media (max-width: 640px) {

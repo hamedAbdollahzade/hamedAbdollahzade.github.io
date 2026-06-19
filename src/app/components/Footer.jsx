@@ -2,7 +2,7 @@ import React from 'react';
 import {GithubOutlined, LinkedinOutlined, MailOutlined} from '@ant-design/icons';
 
 const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({behavior: 'smooth', block: 'start'});
+    document.getElementById(id)?.scrollIntoView({behavior: 'auto', block: 'start'});
 };
 
 export default function Footer() {

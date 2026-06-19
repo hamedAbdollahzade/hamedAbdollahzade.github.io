@@ -3,7 +3,6 @@ import {Button, Card, Tag, Typography} from 'antd';
 import {
     ArrowRightOutlined, DownloadOutlined, GithubOutlined, LinkedinOutlined, MailOutlined, PhoneOutlined, RocketOutlined,
 } from '@ant-design/icons';
-import {motion, useScroll, useTransform} from 'motion/react';
 import {useTranslation} from 'react-i18next';
 import {useLanguage} from '../../contexts/LanguageContext';
 import Resume from '@/public/Resume.pdf';
@@ -14,6 +13,22 @@ import {skillsData} from '@/app/data/skillsData.js';
 import {experienceData} from '@/app/data/experienceData.js';
 
 const {Title, Paragraph} = Typography;
+
+const MotionDiv = ({
+    children,
+    variants,
+    initial,
+    animate,
+    whileInView,
+    viewport,
+    transition,
+    whileHover,
+    ...props
+}) => <div {...props}>{children}</div>;
+
+const motion = {
+    div: MotionDiv,
+};
 
 const fadeUp = {
     hidden: {opacity: 0, y: 54, filter: 'blur(10px)'}, visible: {
@@ -26,7 +41,7 @@ const stagger = {
 };
 
 const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({behavior: 'smooth', block: 'start'});
+    document.getElementById(id)?.scrollIntoView({behavior: 'auto', block: 'start'});
 };
 
 const SectionHeader = ({eyebrow, title, description}) => (<motion.div
@@ -60,10 +75,6 @@ const RevealCard = ({children, className = '', delay = 0}) => (<motion.div
 export default function Home() {
     const {t} = useTranslation();
     const {isRTL} = useLanguage();
-    const {scrollYProgress} = useScroll();
-    const heroY = useTransform(scrollYProgress, [0, 0.28], [0, -130]);
-    const heroScale = useTransform(scrollYProgress, [0, 0.24], [1, 0.92]);
-    const orbY = useTransform(scrollYProgress, [0, 1], [0, 520]);
 
     const featuredProjects = projectsData;
     const skillCloud = [...skillsData.frontend, ...skillsData.tools].slice(0, 14);
@@ -71,13 +82,12 @@ export default function Home() {
 
 
     return (<main className="portfolio-shell min-h-screen overflow-hidden bg-slate-950 text-white">
-        <motion.div style={{scaleX: scrollYProgress}} className="scroll-progress"/>
-        <motion.div style={{y: orbY}} className="aurora aurora-one"/>
-        <motion.div style={{y: useTransform(scrollYProgress, [0, 1], [0, -360])}} className="aurora aurora-two"/>
+        <div className="scroll-progress"/>
+        <div className="aurora aurora-one"/>
+        <div className="aurora aurora-two"/>
 
         <section id="home" className="relative min-h-screen px-4  pt-12 sm:px-6 lg:px-8">
             <motion.div
-                style={{y: heroY, scale: heroScale}}
                 variants={stagger}
                 initial="hidden"
                 animate="visible"
@@ -87,7 +97,7 @@ export default function Home() {
                             className={isRTL ? 'text-center lg:text-right' : 'text-center lg:text-left'}>
                     <div
                         className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm text-cyan-100 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl">
-                        <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400"/>
+                        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400"/>
                         Available for modern frontend products
                     </div>
 
