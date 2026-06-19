@@ -268,6 +268,13 @@
             border: 2px solid rgba(255, 255, 255, 0.1);
         }
 
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         .profile-pic:hover {
             transform: scale(1.02);
         }
@@ -734,20 +741,27 @@
 <section id="hero" class="hero">
     <div class="container hero-grid">
         <div class="hero-content">
-            <div class="hero-name">حامد عبدالله‌زاده</div>
+            <div class="hero-name">حامد عبداله‌زاده</div>
             <div class="hero-title">توسعه‌دهنده فرانت‌اند</div>
             <div class="terminal" id="terminal">
                 <div class="line">> راه‌اندازی پورتفوی…</div>
                 <div class="line">> بارگذاری پروژه‌ها…</div>
                 <div class="line">> بارگذاری مهارت‌ها…</div>
-                <div class="line">> خوش آمدید Hamed.dev <span class="cursor-blink"></span></div>
+                <div class="line">> خوش آمدید<span class="cursor-blink"></span></div>
             </div>
         </div>
         <div class="hero-image">
-            <div class="profile-pic">👨‍💻</div>
+            <!--            <div class="profile-pic">👨‍💻</div>-->
+            <div class="profile-pic">
+                <img src="img/me.jpg" alt="profile pic">
+            </div>
+
             <div class="hero-buttons">
                 <a href="#contact" class="btn">تماس با من</a>
-                <a href="#" class="btn btn-outline" id="downloadResume">دانلود رزومه</a>
+                <a href="assets/HamedAbdollahzade-Resume.pdf" class="btn btn-outline"
+                   download="HamedAbdollahzade-Resume.pdf">
+                    دانلود رزومه
+                </a>
             </div>
         </div>
     </div>
@@ -1104,11 +1118,6 @@
             });
         });
 
-        // download resume (placeholder)
-        document.getElementById('downloadResume').addEventListener('click', function (e) {
-            e.preventDefault();
-            alert('رزومه به زودی قابل دانلود خواهد بود.');
-        });
 
         // extra: smooth scroll for all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(a => {

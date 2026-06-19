@@ -5,112 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d36a96ae-472d-4842-aad1-02abd17185a9" name="Changes" comment="newUpdate">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Icon-BaviW6Ei.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Messenger-CK3j2dkG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Messenger2-C-4wQwAH.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Portfolio-7FNqnBpj.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Resume-duh4Z7sN.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/index-BAbK9Cwb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/index-CbvZnvX6.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/link-Crm-Project1-BKIIx0Kd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/link-Crm-Project2-f3q-5VYe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/office-profile-sm-BPKPm-6n.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/robot-market-Bh36kIVy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/warehouse-cEKVwO6V.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/wiqiQ (1)-DOSJBwzH.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/App.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/Footer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/Layout.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/Navbar.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/figma/ImageWithFallback.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/accordion.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/alert-dialog.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/alert.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/aspect-ratio.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/avatar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/badge.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/breadcrumb.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/button.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/calendar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/card.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/carousel.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/chart.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/checkbox.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/collapsible.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/command.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/context-menu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/dialog.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/drawer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/dropdown-menu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/form.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/hover-card.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/input-otp.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/input.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/label.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/menubar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/navigation-menu.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/pagination.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/popover.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/progress.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/radio-group.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/resizable.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/scroll-area.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/select.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/separator.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/sheet.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/sidebar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/skeleton.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/slider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/sonner.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/switch.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/table.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/tabs.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/textarea.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/toggle-group.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/toggle.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/tooltip.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/use-mobile.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/ui/utils.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/data/experienceData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/data/projectsData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/data/sections.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/data/skillsData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/About.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/Contact.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/Experience.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/Home.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/Projects.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/util/helper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LanguageSwitcher.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/contexts/LanguageContext.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/locales/en.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/locales/fa.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/Resume.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/Messenger.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/Messenger2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/Portfolio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/link-Crm-Project1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/link-Crm-Project2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/office-profile-sm.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/robot-market.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/warehouse.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/public/img/wiqiQ (1).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/fonts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/tailwind.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/theme.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +76,7 @@
       <workItem from="1781083385931" duration="10000" />
       <workItem from="1781091476037" duration="83000" />
       <workItem from="1781872480100" duration="3656000" />
-      <workItem from="1781883441982" duration="2573000" />
+      <workItem from="1781883441982" duration="4323000" />
     </task>
     <task id="LOCAL-00001" summary="newUpdate">
       <option name="closed" value="true" />
