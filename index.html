@@ -802,8 +802,8 @@
         <div class="filter-bar">
             <button class="filter-btn active" data-filter="all">همه</button>
             <button class="filter-btn" data-filter="react">React</button>
-            <button class="filter-btn" data-filter="vue">Vue</button>
-            <button class="filter-btn" data-filter="fullstack">Fullstack</button>
+            <button class="filter-btn" data-filter="html,css,js">html,css,js</button>
+            <button class="filter-btn" data-filter="fullStack">fullStack</button>
         </div>
         <div class="projects-grid" id="projectsGrid"></div>
     </div>
@@ -1039,7 +1039,7 @@
                 tech: ['JavaScript', 'HTML', 'CSS', 'REST API', 'WebSocket', 'ESP32'],
                 links: [{label: 'مشاهده', url: 'https://my-rm.com/'}],
                 img: './img/robot-market.png',
-                filter: 'fullstack'
+                filter: 'html,css,js'
             },
             {
                 id: 2,
@@ -1060,7 +1060,7 @@
                     url: 'https://github.com/hamedAbdollahzade/warehouse-frontend'
                 }, {label: 'بک‌اند', url: 'https://github.com/hamedAbdollahzade/warehouse-backend'}],
                 img: './img/warehouse.webp',
-                filter: 'vue'
+                filter: "fullStack"
             },
             {
                 id: 4,
@@ -1088,8 +1088,12 @@
         const grid = document.getElementById('projectsGrid');
 
         function renderProjects(filter = 'all') {
+            console.log(filter)
+            console.log('filter')
             grid.innerHTML = '';
             const filtered = filter === 'all' ? projectsData : projectsData.filter(p => p.filter === filter);
+            console.log(filtered)
+            console.log('filtered')
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = 'project-card';
