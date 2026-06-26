@@ -17,6 +17,8 @@
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
     <title>حامد عبدالله‌زاده | توسعه‌دهنده فرانت‌اند</title>
     <style>
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+
         /* reset & base */
         * {
             margin: 0;
@@ -24,16 +26,23 @@
             box-sizing: border-box;
         }
 
+        html {
+            font-size: 16px;
+            text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0b0b1a;
             color: #e0e0ff;
+            font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
             line-height: 1.6;
             overflow-x: hidden;
             direction: rtl;
         }
 
-        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -53,6 +62,19 @@
             transition: 0.2s;
         }
 
+        p,
+        li {
+            line-height: 1.6;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+            font-size: 1rem;
+        }
+
         a:hover {
             color: #d4b8ff;
             text-shadow: 0 0 12px #7c3aed88;
@@ -62,7 +84,7 @@
             width: 90%;
             max-width: 1280px;
             margin: 0 auto;
-            padding: 0 1rem;
+            padding: 0 clamp(0.75rem, 2vw, 1rem);
         }
 
         /* loading screen */
@@ -197,12 +219,12 @@
 
         /* sections */
         section {
-            padding: 4rem 0 3rem;
+            padding: clamp(3.25rem, 8vw, 5rem) 0 clamp(2.75rem, 6vw, 4rem);
             scroll-margin-top: 80px;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 1.25rem + 1.6vw, 2.35rem);
             font-weight: 700;
             margin-bottom: 2.5rem;
             position: relative;
@@ -287,7 +309,8 @@
         }
 
         .btn {
-            padding: 0.6rem 1.8rem;
+            min-height: 48px;
+            padding: 0.7rem 1.8rem;
             border-radius: 40px;
             font-weight: 600;
             border: none;
@@ -319,15 +342,17 @@
         }
 
         .hero-name {
-            font-size: 2.6rem;
+            font-size: clamp(2rem, 1.35rem + 3vw, 3.25rem);
             font-weight: 800;
             margin: 0.5rem 0;
+            line-height: 1.25;
         }
 
         .hero-title {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.45rem);
             color: #b48cff;
             margin-bottom: 1.2rem;
+            line-height: 1.6;
         }
 
         .terminal {
@@ -338,7 +363,7 @@
             border: 1px solid #7c3aed55;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
+            font-size: clamp(0.9rem, 0.82rem + 0.35vw, 1rem);
             color: #a5f3fc;
             margin-top: 1rem;
             min-height: 130px;
@@ -415,9 +440,52 @@
 
         /* about */
         .about-text {
-            font-size: 1.05rem;
+            font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
             max-width: 800px;
-            line-height: 2;
+            line-height: 1.85;
+        }
+
+        .support-card {
+            max-width: 800px;
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255, 214, 102, 0.14), rgba(124, 58, 237, 0.16));
+            border-color: rgba(255, 214, 102, 0.35);
+        }
+
+        .support-card p {
+            color: #f3f0ff;
+            margin-top: 0.25rem;
+        }
+
+        .support-card strong {
+            color: #ffe08a;
+            font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+        }
+
+        .coffee-btn {
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.2rem;
+            border-radius: 999px;
+            background: #ffd166;
+            color: #211602;
+            font-weight: 800;
+            box-shadow: 0 12px 30px rgba(255, 209, 102, 0.24);
+            white-space: nowrap;
+        }
+
+        .coffee-btn:hover {
+            color: #211602;
+            text-shadow: none;
+            transform: translateY(-2px);
+            box-shadow: 0 16px 36px rgba(255, 209, 102, 0.34);
         }
 
         /* skills */
@@ -448,8 +516,8 @@
 
         .skill-category ul li {
             padding: 0.3rem 0;
-            color: #b0b0d0;
-            font-size: 0.95rem;
+            color: #c9c9e8;
+            font-size: clamp(1rem, 0.96rem + 0.12vw, 1.05rem);
             position: relative;
             padding-right: 1.2rem;
         }
@@ -488,9 +556,9 @@
         }
 
         .timeline-item .desc {
-            color: #b0b0d0;
+            color: #c9c9e8;
             margin-top: 0.3rem;
-            font-size: 0.95rem;
+            font-size: clamp(1rem, 0.96rem + 0.12vw, 1.05rem);
             line-height: 1.7;
         }
 
@@ -521,7 +589,8 @@
             background: rgba(30, 30, 70, 0.5);
             border: 1px solid #4a3a7a;
             color: #c4b5fd;
-            padding: 0.4rem 1.2rem;
+            min-height: 48px;
+            padding: 0.55rem 1.2rem;
             border-radius: 30px;
             font-size: 0.9rem;
             cursor: pointer;
@@ -579,8 +648,8 @@
         }
 
         .project-body p {
-            font-size: 0.9rem;
-            color: #b0b0d0;
+            font-size: clamp(1rem, 0.96rem + 0.12vw, 1.05rem);
+            color: #c9c9e8;
             margin: 0.5rem 0;
             line-height: 1.7;
         }
@@ -608,28 +677,105 @@
         }
 
         .project-links a {
-            font-size: 0.8rem;
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9rem;
             background: #2a1a4a;
-            padding: 0.2rem 1rem;
+            padding: 0.45rem 1rem;
             border-radius: 30px;
         }
 
         /* contact */
-        .contact-info {
+        .contact-intro {
+            color: #c9c9e8;
+            max-width: 720px;
+            margin: -1rem 0 1.2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-tile {
+            min-height: 112px;
+            padding: 1rem;
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            justify-content: center;
+            gap: 0.35rem;
+            border-radius: 20px;
+            background: rgba(18, 18, 45, 0.58);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            color: #f2efff;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .contact-tile:hover,
+        .contact-tile:focus-visible {
+            color: #fff;
+            text-shadow: none;
+            background: rgba(38, 28, 80, 0.74);
+            border-color: rgba(167, 139, 250, 0.85);
+            box-shadow: 0 12px 34px rgba(124, 58, 237, 0.28);
+            transform: translateY(-3px);
+            outline: none;
+        }
+
+        .contact-tile:active {
+            transform: scale(0.98);
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: rgba(124, 58, 237, 0.18);
+            font-size: 1.45rem;
+        }
+
+        .contact-label {
+            font-weight: 800;
             font-size: 1.05rem;
         }
 
-        .contact-info a {
-            color: #b48cff;
-            transition: 0.2s;
+        .contact-value {
+            color: #c9c9e8;
+            direction: ltr;
+            text-align: right;
+            overflow-wrap: anywhere;
+            font-size: 0.95rem;
         }
 
-        .contact-info a:hover {
-            color: #d4b8ff;
-            text-shadow: 0 0 12px #7c3aed88;
+        .floating-coffee {
+            position: fixed;
+            left: max(1rem, env(safe-area-inset-left));
+            bottom: max(1rem, env(safe-area-inset-bottom));
+            z-index: 90;
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            padding: 0.7rem 1rem;
+            border-radius: 999px;
+            background: #ffd166;
+            color: #211602;
+            font-weight: 800;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 0 0 28px rgba(255, 209, 102, 0.24);
+        }
+
+        .floating-coffee:hover {
+            color: #211602;
+            text-shadow: none;
+            transform: translateY(-2px);
         }
 
         /* scroll reveal */
@@ -675,6 +821,10 @@
         }
 
         @media (max-width: 600px) {
+            body {
+                padding-bottom: 4.75rem;
+            }
+
             .nav-inner {
                 flex-direction: column;
                 align-items: stretch;
@@ -706,6 +856,40 @@
             }
 
             .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-card {
+                grid-template-columns: 1fr;
+            }
+
+            .coffee-btn {
+                width: 100%;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+
+            .contact-tile {
+                min-height: 128px;
+                padding: 0.85rem;
+            }
+
+            .contact-value {
+                font-size: 0.85rem;
+            }
+
+            .floating-coffee {
+                left: 1rem;
+                right: 1rem;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .contact-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -766,6 +950,7 @@
     </div>
 </section>
 
+
 <!-- ABOUT -->
 <section id="about" class="reveal">
     <div class="container">
@@ -776,6 +961,23 @@
             روی کتابخانه‌ها و فریم‌ورک‌های محبوبی مثل React، Redux Toolkit و Vue 3 بوده و در طراحی رابط کاربری از Ant
             Design، Tailwind CSS، MUI، Bootstrap و Sass استفاده کرده‌ام.
         </div>
+        <aside class="support-card glass-card" aria-labelledby="support-card-title">
+            <div class="support-card__content">
+                <strong id="support-card-title">اگر دوست داشتی، می‌تونی از این پروژه در Coffeebede حمایت کنی.</strong>
+            </div>
+
+            <a
+                    class="coffee-btn"
+                    href="https://www.coffeebede.com/h_dev365"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="حمایت از حامد در کافه بده"
+            >
+                Coffeebede
+            </a>
+        </aside>
+
+
     </div>
 </section>
 
@@ -813,15 +1015,44 @@
 <section id="contact" class="reveal">
     <div class="container">
         <h2 class="section-title">تماس</h2>
-        <div class="contact-info glass-card">
-            <div><a href="mailto:hamedabdollahzade.ab@gmail.com">📧 hamedabdollahzade.ab@gmail.com</a></div>
-            <div><a href="tel:09107902735">📱 ۰۹۱۰۷۹۰۲۷۳۵</a></div>
-            <div>🐙 <a href="https://github.com/hamedAbdollahzade" target="_blank">github.com/hamedAbdollahzade</a></div>
-            <div>🔗 <a href="https://www.linkedin.com/in/hamed-abdollahzade" target="_blank">linkedin.com/in/hamed-abdollahzade</a>
-            </div>
+        <p class="contact-intro">برای همکاری، فرصت شغلی یا گفت‌وگوی فنی، یکی از مسیرهای زیر را انتخاب کنید.</p>
+
+        <div class="contact-grid" aria-label="روش‌های تماس">
+            <a class="contact-tile" href="https://github.com/hamedAbdollahzade" target="_blank"
+               rel="noopener noreferrer">
+                <span class="contact-icon" aria-hidden="true">🐙</span>
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value">hamedAbdollahzade</span>
+            </a>
+
+            <a class="contact-tile" href="https://www.linkedin.com/in/hamed-abdollahzade" target="_blank"
+               rel="noopener noreferrer">
+                <span class="contact-icon" aria-hidden="true">🔗</span>
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">hamed-abdollahzade</span>
+            </a>
+
+            <a class="contact-tile" href="mailto:hamedabdollahzade.ab@gmail.com">
+                <span class="contact-icon" aria-hidden="true">📧</span>
+                <span class="contact-label">Email</span>
+                <span class="contact-value">hamedabdollahzade.ab@gmail.com</span>
+            </a>
+
+            <a class="contact-tile" href="tel:9107902735">
+                <span class="contact-icon" aria-hidden="true">📞</span>
+                <span class="contact-label">تماس</span>
+                <span class="contact-value">+98 910 790 27 35</span>
+            </a>
         </div>
     </div>
 </section>
+
+
+<!--<a class="floating-coffee" href="https://www.coffeebede.com/h_dev365" target="_blank" rel="noopener"-->
+<!--   aria-label="حمایت از حامد با خرید قهوه در Coffeebede">-->
+<!--    <span aria-hidden="true">☕</span>-->
+<!--    <span>خرید قهوه</span>-->
+<!--</a>-->
 
 <script>
     (function () {
