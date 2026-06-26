@@ -473,27 +473,6 @@
             font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
         }
 
-        .coffee-btn {
-            min-height: 48px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.2rem;
-            border-radius: 999px;
-            background: #ffd166;
-            color: #211602;
-            font-weight: 800;
-            box-shadow: 0 12px 30px rgba(255, 209, 102, 0.24);
-            white-space: nowrap;
-        }
-
-        .coffee-btn:hover {
-            color: #211602;
-            text-shadow: none;
-            transform: translateY(-2px);
-            box-shadow: 0 16px 36px rgba(255, 209, 102, 0.34);
-        }
 
         /* skills */
         .skills-grid {
@@ -761,29 +740,6 @@
             font-size: 0.95rem;
         }
 
-        .floating-coffee {
-            position: fixed;
-            left: max(1rem, env(safe-area-inset-left));
-            bottom: max(1rem, env(safe-area-inset-bottom));
-            z-index: 90;
-            min-height: 48px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.45rem;
-            padding: 0.7rem 1rem;
-            border-radius: 999px;
-            background: #ffd166;
-            color: #211602;
-            font-weight: 800;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 0 0 28px rgba(255, 209, 102, 0.24);
-        }
-
-        .floating-coffee:hover {
-            color: #211602;
-            text-shadow: none;
-            transform: translateY(-2px);
-        }
 
         /* scroll reveal */
         .reveal {
@@ -870,9 +826,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .coffee-btn {
-                width: 100%;
-            }
 
             .contact-grid {
                 grid-template-columns: 1fr 1fr;
@@ -888,11 +841,6 @@
                 font-size: 0.85rem;
             }
 
-            .floating-coffee {
-                left: 1rem;
-                right: 1rem;
-                width: auto;
-            }
         }
 
         @media (max-width: 380px) {
@@ -968,22 +916,6 @@
             روی کتابخانه‌ها و فریم‌ورک‌های محبوبی مثل React، Redux Toolkit و Vue 3 بوده و در طراحی رابط کاربری از Ant
             Design، Tailwind CSS، MUI، Bootstrap و Sass استفاده کرده‌ام.
         </div>
-        <aside class="support-card glass-card" aria-labelledby="support-card-title">
-            <div class="support-card__content">
-                <strong id="support-card-title">اگر دوست داشتی، می‌تونی از این پروژه در Coffeebede حمایت کنی.</strong>
-            </div>
-
-            <a
-                    class="coffee-btn"
-                    href="https://www.coffeebede.com/h_dev365"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="حمایت از حامد در کافه بده"
-            >
-                Coffeebede
-            </a>
-        </aside>
-
 
     </div>
 </section>
@@ -1025,6 +957,11 @@
         <p class="contact-intro">برای همکاری، فرصت شغلی یا گفت‌وگوی فنی، یکی از مسیرهای زیر را انتخاب کنید.</p>
 
         <div class="contact-grid" aria-label="روش‌های تماس">
+            <a class="contact-tile" href="tel:09107902735">
+                <span class="contact-icon" aria-hidden="true">📞</span>
+                <span class="contact-label">تماس</span>
+                <span class="contact-value">+98 910 790 27 35</span>
+            </a>
             <a class="contact-tile" href="https://github.com/hamedAbdollahzade" target="_blank"
                rel="noopener noreferrer">
                 <span class="contact-icon" aria-hidden="true">🐙</span>
@@ -1044,22 +981,10 @@
                 <span class="contact-label">Email</span>
                 <span class="contact-value">hamedabdollahzade.ab@gmail.com</span>
             </a>
-
-            <a class="contact-tile" href="tel:9107902735">
-                <span class="contact-icon" aria-hidden="true">📞</span>
-                <span class="contact-label">تماس</span>
-                <span class="contact-value">+98 910 790 27 35</span>
-            </a>
         </div>
     </div>
 </section>
 
-
-<!--<a class="floating-coffee" href="https://www.coffeebede.com/h_dev365" target="_blank" rel="noopener"-->
-<!--   aria-label="حمایت از حامد با خرید قهوه در Coffeebede">-->
-<!--    <span aria-hidden="true">☕</span>-->
-<!--    <span>خرید قهوه</span>-->
-<!--</a>-->
 
 <script>
     (function () {
