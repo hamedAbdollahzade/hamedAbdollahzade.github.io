@@ -1,0 +1,21 @@
+{
+  "name": "پورتفولیوی شخصی | توسعه‌دهنده فرانت‌اند",
+  "short_name": "پورتفولیو",
+  "description": "پورتفولیوی شخصی یک توسعه‌دهنده فرانت‌اند با بیش از پنج سال تجربه.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "fa",
+  "dir": "rtl",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

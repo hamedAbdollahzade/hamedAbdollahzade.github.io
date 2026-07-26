@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Responsive — Breakpoints
+   ========================================================================== */
+
+/* -------------------- Ultra Wide -------------------- */
+@media (min-width: 1600px) {
+  :root {
+    --container-w: 1400px;
+  }
+}
+
+/* -------------------- Laptop / small desktop -------------------- */
+@media (max-width: 1080px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .contact-wrap {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* -------------------- Tablet -------------------- */
+@media (max-width: 860px) {
+  .nav-links {
+    position: fixed;
+    top: 0;
+    inset-inline-end: 0;
+    height: 100svh;
+    width: min(320px, 80vw);
+    background: var(--color-surface);
+    border-inline-start: 1px solid var(--color-border);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    transform: translateX(100%);
+    transition: transform var(--dur-normal) var(--ease-out);
+    z-index: var(--z-header);
+  }
+
+  [dir="rtl"] .nav-links {
+    transform: translateX(-100%);
+  }
+
+  .nav-links.is-open {
+    transform: translateX(0);
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-shape--3 {
+    right: -4%;
+  }
+}
+
+/* -------------------- Mobile -------------------- */
+@media (max-width: 600px) {
+  .container {
+    padding-inline: var(--space-sm);
+  }
+
+  .section {
+    padding-block: var(--space-2xl);
+  }
+
+  .hero-title {
+    max-width: 100%;
+  }
+
+  .hero-actions,
+  .hero-socials {
+    width: 100%;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  .stat-card {
+    padding: var(--space-md);
+  }
+
+  .timeline::before {
+    right: 9px;
+  }
+
+  .timeline-item {
+    padding-right: var(--space-xl);
+  }
+
+  .back-to-top {
+    width: 44px;
+    height: 44px;
+    bottom: var(--space-md);
+    left: var(--space-md);
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* -------------------- Small mobile -------------------- */
+@media (max-width: 380px) {
+  .hero-badge {
+    font-size: 0.72rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* -------------------- Prevent any horizontal overflow -------------------- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}

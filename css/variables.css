@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Design Tokens — Variables
+   ========================================================================== */
+
+:root {
+  /* -------------------- Colors -------------------- */
+  --color-primary: #6366f1;
+  --color-secondary: #8b5cf6;
+  --color-accent: #06b6d4;
+
+  --color-bg: #09090b;
+  --color-surface: #111217;
+  --color-card: #181a20;
+  --color-text: #f8fafc;
+  --color-muted: #94a3b8;
+
+  --color-success: #10b981;
+  --color-error: #ef4444;
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+  --gradient-aurora: linear-gradient(120deg, #6366f1 0%, #8b5cf6 35%, #06b6d4 70%, #6366f1 100%);
+  --gradient-text: linear-gradient(90deg, #f8fafc, #94a3b8);
+  --gradient-radial-glow: radial-gradient(circle at center, rgba(99, 102, 241, 0.35), transparent 70%);
+
+  /* -------------------- Typography -------------------- */
+  --font-main: "Vazirmatn", "Tahoma", sans-serif;
+
+  --fs-display: clamp(2.5rem, 6vw, 5.5rem);
+  --fs-h1: clamp(2rem, 4vw, 3.5rem);
+  --fs-h2: clamp(1.6rem, 3vw, 2.5rem);
+  --fs-h3: clamp(1.2rem, 2vw, 1.6rem);
+  --fs-body: clamp(0.95rem, 1vw, 1.05rem);
+  --fs-small: 0.85rem;
+
+  --lh-tight: 1.15;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.9;
+
+  /* -------------------- Spacing -------------------- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  /* -------------------- Radius -------------------- */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-full: 999px;
+
+  /* -------------------- Shadow -------------------- */
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 24px 70px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.25);
+
+  /* -------------------- Motion -------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.2s;
+  --dur-normal: 0.4s;
+  --dur-slow: 0.8s;
+
+  /* -------------------- Layout -------------------- */
+  --container-w: 1240px;
+  --header-h: 84px;
+  --z-header: 100;
+  --z-cursor: 9999;
+  --z-modal: 500;
+}
+
+/* -------------------- Light theme override -------------------- */
+[data-theme="light"] {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-card: #ffffff;
+  --color-text: #0f1115;
+  --color-muted: #52596b;
+  --color-border: rgba(15, 17, 21, 0.08);
+  --color-border-strong: rgba(15, 17, 21, 0.14);
+  --shadow-sm: 0 4px 16px rgba(15, 17, 21, 0.06);
+  --shadow-md: 0 12px 40px rgba(15, 17, 21, 0.08);
+  --shadow-lg: 0 24px 70px rgba(15, 17, 21, 0.1);
+}
