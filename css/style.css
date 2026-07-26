@@ -978,7 +978,7 @@ textarea:focus-visible,
 
 /* -------------------- Contact -------------------- */
 .contact-wrap {
-    display: grid;
+    display: flex;
     grid-template-columns: 1.1fr 0.9fr;
     gap: var(--space-2xl);
 }
