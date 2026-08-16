@@ -61,6 +61,37 @@
   .hero-shape--3 {
     right: -4%;
   }
+
+  .proj-timeline-track {
+    left: auto;
+    right: 34px;
+    transform: none;
+  }
+
+  .pt-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding-right: 84px;
+    padding-block: var(--space-xl);
+  }
+
+  .pt-media {
+    position: absolute;
+    top: var(--space-xl);
+    right: 0;
+    width: 68px;
+  }
+
+  .pt-media-inner {
+    width: 68px;
+    height: 68px;
+    border-width: 3px;
+  }
+
+  .pt-index {
+    font-size: 1.7rem;
+  }
 }
 
 /* -------------------- Mobile -------------------- */
