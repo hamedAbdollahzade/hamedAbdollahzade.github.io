@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/animations.css"/>
     <link rel="stylesheet" href="css/responsive.css"/>
+    <link rel="stylesheet" href="css/cinematic.css"/>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -79,7 +80,17 @@
         }
     </style>
 </head>
-<body>
+<body class="cinematic-portfolio">
+<!-- Set data-video-src to the optimized portrait video when it is available. -->
+<div class="cinematic-backdrop" data-scroll-video-stage aria-hidden="true">
+    <img class="cinematic-poster" src="assets/images/me.jpg" alt="" fetchpriority="high"/>
+    <video class="cinematic-video" data-scroll-video data-video-src=""
+           muted playsinline preload="none" tabindex="-1" disablepictureinpicture></video>
+    <div class="cinematic-shade"></div>
+</div>
+<button class="cinematic-motion" data-video-motion type="button" aria-pressed="false" hidden>
+    توقف حرکت پس‌زمینه
+</button>
 <a href="#main-content" class="skip-link">رفتن به محتوای اصلی</a>
 
 <!-- Scroll progress bar -->
@@ -96,7 +107,7 @@
             <span>&lt;/&gt;</span> پورتفولیو
         </a>
 
-        <nav class="nav-links" data-nav-links aria-label="ناوبری اصلی">
+        <nav id="nav-links" class="nav-links" data-nav-links aria-label="ناوبری اصلی">
             <a href="#hero" class="nav-link">خانه</a>
             <a href="#about" class="nav-link">درباره من</a>
             <a href="#skills" class="nav-link">مهارت‌ها</a>
@@ -145,13 +156,12 @@
         </span>
 
             <h1 class="hero-title" data-reveal="fade" data-reveal-delay="80">
-                سلام، من یک
-                <span class="text-gradient"
-                      data-typed='["توسعه‌دهنده فرانت‌اند هستم.", "عاشق رابط‌های کاربری تمیزم.", "سازنده تجربه‌های دیجیتال هستم."]'></span>
+                حامد عبدالله‌زاده
+                <span class="hero-role">توسعه‌دهنده فرانت‌اند</span>
             </h1>
 
             <p class="hero-subtitle" data-reveal="fade" data-reveal-delay="160">
-                بیش از پنج سال تجربه در طراحی و توسعه رابط‌های کاربری مدرن، سریع و مقیاس‌پذیر.
+                از ایده تا تجربه‌ای که کار می‌کند؛ طراحی و توسعه رابط‌های کاربری با React، Vue و TypeScript.
             </p>
 
             <div class="hero-actions" data-reveal="fade" data-reveal-delay="240">

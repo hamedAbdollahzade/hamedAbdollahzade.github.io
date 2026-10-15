@@ -1,0 +1,118 @@
+/* A fixed portrait layer; content keeps the native document scroll. */
+.cinematic-portfolio {
+    --portrait-position: 50% 40%;
+    isolation: isolate;
+}
+
+.cinematic-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    background: #09090b;
+}
+
+.cinematic-poster,
+.cinematic-video,
+.cinematic-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cinematic-poster,
+.cinematic-video {
+    object-fit: cover;
+    object-position: var(--portrait-position);
+}
+
+.cinematic-video {
+    opacity: 0;
+    transition: opacity 600ms ease;
+}
+
+.cinematic-backdrop.is-ready .cinematic-video {
+    opacity: 1;
+}
+
+.cinematic-shade {
+    background: linear-gradient(270deg, rgba(9, 9, 11, .91), rgba(9, 9, 11, .48) 60%, rgba(9, 9, 11, .26)),
+                linear-gradient(0deg, rgba(9, 9, 11, .7), transparent 65%);
+}
+
+[data-theme="light"] .cinematic-shade {
+    background: linear-gradient(270deg, rgba(248, 250, 252, .96), rgba(248, 250, 252, .75) 60%, rgba(248, 250, 252, .5));
+}
+
+.cinematic-portfolio .hero-bg,
+.cinematic-portfolio .hero-grid,
+.cinematic-portfolio .hero-glow,
+.cinematic-portfolio .hero-shape,
+.cinematic-portfolio .cursor-dot,
+.cinematic-portfolio .cursor-ring {
+    display: none;
+}
+
+.cinematic-portfolio .hero-content {
+    padding-block: calc(var(--header-h) + 4rem) 8rem;
+    gap: 2rem;
+}
+
+.cinematic-portfolio .hero-title {
+    max-width: 15ch;
+    font-size: clamp(2.5rem, 5.5vw, 5rem);
+    line-height: 1.45;
+}
+
+.hero-role {
+    display: block;
+    margin-top: .6rem;
+    font-size: clamp(1.15rem, 2.2vw, 1.8rem);
+    font-weight: 500;
+    color: var(--color-muted);
+}
+
+.cinematic-portfolio .hero-subtitle {
+    max-width: 42ch;
+    color: var(--color-text);
+}
+
+.cinematic-portfolio .section {
+    background: rgba(9, 9, 11, .78);
+    border-top: 1px solid var(--color-border);
+}
+
+[data-theme="light"] .cinematic-portfolio .section {
+    background: rgba(248, 250, 252, .88);
+}
+
+.cinematic-motion {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 90;
+    padding: .75rem 1rem;
+    min-height: 44px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
+    font-size: .75rem;
+    box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 860px) {
+    .cinematic-portfolio .hero-content {
+        padding-block: calc(var(--header-h) + 3rem) 8rem;
+    }
+
+    .cinematic-shade {
+        background: linear-gradient(0deg, rgba(9, 9, 11, .95), rgba(9, 9, 11, .64) 65%, rgba(9, 9, 11, .4));
+    }
+
+    .cinematic-motion {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
