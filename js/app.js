@@ -14,6 +14,7 @@ import {
     initMagneticButtons,
 } from "./animation.js";
 import {initProjects} from "./projects.js";
+import {initScrollVideo} from "./scroll-video.js";
 
 /* -------------------- Contact form -------------------- */
 function validateField(input) {
@@ -121,17 +122,20 @@ function setFooterYear() {
 /* -------------------- Bootstrap -------------------- */
 document.addEventListener("DOMContentLoaded", () => {
     initTheme();
+    initScrollVideo();
     initNavigation();
     initRevealOnScroll();
     initCounters();
     initTypingEffect();
-    initMouseGlow();
-    initCursorFollower();
+    if (!document.body.classList.contains("cinematic-portfolio")) {
+        initMouseGlow();
+        initCursorFollower();
+        initHeroParallax();
+    }
     initCardTilt();
     initMagneticButtons();
-    initHeroParallax();
-    bindDynamicProjectInteractions(); // ← این خط رو بیار بالاتر
-    initProjects();                   // ← این خط رو بذار بعدش
+    bindDynamicProjectInteractions();
+    initProjects();
     initContactForm();
     setFooterYear();
 });

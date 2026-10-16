@@ -105,6 +105,16 @@ function placeholderSVG(color) {
   `;
 }
 
+function attachImageFallback(image, color) {
+  const replace = () => {
+    const fallback = document.createElement("div");
+    fallback.innerHTML = placeholderSVG(color);
+    image.replaceWith(fallback.firstElementChild);
+  };
+  image.addEventListener("error", replace, { once: true });
+  if (image.complete && image.naturalWidth === 0) replace();
+}
+
 function renderLinks(project, btnClass = "btn btn-ghost btn-sm") {
   return project.links
       .map(
@@ -143,9 +153,7 @@ function createTimelineItem(project, index) {
           src="${project.img}"
           alt="${project.title}"
           loading="lazy"
-          onerror="this.replaceWith(Object.assign(document.createElement('div'), { innerHTML: \`${placeholderSVG(
-      color
-  ).replace(/`/g, "\\`")}\`, className: 'pt-media-fallback' }).firstElementChild)"
+
         />
       </div>
     </div>
@@ -164,6 +172,7 @@ function createTimelineItem(project, index) {
     document.dispatchEvent(new CustomEvent("project:open", { detail: project }));
   };
 
+  attachImageFallback(item.querySelector("img"), color);
   const media = item.querySelector(".pt-media-inner");
   media.addEventListener("click", openModal);
   media.addEventListener("keydown", (e) => {
@@ -246,9 +255,8 @@ function initModal() {
     descEl.textContent = project.description;
 
     const color = getProjectColor(project);
-    thumbEl.innerHTML = `<img src="${project.img}" alt="${project.title}" onerror="this.outerHTML = \`${placeholderSVG(
-        color
-    ).replace(/`/g, "\\`")}\`" />`;
+    thumbEl.innerHTML = `<img src="${project.img}" alt="${project.title}" />`;
+    attachImageFallback(thumbEl.querySelector("img"), color);
 
     techEl.innerHTML = project.tech.map((t) => `<span class="skill-tag">${t}</span>`).join("");
 
