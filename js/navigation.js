@@ -37,6 +37,8 @@ function initMobileMenu(toggle, links) {
     document.body.style.overflow = isOpen ? "hidden" : "";
   });
 
+  window.matchMedia("(max-width: 860px)").addEventListener("change", closeMenu);
+
   links.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", closeMenu);
   });

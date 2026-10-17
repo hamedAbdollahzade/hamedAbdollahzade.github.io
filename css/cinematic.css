@@ -38,8 +38,8 @@
 }
 
 .cinematic-shade {
-    background: linear-gradient(270deg, rgba(9, 9, 11, .91), rgba(9, 9, 11, .48) 60%, rgba(9, 9, 11, .26)),
-                linear-gradient(0deg, rgba(9, 9, 11, .7), transparent 65%);
+    background: linear-gradient(270deg, rgba(9, 9, 11, .70), rgba(9, 9, 11, .28) 60%, rgba(9, 9, 11, .12)),
+                linear-gradient(0deg, rgba(9, 9, 11, .45), transparent 65%);
 }
 
 [data-theme="light"] .cinematic-shade {
@@ -80,12 +80,12 @@
 }
 
 .cinematic-portfolio .section {
-    background: rgba(9, 9, 11, .78);
+    background: rgba(9, 9, 11, .58);
     border-top: 1px solid var(--color-border);
 }
 
 [data-theme="light"] .cinematic-portfolio .section {
-    background: rgba(248, 250, 252, .88);
+    background: rgba(248, 250, 252, .76);
 }
 
 .cinematic-motion {
@@ -108,7 +108,7 @@
     }
 
     .cinematic-shade {
-        background: linear-gradient(0deg, rgba(9, 9, 11, .95), rgba(9, 9, 11, .64) 65%, rgba(9, 9, 11, .4));
+        background: linear-gradient(0deg, rgba(9, 9, 11, .76), rgba(9, 9, 11, .42) 65%, rgba(9, 9, 11, .20));
     }
 
     .cinematic-motion {

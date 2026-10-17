@@ -5,17 +5,24 @@
 const PROJECTS = [
   {
     id: 1,
-    title: "پنل مدیریت دستگاه‌های ربات مارکت",
-    description:
-        "داشبورد مدیریت مبتنی بر وب برای دستگاه‌های فروش هوشمند ربات مارکت مبتنی بر ESP32. این پنل به مدیران امکان مدیریت تنظیمات دستگاه، مانیتورینگ وضعیت سیستم، مدیریت قیمت‌ها و موجودی مشتریان و دریافت لاگ‌های لحظه‌ای از طریق WebSocket را می‌دهد.",
+    title: "توسعه فرانت‌اند اکوسیستم وندینگ ربات مارکت",
+    description: "در ربات مارکت روی مجموعه‌ای از محصولات متصل به دستگاه‌های وندینگ کار می‌کنم. مسئله مشترک این محصولات، فراهم‌کردن تجربه‌ای قابل استفاده برای مدیریت و کار با دستگاه، هم در دسترسی آنلاین و هم در محیط آفلاین است. نقش من توسعه فرانت‌اند چند بخش از این مجموعه، از رابط روی دستگاه تا پنل و وب‌سایت اصلی است.",
     learned: [
-      "ارتباط بلادرنگ با دستگاه‌های سخت‌افزاری از طریق WebSocket",
-      "طراحی و پیاده‌سازی REST API برای مدیریت تنظیمات و موجودی",
-      "به‌روزرسانی رابط کاربری بر اساس داده‌های زنده، بدون رفرش صفحه",
+      "توسعه رابط‌های کاربری متناسب با محدودیت‌های اجرای آفلاین و سخت‌افزار",
+      "پیاده‌سازی جریان‌های مدیریت قیمت‌گذاری، کاربران و کیف پول",
+      "کار روی چند محصول مرتبط با نیازها و محیط‌های اجرای متفاوت",
     ],
-    tech: ["JavaScript", "HTML", "CSS", "REST API", "WebSocket", "ESP32"],
-    links: [{ label: "مشاهده", url: "https://my-rm.com/" }],
-    img: "../assets/images/robot-market.png",
+    story: [
+      {title: "اتصال به دستگاه؛ PWA و پنل آنلاین", text: "روی برنامه PWA برای اتصال خودکار به دستگاه‌های وندینگ آفلاین و همچنین پنل آنلاین کار می‌کنم؛ دو بخش با شرایط اتصال متفاوت که هرکدام به رابط و جریان کار متناسب نیاز دارند."},
+      {title: "مدیریت محلی؛ React و ESP32", text: "بخش دیگری از کارم، توسعه برنامه React آفلاین برای ماژول ESP32 است. در این برنامه روی مدیریت قیمت‌گذاری، افزودن کاربر و کیف پول دستگاه‌های وندینگ کار می‌کنم."},
+      {title: "نسل جدید وندینگ؛ Orange Pi", text: "در پروژه دستگاه‌های جدید، روی برد Orange Pi و برنامه React آفلاین کار می‌کنم تا رابط کاربری مورد نیاز دستگاه در محیط محلی اجرا شود."},
+      {title: "معرفی محصول؛ وب‌سایت Next.js", text: "در کنار نرم‌افزارهای دستگاه و پنل‌ها، توسعه فرانت‌اند سایت اصلی ربات مارکت با Next.js نیز بخشی از حوزه کاری من است."},
+    ],
+    tech: ["React", "Next.js", "PWA", "REST API", "WebSocket", "ESP32", "Orange Pi"],
+    links: [{label: "وب‌سایت ربات مارکت", url: "https://my-rm.com/"}],
+    img: "assets/images/robot-market.png",
+    // Add real screenshots here: {src: "assets/images/filename.png", caption: "شرح تصویر"}.
+    images: [{src: "assets/images/robot-market.png", caption: "نمای پنل مدیریت ربات مارکت"}],
   },
   {
     id: 2,
@@ -29,7 +36,7 @@ const PROJECTS = [
     ],
     tech: ["React", "Ant Design", "Redux Toolkit", "Axios", "JavaScript", "Vite"],
     links: [{ label: "مشاهده", url: "https://linkcrm.app/" }],
-    img: "../assets/images/link-Crm-Project.png",
+    img: "assets/images/link-Crm-Project.png",
   },
   {
     id: 3,
@@ -46,7 +53,7 @@ const PROJECTS = [
       { label: "فرانت‌اند", url: "https://github.com/hamedAbdollahzade/warehouse-frontend" },
       { label: "بک‌اند", url: "https://github.com/hamedAbdollahzade/warehouse-backend" },
     ],
-    img: "../assets/images/warehouse.webp",
+    img: "assets/images/warehouse.webp",
   },
   {
     id: 4,
@@ -60,7 +67,7 @@ const PROJECTS = [
     ],
     tech: ["React", "Vite", "Tailwind CSS", "Context API"],
     links: [{ label: "مشاهده", url: "https://wikiq.co/" }],
-    img: "../assets/images/wiqiQ.png",
+    img: "assets/images/wiqiQ.png",
   },
   {
     id: 5,
@@ -77,7 +84,7 @@ const PROJECTS = [
       { label: "گیت‌هاب", url: "https://github.com/hamedAbdollahzade/messanger" },
       { label: "مشاهده", url: "https://hamedabdollahzade.github.io/messanger/" },
     ],
-    img: "../assets/images/Messenger.png",
+    img: "assets/images/Messenger.png",
   },
 ];
 
@@ -147,19 +154,20 @@ function createTimelineItem(project, index) {
       </div>
     </div>
 
-    <div class="pt-media" data-reveal="scale">
-      <div class="pt-media-inner" style="background: linear-gradient(135deg, ${color}66, #09090b);" tabindex="0" role="button" aria-label="مشاهده جزئیات پروژه ${project.title}">
-        <img
-          src="${project.img}"
-          alt="${project.title}"
-          loading="lazy"
-
-        />
-      </div>
+    <div class="pt-media project-gallery" aria-label="تصاویر ${project.title}">
+      ${(project.images || [{src: project.img, caption: project.title}]).map((image, index) => `
+        <figure class="project-figure">
+          <button class="pt-media-inner" type="button" data-image-index="${index}" aria-label="بزرگ‌نمایی: ${image.caption}">
+            <img src="${image.src}" alt="${image.caption}" loading="lazy" decoding="async" />
+          </button>
+          <figcaption>${image.caption} <span>· برای بزرگ‌نمایی انتخاب کنید</span></figcaption>
+        </figure>`).join("")}
     </div>
+    ${project.story ? `<div class="project-story">${project.story.map((chapter, i) => `
+      <section class="story-chapter"><span class="story-number">${toPersianDigits(i + 1)}</span><h4>${chapter.title}</h4><p>${chapter.text}</p></section>`).join("")}</div>` : ""}
 
     <div class="pt-col pt-col--learned" data-reveal="slide-left">
-      <h4 class="pt-learned-title">چیزهایی که یاد گرفتم</h4>
+      <h4 class="pt-learned-title">تجربه و سهم من در پروژه</h4>
       <ul class="pt-learned-list">
         ${project.learned.map((l) => `<li>${l}</li>`).join("")}
       </ul>
@@ -167,19 +175,14 @@ function createTimelineItem(project, index) {
     </div>
   `;
 
-  const openModal = (e) => {
-    if (e.target.closest("a")) return;
-    document.dispatchEvent(new CustomEvent("project:open", { detail: project }));
-  };
-
-  attachImageFallback(item.querySelector("img"), color);
-  const media = item.querySelector(".pt-media-inner");
-  media.addEventListener("click", openModal);
-  media.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      document.dispatchEvent(new CustomEvent("project:open", { detail: project }));
-    }
+  item.querySelectorAll("img").forEach((image) => attachImageFallback(image, color));
+  item.querySelectorAll("[data-image-index]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const selected = project.images?.[Number(button.dataset.imageIndex)];
+      document.dispatchEvent(new CustomEvent("project:open", {
+        detail: {...project, img: selected?.src || project.img},
+      }));
+    });
   });
 
   return item;
@@ -248,6 +251,7 @@ function initModal() {
   const linksEl = overlay.querySelector("[data-modal-links]");
 
   let lastFocused = null;
+  overlay.inert = true;
 
   function openModal(project) {
     lastFocused = document.activeElement;
@@ -264,6 +268,7 @@ function initModal() {
       linksEl.innerHTML = renderLinks(project, "btn btn-primary");
     }
 
+    overlay.inert = false;
     overlay.classList.add("is-open");
     overlay.removeAttribute("aria-hidden");
     document.body.style.overflow = "hidden";
@@ -271,6 +276,7 @@ function initModal() {
   }
 
   function closeModal() {
+    overlay.inert = true;
     overlay.classList.remove("is-open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
@@ -283,7 +289,14 @@ function initModal() {
     if (e.target === overlay) closeModal();
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && overlay.classList.contains("is-open")) closeModal();
+    if (!overlay.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeModal();
+    if (e.key === "Tab") {
+      const focusable = [...overlay.querySelectorAll("button, a[href]")];
+      const first = focusable[0], last = focusable.at(-1);
+      if (e.shiftKey && document.activeElement === first) {e.preventDefault(); last.focus();}
+      else if (!e.shiftKey && document.activeElement === last) {e.preventDefault(); first.focus();}
+    }
   });
 }
 
