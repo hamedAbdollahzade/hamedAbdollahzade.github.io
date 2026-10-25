@@ -2,7 +2,7 @@
    Projects Module — Data, Scroll Timeline Rendering, Progress Line, Modal
    ========================================================================== */
 
-const PROJECTS = [
+export const PROJECTS = [
   {
     id: 1,
     title: "توسعه فرانت‌اند اکوسیستم وندینگ ربات مارکت",
