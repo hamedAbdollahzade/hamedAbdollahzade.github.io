@@ -385,21 +385,28 @@ html.js .portfolio-source {
 }
 
 /* -------------------- Desktop icons -------------------- */
+/* Icons fill columns from the top-right corner, wrapping leftwards. */
 .desktop-icons {
     position: absolute;
-    top: calc(var(--topbar-h) + 14px);
-    right: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    top: calc(var(--topbar-h) + 12px);
+    right: 14px;
+    bottom: 12px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(auto-fill, 112px);
+    align-content: start;
+    gap: 4px 6px;
+    direction: rtl;
 }
 
 .desktop-icon {
+    direction: ltr;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    width: 92px;
+    width: 100px;
+    height: 112px;
     padding: 8px 4px 6px;
     border: 1px solid transparent;
     border-radius: 10px;
@@ -423,6 +430,42 @@ html.js .portfolio-source {
 
 .desktop-icon:hover {
     background: rgba(255, 255, 255, .1);
+}
+
+.desktop-icon--project {
+    cursor: pointer;
+}
+
+.desktop-icon-thumb {
+    flex-shrink: 0;
+    width: 68px;
+    height: 52px;
+    margin: 3px 0;
+    border: 2px solid rgba(255, 255, 255, .85);
+    border-radius: 6px;
+    object-fit: cover;
+    background: linear-gradient(135deg, #77216f, #e95420);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .45);
+}
+
+.desktop-icon-thumb.is-broken {
+    color: transparent;
+}
+
+.desktop-icon--project .desktop-icon-label {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-family: "Vazirmatn", var(--font-ui);
+    font-size: 12px;
+    line-height: 1.55;
+    text-align: center;
+}
+
+.desktop-icon--project:hover .desktop-icon-label,
+.desktop-icon--project:focus-visible .desktop-icon-label {
+    background: rgba(0, 0, 0, .35);
 }
 
 .desktop-icon.is-selected,
@@ -652,6 +695,202 @@ html.js .portfolio-source {
     .viewer-fallback {
         display: flex;
     }
+}
+
+/* -------------------- Project window -------------------- */
+.viewer-tools button.viewer-tool {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.project-body {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #1e1e1e;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, .28) transparent;
+}
+
+.pw {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 20px 24px 32px;
+    color: #f2f2f2;
+    font: 15px/1.95 "Vazirmatn", var(--font-ui);
+}
+
+.pw-hero {
+    margin: 0;
+}
+
+.pw-hero-btn {
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 12px;
+    background: #111;
+    cursor: zoom-in;
+}
+
+.pw-hero-img {
+    display: block;
+    width: 100%;
+    max-height: 440px;
+    object-fit: contain;
+}
+
+.pw-hero figcaption {
+    margin-top: 6px;
+    color: #a8a8a8;
+    font-size: 13px;
+    text-align: center;
+}
+
+.pw-thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+.pw-thumb {
+    flex-shrink: 0;
+    width: 96px;
+    height: 64px;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: #111;
+    opacity: .65;
+    cursor: pointer;
+}
+
+.pw-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pw-thumb.is-active,
+.pw-thumb:hover {
+    border-color: var(--orange);
+    opacity: 1;
+}
+
+.pw-head {
+    margin: 22px 0 6px;
+}
+
+.pw-index {
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.pw-title {
+    margin: 2px 0 10px;
+    font-size: 1.55rem;
+    line-height: 1.6;
+}
+
+.pw-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pw-tag {
+    padding: 1px 10px;
+    border-radius: 999px;
+    background: rgba(233, 84, 32, .16);
+    color: #ffb38f;
+    font: 500 13px/1.8 var(--font-ui);
+}
+
+.pw-desc {
+    margin: 16px 0;
+    color: #dcdcdc;
+}
+
+.pw-story {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.pw-chapter {
+    position: relative;
+    padding: 14px 52px 14px 16px;
+    border-radius: 12px;
+    background: #2a2a2a;
+}
+
+.pw-chapter-num {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.pw-chapter h3,
+.pw-learned h3 {
+    margin: 0 0 4px;
+    font-size: 1.02rem;
+}
+
+.pw-chapter p {
+    margin: 0;
+    color: #cfcfcf;
+}
+
+.pw-learned {
+    margin: 20px 0;
+    padding: 14px 18px;
+    border-inline-start: 3px solid var(--orange);
+    border-radius: 12px;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    background: #2a2a2a;
+}
+
+.pw-learned ul {
+    margin: 0;
+    padding-inline-start: 1.2em;
+    color: #dcdcdc;
+}
+
+.pw-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pw-link {
+    padding: 7px 16px;
+    border-radius: 9px;
+    background: var(--orange);
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.pw-link:hover,
+.pw-link:focus-visible {
+    background: #f06a3a;
+    outline: none;
 }
 
 /* ==================== Terminal ==================== */
@@ -1048,8 +1287,21 @@ html.js .portfolio-source {
         justify-content: flex-start;
     }
 
-    .win--viewer .win-titlebar {
+    .win--viewer .win-titlebar,
+    .win--project .win-titlebar {
         padding-left: 84px;
+    }
+
+    .pw {
+        padding: 14px 14px 28px;
+    }
+
+    .pw-title {
+        font-size: 1.3rem;
+    }
+
+    .desktop-icons {
+        bottom: calc(var(--dock-h) + 8px);
     }
 
     .win-btn[data-win-action="maximize"] {

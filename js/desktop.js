@@ -4,7 +4,7 @@
    ========================================================================== */
 
 import {readPortfolio} from "./portfolio-data.js";
-import {Terminal} from "./terminal.js";
+import {Terminal, h} from "./terminal.js";
 import {createCommands} from "./terminal-commands.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -86,9 +86,12 @@ class AppWindow {
 
     place() {
         const area = this.workArea();
+        // Open beside the desktop icons rather than on top of them.
+        if (!isMobile()) area.width -= $(".desktop-icons").offsetWidth + 14;
         const offset = this.size.offset || 0;
-        const width = Math.min(this.size.width, area.width - 48 - offset);
-        const height = Math.min(this.size.height, area.height - 32 - offset);
+        // Floors guard against a zero-sized viewport (e.g. a tab opened in the background).
+        const width = Math.max(Math.min(this.size.width, area.width - 48 - offset), 340);
+        const height = Math.max(Math.min(this.size.height, area.height - 32 - offset), 220);
         Object.assign(this.el.style, {
             width: `${width}px`,
             height: `${height}px`,
@@ -120,9 +123,8 @@ class AppWindow {
     }
 
     syncDock() {
-        this.dockItem.hidden = false;
         this.dockItem.classList.toggle("is-running", this.state !== "closed");
-        if (this.dockItem.classList.contains("dock-item--viewer")) this.dockItem.hidden = this.state === "closed";
+        if (this.dockItem.hasAttribute("data-transient")) this.dockItem.hidden = this.state === "closed";
     }
 
     async open() {
@@ -280,6 +282,97 @@ function createViewer(data) {
     };
 }
 
+/* -------------------- Projects: desktop icons + details window -------------------- */
+const projectImages = (project) => project.images || [{src: project.img, caption: project.title}];
+const faNumber = (n) => n.toLocaleString("fa-IR");
+
+function renderProjectIcons(projects, onOpen) {
+    const container = $(".desktop-icons");
+    projects.forEach((project, index) => {
+        const thumb = h("img", {class: "desktop-icon-thumb", src: projectImages(project)[0].src, alt: "", decoding: "async"});
+        thumb.addEventListener("error", () => thumb.classList.add("is-broken"), {once: true});
+        const icon = h("button", {class: "desktop-icon desktop-icon--project", type: "button", title: project.title},
+            thumb,
+            h("span", {class: "desktop-icon-label", dir: "auto"}, project.title),
+        );
+        icon.addEventListener("click", () => onOpen(index));
+        container.append(icon);
+    });
+}
+
+function createProjectWindow(projects, openImage) {
+    const el = $('[data-window="project"]');
+    const body = $("[data-project-body]", el);
+    const title = $("[data-project-title]", el);
+    const win = new AppWindow(el, {
+        dockItem: $('[data-dock="project"]'),
+        size: {width: 940, height: 800, offset: 24},
+    });
+    let current = 0;
+
+    function gallery(images, projectTitle) {
+        let selected = 0;
+        const main = h("img", {class: "pw-hero-img", src: images[0].src, alt: images[0].caption});
+        const caption = h("figcaption", {}, images[0].caption);
+        const hero = h("button", {class: "pw-hero-btn", type: "button", "aria-label": images[0].caption}, main);
+        hero.addEventListener("click", () => openImage(images[selected].src, images[selected].caption || projectTitle));
+
+        const thumbs = images.length > 1 && h("div", {class: "pw-thumbs"}, images.map((image, i) => {
+            const button = h("button", {class: `pw-thumb${i ? "" : " is-active"}`, type: "button", "aria-label": image.caption},
+                h("img", {src: image.src, alt: "", loading: "lazy"}));
+            button.addEventListener("click", () => {
+                selected = i;
+                main.src = image.src;
+                main.alt = image.caption;
+                caption.textContent = image.caption;
+                button.parentElement.querySelectorAll(".pw-thumb").forEach((b) => b.classList.toggle("is-active", b === button));
+            });
+            return button;
+        }));
+        return [h("figure", {class: "pw-hero"}, hero, caption), thumbs];
+    }
+
+    function render(index) {
+        current = (index + projects.length) % projects.length;
+        const project = projects[current];
+        title.textContent = project.title;
+        body.replaceChildren(h("article", {class: "pw", dir: "rtl"},
+            gallery(projectImages(project), project.title),
+            h("header", {class: "pw-head"},
+                h("span", {class: "pw-index"}, `${faNumber(current + 1)} / ${faNumber(projects.length)}`),
+                h("h2", {class: "pw-title"}, project.title),
+                h("div", {class: "pw-tags"}, project.tech.map((tech) => h("span", {class: "pw-tag", dir: "ltr"}, tech))),
+            ),
+            h("p", {class: "pw-desc"}, project.description),
+            project.story && h("div", {class: "pw-story"}, project.story.map((chapter, i) =>
+                h("section", {class: "pw-chapter"},
+                    h("span", {class: "pw-chapter-num"}, faNumber(i + 1)),
+                    h("h3", {}, chapter.title),
+                    h("p", {}, chapter.text),
+                ))),
+            h("section", {class: "pw-learned"},
+                h("h3", {}, "تجربه و سهم من در پروژه"),
+                h("ul", {}, project.learned.map((item) => h("li", {}, item))),
+            ),
+            h("div", {class: "pw-links"}, project.links.map((link) =>
+                h("a", {class: "pw-link", href: link.url, target: "_blank", rel: "noopener noreferrer"}, link.label, " ↗"))),
+        ));
+        body.scrollTop = 0;
+    }
+
+    el.querySelectorAll("[data-project-nav]").forEach((button) => {
+        button.addEventListener("click", () => render(current + Number(button.dataset.projectNav)));
+    });
+
+    return {
+        win,
+        open(index) {
+            render(index);
+            win.open();
+        },
+    };
+}
+
 /* -------------------- Boot & login -------------------- */
 async function runBoot(data) {
     const boot = $("[data-boot]");
@@ -322,6 +415,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     initClock($("[data-clock]"));
 
     const viewer = createViewer(data);
+    const projectWindow = createProjectWindow(data.projects.items, viewer.openImage);
+    renderProjectIcons(data.projects.items, projectWindow.open);
     const termEl = $("[data-terminal]");
     let terminalWin;
 
@@ -358,6 +453,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const app = item.dataset.dock;
             if (app === "terminal") return terminalWin.toggleFromDock();
             if (app === "viewer") return viewer.win.toggleFromDock();
+            if (app === "project") return projectWindow.win.toggleFromDock();
             item.classList.remove("is-bouncing");
             void item.offsetWidth;
             item.classList.add("is-bouncing");
