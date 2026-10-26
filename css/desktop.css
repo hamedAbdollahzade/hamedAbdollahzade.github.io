@@ -432,8 +432,31 @@ html.js .portfolio-source {
     background: rgba(255, 255, 255, .1);
 }
 
-.desktop-icon--project {
+.desktop-icon--project,
+.desktop-icon--link {
     cursor: pointer;
+}
+
+.desktop-icon--link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.desktop-icon-tile {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin: 2px 0 4px;
+    border-radius: 14px;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--tile) 80%, #fff), var(--tile));
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .15);
+    color: #fff;
+}
+
+.desktop-icon-tile svg {
+    width: 28px;
+    height: 28px;
 }
 
 .desktop-icon-thumb {

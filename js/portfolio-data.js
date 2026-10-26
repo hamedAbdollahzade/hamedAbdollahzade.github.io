@@ -15,6 +15,7 @@ function toLink(anchor) {
         label: clean(anchor.getAttribute("aria-label")) || text(anchor),
         href: anchor.getAttribute("href"),
         external: anchor.getAttribute("target") === "_blank",
+        icon: anchor.querySelector("svg")?.cloneNode(true) || null,
     };
 }
 

@@ -282,6 +282,34 @@ function createViewer(data) {
     };
 }
 
+/* -------------------- Contact links as desktop launchers -------------------- */
+function launcherColor(href) {
+    if (href.startsWith("tel:")) return "#26a269";
+    if (href.startsWith("mailto:")) return "#e95420";
+    if (href.includes("linkedin.com")) return "#0a66c2";
+    if (href.includes("github.com")) return "#24292f";
+    return "#5e2750";
+}
+
+function renderLinkIcons(links) {
+    const container = $(".desktop-icons");
+    links.forEach((link) => {
+        const isWeb = /^https?:/.test(link.href);
+        const icon = link.icon?.cloneNode(true);
+        icon?.setAttribute("aria-hidden", "true");
+        container.append(h("a", {
+            class: "desktop-icon desktop-icon--link",
+            href: link.href,
+            target: isWeb ? "_blank" : null,
+            rel: isWeb ? "noopener noreferrer" : null,
+            title: link.href.replace(/^(tel:|mailto:)/, ""),
+        },
+            h("span", {class: "desktop-icon-tile", style: `--tile: ${launcherColor(link.href)}`}, icon),
+            h("span", {class: "desktop-icon-label"}, link.label),
+        ));
+    });
+}
+
 /* -------------------- Projects: desktop icons + details window -------------------- */
 const projectImages = (project) => project.images || [{src: project.img, caption: project.title}];
 const faNumber = (n) => n.toLocaleString("fa-IR");
@@ -416,6 +444,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const viewer = createViewer(data);
     const projectWindow = createProjectWindow(data.projects.items, viewer.openImage);
+    renderLinkIcons(data.hero.socials);
     renderProjectIcons(data.projects.items, projectWindow.open);
     const termEl = $("[data-terminal]");
     let terminalWin;
