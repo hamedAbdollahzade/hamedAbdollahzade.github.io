@@ -319,11 +319,16 @@ function renderProjectIcons(projects, onOpen) {
     projects.forEach((project, index) => {
         const thumb = h("img", {class: "desktop-icon-thumb", src: projectImages(project)[0].src, alt: "", decoding: "async"});
         thumb.addEventListener("error", () => thumb.classList.add("is-broken"), {once: true});
-        const icon = h("button", {class: "desktop-icon desktop-icon--project", type: "button", title: project.title},
+        const icon = h("a", {class: "desktop-icon desktop-icon--project", href: `projects/${project.slug}.html`, title: project.title},
             thumb,
             h("span", {class: "desktop-icon-label", dir: "auto"}, project.title),
         );
-        icon.addEventListener("click", () => onOpen(index));
+        icon.addEventListener("click", (e) => {
+            // Ctrl/Cmd/Shift-click keeps the link's normal behaviour.
+            if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+            e.preventDefault();
+            onOpen(index);
+        });
         container.append(icon);
     });
 }

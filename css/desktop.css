@@ -437,6 +437,7 @@ html.js .portfolio-source {
     cursor: pointer;
 }
 
+.desktop-icon--project,
 .desktop-icon--link {
     color: #fff;
     text-decoration: none;

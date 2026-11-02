@@ -219,6 +219,8 @@ export function createCommands(data, {openResume, closeTerminal, startedAt}) {
                 return [
                     line(c("c-green", "✔ "), `Opening ${data.resume.fileName} in Document Viewer…`),
                     line(c("c-muted", "  ↓ "), h("a", {class: "t-link", href: data.resume.href, download: true, dir: "auto"}, data.resume.label)),
+                    data.hero.actions.filter((action) => action.href.endsWith(".html"))
+                        .map((action) => line(c("c-muted", "  ↗ "), link(action))),
                 ];
             },
         },

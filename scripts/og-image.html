@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+  Source of assets/images/og-image.jpg, the 1200x630 social sharing image.
+  Render with Chrome at that window size, then save the result as a JPEG.
+-->
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&family=Ubuntu+Mono:wght@700&display=swap" rel="stylesheet"/>
+<style>
+    html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+    body {
+        display: flex;
+        align-items: center;
+        gap: 64px;
+        padding: 0 88px;
+        box-sizing: border-box;
+        color: #fff;
+        font-family: "Vazirmatn", sans-serif;
+        background:
+            radial-gradient(70% 80% at 5% 105%, rgba(255, 140, 60, .9) 0%, rgba(233, 84, 32, 0) 60%),
+            linear-gradient(225deg, #2c001e 0%, #5e2750 40%, #a6364f 75%, #e95420 100%);
+    }
+    img {
+        flex-shrink: 0;
+        width: 300px;
+        height: 300px;
+        border: 6px solid rgba(255, 255, 255, .85);
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    h1 { margin: 0; font-size: 68px; line-height: 1.25; }
+    .latin { margin: 6px 0 22px; direction: ltr; text-align: right; font-size: 38px; opacity: .92; }
+    .role { margin: 0; font-size: 36px; }
+    .prompt {
+        margin: 34px 0 0;
+        direction: ltr;
+        text-align: right;
+        font: 700 28px "Ubuntu Mono", monospace;
+        color: #8ae234;
+    }
+</style>
+</head>
+<body>
+    <img src="../assets/images/me.jpg" alt=""/>
+    <div>
+        <h1>حامد عبداله زاده</h1>
+        <p class="latin">Hamed Abdollahzade</p>
+        <p class="role">توسعه‌دهنده فرانت‌اند</p>
+        <p class="prompt">guest@portfolio:~$ ./welcome.sh</p>
+    </div>
+</body>
+</html>

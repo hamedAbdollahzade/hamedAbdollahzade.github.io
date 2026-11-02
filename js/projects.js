@@ -5,6 +5,7 @@
 export const PROJECTS = [
   {
     id: 1,
+    slug: "robot-market",
     title: "توسعه فرانت‌اند اکوسیستم وندینگ ربات مارکت",
     description: "در ربات مارکت روی مجموعه‌ای از محصولات متصل به دستگاه‌های وندینگ کار می‌کنم. مسئله مشترک این محصولات، فراهم‌کردن تجربه‌ای قابل استفاده برای مدیریت و کار با دستگاه، هم در دسترسی آنلاین و هم در محیط آفلاین است. نقش من توسعه فرانت‌اند چند بخش از این مجموعه، از رابط روی دستگاه تا پنل و وب‌سایت اصلی است.",
     learned: [
@@ -20,12 +21,13 @@ export const PROJECTS = [
     ],
     tech: ["React", "Next.js", "PWA", "REST API", "WebSocket", "ESP32", "Orange Pi"],
     links: [{label: "وب‌سایت ربات مارکت", url: "https://my-rm.com/"}],
-    img: "assets/images/robot-market.png",
+    img: "assets/images/robot-market.webp",
     // Add real screenshots here: {src: "assets/images/filename.png", caption: "شرح تصویر"}.
-    images: [{src: "assets/images/robot-market.png", caption: "نمای پنل مدیریت ربات مارکت"}],
+    images: [{src: "assets/images/robot-market.webp", caption: "نمای پنل مدیریت ربات مارکت"}],
   },
   {
     id: 2,
+    slug: "link-crm",
     title: "لینک CRM / لینک ERP",
     description:
         "اپلیکیشن وب CRM/ERP در مقیاس بزرگ که به عنوان بخشی از یک تیم حرفه‌ای توسعه یافته است. تمرکز بر ساخت کامپوننت‌های قابل استفاده مجدد، فرم‌های پیچیده، داشبوردها و بهبود UI/UX برای گردش‌های کاری کسب‌وکار.",
@@ -40,6 +42,7 @@ export const PROJECTS = [
   },
   {
     id: 3,
+    slug: "stockio",
     title: "سیستم مدیریت انبار (استاکیو)",
     description:
         "سیستم مدیریت انبار فول‌استک ساخته شده با Laravel و Vue.js. پیاده‌سازی ردیابی موجودی مبتنی بر رویداد با موجودی اولیه، حرکات ورود/خروج، تعدیل‌ها و محاسبه کاردکس لحظه‌ای.",
@@ -57,6 +60,7 @@ export const PROJECTS = [
   },
   {
     id: 4,
+    slug: "wikiq",
     title: "پنل مدیریت ویکی‌کیو",
     description:
         "همکاری در توسعه پنل مدیریت ویکی‌کیو با تمرکز بر مدیریت محتوای پلتفرم و گردش‌های کاری داخلی با معماری فرانت‌اند تمیز، مدرن و مقیاس‌پذیر.",
@@ -71,6 +75,7 @@ export const PROJECTS = [
   },
   {
     id: 5,
+    slug: "messenger",
     title: "اپلیکیشن پیام‌رسان",
     description:
         "اپلیکیشن پیام‌رسان توسعه یافته به عنوان اولین پروژه عملی برای یادگیری React در طول بوت‌کمپ. تمرکز بر ساخت رابط کاربری مدولار و پاسخگو و یکپارچه‌سازی با API پیام‌رسانی واقعی.",
@@ -84,7 +89,7 @@ export const PROJECTS = [
       { label: "گیت‌هاب", url: "https://github.com/hamedAbdollahzade/messanger" },
       { label: "مشاهده", url: "https://hamedabdollahzade.github.io/messanger/" },
     ],
-    img: "assets/images/Messenger.png",
+    img: "assets/images/Messenger.webp",
   },
 ];
 

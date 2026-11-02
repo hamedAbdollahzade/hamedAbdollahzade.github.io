@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"/>
-    <title>حامد عبداله زاده | توسعه‌دهنده فرانت‌اند React و Next.js</title>
+    <title>حامد عبداله زاده (Hamed Abdollahzade) | توسعه‌دهنده فرانت‌اند React و Next.js</title>
     <meta name="description"
-          content="حامد عبداله زاده، توسعه‌دهنده فرانت‌اند در مشهد؛ توسعه رابط‌های کاربری با React، Next.js و TypeScript، پنل‌های مدیریتی و برنامه‌های آنلاین و آفلاین دستگاه‌های وندینگ."/>
+          content="حامد عبداله زاده (Hamed Abdollahzade)، توسعه‌دهنده فرانت‌اند در مشهد؛ رابط‌های کاربری با React، Next.js و TypeScript، پنل‌های مدیریتی و برنامه‌های آفلاین وندینگ."/>
     <meta name="author" content="حامد عبداله زاده"/>
-    <meta name="keywords" content="توسعه‌دهنده فرانت‌اند, React, Vue, TypeScript, پورتفولیو, طراحی رابط کاربری"/>
     <meta name="theme-color" content="#09090b"/>
     <link rel="canonical" href="https://hamedabdollahzade.github.io/"/>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="حامد عبداله زاده | توسعه‌دهنده فرانت‌اند React و Next.js"/>
+    <meta property="og:title" content="حامد عبداله زاده (Hamed Abdollahzade) | توسعه‌دهنده فرانت‌اند React و Next.js"/>
     <meta property="og:description"
           content="نمونه‌کارها و مسیر حرفه‌ای حامد عبداله زاده؛ از پنل‌های سازمانی تا رابط‌های آنلاین و آفلاین دستگاه‌های وندینگ."/>
-    <meta property="og:image" content="https://hamedabdollahzade.github.io/assets/images/me.jpg"/>
+    <meta property="og:image" content="https://hamedabdollahzade.github.io/assets/images/og-image.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
     <meta property="og:locale" content="fa_IR"/>
     <meta property="og:site_name" content="حامد عبداله زاده"/>
     <meta property="og:image:alt" content="حامد عبداله زاده، توسعه‌دهنده فرانت‌اند"/>
@@ -24,10 +25,10 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:title" content="حامد عبداله زاده | توسعه‌دهنده فرانت‌اند React و Next.js"/>
+    <meta name="twitter:title" content="حامد عبداله زاده (Hamed Abdollahzade) | توسعه‌دهنده فرانت‌اند React و Next.js"/>
     <meta name="twitter:description"
           content="نمونه‌کارها و مسیر حرفه‌ای حامد عبداله زاده؛ از پنل‌های سازمانی تا رابط‌های آنلاین و آفلاین دستگاه‌های وندینگ."/>
-    <meta name="twitter:image" content="https://hamedabdollahzade.github.io/assets/images/me.jpg"/>
+    <meta name="twitter:image" content="https://hamedabdollahzade.github.io/assets/images/og-image.jpg"/>
 
     <meta name="twitter:image:alt" content="حامد عبداله زاده، توسعه‌دهنده فرانت‌اند"/>
 
@@ -51,7 +52,9 @@
         {
             "@context": "https://schema.org",
             "@type": "Person",
+            "@id": "https://hamedabdollahzade.github.io/#person",
             "name": "حامد عبداله زاده",
+            "alternateName": ["Hamed Abdollahzade", "حامد عبدالله‌زاده"],
             "jobTitle": "Frontend Developer",
             "image": "https://hamedabdollahzade.github.io/assets/images/me.jpg",
             "email": "mailto:hamedabdollahzade.ab@gmail.com",
@@ -69,6 +72,29 @@
                 "Next.js",
                 "Progressive Web Apps",
                 "Frontend Development"
+            ]
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "@id": "https://hamedabdollahzade.github.io/#website",
+                    "url": "https://hamedabdollahzade.github.io/",
+                    "name": "حامد عبداله زاده",
+                    "inLanguage": "fa",
+                    "publisher": {"@id": "https://hamedabdollahzade.github.io/#person"}
+                },
+                {
+                    "@type": "ProfilePage",
+                    "@id": "https://hamedabdollahzade.github.io/#profile",
+                    "url": "https://hamedabdollahzade.github.io/",
+                    "inLanguage": "fa",
+                    "isPartOf": {"@id": "https://hamedabdollahzade.github.io/#website"},
+                    "mainEntity": {"@id": "https://hamedabdollahzade.github.io/#person"}
+                }
             ]
         }
     </script>
@@ -269,6 +295,7 @@
                 <a class="btn btn-primary" data-magnetic href="assets/HamedAbdollahzade-Resume.pdf" download>دانلود
                     رزومه</a>
                 <a class="btn btn-ghost" data-magnetic href="#projects">مشاهده پروژه‌ها</a>
+                <a class="btn btn-ghost" data-magnetic href="resume.html">رزومه آنلاین</a>
             </div>
 
             <div class="hero-socials" data-reveal="fade" data-reveal-delay="320">
@@ -836,6 +863,15 @@
                     <div class="proj-timeline-progress" data-timeline-progress></div>
                 </div>
             </div>
+            <!-- project-links:start -->
+            <ul class="project-links">
+                <li><a href="projects/robot-market.html">توسعه فرانت‌اند اکوسیستم وندینگ ربات مارکت</a></li>
+                <li><a href="projects/link-crm.html">لینک CRM / لینک ERP</a></li>
+                <li><a href="projects/stockio.html">سیستم مدیریت انبار (استاکیو)</a></li>
+                <li><a href="projects/wikiq.html">پنل مدیریت ویکی‌کیو</a></li>
+                <li><a href="projects/messenger.html">اپلیکیشن پیام‌رسان</a></li>
+            </ul>
+            <!-- project-links:end -->
         </div>
     </section>
 

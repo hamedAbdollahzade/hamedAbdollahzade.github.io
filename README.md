@@ -48,9 +48,15 @@ python3 -m http.server 8080
 ```text
 ├── index.html               # پوسته‌ی دسکتاپ + محتوای اصلی سایت (منبع داده)
 ├── resume.html              # رزومه‌ی آنلاین، قابل چاپ
+├── 404.html                 # صفحه‌ی خطای GitHub Pages
+├── projects/                # صفحه‌ی مستقل هر پروژه (خروجی اسکریپت)
+├── scripts/
+│   ├── build-project-pages.mjs # ساخت صفحه‌های پروژه و sitemap.xml
+│   └── og-image.html        # منبع تصویر اشتراک‌گذاری
 ├── manifest.json, robots.txt, sitemap.xml
 ├── css/
 │   ├── desktop.css          # استایل دسکتاپ، پنجره‌ها، ترمینال و موبایل
+│   ├── project-page.css     # استایل صفحه‌های پروژه
 │   └── variables.css        # توکن‌های طراحی resume.html
 ├── js/
 │   ├── desktop.js           # نقطه ورود: بوت، ساعت، پنجره‌ها، Dock، آیکون‌ها
@@ -81,7 +87,15 @@ python3 -m http.server 8080
 ترمینال و دسکتاپ متن‌ها را از همین منابع می‌خوانند، پس لازم نیست جای دیگری را تغییر دهید. این محتوا با جاوااسکریپت پنهان می‌شود و اگر جاوااسکریپت غیرفعال باشد، به‌صورت HTML ساده نمایش داده می‌شود.
 
 - **سوابق:** هر `timeline-item` باید `data-entry="work"` یا `data-entry="education"` داشته باشد تا در دستور درست نمایش داده شود.
-- **پروژه‌ی جدید:** فیلدهای `id`، `title`، `description`، `learned`، `tech`، `links` و `img` لازم‌اند. `images` (با `src` و `caption`) و `story` (با `title` و `text`) اختیاری‌اند.
+- **پروژه‌ی جدید:** فیلدهای `id`، `slug`، `title`، `description`، `learned`، `tech`، `links` و `img` لازم‌اند. `images` (با `src` و `caption`) و `story` (با `title` و `text`) اختیاری‌اند.
+
+## ساخت صفحه‌های پروژه
+
+هر پروژه یک صفحه‌ی مستقل در `projects/` دارد تا موتورهای جست‌وجو بتوانند متن آن را بخوانند. این صفحه‌ها، لینک‌های پروژه در `index.html` و `sitemap.xml` از روی `PROJECTS` ساخته می‌شوند، پس فایل‌های `projects/` را دستی ویرایش نکنید. بعد از هر تغییر در `js/projects.js`، از ریشه‌ی پروژه این دستور را اجرا کنید:
+
+```bash
+node scripts/build-project-pages.mjs
+```
 
 ## ساخت دوباره‌ی PDF رزومه
 
