@@ -3,4 +3,4 @@ Allow: /
 Disallow: /assets/resume-source/
 Disallow: /scripts/
 
-Sitemap: https://hamedabdollahzade.github.io/sitemap.xml
+Sitemap: https://webino-dev.ir/sitemap.xml

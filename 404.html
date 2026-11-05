@@ -1,43 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>404: Page not found</title>
+    <title>صفحه پیدا نشد (۴۰۴) | حامد عبداله زاده</title>
     <meta name="robots" content="noindex"/>
     <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml"/>
-    <style>
-        body {
-            display: grid;
-            place-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 16px;
-            box-sizing: border-box;
-            background: linear-gradient(135deg, #2c001e, #5e2750 50%, #e95420);
-            font: 16px/1.6 "Ubuntu Mono", ui-monospace, monospace;
-        }
-        main {
-            width: min(620px, 100%);
-            padding: 20px;
-            border-radius: 12px;
-            background: #300a24;
-            color: #fff;
-            overflow-wrap: anywhere;
-        }
-        h1 { margin: 0; font: inherit; }
-        p { margin: 0; }
-        .prompt { color: #8ae234; font-weight: 700; }
-        .muted { margin-top: 16px; color: #bfa9b8; }
-        a { color: #729fcf; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500&family=Vazirmatn:wght@400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/labs.css"/>
 </head>
 <body>
-<main>
-    <p><span class="prompt">guest@portfolio:~$</span> cat <span id="path">this-page</span></p>
-    <h1>cat: No such file or directory (404)</h1>
-    <p class="muted">Go back <a href="/">home</a> or read the <a href="/resume.html">online resume</a>.</p>
-</main>
-<script>document.getElementById("path").textContent = location.pathname;</script>
+<section class="hero" style="min-height:100svh">
+    <div class="hero-content">
+        <h1>۴۰۴<small>این صفحه پیدا نشد</small></h1>
+        <p>آدرسی که باز کردید وجود ندارد یا جابه‌جا شده است.</p>
+        <div class="hero-actions">
+            <a class="pill" href="/">بازگشت به خانه</a>
+            <a class="pill pill--ghost" href="/resume.html">رزومه آنلاین</a>
+        </div>
+    </div>
+</section>
 </body>
 </html>

@@ -1,37 +1,24 @@
-# پورتفولیوی حامد عبداله زاده
+# Webino-Dev
 
-پورتفولیوی شخصی من به شکل یک دسکتاپ اوبونتو. همه‌ی بخش‌های رزومه از داخل یک ترمینال تعاملی خوانده می‌شوند و پروژه‌ها، لینک‌های تماس و فایل رزومه هم به‌صورت آیکون روی دسکتاپ هستند.
+وب‌سایت تیم Webino-Dev (توسعه وب و نرم‌افزار، مشهد) برای جذب سفارش پروژه، با ظاهری الهام‌گرفته از [Google Labs](https://labs.google/): هیرو تیره با کارت‌های شناور، کاروسل پروژه‌ها، بخش‌های روشن و منوی تمام‌صفحه.
 
-**نسخه‌ی آنلاین:** <https://hamedabdollahzade.github.io/>
+**نسخه‌ی آنلاین:** <https://webino-dev.ir/>
 
-پروژه با HTML، CSS و JavaScript خالص (ES Modules) نوشته شده و فریمورک، کتابخانه‌ی جاوااسکریپتی و مرحله‌ی build ندارد.
+پروژه با HTML، CSS و JavaScript خالص نوشته شده و فریمورک ندارد. محتوا کاملاً در HTML ایستا قرار دارد تا موتورهای جست‌وجو آن را بخوانند.
 
-## قابلیت‌ها
+## سئو
 
-- **دسکتاپ:** انیمیشن بوت و لاگین، Top Bar با ساعت زنده، Dock، و پنجره‌های قابل جابه‌جایی، کوچک‌کردن، بزرگ‌کردن و بستن.
-- **ترمینال:** تایپ خودکار `./welcome.sh`، منوی قابل کلیک، خروجی با افکت تایپ، تاریخچه با ↑ و ↓، تکمیل با Tab، و میان‌برهای Ctrl+L، Ctrl+C و Ctrl+U.
-- **پروژه‌ها:** هر پروژه یک آیکون با تصویر خودش دارد و با کلیک، پنجره‌ای با توضیحات، تصاویر و لینک‌های آن باز می‌شود.
-- **تماس:** آیکون‌های GitHub، LinkedIn، تلفن و ایمیل.
-- **رزومه:** آیکون Resume فایل PDF را در یک پنجره‌ی نمایشگر باز می‌کند.
-- **موبایل:** پنجره‌ها تمام‌صفحه می‌شوند و Dock به نوار پایین صفحه می‌رود.
+- آدرس canonical، Open Graph، Twitter Card و داده‌ی ساخت‌یافته (JSON-LD) برای دامنه‌ی `webino-dev.ir`
+- یک صفحه‌ی مستقل برای هر پروژه در `projects/`، با `sitemap.xml` و `robots.txt`
+- فایل `CNAME` برای GitHub Pages
 
-## دستورات ترمینال
+## ساخت صفحه‌ی پروژه‌ها
 
-| دستور | کار |
-|---|---|
-| `help` | فهرست دستورات و میان‌برها |
-| `about` | درباره من |
-| `skills` | مهارت‌ها |
-| `projects` / `projects <n>` | فهرست پروژه‌ها / جزئیات یک پروژه |
-| `experience` | سوابق کاری |
-| `education` | تحصیلات و یادگیری |
-| `contact` | راه‌های تماس |
-| `resume` | باز کردن رزومه‌ی PDF |
-| `whoami`، `neofetch` | معرفی کوتاه و اطلاعات سیستم |
-| `ls`، `cat <file>` | فهرست و خواندن فایل‌های مجازی |
-| `date`، `history`، `clear`، `sudo` | دستورات عمومی |
+داده‌ی پروژه‌ها در `js/projects.js` و خدمات، سؤالات متداول، روند کار و اطلاعات تماس در `js/services.js` است. جاهای خالی و فرض‌ها در `TODO.md` آمده‌اند. بعد از هر تغییر این دستور را اجرا کنید تا صفحه‌های پروژه و خدمات، کارت‌های صفحه‌ی اصلی، فوتر و `sitemap.xml` به‌روز شوند:
 
-عددهای ۱ تا ۷ هم میان‌بر گزینه‌های منوی خوش‌آمدگویی هستند.
+```bash
+node scripts/build-project-pages.mjs
+```
 
 ## اجرای پروژه
 
@@ -46,74 +33,42 @@ python3 -m http.server 8080
 ## ساختار پروژه
 
 ```text
-├── index.html               # پوسته‌ی دسکتاپ + محتوای اصلی سایت (منبع داده)
+├── index.html               # صفحه‌ی اصلی (هدر، کارت‌ها و فوتر را اسکریپت می‌سازد)
 ├── resume.html              # رزومه‌ی آنلاین، قابل چاپ
-├── 404.html                 # صفحه‌ی خطای GitHub Pages
+├── 404.html                 # صفحه‌ی خطا
+├── CNAME                    # دامنه‌ی webino-dev.ir برای GitHub Pages
 ├── projects/                # صفحه‌ی مستقل هر پروژه (خروجی اسکریپت)
 ├── scripts/
-│   ├── build-project-pages.mjs # ساخت صفحه‌های پروژه و sitemap.xml
+│   ├── build-project-pages.mjs # ساخت صفحه‌های پروژه، کارت‌ها، فوتر و sitemap.xml
 │   └── og-image.html        # منبع تصویر اشتراک‌گذاری
 ├── manifest.json, robots.txt, sitemap.xml
 ├── css/
-│   ├── desktop.css          # استایل دسکتاپ، پنجره‌ها، ترمینال و موبایل
-│   ├── project-page.css     # استایل صفحه‌های پروژه
-│   └── variables.css        # توکن‌های طراحی resume.html
+│   ├── labs.css             # استایل سایت به سبک Google Labs
+│   └── variables.css       # توکن‌های طراحی resume.html
 ├── js/
-│   ├── desktop.js           # نقطه ورود: بوت، ساعت، پنجره‌ها، Dock، آیکون‌ها
-│   ├── portfolio-data.js    # خواندن محتوای index.html و پروژه‌ها
-│   ├── projects.js          # داده‌ی پروژه‌ها (PROJECTS)
-│   ├── terminal.js          # موتور ترمینال
-│   ├── terminal-commands.js # دستورات ترمینال
-│   └── ascii.js             # بنر ASCII نام
-├── assets/
-│   ├── HamedAbdollahzade-Resume.pdf
-│   ├── resume-source/       # فایل منبع PDF رزومه
-│   ├── icons/, images/
-│   └── video/               # مربوط به طراحی قبلی
-└── tests/scroll-video.test.cjs
+│   ├── labs.js              # منو، کاروسل، ظاهر هدر و انیمیشن اسکرول
+│   └── projects.js          # داده‌ی پروژه‌ها (PROJECTS)
+└── assets/                  # رزومه‌ی PDF، منبع PDF، آیکون‌ها و تصاویر
 ```
-
-این فایل‌ها از طراحی قبلی سایت باقی مانده‌اند و صفحه‌ی اصلی آن‌ها را بارگذاری نمی‌کند: `js/app.js`، `js/navigation.js`، `js/animation.js`، `js/theme.js`، `js/scroll-video.js`، `css/style.css`، `css/animations.css`، `css/responsive.css` و `css/cinematic.css`. از `js/projects.js` هم فقط آرایه‌ی `PROJECTS` استفاده می‌شود.
 
 ## ویرایش محتوا
 
 | چه چیزی | کجا |
 |---|---|
-| معرفی، درباره من، مهارت‌ها، سوابق، تماس | بخش `data-portfolio-source` در `index.html` |
+| درباره من، مهارت‌ها، سوابق، تماس | `index.html` |
 | پروژه‌ها | آرایه‌ی `PROJECTS` در `js/projects.js` |
 | رزومه‌ی آنلاین | `resume.html` |
 | رزومه‌ی PDF | `assets/resume-source/resume.html` |
 
-ترمینال و دسکتاپ متن‌ها را از همین منابع می‌خوانند، پس لازم نیست جای دیگری را تغییر دهید. این محتوا با جاوااسکریپت پنهان می‌شود و اگر جاوااسکریپت غیرفعال باشد، به‌صورت HTML ساده نمایش داده می‌شود.
-
-- **سوابق:** هر `timeline-item` باید `data-entry="work"` یا `data-entry="education"` داشته باشد تا در دستور درست نمایش داده شود.
-- **پروژه‌ی جدید:** فیلدهای `id`، `slug`، `title`، `description`، `learned`، `tech`، `links` و `img` لازم‌اند. `images` (با `src` و `caption`) و `story` (با `title` و `text`) اختیاری‌اند.
+**پروژه‌ی جدید:** فیلدهای `id`، `slug`، `title`، `description`، `learned`، `tech`، `links` و `img` لازم‌اند. `images` (با `src` و `caption`) و `story` (با `title` و `text`) اختیاری‌اند.
 
 ## ساخت صفحه‌های پروژه
 
-هر پروژه یک صفحه‌ی مستقل در `projects/` دارد تا موتورهای جست‌وجو بتوانند متن آن را بخوانند. این صفحه‌ها، لینک‌های پروژه در `index.html` و `sitemap.xml` از روی `PROJECTS` ساخته می‌شوند، پس فایل‌های `projects/` را دستی ویرایش نکنید. بعد از هر تغییر در `js/projects.js`، از ریشه‌ی پروژه این دستور را اجرا کنید:
+هر پروژه یک صفحه‌ی مستقل در `projects/` دارد تا موتورهای جست‌وجو بتوانند متن آن را بخوانند. این صفحه‌ها، کارت‌های پروژه در `index.html` و `sitemap.xml` از روی `PROJECTS` ساخته می‌شوند، پس فایل‌های `projects/` را دستی ویرایش نکنید. بعد از هر تغییر در `js/projects.js`، از ریشه‌ی پروژه این دستور را اجرا کنید:
 
 ```bash
 node scripts/build-project-pages.mjs
 ```
-
-## ساخت دوباره‌ی PDF رزومه
-
-بعد از ویرایش `assets/resume-source/resume.html`، از ریشه‌ی پروژه این دستور را اجرا کنید. به Google Chrome و اینترنت (برای فونت Vazirmatn) نیاز دارد:
-
-```bash
-google-chrome --headless=new --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=assets/HamedAbdollahzade-Resume.pdf "file://$PWD/assets/resume-source/resume.html"
-```
-
-هر صفحه‌ی PDF جداگانه در فایل منبع تعریف شده است. اگر متن بلندتر شد، بررسی کنید از پایین صفحه بیرون نزده باشد.
-
-## تست
-
-```bash
-node --test tests/scroll-video.test.cjs
-```
-
-این تنها تست موجود است و `js/scroll-video.js` از طراحی قبلی را پوشش می‌دهد. برای رابط کاربری فعلی هنوز تستی نوشته نشده است.
 
 ## انتشار
 

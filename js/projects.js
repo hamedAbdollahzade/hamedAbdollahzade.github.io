@@ -1,6 +1,5 @@
-/* ==========================================================================
-   Projects Module — Data, Scroll Timeline Rendering, Progress Line, Modal
-   ========================================================================== */
+/* Project data: single source for the home page cards and the generated project pages
+   (node scripts/build-project-pages.mjs). */
 
 export const PROJECTS = [
   {
@@ -30,11 +29,32 @@ export const PROJECTS = [
     slug: "link-crm",
     title: "لینک CRM / لینک ERP",
     description:
-        "اپلیکیشن وب CRM/ERP در مقیاس بزرگ که به عنوان بخشی از یک تیم حرفه‌ای توسعه یافته است. تمرکز بر ساخت کامپوننت‌های قابل استفاده مجدد، فرم‌های پیچیده، داشبوردها و بهبود UI/UX برای گردش‌های کاری کسب‌وکار.",
+        "لینک یک پلتفرم CRM/ERP فارسی برای مدیریت مشتریان، فروش، پیام‌رسانی و امور مالی کسب‌وکارهاست که روی کامپیوتر و موبایل یک تجربه‌ی یکسان دارد. من به‌عنوان توسعه‌دهنده فرانت‌اند در یک تیم حرفه‌ای روی بخش‌های اصلی پنل کار کرده‌ام: جریان فروش، صندوق پیام‌ها، مخاطبین، امور مالی، گزارش‌ها، یادآورها، فرم‌ساز و صفحه‌ساز. تمرکز کارم ساخت کامپوننت‌های قابل استفاده‌ی مجدد، فرم‌های پیچیده، داشبوردها و بهبود UI/UX برای گردش‌های کاری واقعی کسب‌وکار بوده است.",
     learned: [
       "مدیریت state پیچیده در مقیاس بزرگ با Redux Toolkit",
-      "ساخت کامپوننت‌های قابل استفاده مجدد و فرم‌های چندمرحله‌ای",
+      "ساخت کامپوننت‌های قابل استفاده مجدد، جدول‌ها و فرم‌های چندمرحله‌ای",
+      "پیاده‌سازی رابط‌های واکنش‌گرا که روی دسکتاپ و موبایل یکسان کار می‌کنند",
+      "یکپارچه‌سازی REST API با سرویس‌های بک‌اند و درگاه‌ها",
       "همکاری تیمی با استاندارد کدنویسی و ریویو در یک پروژه واقعی",
+    ],
+    story: [
+      {title: "جریان؛ قیف فروش مرحله‌به‌مرحله", text: "در بخش جریان، فرآیند فروش با مراحل و انواع سفارشی نمایش داده می‌شود و کاربر قیف فروش، پیگیری‌ها و احتمال خرید هر مشتری را یک‌جا می‌بیند. من رابط این بخش، از نمای مراحل تا کارت‌ها و فیلترها، را با کامپوننت‌های قابل استفاده‌ی مجدد توسعه داده‌ام."},
+      {title: "پیام‌رسان؛ صندوق یکپارچه‌ی گفتگوها", text: "گفتگوهای پیام‌رسان‌ها و پیامک در یک صندوق جمع می‌شوند و هر گفتگو به جریان مرتبط وصل می‌شود. در این بخش روی رابط گفتگو، فهرست مکالمه‌ها و اتصال آن‌ها به مشتری و جریان کار کرده‌ام."},
+      {title: "مخاطبین؛ پرونده‌ی کامل هر مشتری", text: "پروفایل هر مشتری با برچسب، دسته‌بندی، بدهی و اعتبار و داشبوردی برای منبع جذب مشتری. من فرم‌ها، جدول‌های مخاطبین، فیلدهای سفارشی و ورود گروهی را در رابط پیاده‌سازی کرده‌ام."},
+      {title: "امور مالی؛ فاکتور، پرداخت و مانده‌ی مشتری", text: "صدور فاکتور و پیش‌فاکتور، تأیید واریزی‌ها و پیگیری مانده‌ی هر مشتری. روی صفحه‌های فاکتور، فرم‌های محاسباتی و جدول‌های مالی کار کرده‌ام تا ثبت و مرور اطلاعات مالی روان و کم‌خطا باشد."},
+      {title: "گزارش‌ها؛ تصویر لحظه‌ای کسب‌وکار", text: "نمودارها و گزارش‌های روند درآمد، وضعیت پرداخت فاکتورها و پرفروش‌ترین کالاها. در این بخش داشبوردها و نمودارها را به داده‌ی API وصل کرده و نمایش آن‌ها را روی اندازه‌های مختلف صفحه بهینه کرده‌ام."},
+      {title: "یادآورها، فرم‌ساز و صفحه‌ساز", text: "یادآورهای یک‌باره یا تکراری با ارسال پیامک، فرم‌ساز برای ثبت‌نام و نظرسنجی که پاسخ‌ها را مستقیم به مخاطبین می‌فرستد، و صفحه‌ساز برای ساخت سریع صفحه‌ی معرفی کسب‌وکار. رابط‌ ساخت و مدیریت این ابزارها بخشی از کار من بوده است."},
+    ],
+    images: [
+      {src: "assets/images/linkcrm/home.webp", caption: "صفحه‌ی اصلی پنل لینک"},
+      {src: "assets/images/linkcrm/flow.webp", caption: "جریان فروش و قیف مرحله‌ها"},
+      {src: "assets/images/linkcrm/inbox.webp", caption: "صندوق یکپارچه‌ی پیام‌ها"},
+      {src: "assets/images/linkcrm/contacts.webp", caption: "مدیریت مخاطبین و پرونده‌ی مشتری"},
+      {src: "assets/images/linkcrm/finance.webp", caption: "امور مالی، فاکتور و پرداخت‌ها"},
+      {src: "assets/images/linkcrm/reports.webp", caption: "گزارش‌های درآمد و فروش"},
+      {src: "assets/images/linkcrm/reminders.webp", caption: "یادآورها"},
+      {src: "assets/images/linkcrm/form.webp", caption: "فرم‌ساز"},
+      {src: "assets/images/linkcrm/landing.webp", caption: "صفحه‌ساز"},
     ],
     tech: ["React", "Ant Design", "Redux Toolkit", "Axios", "JavaScript", "Vite"],
     links: [{ label: "مشاهده", url: "https://linkcrm.app/" }],
@@ -92,224 +112,3 @@ export const PROJECTS = [
     img: "assets/images/Messenger.webp",
   },
 ];
-
-/* Colors used as a fallback gradient behind the thumbnail while the image
-   loads, and as a placeholder if the image fails to load. */
-const FALLBACK_COLORS = ["#6366f1", "#8b5cf6", "#06b6d4", "#10b981", "#ef4444"];
-
-function getProjectColor(project) {
-  return FALLBACK_COLORS[(project.id - 1) % FALLBACK_COLORS.length];
-}
-
-function placeholderSVG(color) {
-  return `
-    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-      <defs>
-        <linearGradient id="grad-${color.replace("#", "")}" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="${color}" stop-opacity="0.9" />
-          <stop offset="100%" stop-color="#09090b" stop-opacity="0.95" />
-        </linearGradient>
-      </defs>
-      <rect width="400" height="400" fill="url(#grad-${color.replace("#", "")})" />
-      <circle cx="330" cy="40" r="90" fill="#ffffff" opacity="0.06" />
-      <circle cx="60" cy="340" r="110" fill="#ffffff" opacity="0.05" />
-    </svg>
-  `;
-}
-
-function attachImageFallback(image, color) {
-  const replace = () => {
-    const fallback = document.createElement("div");
-    fallback.innerHTML = placeholderSVG(color);
-    image.replaceWith(fallback.firstElementChild);
-  };
-  image.addEventListener("error", replace, { once: true });
-  if (image.complete && image.naturalWidth === 0) replace();
-}
-
-function renderLinks(project, btnClass = "btn btn-ghost btn-sm") {
-  return project.links
-      .map(
-          (link) =>
-              `<a href="${link.url}" class="${btnClass}" target="_blank" rel="noopener noreferrer">${link.label}</a>`
-      )
-      .join("");
-}
-
-function toPersianDigits(str) {
-  const fa = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-  return String(str).replace(/\d/g, (d) => fa[Number(d)]);
-}
-
-function createTimelineItem(project, index) {
-  const item = document.createElement("article");
-  item.className = "pt-item";
-  item.setAttribute("data-pt-item", "");
-
-  const color = getProjectColor(project);
-  const indexLabel = toPersianDigits(String(index + 1).padStart(2, "0"));
-
-  item.innerHTML = `
-    <div class="pt-col pt-col--desc" data-reveal="slide-right">
-      <span class="pt-index">${indexLabel}</span>
-      <h3 class="pt-title">${project.title}</h3>
-      <p class="pt-desc">${project.description}</p>
-      <div class="project-tech">
-        ${project.tech.map((t) => `<span class="skill-tag">${t}</span>`).join("")}
-      </div>
-    </div>
-
-    <div class="pt-media project-gallery" aria-label="تصاویر ${project.title}">
-      ${(project.images || [{src: project.img, caption: project.title}]).map((image, index) => `
-        <figure class="project-figure">
-          <button class="pt-media-inner" type="button" data-image-index="${index}" aria-label="بزرگ‌نمایی: ${image.caption}">
-            <img src="${image.src}" alt="${image.caption}" loading="lazy" decoding="async" />
-          </button>
-          <figcaption>${image.caption} <span>· برای بزرگ‌نمایی انتخاب کنید</span></figcaption>
-        </figure>`).join("")}
-    </div>
-    ${project.story ? `<div class="project-story">${project.story.map((chapter, i) => `
-      <section class="story-chapter"><span class="story-number">${toPersianDigits(i + 1)}</span><h4>${chapter.title}</h4><p>${chapter.text}</p></section>`).join("")}</div>` : ""}
-
-    <div class="pt-col pt-col--learned" data-reveal="slide-left">
-      <h4 class="pt-learned-title">تجربه و سهم من در پروژه</h4>
-      <ul class="pt-learned-list">
-        ${project.learned.map((l) => `<li>${l}</li>`).join("")}
-      </ul>
-      <div class="project-links">${renderLinks(project)}</div>
-    </div>
-  `;
-
-  item.querySelectorAll("img").forEach((image) => attachImageFallback(image, color));
-  item.querySelectorAll("[data-image-index]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const selected = project.images?.[Number(button.dataset.imageIndex)];
-      document.dispatchEvent(new CustomEvent("project:open", {
-        detail: {...project, img: selected?.src || project.img},
-      }));
-    });
-  });
-
-  return item;
-}
-
-function renderTimeline(container) {
-  const track = container.querySelector(".proj-timeline-track");
-  const fragment = document.createDocumentFragment();
-
-  PROJECTS.forEach((project, index) => {
-    fragment.appendChild(createTimelineItem(project, index));
-  });
-
-  container.appendChild(fragment);
-  // Keep the progress track as the very first child so items render on top of it.
-  if (track) container.prepend(track);
-
-  document.dispatchEvent(new CustomEvent("projects:rendered"));
-}
-
-/* -------------------- Scroll-driven progress line -------------------- */
-function initTimelineProgress(container) {
-  const progress = container.querySelector("[data-timeline-progress]");
-  if (!progress) return;
-
-  let ticking = false;
-
-  function update() {
-    ticking = false;
-    const rect = container.getBoundingClientRect();
-    const viewportH = window.innerHeight || document.documentElement.clientHeight;
-    const triggerLine = viewportH * 0.78;
-
-    const raw = rect.height > 0 ? (triggerLine - rect.top) / rect.height : 0;
-    const clamped = Math.min(Math.max(raw, 0), 1);
-    progress.style.transform = `scaleY(${clamped})`;
-
-    container.querySelectorAll("[data-pt-item]").forEach((item) => {
-      const itemRect = item.getBoundingClientRect();
-      const isActive = itemRect.top <= triggerLine;
-      item.classList.toggle("is-active", isActive);
-    });
-  }
-
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(update);
-      ticking = true;
-    }
-  }
-
-  update();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
-}
-
-function initModal() {
-  const overlay = document.querySelector("[data-project-modal]");
-  if (!overlay) return;
-
-  const closeBtn = overlay.querySelector("[data-modal-close]");
-  const titleEl = overlay.querySelector("[data-modal-title]");
-  const descEl = overlay.querySelector("[data-modal-desc]");
-  const thumbEl = overlay.querySelector("[data-modal-thumb]");
-  const techEl = overlay.querySelector("[data-modal-tech]");
-  const linksEl = overlay.querySelector("[data-modal-links]");
-
-  let lastFocused = null;
-  overlay.inert = true;
-
-  function openModal(project) {
-    lastFocused = document.activeElement;
-    titleEl.textContent = project.title;
-    descEl.textContent = project.description;
-
-    const color = getProjectColor(project);
-    thumbEl.innerHTML = `<img src="${project.img}" alt="${project.title}" />`;
-    attachImageFallback(thumbEl.querySelector("img"), color);
-
-    techEl.innerHTML = project.tech.map((t) => `<span class="skill-tag">${t}</span>`).join("");
-
-    if (linksEl) {
-      linksEl.innerHTML = renderLinks(project, "btn btn-primary");
-    }
-
-    overlay.inert = false;
-    overlay.classList.add("is-open");
-    overlay.removeAttribute("aria-hidden");
-    document.body.style.overflow = "hidden";
-    closeBtn.focus();
-  }
-
-  function closeModal() {
-    overlay.inert = true;
-    overlay.classList.remove("is-open");
-    overlay.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-    if (lastFocused) lastFocused.focus();
-  }
-
-  document.addEventListener("project:open", (e) => openModal(e.detail));
-  closeBtn.addEventListener("click", closeModal);
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closeModal();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (!overlay.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeModal();
-    if (e.key === "Tab") {
-      const focusable = [...overlay.querySelectorAll("button, a[href]")];
-      const first = focusable[0], last = focusable.at(-1);
-      if (e.shiftKey && document.activeElement === first) {e.preventDefault(); last.focus();}
-      else if (!e.shiftKey && document.activeElement === last) {e.preventDefault(); first.focus();}
-    }
-  });
-}
-
-export function initProjects() {
-  const container = document.querySelector("[data-projects-timeline]");
-  if (!container) return;
-
-  renderTimeline(container);
-  initTimelineProgress(container);
-  initModal();
-}

@@ -1,15 +1,15 @@
 {
-  "name": "حامد عبداله زاده | توسعه‌دهنده فرانت‌اند",
-  "short_name": "حامد عبداله زاده",
-  "description": "پورتفولیو و نمونه‌کارهای حامد عبداله زاده؛ React، Next.js و برنامه‌های آنلاین و آفلاین.",
+  "name": "Webino-Dev | طراحی سایت، پنل مدیریتی و اپلیکیشن وب",
+  "short_name": "Webino-Dev",
+  "description": "تیم توسعه وب و نرم‌افزار در مشهد: سایت، پنل مدیریتی، اپلیکیشن وب و PWA.",
   "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "lang": "fa",
   "dir": "rtl",
-  "background_color": "#09090b",
-  "theme_color": "#09090b",
+  "background_color": "#0b0b0d",
+  "theme_color": "#0b0b0d",
   "icons": [
     {
       "src": "/assets/icons/favicon.svg",
