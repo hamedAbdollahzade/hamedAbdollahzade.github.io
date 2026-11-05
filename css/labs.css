@@ -374,3 +374,16 @@ a.contact-card--primary:hover { background: var(--cream); }
     .call-bar-btn--wa { background: #25d366; color: #06361a; }
     body { padding-bottom: 84px; }
 }
+
+/* ---------- Blog / prose ---------- */
+.service-card h2 { font-size: 21px; font-weight: 700; line-height: 1.6; }
+.prose h2 { font-size: 26px; font-weight: 700; margin: 40px 0 12px; line-height: 1.6; }
+.prose h3 { font-size: 20px; font-weight: 700; margin: 28px 0 8px; }
+.prose p { margin: 0 0 16px; color: var(--ink); font-size: 18px; line-height: 2.05; }
+.prose ul, .prose ol { padding-inline-start: 24px; margin: 0 0 18px; display: grid; gap: 8px; color: var(--ink); font-size: 18px; line-height: 2; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose a { color: var(--blue); text-decoration: underline; }
+.prose blockquote { margin: 24px 0; padding: 4px 22px; border-inline-start: 4px solid var(--blue); background: #fff; border-radius: 12px; }
+.prose code { padding: 2px 8px; border-radius: 8px; background: var(--bg-alt); font-size: .92em; }
+.page-top .eyebrow a { color: inherit; }

@@ -4,7 +4,7 @@
    Run from the repository root: node scripts/build-project-pages.mjs
    ========================================================================== */
 
-import {mkdirSync, readFileSync, writeFileSync} from "node:fs";
+import {existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync} from "node:fs";
 import {PROJECTS} from "../js/projects.js";
 import {BRAND, FAQ, PROCESS, SERVICES} from "../js/services.js";
 
@@ -49,6 +49,7 @@ function siteHeader(solid) {
     <a href="/#projects">نمونه‌کارها</a>
     <a href="/#process">روند کار</a>
     <a href="/about.html">درباره‌ی ما</a>
+    <a href="/blog/">بلاگ</a>
     <a href="/#faq">سؤالات متداول</a>
     <a href="/#contact">تماس و سفارش</a>
 </nav>`;
@@ -74,6 +75,7 @@ ${PROJECTS.map((project) => `                <li><a href="/${pagePath(project)}"
             </ul></div>
             <div><h2>${BRAND.name}</h2><ul>
                 <li><a href="/about.html">درباره‌ی ما و تیم</a></li>
+                <li><a href="/blog/">بلاگ</a></li>
                 <li><a href="/resume.html">رزومه‌ی حامد عبداله زاده</a></li>
                 <li><a href="/#faq">سؤالات متداول</a></li>
                 <li><a href="/#contact">تماس و سفارش</a></li>
@@ -264,6 +266,212 @@ ${siteFooter()}
 `;
 }
 
+/* ---------- Blog: content/blog/*.md -> /blog/<slug>.html ---------- */
+
+function inlineMd(text) {
+    return escapeHtml(text)
+        .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, href) => `<a href="${href}">${label}</a>`)
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/`([^`]+)`/g, "<code>$1</code>");
+}
+
+/* Small Markdown subset: ## / ### headings, paragraphs, - lists, 1. lists, > quotes. */
+function markdownToHtml(source) {
+    const out = [];
+    let list = null;
+    let para = [];
+    const flushPara = () => { if (para.length) out.push(`<p>${inlineMd(para.join(" "))}</p>`); para = []; };
+    const flushList = () => { if (list) out.push(`</${list}>`); list = null; };
+    for (const raw of source.split("\n")) {
+        const line = raw.trim();
+        let m;
+        if (!line) { flushPara(); flushList(); }
+        else if ((m = line.match(/^(#{2,3})\s+(.*)$/))) { flushPara(); flushList(); out.push(`<h${m[1].length}>${inlineMd(m[2])}</h${m[1].length}>`); }
+        else if ((m = line.match(/^[-*]\s+(.*)$/))) { flushPara(); if (list !== "ul") { flushList(); out.push("<ul>"); list = "ul"; } out.push(`<li>${inlineMd(m[1])}</li>`); }
+        else if ((m = line.match(/^\d+[.)]\s+(.*)$/))) { flushPara(); if (list !== "ol") { flushList(); out.push("<ol>"); list = "ol"; } out.push(`<li>${inlineMd(m[1])}</li>`); }
+        else if ((m = line.match(/^>\s?(.*)$/))) { flushPara(); flushList(); out.push(`<blockquote><p>${inlineMd(m[1])}</p></blockquote>`); }
+        else { flushList(); para.push(line); }
+    }
+    flushPara(); flushList();
+    return out.join("\n");
+}
+
+/* Frontmatter: title, description, date (YYYY-MM-DD) and an optional keywords list. */
+function parseFrontmatter(text) {
+    const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (!match) throw new Error("Blog post is missing frontmatter");
+    const meta = {keywords: []};
+    let key = null;
+    for (const line of match[1].split("\n")) {
+        const item = line.match(/^\s+-\s+(.*)$/);
+        if (item && key) { meta[key].push(item[1].trim()); continue; }
+        const pair = line.match(/^(\w+):\s*(.*)$/);
+        if (!pair) continue;
+        key = pair[1];
+        meta[key] = pair[2] === "" ? [] : pair[2].trim();
+    }
+    return {meta, body: match[2]};
+}
+
+const faDate = (date) => new Date(date).toLocaleDateString("fa-IR", {year: "numeric", month: "long", day: "numeric", timeZone: "UTC"});
+const postPath = (post) => `blog/${post.slug}.html`;
+const postUrl = (post) => `${SITE}/${postPath(post)}`;
+
+function loadPosts() {
+    if (!existsSync("content/blog")) return [];
+    return readdirSync("content/blog")
+        .filter((file) => file.endsWith(".md") && !file.startsWith("_"))
+        .map((file) => {
+            const {meta, body} = parseFrontmatter(readFileSync(`content/blog/${file}`, "utf8"));
+            for (const field of ["title", "description", "date"]) if (!meta[field]) throw new Error(`${file}: missing ${field}`);
+            return {slug: file.replace(/\.md$/, ""), ...meta, dateFa: faDate(meta.date), html: markdownToHtml(body)};
+        })
+        .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+const POSTS = loadPosts();
+
+function pageHead({title, description, path, type = "website", keywords = [], image = OG_IMAGE, jsonLd = []}) {
+    const url = `${SITE}${path}`;
+    return `<meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <title>${escapeHtml(title)}</title>
+    <meta name="description" content="${escapeHtml(description)}"/>
+    ${keywords.length ? `<meta name="keywords" content="${escapeHtml(keywords.join(", "))}"/>` : ""}
+    <meta name="author" content="${BRAND.name}"/>
+    <meta name="robots" content="index, follow, max-image-preview:large"/>
+    <meta name="theme-color" content="#0b0b0d"/>
+    <link rel="canonical" href="${url}"/>
+    <meta property="og:type" content="${type}"/>
+    <meta property="og:title" content="${escapeHtml(title)}"/>
+    <meta property="og:description" content="${escapeHtml(description)}"/>
+    <meta property="og:image" content="${image}"/>
+    <meta property="og:locale" content="fa_IR"/>
+    <meta property="og:site_name" content="${ORG}"/>
+    <meta property="og:url" content="${url}"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="${escapeHtml(title)}"/>
+    <meta name="twitter:description" content="${escapeHtml(description)}"/>
+    <meta name="twitter:image" content="${image}"/>
+    <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/labs.css"/>
+    <script>document.documentElement.classList.add("js");</script>
+${jsonLd.map((data) => `    <script type="application/ld+json">\n${JSON.stringify(data, null, 2).replace(/</g, "\\u003c")}\n    </script>`).join("\n")}`;
+}
+
+function postCard(post) {
+    return `                <a class="service-card" href="/${postPath(post)}" data-reveal>
+                    <span class="service-num">${post.dateFa}</span>
+                    <h3>${escapeHtml(post.title)}</h3>
+                    <p>${escapeHtml(post.description)}</p>
+                    <span class="project-more">خواندن مقاله ←</span>
+                </a>`;
+}
+
+function renderBlogIndex() {
+    const description = "مقاله‌ها و راهنماهای Webino-Dev درباره‌ی طراحی سایت، ساخت پنل مدیریتی، PWA و تبدیل ایده به محصول.";
+    const title = "بلاگ Webino-Dev | راهنمای طراحی سایت و توسعه نرم‌افزار";
+    return `<!DOCTYPE html>
+<!-- Generated by scripts/build-project-pages.mjs from content/blog/*.md. Do not edit by hand. -->
+<html lang="fa" dir="rtl">
+<head>
+    ${pageHead({title, description, path: "/blog/", jsonLd: [{
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "@id": `${SITE}/blog/#blog`,
+        url: `${SITE}/blog/`,
+        name: "بلاگ Webino-Dev",
+        inLanguage: "fa",
+        publisher: {"@id": `${SITE}/#org`},
+        blogPost: POSTS.map((post) => ({"@type": "BlogPosting", headline: post.title, url: postUrl(post), datePublished: post.date})),
+    }]})}
+</head>
+<body>
+<a class="skip-link" href="#main-content">پرش به محتوای اصلی</a>
+${siteHeader(true)}
+<section class="page-top">
+    <div class="container">
+        <span class="eyebrow" style="color:rgba(255,255,255,.65)">بلاگ</span>
+        <h1>راهنماهایی برای تبدیل ایده به محصول</h1>
+        <p class="page-intro">${escapeHtml(description)}</p>
+    </div>
+</section>
+<main id="main-content" class="section">
+    <div class="container">
+        <div class="service-grid">
+${POSTS.map(postCard).join("\n")}
+        </div>
+    </div>
+</main>
+${siteFooter()}
+<script type="module" src="/js/labs.js"></script>
+</body>
+</html>
+`;
+}
+
+function renderPostPage(post) {
+    const url = postUrl(post);
+    const others = POSTS.filter((p) => p !== post).slice(0, 2);
+    return `<!DOCTYPE html>
+<!-- Generated by scripts/build-project-pages.mjs from content/blog/${post.slug}.md. Do not edit by hand. -->
+<html lang="fa" dir="rtl">
+<head>
+    ${pageHead({title: `${post.title} | ${BRAND.name}`, description: post.description, path: `/${postPath(post)}`, type: "article", keywords: post.keywords, jsonLd: [{
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "BlogPosting", "@id": `${url}#post`, headline: post.title, description: post.description,
+                datePublished: post.date, dateModified: post.date, inLanguage: "fa", url, mainEntityOfPage: url, image: OG_IMAGE,
+                author: {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
+                publisher: {"@id": `${SITE}/#org`},
+            },
+            {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                    {"@type": "ListItem", position: 1, name: BRAND.name, item: `${SITE}/`},
+                    {"@type": "ListItem", position: 2, name: "بلاگ", item: `${SITE}/blog/`},
+                    {"@type": "ListItem", position: 3, name: post.title, item: url},
+                ],
+            },
+        ],
+    }]})}
+</head>
+<body>
+<a class="skip-link" href="#main-content">پرش به محتوای اصلی</a>
+${siteHeader(true)}
+<section class="page-top">
+    <div class="container">
+        <span class="eyebrow" style="color:rgba(255,255,255,.65)"><a href="/blog/">بلاگ</a> · <time datetime="${post.date}">${post.dateFa}</time></span>
+        <h1>${escapeHtml(post.title)}</h1>
+        <p class="page-intro">${escapeHtml(post.description)}</p>
+    </div>
+</section>
+<main class="page-body" id="main-content">
+    <article class="prose">
+${post.html}
+    </article>
+    <div class="cta-box">
+        <h2>ایده‌ای دارید؟ برایمان بگویید</h2>
+        <p>مشاوره و پیشنهاد اولیه رایگان است.</p>
+        <div class="hero-actions">
+            <a class="pill pill--dark" href="tel:${BRAND.phone}" dir="ltr">${BRAND.phoneDisplay}</a>
+            <a class="pill pill--ghost" href="/#contact">فرم درخواست</a>
+        </div>
+    </div>
+</main>
+${others.length ? `<nav class="siblings" aria-label="مقاله‌های دیگر">\n${others.map((p) => `    <a href="/${postPath(p)}">${escapeHtml(p.title)}</a>`).join("\n")}\n</nav>` : ""}
+${siteFooter()}
+<script type="module" src="/js/labs.js"></script>
+</body>
+</html>
+`;
+}
+
+
 function updatePage(file, replacements) {
     let html = readFileSync(file, "utf8");
     for (const [name, content] of Object.entries(replacements)) html = fillMarkers(html, name, content);
@@ -278,6 +486,7 @@ function updateSharedPages() {
         "service-cards": SERVICES.map(serviceCard).join("\n"),
         "project-cards": PROJECTS.map(projectCard).join("\n"),
         "process-steps": processSteps(),
+        "blog-cards": POSTS.slice(0, 3).map(postCard).join("\n"),
         "faq-list": faqItems(FAQ),
         "faq-jsonld": faqJsonLd(FAQ),
     });
@@ -411,6 +620,8 @@ function writeSitemap() {
         {loc: `${SITE}/`, priority: "1.0"},
         ...SERVICES.map((service) => ({loc: serviceUrl(service), priority: "0.9"})),
         {loc: `${SITE}/about.html`, priority: "0.8"},
+        {loc: `${SITE}/blog/`, priority: "0.8"},
+        ...POSTS.map((post) => ({loc: postUrl(post), priority: "0.7"})),
         {loc: `${SITE}/resume.html`, priority: "0.6"},
         ...PROJECTS.map((project) => ({loc: pageUrl(project), priority: "0.7"})),
     ];
@@ -428,8 +639,11 @@ ${entries}
 
 mkdirSync("projects", {recursive: true});
 mkdirSync("services", {recursive: true});
+mkdirSync("blog", {recursive: true});
 PROJECTS.forEach((project, index) => writeFileSync(pagePath(project), renderPage(project, index)));
 SERVICES.forEach((service) => writeFileSync(servicePath(service), renderServicePage(service)));
+writeFileSync("blog/index.html", renderBlogIndex());
+POSTS.forEach((post) => writeFileSync(postPath(post), renderPostPage(post)));
 updateSharedPages();
 writeSitemap();
-console.log(`Built ${PROJECTS.length} project pages, ${SERVICES.length} service pages, shared page sections and sitemap.xml`);
+console.log(`Built ${PROJECTS.length} project pages, ${SERVICES.length} service pages, ${POSTS.length} blog posts, shared page sections and sitemap.xml`);

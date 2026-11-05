@@ -47,12 +47,32 @@ if ("IntersectionObserver" in window) {
 
 document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
 
-/* Contact form: build a WhatsApp message from the fields (the site is static, nothing is stored). */
+/* Contact form. By default it opens a ready WhatsApp message and stores nothing.
+   To also save requests, set FORM_ENDPOINT to a backend that accepts a JSON POST
+   ({name, phone, idea, source}); if the request fails the form falls back to WhatsApp. */
+const FORM_ENDPOINT = "";
+const WHATSAPP = "989107902735";
+
 document.querySelectorAll("[data-contact-form]").forEach((form) => {
-    form.addEventListener("submit", (e) => {
+    const note = form.querySelector("[data-form-status]");
+    const button = form.querySelector("button[type=submit]");
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const data = new FormData(form);
-        const text = `سلام، من ${data.get("name")} هستم.\nشماره‌ی تماس: ${data.get("phone")}\nایده/پروژه: ${data.get("idea")}`;
-        window.open(`https://wa.me/989107902735?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+        const data = Object.fromEntries(new FormData(form));
+        const text = `سلام، من ${data.name} هستم.\nشماره‌ی تماس: ${data.phone}\nایده/پروژه: ${data.idea}`;
+        const openWhatsApp = () => window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+        if (!FORM_ENDPOINT) return openWhatsApp();
+        button.disabled = true;
+        try {
+            const res = await fetch(FORM_ENDPOINT, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({...data, source: "webino-dev.ir"})});
+            if (!res.ok) throw new Error(res.status);
+            form.reset();
+            if (note) note.textContent = "درخواست شما ثبت شد. به‌زودی با شما تماس می‌گیریم.";
+        } catch {
+            if (note) note.textContent = "ارسال انجام نشد؛ پیام را در واتساپ باز کردیم.";
+            openWhatsApp();
+        } finally {
+            button.disabled = false;
+        }
     });
 });
