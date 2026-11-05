@@ -61,24 +61,6 @@ export const PROJECTS = [
     img: "assets/images/link-Crm-Project.png",
   },
   {
-    id: 3,
-    slug: "stockio",
-    title: "سیستم مدیریت انبار (استاکیو)",
-    description:
-        "سیستم مدیریت انبار فول‌استک ساخته شده با Laravel و Vue.js. پیاده‌سازی ردیابی موجودی مبتنی بر رویداد با موجودی اولیه، حرکات ورود/خروج، تعدیل‌ها و محاسبه کاردکس لحظه‌ای.",
-    learned: [
-      "طراحی دیتابیس رابطه‌ای و منطق رویداد-محور برای موجودی",
-      "توسعه فول‌استک و ارتباط API بین بک‌اند Laravel و فرانت‌اند Vue",
-      "محاسبه گزارش کاردکس و مدیریت تراکنش‌های ورود و خروج انبار",
-    ],
-    tech: ["Laravel", "MySQL", "REST API", "Vue.js", "Vite", "Tailwind CSS", "Axios"],
-    links: [
-      { label: "فرانت‌اند", url: "https://github.com/hamedAbdollahzade/warehouse-frontend" },
-      { label: "بک‌اند", url: "https://github.com/hamedAbdollahzade/warehouse-backend" },
-    ],
-    img: "assets/images/warehouse.webp",
-  },
-  {
     id: 4,
     slug: "wikiq",
     title: "پنل مدیریت ویکی‌کیو",
@@ -92,23 +74,5 @@ export const PROJECTS = [
     tech: ["React", "Vite", "Tailwind CSS", "Context API"],
     links: [{ label: "مشاهده", url: "https://wikiq.co/" }],
     img: "assets/images/wiqiQ.png",
-  },
-  {
-    id: 5,
-    slug: "messenger",
-    title: "اپلیکیشن پیام‌رسان",
-    description:
-        "اپلیکیشن پیام‌رسان توسعه یافته به عنوان اولین پروژه عملی برای یادگیری React در طول بوت‌کمپ. تمرکز بر ساخت رابط کاربری مدولار و پاسخگو و یکپارچه‌سازی با API پیام‌رسانی واقعی.",
-    learned: [
-      "اولین تجربه یکپارچه‌سازی با یک API واقعی پیام‌رسانی",
-      "یادگیری اصول React از پایه در قالب یک پروژه عملی",
-      "ساخت رابط کاربری واکنش‌گرا (Responsive) برای موبایل و دسکتاپ",
-    ],
-    tech: ["React", "Vite", "Tailwind CSS", "Farawin API"],
-    links: [
-      { label: "گیت‌هاب", url: "https://github.com/hamedAbdollahzade/messanger" },
-      { label: "مشاهده", url: "https://hamedabdollahzade.github.io/messanger/" },
-    ],
-    img: "assets/images/Messenger.webp",
   },
 ];
