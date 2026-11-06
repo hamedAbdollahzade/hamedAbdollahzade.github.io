@@ -368,3 +368,28 @@ a.contact-card:hover { background: var(--primary-soft); }
 .dot.is-active { width: 30px; background: var(--primary); }
 @media (max-width: 980px) { .slide { grid-template-columns: 1fr; } .slide-media { order: -1; } .mock--phone img { max-height: 260px; } }
 @media (prefers-reduced-motion: reduce) { .slide { transition: none; transform: none; } }
+
+/* ---------- Lessons list, code, tables ---------- */
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 10px; }
+.lessons a { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 14px; background: var(--bg); text-decoration: none; transition: background .2s; }
+.lessons a:hover { background: var(--primary-soft); }
+.lesson-num { width: 30px; height: 30px; flex: none; border-radius: 10px; display: grid; place-items: center; background: #fff; font-weight: 800; font-size: 13.5px; color: var(--primary-dark); }
+.lesson-title { flex: 1; font-weight: 500; font-size: 15px; line-height: 1.7; }
+.lesson-time { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+a.filter { text-decoration: none; color: var(--ink); }
+a.filter:hover { background: var(--primary-soft); }
+
+.prose pre { direction: ltr; text-align: left; margin: 0 0 20px; padding: 18px 20px; border-radius: 16px; background: #181b3a; color: #e9ebff; overflow-x: auto; font: 400 14px/1.8 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; position: relative; unicode-bidi: plaintext; }
+.prose pre[data-lang]::before { content: attr(data-lang); position: absolute; top: 8px; inset-inline-start: 14px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #9aa3ff; }
+.prose pre[data-lang] { padding-top: 30px; }
+.prose pre code { background: none; padding: 0; font: inherit; direction: ltr; unicode-bidi: plaintext; white-space: pre; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 30px 0; }
+.table-wrap { overflow-x: auto; margin: 0 0 20px; border: 1px solid var(--line); border-radius: 14px; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15.5px; line-height: 1.8; }
+.prose th { background: var(--bg); font-weight: 800; text-align: start; }
+.prose th, .prose td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.prose tr:last-child td { border-bottom: 0; }
+.prose td code, .prose li code, .prose p code { direction: ltr; unicode-bidi: embed; }
+.prose ul ul, .prose ol ul, .prose ul ol { margin: 6px 0 0; }
+.prose em { font-style: italic; }
+@media (max-width: 640px) { .lessons { grid-template-columns: 1fr; } .prose pre { padding: 14px; font-size: 13px; } }

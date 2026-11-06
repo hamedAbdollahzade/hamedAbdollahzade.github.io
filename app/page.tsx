@@ -5,6 +5,7 @@ import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
 import Shell from "@/components/Shell";
+import {COURSES} from "@/data/courses";
 import {DEVELOPERS} from "@/data/developers";
 import {PROJECTS} from "@/data/projects";
 import {BRAND, FAQ, PROCESS, SERVICES} from "@/data/services";
@@ -60,7 +61,8 @@ const faqLd = {
 
 
 export default function Home() {
-    const posts = getPosts().slice(0, 3);
+    const posts = getPosts();
+    const courses = COURSES.map((c) => ({...c, count: posts.filter((p) => p.category === c.title).length})).filter((c) => c.count > 0);
     return (
         <Shell>
             <JsonLd data={graph}/>
@@ -109,18 +111,17 @@ export default function Home() {
             <section className="card" id="learn" aria-labelledby="learn-title" data-reveal>
                 <div className="block-head">
                     <div>
-                        <h2 className="block-title" id="learn-title">آموزش‌ها و مقالات</h2>
-                        <p className="block-desc">راهنماهای کاربردی درباره‌ی هوش مصنوعی و ساخت محصول.</p>
+                        <h2 className="block-title" id="learn-title">آموزش‌های رایگان</h2>
+                        <p className="block-desc">{posts.length.toLocaleString("fa-IR")} درس و مقاله درباره‌ی برنامه‌نویسی، هوش مصنوعی و ساخت محصول.</p>
                     </div>
-                    <Link className="link-more" href="/blog/">همه‌ی مقاله‌ها ←</Link>
+                    <Link className="link-more" href="/blog/">همه‌ی آموزش‌ها ←</Link>
                 </div>
-                <div className="grid grid--cards">
-                    {posts.map((post) => (
-                        <Link className="post-card" href={`/blog/${post.slug}/`} key={post.slug}>
-                            <div className="post-meta"><span className="chip chip--green">{post.category}</span><span>{post.dateFa}</span></div>
-                            <h3>{post.title}</h3>
-                            <p>{post.description}</p>
-                            <span className="tile-more">خواندن مقاله ←</span>
+                <div className="grid grid--services">
+                    {courses.map((c) => (
+                        <Link className="tile-card" href={`/blog/#${c.slug}`} key={c.slug}>
+                            <h3>{c.title}</h3>
+                            <p>{c.description}</p>
+                            <span className="tile-more">{c.count.toLocaleString("fa-IR")} درس ←</span>
                         </Link>
                     ))}
                 </div>

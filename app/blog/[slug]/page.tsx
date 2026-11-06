@@ -4,6 +4,7 @@ import {PhoneIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
 import Shell from "@/components/Shell";
+import {courseOf} from "@/data/courses";
 import {BRAND} from "@/data/services";
 import {getPosts} from "@/lib/blog";
 import {AUTHOR, OG_IMAGE, SITE, pageMeta} from "@/lib/site";
@@ -29,10 +30,14 @@ export default async function BlogPost({params}: {params: Promise<Params>}) {
     const post = posts.find((p) => p.slug === slug);
     if (!post) notFound();
     const url = `${SITE}/blog/${slug}/`;
-    const others = posts.filter((p) => p.slug !== slug).slice(0, 2);
+    const course = courseOf(post.category);
+    const siblings = posts.filter((p) => p.category === post.category).sort((a, b) => a.order - b.order);
+    const at = siblings.findIndex((p) => p.slug === slug);
+    const prev = at > 0 ? siblings[at - 1] : null;
+    const next = at < siblings.length - 1 ? siblings[at + 1] : null;
 
     return (
-        <Shell crumbs={[{label: "آموزش‌ها و مقالات", href: "/blog/"}, {label: post.title}]}>
+        <Shell crumbs={[{label: "آموزش‌ها و مقالات", href: "/blog/"}, {label: post.category, href: `/blog/#${course?.slug ?? ""}`}, {label: post.title}]}>
             <JsonLd data={{
                 "@context": "https://schema.org",
                 "@graph": [
@@ -67,9 +72,10 @@ export default async function BlogPost({params}: {params: Promise<Params>}) {
                     <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس با ما</a>
                 </div>
             </div>
-            {others.length > 0 && (
-                <nav className="sibling-nav" aria-label="مقاله‌های دیگر" style={{maxWidth: 860, width: "100%", marginInline: "auto"}}>
-                    {others.map((p) => <Link key={p.slug} href={`/blog/${p.slug}/`}>{p.title}</Link>)}
+            {(prev || next) && (
+                <nav className="sibling-nav" aria-label="درس قبلی و بعدی" style={{maxWidth: 860, width: "100%", marginInline: "auto"}}>
+                    {prev ? <Link href={`/blog/${prev.slug}/`}>→ {prev.title}</Link> : <span/>}
+                    {next ? <Link href={`/blog/${next.slug}/`}>{next.title} ←</Link> : <span/>}
                 </nav>
             )}
         </Shell>

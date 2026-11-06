@@ -11,6 +11,7 @@ export interface Post {
     dateFa: string;
     keywords: string[];
     category: string;
+    order: number;
     readingMinutes: number;
     html: string;
 }
@@ -19,30 +20,98 @@ const escapeHtml = (value: string) =>
     value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 function inlineMd(text: string): string {
-    return escapeHtml(text)
+    const codes: string[] = [];
+    // Pull out `code` first so its content is never touched by the other rules.
+    let s = text.replace(/`([^`]+)`/g, (_, c) => { codes.push(`<code>${escapeHtml(c)}</code>`); return `\u0000${codes.length - 1}\u0000`; });
+    s = escapeHtml(s)
         .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, label, href) => `<a href="${href}">${label}</a>`)
         .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-        .replace(/`([^`]+)`/g, "<code>$1</code>");
+        .replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\*)/g, "$1<em>$2</em>");
+    return s.replace(/\u0000(\d+)\u0000/g, (_, i) => codes[Number(i)]);
 }
 
-/** Small Markdown subset: ## / ### headings, paragraphs, - lists, 1. lists, > quotes. */
+const cells = (row: string) => row.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+const isTableSep = (line: string) => /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?$/.test(line.trim());
+
+interface ListItem { text: string; children: ListItem[]; ordered: boolean }
+
+function renderList(items: ListItem[], ordered: boolean): string {
+    const tag = ordered ? "ol" : "ul";
+    return `<${tag}>${items.map((i) => `<li>${inlineMd(i.text)}${i.children.length ? renderList(i.children, i.children[0].ordered) : ""}</li>`).join("")}</${tag}>`;
+}
+
+/** Markdown subset: headings, paragraphs, fenced code, tables, nested lists, quotes, rules, links, bold, italic, code. */
 export function markdownToHtml(source: string): string {
+    const lines = source.replace(/\r/g, "").split("\n");
     const out: string[] = [];
-    let list: "ul" | "ol" | null = null;
-    let para: string[] = [];
-    const flushPara = () => { if (para.length) out.push(`<p>${inlineMd(para.join(" "))}</p>`); para = []; };
-    const flushList = () => { if (list) out.push(`</${list}>`); list = null; };
-    for (const raw of source.split("\n")) {
+    let i = 0;
+
+    while (i < lines.length) {
+        const raw = lines[i];
         const line = raw.trim();
         let m: RegExpMatchArray | null;
-        if (!line) { flushPara(); flushList(); }
-        else if ((m = line.match(/^(#{2,3})\s+(.*)$/))) { flushPara(); flushList(); out.push(`<h${m[1].length}>${inlineMd(m[2])}</h${m[1].length}>`); }
-        else if ((m = line.match(/^[-*]\s+(.*)$/))) { flushPara(); if (list !== "ul") { flushList(); out.push("<ul>"); list = "ul"; } out.push(`<li>${inlineMd(m[1])}</li>`); }
-        else if ((m = line.match(/^\d+[.)]\s+(.*)$/))) { flushPara(); if (list !== "ol") { flushList(); out.push("<ol>"); list = "ol"; } out.push(`<li>${inlineMd(m[1])}</li>`); }
-        else if ((m = line.match(/^>\s?(.*)$/))) { flushPara(); flushList(); out.push(`<blockquote><p>${inlineMd(m[1])}</p></blockquote>`); }
-        else { flushList(); para.push(line); }
+
+        if (!line) { i++; continue; }
+
+        // Fenced code block
+        if ((m = line.match(/^```\s*([\w+-]*)/))) {
+            const lang = m[1];
+            const code: string[] = [];
+            i++;
+            while (i < lines.length && !lines[i].trim().startsWith("```")) code.push(lines[i++]);
+            i++;
+            out.push(`<pre dir="ltr"${lang ? ` data-lang="${escapeHtml(lang)}"` : ""}><code>${escapeHtml(code.join("\n"))}</code></pre>`);
+            continue;
+        }
+        // Heading
+        if ((m = line.match(/^(#{1,4})\s+(.*)$/))) {
+            const level = Math.max(2, m[1].length);
+            out.push(`<h${level}>${inlineMd(m[2])}</h${level}>`);
+            i++;
+            continue;
+        }
+        // Horizontal rule
+        if (/^(-{3,}|\*{3,}|_{3,})$/.test(line)) { out.push("<hr>"); i++; continue; }
+        // Table
+        if (line.startsWith("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+            const head = cells(line);
+            i += 2;
+            const rows: string[][] = [];
+            while (i < lines.length && lines[i].trim().startsWith("|")) rows.push(cells(lines[i++]));
+            out.push(`<div class="table-wrap"><table><thead><tr>${head.map((c) => `<th>${inlineMd(c)}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${inlineMd(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+            continue;
+        }
+        // Blockquote
+        if (line.startsWith(">")) {
+            const quote: string[] = [];
+            while (i < lines.length && lines[i].trim().startsWith(">")) quote.push(lines[i++].trim().replace(/^>\s?/, ""));
+            out.push(`<blockquote>${markdownToHtml(quote.join("\n"))}</blockquote>`);
+            continue;
+        }
+        // List (with nesting by indentation)
+        if (/^\s*([-*]|\d+[.)])\s+/.test(raw)) {
+            const root: ListItem[] = [];
+            const stack: {indent: number; items: ListItem[]}[] = [{indent: -1, items: root}];
+            while (i < lines.length && /^\s*([-*]|\d+[.)])\s+/.test(lines[i])) {
+                const lm = lines[i].match(/^(\s*)([-*]|\d+[.)])\s+(.*)$/)!;
+                const indent = lm[1].replace(/\t/g, "    ").length;
+                const item: ListItem = {text: lm[3], children: [], ordered: /\d/.test(lm[2])};
+                while (stack.length > 1 && indent <= stack[stack.length - 1].indent) stack.pop();
+                stack[stack.length - 1].items.push(item);
+                stack.push({indent, items: item.children});
+                i++;
+                // Continuation lines belonging to this item
+                while (i < lines.length && lines[i].trim() && /^\s{2,}\S/.test(lines[i]) && !/^\s*([-*]|\d+[.)])\s+/.test(lines[i])) { item.text += " " + lines[i].trim(); i++; }
+            }
+            out.push(renderList(root, root[0].ordered));
+            continue;
+        }
+        // Paragraph
+        const para: string[] = [];
+        while (i < lines.length && lines[i].trim() && !/^(```|#{1,4}\s|>|---+$|\|)/.test(lines[i].trim()) && !/^\s*([-*]|\d+[.)])\s+/.test(lines[i])) para.push(lines[i++].trim());
+        if (para.length) out.push(`<p>${inlineMd(para.join(" "))}</p>`);
+        else i++;
     }
-    flushPara(); flushList();
     return out.join("\n");
 }
 
@@ -84,10 +153,11 @@ export function getPosts(): Post[] {
                 date,
                 dateFa: toFa(date),
                 keywords: Array.isArray(meta.keywords) ? meta.keywords : [],
-                category: meta.category ? String(meta.category) : "مقاله",
+                category: meta.category ? String(meta.category) : "راهنما و مقاله",
+                order: meta.order ? Number(meta.order) : 0,
                 readingMinutes: Math.max(1, Math.round(words / 180)),
                 html,
             };
         })
-        .sort((a, b) => b.date.localeCompare(a.date));
+        .sort((a, b) => b.date.localeCompare(a.date) || a.order - b.order || a.slug.localeCompare(b.slug));
 }
