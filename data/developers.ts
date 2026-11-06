@@ -1,5 +1,4 @@
-/* Developers of the team. Add one object per member; each gets a /developers/<slug>/ page.
-   TODO(webino): add the other team members here (photo in public/assets/images/, name, role, bio, skills). */
+/* Developers of the team. Add one object per member; each gets a /developers/<slug>/ page. */
 
 import {SKILLS, TIMELINE} from "./about";
 import type {SkillGroup, TimelineEntry} from "./about";

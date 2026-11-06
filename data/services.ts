@@ -4,7 +4,6 @@ export const BRAND = {
     name: "Webino-Dev",
     fa: "وبینو دِو",
     tagline: "ایده‌ات را بگو؛ ما می‌سازیمش",
-    // TODO: replace with the business phone / WhatsApp / email if they differ from the personal ones.
     phone: "+989107902735",
     phoneDisplay: "۰۹۱۰ ۷۹۰ ۲۷۳۵",
     whatsapp: "989107902735",
