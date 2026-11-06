@@ -73,6 +73,26 @@ export default async function DeveloperPage({params}: {params: Promise<Params>})
                         <h2>درباره‌ی {d.name}</h2>
                         <p>{d.bio}</p>
                     </section>
+                    {d.mentors && (
+                        <section className="card" aria-labelledby="mentors-title">
+                            <div className="block-head">
+                                <div>
+                                    <h2 className="block-title" id="mentors-title">اساتید من</h2>
+                                    <p className="block-desc">از این اساتید در دوره‌ی فراوین چیزهای زیادی یاد گرفته‌ام.</p>
+                                </div>
+                            </div>
+                            <div className="grid grid--cards">
+                                {d.mentors.map((m) => (
+                                    <article className="mentor-card" key={m.url}>
+                                        <h3>{m.name}</h3>
+                                        <div className="dev-role">{m.role}</div>
+                                        <p>{m.text}</p>
+                                        <a className="link-more" href={m.url} target="_blank" rel="noopener noreferrer">{m.linkLabel} ←</a>
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+                    )}
                     {d.skillGroups && (
                         <section className="card" aria-labelledby="skills-title">
                             <div className="block-head"><h2 className="block-title" id="skills-title">مهارت‌ها و ابزارها</h2></div>

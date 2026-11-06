@@ -400,3 +400,7 @@ a.filter:hover { background: var(--primary-soft); }
 .prose ul ul, .prose ol ul, .prose ul ol { margin: 6px 0 0; }
 .prose em { font-style: italic; }
 @media (max-width: 640px) { .lessons { grid-template-columns: 1fr; } .prose pre { padding: 14px; font-size: 13px; } }
+
+.mentor-card { display: grid; gap: 8px; align-content: start; padding: 22px; border-radius: 20px; background: var(--bg); }
+.mentor-card h3 { font-size: 19px; font-weight: 800; }
+.mentor-card p { color: #3b4a49; font-size: 15px; }
