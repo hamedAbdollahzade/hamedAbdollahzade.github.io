@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import JsonLd from "@/components/JsonLd";
+import OpenChat from "@/components/OpenChat";
+import Shell from "@/components/Shell";
 import {PROJECTS} from "@/data/projects";
 import {AUTHOR, SITE, pageMeta, summarize} from "@/lib/site";
 
@@ -40,7 +40,7 @@ export default async function ProjectPage({params}: {params: Promise<Params>}) {
     const url = `${SITE}/projects/${slug}/`;
 
     return (
-        <>
+        <Shell crumbs={[{label: "نمونه‌کارها", href: "/#projects"}, {label: p.title}]}>
             <JsonLd data={{
                 "@context": "https://schema.org",
                 "@graph": [
@@ -56,38 +56,32 @@ export default async function ProjectPage({params}: {params: Promise<Params>}) {
                     ]},
                 ],
             }}/>
-            <Header/>
-            <section className="page-top">
-                <div className="container">
-                    <span className="eyebrow" style={{color: "rgba(255,255,255,.65)"}}>پروژه</span>
-                    <h1>{p.title}</h1>
-                    <ul className="tags" dir="ltr">{p.tech.map((t) => <li key={t}>{t}</li>)}</ul>
-                </div>
-            </section>
-            <main className="page-body" id="main-content">
+            <div className="card">
+                <h1 className="page-title">{p.title}</h1>
+                <ul className="tags" style={{marginTop: 14}}>{p.tech.map((t) => <li key={t}>{t}</li>)}</ul>
+            </div>
+            <div className="card page-card">
                 {images.map((img, i) => (
-                    <figure key={img.src}>
-                        <Image src={`/${img.src}`} alt={img.caption} width={1440} height={900} priority={i === 0} style={{width: "100%", height: "auto"}}/>
+                    <figure className="figure" key={img.src}>
+                        <Image src={`/${img.src}`} alt={img.caption} width={1440} height={900} priority={i === 0}/>
                         <figcaption>{img.caption}</figcaption>
                     </figure>
                 ))}
                 <p className="lead">{p.description}</p>
                 {(p.story ?? []).map((c) => (
-                    <section className="chapter" key={c.title}><h2>{c.title}</h2><p>{c.text}</p></section>
+                    <section key={c.title}><h2>{c.title}</h2><p>{c.text}</p></section>
                 ))}
-                <section className="contribution">
-                    <h2>تجربه و سهم من در پروژه</h2>
-                    <ul>{p.learned.map((l) => <li key={l}>{l}</li>)}</ul>
-                </section>
-                <div className="links">
-                    {p.links.map((l) => <a className="pill pill--dark" key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a>)}
+                <h2>تجربه و سهم من در پروژه</h2>
+                <ul className="list">{p.learned.map((l) => <li key={l}>{l}</li>)}</ul>
+                <div className="btn-row" style={{marginTop: 24}}>
+                    {p.links.map((l) => <a className="btn" key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a>)}
+                    <OpenChat className="btn btn--green">پروژه‌ای مشابه می‌خواهم</OpenChat>
                 </div>
-            </main>
-            <nav className="siblings" aria-label="پروژه‌های دیگر">
+            </div>
+            <nav className="sibling-nav" aria-label="پروژه‌های دیگر">
                 <Link href={`/projects/${prev.slug}/`}>→ {prev.title}</Link>
                 <Link href={`/projects/${next.slug}/`}>{next.title} ←</Link>
             </nav>
-            <Footer/>
-        </>
+        </Shell>
     );
 }

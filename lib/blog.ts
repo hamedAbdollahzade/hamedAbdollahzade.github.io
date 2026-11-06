@@ -10,6 +10,8 @@ export interface Post {
     date: string;
     dateFa: string;
     keywords: string[];
+    category: string;
+    readingMinutes: number;
     html: string;
 }
 
@@ -44,7 +46,7 @@ export function markdownToHtml(source: string): string {
     return out.join("\n");
 }
 
-/** Frontmatter: title, description, date (YYYY-MM-DD) and an optional keywords list. */
+/** Frontmatter: title, description, date (YYYY-MM-DD), optional category (e.g. آموزش) and keywords list. */
 function parseFrontmatter(text: string): {meta: Record<string, string | string[]>; body: string} {
     const match = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
     if (!match) throw new Error("Blog post is missing frontmatter");
@@ -73,6 +75,8 @@ export function getPosts(): Post[] {
             const {meta, body} = parseFrontmatter(fs.readFileSync(path.join(DIR, file), "utf8"));
             for (const field of ["title", "description", "date"]) if (!meta[field]) throw new Error(`${file}: missing ${field}`);
             const date = String(meta.date);
+            const html = markdownToHtml(body);
+            const words = body.split(/\s+/).filter(Boolean).length;
             return {
                 slug: file.replace(/\.md$/, ""),
                 title: String(meta.title),
@@ -80,7 +84,9 @@ export function getPosts(): Post[] {
                 date,
                 dateFa: toFa(date),
                 keywords: Array.isArray(meta.keywords) ? meta.keywords : [],
-                html: markdownToHtml(body),
+                category: meta.category ? String(meta.category) : "مقاله",
+                readingMinutes: Math.max(1, Math.round(words / 180)),
+                html,
             };
         })
         .sort((a, b) => b.date.localeCompare(a.date));

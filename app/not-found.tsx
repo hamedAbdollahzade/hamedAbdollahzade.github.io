@@ -1,21 +1,20 @@
 import Link from "next/link";
 import type {Metadata} from "next";
+import Shell from "@/components/Shell";
 
 export const metadata: Metadata = {title: {absolute: "صفحه پیدا نشد (۴۰۴) | Webino-Dev"}, robots: {index: false}};
 
 export default function NotFound() {
     return (
-        <main id="main-content">
-            <section className="hero" style={{minHeight: "100svh"}}>
-                <div className="hero-content">
-                    <h1>۴۰۴<small>این صفحه پیدا نشد</small></h1>
-                    <p>آدرسی که باز کردید وجود ندارد یا جابه‌جا شده است.</p>
-                    <div className="hero-actions">
-                        <Link className="pill" href="/">بازگشت به خانه</Link>
-                        <Link className="pill pill--ghost" href="/blog/">بلاگ</Link>
-                    </div>
+        <Shell>
+            <div className="card" style={{textAlign: "center", padding: "56px 20px"}}>
+                <h1 className="page-title">۴۰۴ · این صفحه پیدا نشد</h1>
+                <p className="page-lead" style={{marginInline: "auto"}}>آدرسی که باز کردید وجود ندارد یا جابه‌جا شده است.</p>
+                <div className="btn-row" style={{justifyContent: "center", marginTop: 22}}>
+                    <Link className="btn" href="/">بازگشت به خانه</Link>
+                    <Link className="btn btn--ghost" href="/blog/">آموزش‌ها</Link>
                 </div>
-            </section>
-        </main>
+            </div>
+        </Shell>
     );
 }

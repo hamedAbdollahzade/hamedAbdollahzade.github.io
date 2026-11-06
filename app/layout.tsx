@@ -1,5 +1,6 @@
 import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
+import ChatWidget from "@/components/ChatWidget";
 import RevealInit from "@/components/RevealInit";
 import {ORG, SITE} from "@/lib/site";
 import "./globals.css";
@@ -18,7 +19,7 @@ export const viewport: Viewport = {
     width: "device-width",
     initialScale: 1,
     viewportFit: "cover",
-    themeColor: "#0b0b0d",
+    themeColor: "#f2f4fd",
 };
 
 export default function RootLayout({children}: {children: ReactNode}) {
@@ -27,12 +28,13 @@ export default function RootLayout({children}: {children: ReactNode}) {
         <head>
             <link rel="preconnect" href="https://fonts.googleapis.com"/>
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
-            <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;700&family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet"/>
+            <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet"/>
             <script dangerouslySetInnerHTML={{__html: 'document.documentElement.classList.add("js");'}}/>
         </head>
         <body>
         <a className="skip-link" href="#main-content">پرش به محتوای اصلی</a>
         {children}
+        <ChatWidget/>
         <RevealInit/>
         </body>
         </html>

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import {PhoneIcon} from "@/components/Icons";
+import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
+import OpenChat from "@/components/OpenChat";
+import Shell from "@/components/Shell";
 import {PROJECTS} from "@/data/projects";
 import {BRAND, SERVICES} from "@/data/services";
 import {SITE, pageMeta, summarize, waLink} from "@/lib/site";
@@ -30,7 +30,7 @@ export default async function ServicePage({params}: {params: Promise<Params>}) {
     const url = `${SITE}/services/${slug}/`;
 
     return (
-        <>
+        <Shell crumbs={[{label: "خدمات", href: "/#services"}, {label: s.title}]}>
             <JsonLd data={{
                 "@context": "https://schema.org",
                 "@graph": [
@@ -50,41 +50,41 @@ export default async function ServicePage({params}: {params: Promise<Params>}) {
                 "@type": "FAQPage",
                 mainEntity: s.faq.map(([q, a]) => ({"@type": "Question", name: q, acceptedAnswer: {"@type": "Answer", text: a}})),
             }}/>
-            <Header/>
-            <section className="page-top">
-                <div className="container">
-                    <span className="eyebrow" style={{color: "rgba(255,255,255,.65)"}}>خدمات {BRAND.name}</span>
-                    <h1>{s.title}</h1>
-                    <p className="page-intro">{s.intro}</p>
-                    <div className="hero-actions">
-                        <a className="pill" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس برای مشاوره‌ی رایگان</a>
-                        <a className="pill pill--ghost" href={waLink(`سلام، درباره‌ی «${s.title}» می‌خواهم مشورت بگیرم.`)} target="_blank" rel="noopener noreferrer">پیام در واتساپ</a>
+            <div className="card">
+                <div className="dev-top" style={{alignItems: "flex-start"}}>
+                    <span className="tile-icon"><ServiceIcon slug={s.slug}/></span>
+                    <div>
+                        <h1 className="page-title">{s.title}</h1>
+                        <p className="page-lead">{s.intro}</p>
                     </div>
                 </div>
-            </section>
-            <main className="page-body" id="main-content">
+                <div className="btn-row" style={{marginTop: 18}}>
+                    <OpenChat className="btn btn--lg" topic={s.title}>ثبت درخواست</OpenChat>
+                    <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس برای مشاوره‌ی رایگان</a>
+                    <a className="btn btn--lg btn--green" href={waLink(`سلام، درباره‌ی «${s.title}» می‌خواهم مشورت بگیرم.`)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>واتساپ</a>
+                </div>
+            </div>
+            <div className="card page-card">
                 <h2>این خدمت برای چه کسانی است؟</h2>
-                <ul>{s.for.map((i) => <li key={i}>{i}</li>)}</ul>
+                <ul className="list">{s.for.map((i) => <li key={i}>{i}</li>)}</ul>
                 <h2>چه چیزی تحویل می‌گیرید؟</h2>
-                <ul>{s.deliver.map((i) => <li key={i}>{i}</li>)}</ul>
+                <ul className="list">{s.deliver.map((i) => <li key={i}>{i}</li>)}</ul>
                 <h2>فناوری‌های مورد استفاده</h2>
-                <ul className="tags" dir="ltr" style={{listStyle: "none", padding: 0}}>{s.tech.map((t) => <li key={t}>{t}</li>)}</ul>
+                <ul className="tags">{s.tech.map((t) => <li key={t}>{t}</li>)}</ul>
                 <h2>نمونه‌کارهای مرتبط</h2>
-                <ul>{PROJECTS.slice(0, 3).map((p) => <li key={p.slug}><Link href={`/projects/${p.slug}/`}>{p.title}</Link></li>)}</ul>
-                <h2>سؤالات پرتکرار</h2>
+                <ul className="list">{PROJECTS.slice(0, 3).map((p) => <li key={p.slug}><Link href={`/projects/${p.slug}/`}>{p.title}</Link></li>)}</ul>
+            </div>
+            <div className="card">
+                <div className="block-head"><h2 className="block-title">سؤالات پرتکرار</h2></div>
                 <div className="faq">
                     {s.faq.map(([q, a]) => <details className="faq-item" key={q}><summary>{q}</summary><p>{a}</p></details>)}
                 </div>
-                <div className="cta-box">
-                    <h2>ایده‌ات را برایمان بگو</h2>
-                    <p>مشاوره و پیشنهاد اولیه رایگان است. زنگ بزنید یا پیام بدهید.</p>
-                    <div className="hero-actions">
-                        <a className="pill pill--dark" href={`tel:${BRAND.phone}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a>
-                        <Link className="pill pill--ghost" href="/#contact">فرم درخواست</Link>
-                    </div>
-                </div>
-            </main>
-            <Footer/>
-        </>
+            </div>
+            <div className="cta-card">
+                <h2>ایده‌ات را برایمان بگو</h2>
+                <p>مشاوره و پیشنهاد اولیه رایگان است. گفتگو را شروع کن یا تماس بگیر.</p>
+                <div className="btn-row"><OpenChat className="btn btn--lg" topic={s.title}>شروع گفتگو</OpenChat><a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a></div>
+            </div>
+        </Shell>
     );
 }

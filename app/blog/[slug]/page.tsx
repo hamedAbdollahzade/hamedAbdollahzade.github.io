@@ -1,8 +1,9 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import {PhoneIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
+import OpenChat from "@/components/OpenChat";
+import Shell from "@/components/Shell";
 import {BRAND} from "@/data/services";
 import {getPosts} from "@/lib/blog";
 import {AUTHOR, OG_IMAGE, SITE, pageMeta} from "@/lib/site";
@@ -31,48 +32,46 @@ export default async function BlogPost({params}: {params: Promise<Params>}) {
     const others = posts.filter((p) => p.slug !== slug).slice(0, 2);
 
     return (
-        <>
+        <Shell crumbs={[{label: "آموزش‌ها و مقالات", href: "/blog/"}, {label: post.title}]}>
             <JsonLd data={{
                 "@context": "https://schema.org",
                 "@graph": [
                     {
-                        "@type": "BlogPosting", "@id": `${url}#post`, headline: post.title, description: post.description,
+                        "@type": "BlogPosting", "@id": `${url}#post`, headline: post.title, description: post.description, articleSection: post.category,
                         datePublished: post.date, dateModified: post.date, inLanguage: "fa", url, mainEntityOfPage: url, image: OG_IMAGE,
                         author: {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
                         publisher: {"@id": `${SITE}/#org`},
                     },
                     {"@type": "BreadcrumbList", itemListElement: [
                         {"@type": "ListItem", position: 1, name: BRAND.name, item: `${SITE}/`},
-                        {"@type": "ListItem", position: 2, name: "بلاگ", item: `${SITE}/blog/`},
+                        {"@type": "ListItem", position: 2, name: "آموزش‌ها و مقالات", item: `${SITE}/blog/`},
                         {"@type": "ListItem", position: 3, name: post.title, item: url},
                     ]},
                 ],
             }}/>
-            <Header solidAlways/>
-            <section className="page-top">
-                <div className="container">
-                    <span className="eyebrow" style={{color: "rgba(255,255,255,.65)"}}><Link href="/blog/">بلاگ</Link> · <time dateTime={post.date}>{post.dateFa}</time></span>
-                    <h1>{post.title}</h1>
-                    <p className="page-intro">{post.description}</p>
+            <article className="card" style={{maxWidth: 860, width: "100%", marginInline: "auto"}}>
+                <div className="post-meta" style={{marginBottom: 10}}>
+                    <span className="chip chip--green">{post.category}</span>
+                    <time dateTime={post.date}>{post.dateFa}</time>
+                    <span>· {post.readingMinutes.toLocaleString("fa-IR")} دقیقه مطالعه</span>
                 </div>
-            </section>
-            <main className="page-body" id="main-content">
-                <article className="prose" dangerouslySetInnerHTML={{__html: post.html}}/>
-                <div className="cta-box">
-                    <h2>ایده‌ای دارید؟ برایمان بگویید</h2>
-                    <p>مشاوره و پیشنهاد اولیه رایگان است.</p>
-                    <div className="hero-actions">
-                        <a className="pill pill--dark" href={`tel:${BRAND.phone}`} dir="ltr">{BRAND.phoneDisplay}</a>
-                        <Link className="pill pill--ghost" href="/#contact">فرم درخواست</Link>
-                    </div>
+                <h1 className="page-title">{post.title}</h1>
+                <p className="page-lead">{post.description}</p>
+                <div className="prose" style={{marginTop: 26}} dangerouslySetInnerHTML={{__html: post.html}}/>
+            </article>
+            <div className="cta-card" style={{maxWidth: 860, width: "100%", marginInline: "auto"}}>
+                <h2>ایده‌ای دارید؟ برایمان بگویید</h2>
+                <p>مشاوره و پیشنهاد اولیه رایگان است.</p>
+                <div className="btn-row">
+                    <OpenChat className="btn btn--lg">شروع گفتگو</OpenChat>
+                    <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a>
                 </div>
-            </main>
+            </div>
             {others.length > 0 && (
-                <nav className="siblings" aria-label="مقاله‌های دیگر">
+                <nav className="sibling-nav" aria-label="مقاله‌های دیگر" style={{maxWidth: 860, width: "100%", marginInline: "auto"}}>
                     {others.map((p) => <Link key={p.slug} href={`/blog/${p.slug}/`}>{p.title}</Link>)}
                 </nav>
             )}
-            <Footer/>
-        </>
+        </Shell>
     );
 }
