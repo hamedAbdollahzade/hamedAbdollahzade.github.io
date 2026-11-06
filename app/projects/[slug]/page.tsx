@@ -36,7 +36,8 @@ export default async function ProjectPage({params}: {params: Promise<Params>}) {
     const p = PROJECTS[index];
     const prev = PROJECTS[(index - 1 + PROJECTS.length) % PROJECTS.length];
     const next = PROJECTS[(index + 1) % PROJECTS.length];
-    const images = p.images ?? [{src: p.img, caption: p.title}];
+    const images = p.images ?? (p.gallery ? [] : [{src: p.img, caption: p.title}]);
+    const allImages = [...images, ...(p.gallery ?? [])];
     const url = `${SITE}/projects/${slug}/`;
 
     return (
@@ -46,7 +47,7 @@ export default async function ProjectPage({params}: {params: Promise<Params>}) {
                 "@graph": [
                     {
                         "@type": "CreativeWork", "@id": `${url}#project`, name: p.title, description: p.description, url,
-                        image: images.map((i) => `${SITE}/${i.src}`), keywords: p.tech.join(", "), inLanguage: "fa",
+                        image: allImages.map((i) => `${SITE}/${i.src}`), keywords: p.tech.join(", "), inLanguage: "fa",
                         author: {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
                         publisher: {"@id": `${SITE}/#org`},
                     },
@@ -71,6 +72,19 @@ export default async function ProjectPage({params}: {params: Promise<Params>}) {
                 {(p.story ?? []).map((c) => (
                     <section key={c.title}><h2>{c.title}</h2><p>{c.text}</p></section>
                 ))}
+                {p.gallery && (
+                    <>
+                        <h2>تصاویر اپلیکیشن</h2>
+                        <div className="gallery">
+                            {p.gallery.map((g) => (
+                                <figure className="gallery-item" key={g.src}>
+                                    <Image src={`/${g.src}`} alt={g.caption} width={g.width} height={g.height} loading="lazy"/>
+                                    <figcaption>{g.caption}</figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    </>
+                )}
                 <h2>تجربه و سهم من در پروژه</h2>
                 <ul className="list">{p.learned.map((l) => <li key={l}>{l}</li>)}</ul>
                 <div className="btn-row" style={{marginTop: 24}}>

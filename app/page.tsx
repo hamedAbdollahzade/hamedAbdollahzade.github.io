@@ -117,7 +117,7 @@ export default function Home() {
                 <div className="grid grid--cards">
                     {PROJECTS.map((p) => (
                         <Link className="project-card" href={`/projects/${p.slug}/`} key={p.slug}>
-                            <div className="project-media"><Image src={`/${p.img}`} alt={p.title} width={720} height={540}/></div>
+                            <div className={`project-media${p.imgFit === "contain" ? " project-media--contain" : ""}`}><Image src={`/${p.img}`} alt={p.title} width={720} height={540}/></div>
                             <h3>{p.title}</h3>
                             <p>{summarize(p.description, 140)}</p>
                             <span className="tile-more">مشاهده جزئیات ←</span>
