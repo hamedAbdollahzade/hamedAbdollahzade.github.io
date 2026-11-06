@@ -178,7 +178,7 @@ export default function ChatWidget() {
                     )}
                     {error && <p className="chat-error" role="alert">{error}</p>}
                     {step === "ready" && (
-                        <button type="button" className="btn btn--green btn--lg chat-wa" onClick={sendToWhatsApp}><WhatsAppIcon/>ارسال درخواست در واتساپ</button>
+                        <button type="button" className="btn btn--wa btn--lg chat-wa" onClick={sendToWhatsApp}><WhatsAppIcon/>ارسال درخواست در واتساپ</button>
                     )}
                     {step === "topic" && <p className="chat-note">یا <a href={`tel:${BRAND.phone}`}>با ما تماس بگیرید</a></p>}
                     {step === "ready" && <p className="chat-note">اطلاعات روی سایت ذخیره نمی‌شود؛ پیام شما در واتساپ باز می‌شود.</p>}

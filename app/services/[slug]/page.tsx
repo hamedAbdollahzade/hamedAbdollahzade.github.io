@@ -61,7 +61,7 @@ export default async function ServicePage({params}: {params: Promise<Params>}) {
                 <div className="btn-row" style={{marginTop: 18}}>
                     <OpenChat className="btn btn--lg" topic={s.title}>ثبت درخواست</OpenChat>
                     <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس برای مشاوره‌ی رایگان</a>
-                    <a className="btn btn--lg btn--green" href={waLink(`سلام، درباره‌ی «${s.title}» می‌خواهم مشورت بگیرم.`)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>واتساپ</a>
+                    <a className="btn btn--lg btn--wa" href={waLink(`سلام، درباره‌ی «${s.title}» می‌خواهم مشورت بگیرم.`)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>واتساپ</a>
                 </div>
             </div>
             <div className="card page-card">

@@ -67,7 +67,7 @@ export default function HeroSlider() {
                             <div className="slide-media">
                                 <div className={`mock${s.contain ? " mock--phone" : ""}`}>
                                     {!s.contain && <div className="mock-bar"><i/><i/><i/></div>}
-                                    <Image src={`/${s.image}`} alt={s.imageAlt} width={1440} height={900} priority={i === 0}/>
+                                    <Image src={`/${s.image}`} alt={s.imageAlt} width={1440} height={900} priority={i === 0} loading="eager"/>
                                 </div>
                                 <Link className="slide-caption" href={s.captionHref} tabIndex={active ? 0 : -1}>{s.caption} ←</Link>
                             </div>

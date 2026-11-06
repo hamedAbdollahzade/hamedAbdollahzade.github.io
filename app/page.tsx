@@ -170,7 +170,7 @@ export default function Home() {
                 <p>موضوع و ایده‌ات را در چت بنویس؛ درخواست در واتساپ برای ما ارسال می‌شود و به‌زودی تماس می‌گیریم. بررسی اولیه و پیشنهاد، رایگان است.</p>
                 <div className="btn-row">
                     <OpenChat className="btn btn--lg">شروع گفتگو</OpenChat>
-                    <a className="btn btn--lg btn--green" href={waLink()} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>واتساپ</a>
+                    <a className="btn btn--lg btn--wa" href={waLink()} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>واتساپ</a>
                     <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس تلفنی</a>
                 </div>
             </section>
