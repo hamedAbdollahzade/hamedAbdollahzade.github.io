@@ -89,6 +89,25 @@ NEXT_PUBLIC_FORM_ENDPOINT=https://example.com/api/lead npm run build
 2. همان‌جا Custom domain را `webino-dev.ir` بگذارید و بعد از صدور گواهی، **Enforce HTTPS** را روشن کنید.
 3. در DNS، چهار رکورد A به آی‌پی‌های GitHub Pages و یک CNAME برای `www` بدهید (در Cloudflare ابر را خاکستری کنید).
 
+## Docker
+
+برای اجرا روی سرور یا هاست خودتان (بدون GitHub Pages) تصویر Docker آماده است: مرحله‌ی اول Next.js را بیلد می‌کند و مرحله‌ی دوم فقط فایل‌های ایستا را با nginx سرو می‌کند.
+
+```bash
+docker compose up -d --build     # سایت روی http://localhost:8080
+PORT=80 docker compose up -d --build   # روی پورت دلخواه
+docker compose down              # توقف
+```
+
+یا بدون compose:
+
+```bash
+docker build -t webino-dev-site .
+docker run -d --name webino-dev -p 8080:80 webino-dev-site
+```
+
+برای وصل کردن فرم به بک‌اند، موقع بیلد `NEXT_PUBLIC_FORM_ENDPOINT` را بدهید: `NEXT_PUBLIC_FORM_ENDPOINT=https://example.com/api/lead docker compose up -d --build`. تنظیمات nginx در `docker/nginx.conf` است. برای HTTPS روی سرور، جلوی این کانتینر یک reverse proxy (مثل Caddy یا Traefik یا nginx میزبان) بگذارید.
+
 ## ساخت دوباره‌ی PDF رزومه
 
 بعد از ویرایش `resume-source/resume.html`، از ریشه‌ی پروژه این دستور را اجرا کنید (به Chrome یا Chromium و اینترنت برای فونت Vazirmatn نیاز دارد):

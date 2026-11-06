@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        # Optional backend for the contact form; empty = WhatsApp only.
+        NEXT_PUBLIC_FORM_ENDPOINT: ${NEXT_PUBLIC_FORM_ENDPOINT:-}
+    image: webino-dev-site:latest
+    container_name: webino-dev
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:80"
