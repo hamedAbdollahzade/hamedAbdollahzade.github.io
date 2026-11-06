@@ -21,6 +21,7 @@ export const GlobeIcon = make(<><circle cx="12" cy="12" r="9"/><path d="M3 12h18
 export const DashboardIcon = make(<><rect x="3" y="3" width="8" height="10" rx="2"/><rect x="13" y="3" width="8" height="6" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="15" width="8" height="6" rx="2"/></>);
 export const MobileIcon = make(<><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></>);
 export const ChipIcon = make(<><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></>);
+export const SparkIcon = make(<><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></>);
 export const CodeIcon = make(<path d="m8 7-5 5 5 5M16 7l5 5-5 5"/>);
 
 export function WhatsAppIcon() {
@@ -30,6 +31,7 @@ export function WhatsAppIcon() {
 }
 
 const SERVICE_ICONS: Record<string, () => ReactNode> = {
+    "ai-solutions": SparkIcon,
     "website-design": GlobeIcon,
     "admin-panel-crm": DashboardIcon,
     "web-app-pwa": MobileIcon,

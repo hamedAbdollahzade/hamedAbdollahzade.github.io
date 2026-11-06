@@ -4,9 +4,9 @@ import Shell from "@/components/Shell";
 import {getPosts} from "@/lib/blog";
 import {SITE, pageMeta} from "@/lib/site";
 
-const DESC = "آموزش‌ها و مقاله‌های Webino-Dev درباره‌ی طراحی سایت، ساخت پنل مدیریتی، PWA و تبدیل ایده به محصول.";
+const DESC = "آموزش‌ها و مقاله‌های Webino-Dev درباره‌ی هوش مصنوعی، طراحی سایت، ساخت پنل مدیریتی، PWA و تبدیل ایده به محصول.";
 
-export const metadata = pageMeta({title: "آموزش‌ها و مقالات | Webino-Dev", description: DESC, path: "/blog/", keywords: ["آموزش طراحی سایت", "آموزش برنامه‌نویسی", "راهنمای سفارش سایت", "PWA"]});
+export const metadata = pageMeta({title: "آموزش‌ها و مقالات | Webino-Dev", description: DESC, path: "/blog/", keywords: ["آموزش هوش مصنوعی", "آموزش طراحی سایت", "آموزش برنامه‌نویسی", "راهنمای سفارش سایت", "PWA"]});
 
 export default function BlogIndex() {
     const posts = getPosts();

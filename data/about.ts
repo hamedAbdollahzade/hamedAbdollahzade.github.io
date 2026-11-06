@@ -13,7 +13,8 @@ export const SKILLS: SkillGroup[] = [
       "DNS",
       "Hosting",
       "Domain",
-      "Browser Rendering"
+      "Browser Rendering",
+      "How the Internet Works"
     ]
   },
   {
@@ -56,7 +57,9 @@ export const SKILLS: SkillGroup[] = [
       "SSR",
       "SSG",
       "SEO",
-      "Metadata API"
+      "Metadata API",
+      "Astro",
+      "TanStack Start"
     ]
   },
   {
@@ -86,7 +89,8 @@ export const SKILLS: SkillGroup[] = [
       "Unit Testing",
       "Integration Testing",
       "E2E Testing",
-      "API Mocking"
+      "API Mocking",
+      "Playwright"
     ]
   },
   {
@@ -105,7 +109,9 @@ export const SKILLS: SkillGroup[] = [
       "ESLint",
       "Prettier",
       "Figma",
-      "GitHub Pages"
+      "GitHub Pages",
+      "esbuild",
+      "Cloudflare"
     ]
   },
   {
@@ -130,7 +136,10 @@ export const SKILLS: SkillGroup[] = [
       "Keyboard Navigation",
       "Lighthouse",
       "Chrome DevTools",
-      "Core Web Vitals"
+      "Core Web Vitals",
+      "Service Workers",
+      "Streamed Responses",
+      "Cache-Control"
     ]
   },
   {
@@ -141,6 +150,17 @@ export const SKILLS: SkillGroup[] = [
       "GitHub Copilot",
       "Cursor",
       "Prompt Engineering"
+    ]
+  },
+  {
+    "title": "Cross-Platform & Data",
+    "icon": "<rect x=\"3\" y=\"4\" width=\"14\" height=\"10\" rx=\"2\"/> <path d=\"M8 18h4M10 14v4\"/> <rect x=\"15\" y=\"9\" width=\"6\" height=\"11\" rx=\"1.5\"/>",
+    "tags": [
+      "GraphQL",
+      "Apollo",
+      "React Native",
+      "Electron",
+      "Tauri"
     ]
   }
 ];

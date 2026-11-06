@@ -64,7 +64,7 @@ export default async function BlogPost({params}: {params: Promise<Params>}) {
                 <p>مشاوره و پیشنهاد اولیه رایگان است.</p>
                 <div className="btn-row">
                     <OpenChat className="btn btn--lg">شروع گفتگو</OpenChat>
-                    <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a>
+                    <a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس با ما</a>
                 </div>
             </div>
             {others.length > 0 && (

@@ -46,7 +46,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                     ))}
                 </nav>
                 <div className="sidebar-cta">
-                    <a className="btn btn--soft" href={`tel:${BRAND.phone}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a>
+                    <Link className="btn btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>
                     <OpenChat className="btn btn--green">ثبت درخواست پروژه</OpenChat>
                 </div>
             </aside>
@@ -55,9 +55,9 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
             <div className="main">
                 <header className="topbar">
                     <button className="menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded={open} onClick={() => setOpen(!open)}><MenuIcon/></button>
-                    <OpenChat className="search-pill"><SearchIcon/><span>ایده‌ات را بگو؛ ما می‌سازیمش…</span></OpenChat>
+                    <OpenChat className="search-pill"><SearchIcon/><span>ایده‌ات را بگو؛ با هوش مصنوعی می‌سازیمش…</span></OpenChat>
                     <div className="topbar-actions">
-                        <a className="btn btn--soft" href={`tel:${BRAND.phone}`} aria-label={`تماس با ${BRAND.name}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a>
+                        <Link className="btn btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>
                         <OpenChat className="btn">درخواست پروژه</OpenChat>
                     </div>
                 </header>

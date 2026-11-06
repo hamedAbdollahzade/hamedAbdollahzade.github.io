@@ -180,7 +180,7 @@ export default function ChatWidget() {
                     {step === "ready" && (
                         <button type="button" className="btn btn--green btn--lg chat-wa" onClick={sendToWhatsApp}><WhatsAppIcon/>ارسال درخواست در واتساپ</button>
                     )}
-                    {step === "topic" && <p className="chat-note">یا مستقیم تماس بگیرید: <a href={`tel:${BRAND.phone}`} dir="ltr">{BRAND.phoneDisplay}</a></p>}
+                    {step === "topic" && <p className="chat-note">یا <a href={`tel:${BRAND.phone}`}>با ما تماس بگیرید</a></p>}
                     {step === "ready" && <p className="chat-note">اطلاعات روی سایت ذخیره نمی‌شود؛ پیام شما در واتساپ باز می‌شود.</p>}
                 </div>
             </section>

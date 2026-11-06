@@ -83,7 +83,7 @@ export default async function ServicePage({params}: {params: Promise<Params>}) {
             <div className="cta-card">
                 <h2>ایده‌ات را برایمان بگو</h2>
                 <p>مشاوره و پیشنهاد اولیه رایگان است. گفتگو را شروع کن یا تماس بگیر.</p>
-                <div className="btn-row"><OpenChat className="btn btn--lg" topic={s.title}>شروع گفتگو</OpenChat><a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/><span dir="ltr">{BRAND.phoneDisplay}</span></a></div>
+                <div className="btn-row"><OpenChat className="btn btn--lg" topic={s.title}>شروع گفتگو</OpenChat><a className="btn btn--lg btn--ghost" href={`tel:${BRAND.phone}`}><PhoneIcon/>تماس با ما</a></div>
             </div>
         </Shell>
     );
