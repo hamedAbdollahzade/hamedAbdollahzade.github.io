@@ -2,44 +2,41 @@
 
 import {useCallback, useEffect, useRef, useState} from "react";
 import type {FormEvent} from "react";
-import {BRAND} from "@/data/services";
+import {getBrand} from "@/data/localized";
 import {waLink} from "@/lib/site";
 import {ChatIcon, SendIcon, WhatsAppIcon} from "./Icons";
+import {useLocale} from "./LocaleProvider";
 
 /** Optional: set NEXT_PUBLIC_FORM_ENDPOINT at build time to also POST each request to your own backend. */
 const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT;
 
-const TOPICS = ["طراحی سایت", "پنل مدیریتی / CRM", "اپلیکیشن وب / PWA", "رابط دستگاه و سخت‌افزار", "چیز دیگری"];
-
 type Step = "topic" | "idea" | "name" | "phone" | "ready";
 interface Msg { from: "bot" | "user"; text: string }
-
-const GREETING: Msg[] = [
-    {from: "bot", text: "سلام 👋 به Webino-Dev خوش آمدید."},
-    {from: "bot", text: "چه کمکی از ما برمی‌آید؟ موضوع را انتخاب کنید تا سریع‌تر پیش برویم."},
-];
 
 const toLatinDigits = (s: string) => s.replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[٠-٩]/g, (d) => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)));
 
 export default function ChatWidget() {
+    const {locale, t} = useLocale();
+    const brand = getBrand(locale);
+    const c = t.chat;
+    const greeting: Msg[] = [{from: "bot", text: c.greeting1}, {from: "bot", text: c.greeting2}];
+
     const [open, setOpen] = useState(false);
     const [tip, setTip] = useState(false);
     const [toast, setToast] = useState(false);
     const [step, setStep] = useState<Step>("topic");
-    const [msgs, setMsgs] = useState<Msg[]>(GREETING);
+    const [msgs, setMsgs] = useState<Msg[]>(greeting);
     const [answers, setAnswers] = useState({topic: "", idea: "", name: "", phone: ""});
     const [value, setValue] = useState("");
     const [error, setError] = useState("");
     const bodyRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
-    const say = useCallback((from: Msg["from"], text: string) => setMsgs((m) => [...m, {from, text}]), []);
-
     const pickTopic = useCallback((topic: string) => {
         setAnswers((a) => ({...a, topic}));
-        setMsgs((m) => [...m, {from: "user", text: topic}, {from: "bot", text: "عالیه! ایده یا نیازت را کوتاه برایمان بنویس (چند جمله کافیه)."}]);
+        setMsgs((m) => [...m, {from: "user", text: topic}, {from: "bot", text: c.askIdea}]);
         setStep("idea");
-    }, []);
+    }, [c.askIdea]);
 
     // Open from any <OpenChat> button.
     useEffect(() => {
@@ -58,8 +55,8 @@ export default function ChatWidget() {
         let seen = false;
         try { seen = sessionStorage.getItem("webino-chat-tip") === "1"; } catch { /* storage may be blocked */ }
         if (seen) return;
-        const t = setTimeout(() => setTip(true), 5000);
-        return () => clearTimeout(t);
+        const timer = setTimeout(() => setTip(true), 5000);
+        return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
@@ -78,8 +75,8 @@ export default function ChatWidget() {
 
     useEffect(() => {
         if (!toast) return;
-        const t = setTimeout(() => setToast(false), 5000);
-        return () => clearTimeout(t);
+        const timer = setTimeout(() => setToast(false), 5000);
+        return () => clearTimeout(timer);
     }, [toast]);
 
     function dismissTip() {
@@ -91,20 +88,20 @@ export default function ChatWidget() {
         e.preventDefault();
         const text = value.trim();
         if (step === "idea") {
-            if (text.length < 5) return setError("لطفاً کمی بیشتر توضیح بدهید.");
+            if (text.length < 5) return setError(c.shortIdea);
             setAnswers((a) => ({...a, idea: text}));
-            setMsgs((m) => [...m, {from: "user", text}, {from: "bot", text: "ممنون! اسمت چیه؟"}]);
+            setMsgs((m) => [...m, {from: "user", text}, {from: "bot", text: c.askName}]);
             setStep("name");
         } else if (step === "name") {
-            if (text.length < 2) return setError("نام را وارد کنید.");
+            if (text.length < 2) return setError(c.shortName);
             setAnswers((a) => ({...a, name: text}));
-            setMsgs((m) => [...m, {from: "user", text}, {from: "bot", text: `خوشحالیم ${text} 🙌 شماره‌ی تماست را بنویس تا با شما هماهنگ کنیم.`}]);
+            setMsgs((m) => [...m, {from: "user", text}, {from: "bot", text: c.askPhone(text)}]);
             setStep("phone");
         } else if (step === "phone") {
             const digits = toLatinDigits(text).replace(/[\s\-()+]/g, "");
-            if (!/^\d{10,13}$/.test(digits)) return setError("شماره‌ی معتبر وارد کنید (مثلاً 09123456789).");
+            if (!/^\d{10,13}$/.test(digits)) return setError(c.badPhone);
             setAnswers((a) => ({...a, phone: digits}));
-            setMsgs((m) => [...m, {from: "user", text: digits}, {from: "bot", text: "همه چیز آماده است. با دکمه‌ی زیر درخواستت در واتساپ برای ما ارسال می‌شود."}]);
+            setMsgs((m) => [...m, {from: "user", text: digits}, {from: "bot", text: c.ready}]);
             setStep("ready");
         }
         setValue("");
@@ -112,14 +109,14 @@ export default function ChatWidget() {
     }
 
     function sendToWhatsApp() {
-        const message = `سلام، من ${answers.name} هستم.\nموضوع: ${answers.topic}\nتوضیحات: ${answers.idea}\nشماره‌ی تماس: ${answers.phone}`;
+        const message = `${c.waHello(answers.name)}\n${c.waTopic}: ${answers.topic}\n${c.waDetails}: ${answers.idea}\n${c.waPhone}: ${answers.phone}`;
         // Must run inside the click handler so the browser doesn't block the new tab.
         window.open(waLink(message), "_blank", "noopener");
         if (ENDPOINT) {
             fetch(ENDPOINT, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({...answers, source: "webino-dev.ir"}),
+                body: JSON.stringify({...answers, locale, source: "webino-dev.ir"}),
                 keepalive: true,
             }).catch(() => { /* WhatsApp already has the message */ });
         }
@@ -127,34 +124,34 @@ export default function ChatWidget() {
         setToast(true);
         setTimeout(() => {
             setStep("topic");
-            setMsgs(GREETING);
+            setMsgs(greeting);
             setAnswers({topic: "", idea: "", name: "", phone: ""});
             setValue("");
             setError("");
         }, 400);
     }
 
-    const placeholder = step === "idea" ? "ایده یا نیازت را بنویس…" : step === "name" ? "نام و نام خانوادگی" : "شماره‌ی تماس";
+    const placeholder = step === "idea" ? c.ideaPlaceholder : step === "name" ? c.namePlaceholder : c.phonePlaceholder;
 
     return (
         <>
             {tip && !open && (
                 <div className="chat-tip" role="status" onClick={() => { setOpen(true); dismissTip(); }}>
-                    <button type="button" aria-label="بستن" onClick={(e) => { e.stopPropagation(); dismissTip(); }}>×</button>
-                    <div><strong>هر سؤالی دارید بپرسید.</strong><span>پاسخگوی شما هستیم.</span></div>
+                    <button type="button" aria-label={c.closeTip} onClick={(e) => { e.stopPropagation(); dismissTip(); }}>×</button>
+                    <div><strong>{c.tipTitle}</strong><span>{c.tipText}</span></div>
                 </div>
             )}
-            <section className={`chat-panel${open ? " is-open" : ""}`} role="dialog" aria-label="گفتگو با Webino-Dev" aria-hidden={!open}>
+            <section className={`chat-panel${open ? " is-open" : ""}`} role="dialog" aria-label={c.title} aria-hidden={!open}>
                 <header className="chat-head">
                     <span className="chat-avatar"><ChatIcon/></span>
-                    <div><h2>{BRAND.name}</h2><p>معمولاً در چند دقیقه پاسخ می‌دهیم</p></div>
-                    <button className="chat-close" type="button" aria-label="بستن گفتگو" onClick={() => setOpen(false)}>×</button>
+                    <div><h2>{brand.name}</h2><p>{c.status}</p></div>
+                    <button className="chat-close" type="button" aria-label={c.close} onClick={() => setOpen(false)}>×</button>
                 </header>
                 <div className="chat-body" ref={bodyRef} aria-live="polite">
                     {msgs.map((m, i) => <div key={i} className={`msg msg--${m.from}`}>{m.text}</div>)}
                     {step === "topic" && (
                         <div className="chat-chips">
-                            {TOPICS.map((t) => <button key={t} type="button" className="chat-chip" onClick={() => pickTopic(t)}>{t}</button>)}
+                            {c.topics.map((topic) => <button key={topic} type="button" className="chat-chip" onClick={() => pickTopic(topic)}>{topic}</button>)}
                         </div>
                     )}
                 </div>
@@ -173,19 +170,19 @@ export default function ChatWidget() {
                                 onChange={(e) => setValue(e.target.value)}
                                 onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); onSubmit(e); } }}
                             />
-                            <button className="chat-send" type="submit" aria-label="ارسال" disabled={!value.trim()}><SendIcon/></button>
+                            <button className="chat-send" type="submit" aria-label={c.send} disabled={!value.trim()}><SendIcon/></button>
                         </form>
                     )}
                     {error && <p className="chat-error" role="alert">{error}</p>}
                     {step === "ready" && (
-                        <button type="button" className="btn btn--wa btn--lg chat-wa" onClick={sendToWhatsApp}><WhatsAppIcon/>ارسال درخواست در واتساپ</button>
+                        <button type="button" className="btn btn--wa btn--lg chat-wa" onClick={sendToWhatsApp}><WhatsAppIcon/>{c.sendWhatsApp}</button>
                     )}
-                    {step === "topic" && <p className="chat-note">یا <a href={`tel:${BRAND.phone}`}>با ما تماس بگیرید</a></p>}
-                    {step === "ready" && <p className="chat-note">اطلاعات روی سایت ذخیره نمی‌شود؛ پیام شما در واتساپ باز می‌شود.</p>}
+                    {step === "topic" && <p className="chat-note">{c.orCall} <a href={`tel:${brand.phone}`}>{c.callLink}</a></p>}
+                    {step === "ready" && <p className="chat-note">{c.noStorage}</p>}
                 </div>
             </section>
-            {toast && <div className="chat-toast" role="status">درخواست شما در واتساپ باز شد. پیام را ارسال کنید 👍</div>}
-            <button className="chat-fab" type="button" aria-label={open ? "بستن گفتگو" : "باز کردن گفتگو"} onClick={() => { setOpen(!open); dismissTip(); }}><ChatIcon/></button>
+            {toast && <div className="chat-toast" role="status">{c.toast}</div>}
+            <button className="chat-fab" type="button" aria-label={open ? c.close : c.open} onClick={() => { setOpen(!open); dismissTip(); }}><ChatIcon/></button>
         </>
     );
 }

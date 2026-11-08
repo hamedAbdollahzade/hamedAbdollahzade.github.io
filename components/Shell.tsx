@@ -4,36 +4,44 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Fragment, useEffect, useRef, useState} from "react";
 import type {ReactNode} from "react";
-import {BRAND} from "@/data/services";
+import {getBrand} from "@/data/localized";
+import {localePath, parsePath} from "@/lib/locale";
 import Footer from "./Footer";
 import {ChevronIcon, Logo, MenuIcon, PhoneIcon} from "./Icons";
+import LanguageSwitch from "./LanguageSwitch";
+import {useLocale} from "./LocaleProvider";
 import OpenChat from "./OpenChat";
+import ThemeToggle from "./ThemeToggle";
 
 /* `spy` lists the home-page sections that highlight this item while they are on screen. */
 const NAV = [
-    {href: "/", label: "خانه", path: (p: string) => p === "/", spy: ["", "process", "faq", "contact"]},
-    {href: "/#services", label: "خدمات", path: (p: string) => p.startsWith("/services"), spy: ["services"]},
-    {href: "/#projects", label: "نمونه‌کارها", path: (p: string) => p.startsWith("/projects"), spy: ["projects"]},
-    {href: "/blog/", label: "آموزش‌ها", path: (p: string) => p.startsWith("/blog"), spy: ["learn"]},
-    {href: "/developers/", label: "برنامه‌نویسان", path: (p: string) => p.startsWith("/developers"), spy: ["developers"]},
-    {href: "/about/", label: "درباره‌ی ما", path: (p: string) => p.startsWith("/about"), spy: []},
-];
+    {key: "home", href: "/", path: (p: string) => p === "/", spy: ["", "process", "faq", "contact"]},
+    {key: "services", href: "/#services", path: (p: string) => p.startsWith("/services"), spy: ["services"]},
+    {key: "projects", href: "/#projects", path: (p: string) => p.startsWith("/projects"), spy: ["projects"]},
+    {key: "learn", href: "/blog/", path: (p: string) => p.startsWith("/blog"), spy: ["learn"]},
+    {key: "developers", href: "/developers/", path: (p: string) => p.startsWith("/developers"), spy: ["developers"]},
+    {key: "about", href: "/about/", path: (p: string) => p.startsWith("/about"), spy: []},
+] as const;
 
 const SPY_IDS = ["services", "projects", "learn", "developers", "process", "faq", "contact"];
 
 export interface Crumb { label: string; href?: string }
 
 export default function Shell({children, crumbs}: {children: ReactNode; crumbs?: Crumb[]}) {
+    const {locale, t} = useLocale();
     const pathname = usePathname() || "/";
+    const {path: currentPath} = parsePath(pathname);
+    const brand = getBrand(locale);
     const [open, setOpen] = useState(false);
     const [section, setSection] = useState("");
     const toggleRef = useRef<HTMLButtonElement>(null);
+    const isHome = currentPath === "/";
 
     useEffect(() => setOpen(false), [pathname]);
 
     // On the home page, highlight the item of the section that is currently on screen.
     useEffect(() => {
-        if (pathname !== "/") { setSection(""); return; }
+        if (!isHome) { setSection(""); return; }
         let timer: ReturnType<typeof setTimeout> | undefined;
         const update = () => {
             timer = undefined;
@@ -53,7 +61,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
             window.removeEventListener("resize", onScroll);
             if (timer) clearTimeout(timer);
         };
-    }, [pathname]);
+    }, [isHome]);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
@@ -86,23 +94,25 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
         return () => { document.body.style.overflow = ""; };
     }, [open]);
 
-    const links = (inPanel: boolean) => NAV.map(({href, label, path, spy}) => {
-        const active = pathname === "/" ? spy.includes(section) : path(pathname);
+    const label = (key: (typeof NAV)[number]["key"]) => (key === "home" ? t.homeLabel : t.nav[key]);
+
+    const links = (inPanel: boolean) => NAV.map(({key, href, path, spy}) => {
+        const active = isHome ? (spy as readonly string[]).includes(section) : path(currentPath);
         return (
             <Link
-                key={href}
-                href={href}
+                key={key}
+                href={localePath(locale, href)}
                 className={`nav-link${active ? " is-active" : ""}`}
                 aria-current={active ? "page" : undefined}
                 onClick={() => {
                     setOpen(false);
                     // Same-page links don't change the route, so select the item right away.
-                    if (pathname === "/" && href.startsWith("/#")) setSection(href.slice(2));
-                    if (pathname === "/" && href === "/") setSection("");
+                    if (isHome && href.startsWith("/#")) setSection(href.slice(2));
+                    if (isHome && href === "/") setSection("");
                 }}
                 tabIndex={inPanel && !open ? -1 : undefined}
             >
-                {label}
+                {label(key)}
             </Link>
         );
     });
@@ -110,17 +120,19 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
     return (
         <>
             <header className="navbar">
-                <Link className="brand" href="/" aria-label={`${BRAND.name}، صفحه اصلی`} onClick={() => setOpen(false)}>
-                    <span className="brand-mark"><Logo/></span><span>{BRAND.name}</span>
+                <Link className="brand" href={localePath(locale, "/")} aria-label={`${brand.name}, ${t.brandHome}`} onClick={() => setOpen(false)}>
+                    <span className="brand-mark"><Logo/></span><span>{brand.name}</span>
                 </Link>
-                <nav className="nav-links" aria-label="منوی اصلی">{links(false)}</nav>
+                <nav className="nav-links" aria-label={t.mainNav}>{links(false)}</nav>
                 <div className="nav-end">
-                    <Link className="btn nav-cta" href="/#contact"><PhoneIcon/>تماس با ما</Link>
+                    <LanguageSwitch/>
+                    <ThemeToggle/>
+                    <Link className="btn nav-cta" href={localePath(locale, "/#contact")}><PhoneIcon/>{t.contactUs}</Link>
                     <button
                         ref={toggleRef}
                         className="menu-toggle"
                         type="button"
-                        aria-label={open ? "بستن منو" : "باز کردن منو"}
+                        aria-label={open ? t.closeMenu : t.openMenu}
                         aria-controls="nav-panel"
                         aria-expanded={open}
                         onClick={() => setOpen(!open)}
@@ -130,19 +142,19 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                 </div>
             </header>
             <div className={`scrim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true"/>
-            <div className={`nav-panel${open ? " is-open" : ""}`} id="nav-panel" role="navigation" aria-label="منوی موبایل" inert={!open}>
+            <div className={`nav-panel${open ? " is-open" : ""}`} id="nav-panel" role="navigation" aria-label={t.mobileNav} inert={!open}>
                 {links(true)}
                 <div className="nav-panel-cta">
-                    <OpenChat className="btn btn--lg">ثبت درخواست پروژه</OpenChat>
-                    <Link className="btn btn--lg btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>
+                    <OpenChat className="btn btn--lg">{t.requestProject}</OpenChat>
+                    <Link className="btn btn--lg btn--soft" href={localePath(locale, "/#contact")}><PhoneIcon/>{t.contactUs}</Link>
                 </div>
             </div>
 
             <div className="main">
                 <main className="content" id="main-content">
                     {crumbs && crumbs.length > 0 && (
-                        <nav className="crumbs" aria-label="مسیر صفحه">
-                            <Link href="/">خانه</Link>
+                        <nav className="crumbs" aria-label={t.breadcrumbs}>
+                            <Link href={localePath(locale, "/")}>{t.homeLabel}</Link>
                             {crumbs.map((c, i) => (
                                 <Fragment key={c.label}>
                                     <ChevronIcon/>

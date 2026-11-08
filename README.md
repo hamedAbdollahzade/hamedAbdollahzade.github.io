@@ -22,7 +22,7 @@ docker compose up -d --build
 
 ## Content
 
-Site content lives in `data/` (services, projects, developers) and `content/blog/*.md` (articles and tutorials).
+The site is bilingual: Persian at `/` and English at `/en/`, with a dark and a light theme. Persian content lives in `data/`, English copy in `data/en/`, interface strings in `lib/ui.ts`, and the tutorials in `content/blog/*.md` (Persian only).
 
 ## License
 

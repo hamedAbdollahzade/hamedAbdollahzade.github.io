@@ -1,7 +1,8 @@
 "use client";
 
 import {useEffect, useRef} from "react";
-import {BRAND} from "@/data/services";
+import {getBrand} from "@/data/localized";
+import {useLocale} from "./LocaleProvider";
 
 const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789ابپتجدرزسشعفقکلمنهی";
 const GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789<>/{}=+-*";
@@ -17,6 +18,8 @@ const FADE = 700;             // ms of the fade-out
  * The overlay is only displayed when <html> carries the "intro-on" class (set by an inline script).
  */
 export default function IntroLoader() {
+    const {locale, t} = useLocale();
+    const BRAND = getBrand(locale);
     const rootRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -128,7 +131,7 @@ export default function IntroLoader() {
     }, []);
 
     return (
-        <div className="intro" ref={rootRef} role="status" aria-label={`در حال بارگذاری ${BRAND.name}`}>
+        <div className="intro" ref={rootRef} role="status" aria-label={t.intro.label(BRAND.name)}>
             <canvas ref={canvasRef} aria-hidden="true"/>
             <div className="intro-center">
                 <div className="intro-brand" aria-hidden="true" dir="ltr">
@@ -138,7 +141,7 @@ export default function IntroLoader() {
                 </div>
                 <p className="intro-sub" ref={subRef}>{BRAND.tagline}</p>
             </div>
-            <button type="button" className="intro-skip">رد کردن</button>
+            <button type="button" className="intro-skip">{t.intro.skip}</button>
         </div>
     );
 }
