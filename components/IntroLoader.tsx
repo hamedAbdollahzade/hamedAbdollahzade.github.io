@@ -41,7 +41,7 @@ export default function IntroLoader() {
             canvas.width = width * dpr;
             canvas.height = height * dpr;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            ctx.fillStyle = "#04181a";
+            ctx.fillStyle = "#050505";
             ctx.fillRect(0, 0, width, height);
             const count = Math.ceil(width / fontSize);
             columns = Array.from({length: count}, () => ({y: -Math.random() * height * 0.6, speed: 0.55 + Math.random() * 1.1, delay: Math.random() * 900}));
@@ -72,7 +72,7 @@ export default function IntroLoader() {
             const now = performance.now() - start;
 
             // Rain: fade the previous frame, then draw the head and a bright tail character per column.
-            ctx.fillStyle = "rgba(4, 24, 26, 0.09)";
+            ctx.fillStyle = "rgba(5, 5, 5, 0.09)";
             ctx.fillRect(0, 0, width, height);
             ctx.font = `${fontSize}px ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace`;
             ctx.textAlign = "center";
@@ -82,9 +82,9 @@ export default function IntroLoader() {
                 const step = col.speed * fontSize * 0.95;
                 // Draw a glyph at every cell the column moved through, so fast columns stay continuous.
                 for (let y = col.y; y < col.y + step; y += fontSize) {
-                    ctx.fillStyle = "rgba(51, 176, 164, 0.95)";
+                    ctx.fillStyle = "rgba(161, 161, 170, 0.95)";
                     ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, y - fontSize);
-                    ctx.fillStyle = "#d8fff9";
+                    ctx.fillStyle = "#ffffff";
                     ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, y);
                 }
                 col.y += step;

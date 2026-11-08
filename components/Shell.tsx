@@ -6,18 +6,17 @@ import {Fragment, useEffect, useRef, useState} from "react";
 import type {ReactNode} from "react";
 import {BRAND} from "@/data/services";
 import Footer from "./Footer";
-import {BookIcon, ChevronIcon, FolderIcon, HomeIcon, InfoIcon, LayersIcon, Logo, MailIcon, MenuIcon, PhoneIcon, SearchIcon, UsersIcon} from "./Icons";
+import {ChevronIcon, Logo, MenuIcon, PhoneIcon} from "./Icons";
 import OpenChat from "./OpenChat";
 
 /* `spy` lists the home-page sections that highlight this item while they are on screen. */
 const NAV = [
-    {href: "/", label: "خانه", icon: HomeIcon, path: (p: string) => p === "/", spy: ["", "process", "faq"]},
-    {href: "/#services", label: "خدمات", icon: LayersIcon, path: (p: string) => p.startsWith("/services"), spy: ["services"]},
-    {href: "/#projects", label: "نمونه‌کارها", icon: FolderIcon, path: (p: string) => p.startsWith("/projects"), spy: ["projects"]},
-    {href: "/blog/", label: "آموزش‌ها", icon: BookIcon, path: (p: string) => p.startsWith("/blog"), spy: ["learn"]},
-    {href: "/developers/", label: "برنامه‌نویسان", icon: UsersIcon, path: (p: string) => p.startsWith("/developers"), spy: ["developers"]},
-    {href: "/about/", label: "درباره‌ی ما", icon: InfoIcon, path: (p: string) => p.startsWith("/about"), spy: []},
-    {href: "/#contact", label: "تماس و سفارش", icon: MailIcon, path: () => false, spy: ["contact"]},
+    {href: "/", label: "خانه", path: (p: string) => p === "/", spy: ["", "process", "faq", "contact"]},
+    {href: "/#services", label: "خدمات", path: (p: string) => p.startsWith("/services"), spy: ["services"]},
+    {href: "/#projects", label: "نمونه‌کارها", path: (p: string) => p.startsWith("/projects"), spy: ["projects"]},
+    {href: "/blog/", label: "آموزش‌ها", path: (p: string) => p.startsWith("/blog"), spy: ["learn"]},
+    {href: "/developers/", label: "برنامه‌نویسان", path: (p: string) => p.startsWith("/developers"), spy: ["developers"]},
+    {href: "/about/", label: "درباره‌ی ما", path: (p: string) => p.startsWith("/about"), spy: []},
 ];
 
 const SPY_IDS = ["services", "projects", "learn", "developers", "process", "faq", "contact"];
@@ -28,6 +27,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
     const pathname = usePathname() || "/";
     const [open, setOpen] = useState(false);
     const [section, setSection] = useState("");
+    const toggleRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => setOpen(false), [pathname]);
 
@@ -54,7 +54,6 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
             if (timer) clearTimeout(timer);
         };
     }, [pathname]);
-    const toggleRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
@@ -64,9 +63,9 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                 return false;
             });
         };
-        // Opening the chat (from the drawer or anywhere) must not leave the drawer open behind it.
+        // Opening the chat must not leave the menu open behind it.
         const onChat = () => setOpen(false);
-        // Leaving the phone layout (rotation, resize) resets the drawer.
+        // Leaving the phone layout (rotation, resize) resets the menu.
         const mq = window.matchMedia("(min-width: 981px)");
         const onMq = () => { if (mq.matches) setOpen(false); };
         document.addEventListener("keydown", onKey);
@@ -81,70 +80,65 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
         };
     }, []);
 
-    // Lock page scroll behind the open drawer.
+    // Lock page scroll behind the open menu.
     useEffect(() => {
         document.body.style.overflow = open ? "hidden" : "";
         return () => { document.body.style.overflow = ""; };
     }, [open]);
 
-    // Swipe toward the right edge (the side the drawer lives on) closes it.
-    const touchX = useRef<number | null>(null);
+    const links = (inPanel: boolean) => NAV.map(({href, label, path, spy}) => {
+        const active = pathname === "/" ? spy.includes(section) : path(pathname);
+        return (
+            <Link
+                key={href}
+                href={href}
+                className={`nav-link${active ? " is-active" : ""}`}
+                aria-current={active ? "page" : undefined}
+                onClick={() => {
+                    setOpen(false);
+                    // Same-page links don't change the route, so select the item right away.
+                    if (pathname === "/" && href.startsWith("/#")) setSection(href.slice(2));
+                    if (pathname === "/" && href === "/") setSection("");
+                }}
+                tabIndex={inPanel && !open ? -1 : undefined}
+            >
+                {label}
+            </Link>
+        );
+    });
 
     return (
         <>
-            <aside
-                id="site-sidebar"
-                className={`sidebar${open ? " is-open" : ""}`}
-                aria-label="منوی اصلی"
-                onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
-                onTouchEnd={(e) => {
-                    if (touchX.current !== null && e.changedTouches[0].clientX - touchX.current > 60) setOpen(false);
-                    touchX.current = null;
-                }}
-            >
-                <div className="sidebar-head">
-                    <Link className="brand" href="/" aria-label={`${BRAND.name}، صفحه اصلی`} onClick={() => setOpen(false)}>
-                        <span className="brand-mark"><Logo/></span><span>{BRAND.name}</span>
-                    </Link>
-                    <button className="sidebar-close" type="button" aria-label="بستن منو" onClick={() => setOpen(false)}>×</button>
+            <header className="navbar">
+                <Link className="brand" href="/" aria-label={`${BRAND.name}، صفحه اصلی`} onClick={() => setOpen(false)}>
+                    <span className="brand-mark"><Logo/></span><span>{BRAND.name}</span>
+                </Link>
+                <nav className="nav-links" aria-label="منوی اصلی">{links(false)}</nav>
+                <div className="nav-end">
+                    <Link className="btn nav-cta" href="/#contact"><PhoneIcon/>تماس با ما</Link>
+                    <button
+                        ref={toggleRef}
+                        className="menu-toggle"
+                        type="button"
+                        aria-label={open ? "بستن منو" : "باز کردن منو"}
+                        aria-controls="nav-panel"
+                        aria-expanded={open}
+                        onClick={() => setOpen(!open)}
+                    >
+                        <MenuIcon/>
+                    </button>
                 </div>
-                <nav>
-                    {NAV.map(({href, label, icon: Icon, path, spy}) => {
-                        const active = pathname === "/" ? spy.includes(section) : path(pathname);
-                        return (
-                            <Link
-                                key={href}
-                                href={href}
-                                className={`nav-item${active ? " is-active" : ""}`}
-                                aria-current={active ? "page" : undefined}
-                                onClick={() => {
-                                    setOpen(false);
-                                    // Same-page links don't change the route, so select the item right away.
-                                    if (pathname === "/" && href.startsWith("/#")) setSection(href.slice(2));
-                                    if (pathname === "/" && href === "/") setSection("");
-                                }}
-                            >
-                                <span className="nav-icon"><Icon/></span>{label}
-                            </Link>
-                        );
-                    })}
-                </nav>
-                <div className="sidebar-cta">
-                    <Link className="btn btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>
-                    <OpenChat className="btn btn--green">ثبت درخواست پروژه</OpenChat>
-                </div>
-            </aside>
+            </header>
             <div className={`scrim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true"/>
+            <div className={`nav-panel${open ? " is-open" : ""}`} id="nav-panel" role="navigation" aria-label="منوی موبایل" inert={!open}>
+                {links(true)}
+                <div className="nav-panel-cta">
+                    <OpenChat className="btn btn--lg">ثبت درخواست پروژه</OpenChat>
+                    <Link className="btn btn--lg btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>
+                </div>
+            </div>
 
             <div className="main">
-                <header className="topbar">
-                    <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? "بستن منو" : "باز کردن منو"} aria-controls="site-sidebar" aria-expanded={open} onClick={() => setOpen(!open)}><MenuIcon/></button>
-                    <OpenChat className="search-pill"><SearchIcon/><span>ایده‌ات را بگو؛ با هوش مصنوعی می‌سازیمش…</span></OpenChat>
-                    <div className="topbar-actions">
-                        <Link className="btn btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>
-                        <OpenChat className="btn">درخواست پروژه</OpenChat>
-                    </div>
-                </header>
                 <main className="content" id="main-content">
                     {crumbs && crumbs.length > 0 && (
                         <nav className="crumbs" aria-label="مسیر صفحه">

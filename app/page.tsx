@@ -4,6 +4,7 @@ import HeroSlider from "@/components/HeroSlider";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
+import TechStrip from "@/components/TechStrip";
 import Shell from "@/components/Shell";
 import {COURSES} from "@/data/courses";
 import {DEVELOPERS} from "@/data/developers";
@@ -69,6 +70,7 @@ export default function Home() {
             <JsonLd data={faqLd}/>
 
             <HeroSlider/>
+            <TechStrip/>
 
             <section className="card" id="services" aria-labelledby="services-title" data-reveal>
                 <div className="block-head">
