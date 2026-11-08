@@ -97,7 +97,7 @@ const fa = {
     },
     blog: {
         crumb: "آموزش‌ها و مقالات", title: "آموزش‌ها و مقالات",
-        desc: "آموزش‌های رایگان HTML، CSS، JavaScript، مسیر فرانت‌اند، لینوکس اوبونتو و کدنویسی با هوش مصنوعی، همراه با راهنماهای عملی Webino-Dev.",
+        desc: "آموزش‌های رایگان HTML، CSS، JavaScript، مسیر فرانت‌اند، لینوکس اوبونتو، شبکه و امنیت و کدنویسی با هوش مصنوعی، همراه با راهنماهای عملی Webino-Dev.",
         lessons: "درس", minutes: "دقیقه", metaTitle: "آموزش‌ها و مقالات | HTML، CSS، JavaScript و هوش مصنوعی | Webino-Dev",
         faNote: "",
     },
@@ -199,7 +199,7 @@ const en: typeof fa = {
     },
     blog: {
         crumb: "Tutorials", title: "Tutorials and articles",
-        desc: "Free tutorials on HTML, CSS, JavaScript, the frontend roadmap, Ubuntu Linux and coding with AI, plus practical Webino-Dev guides.",
+        desc: "Free tutorials on HTML, CSS, JavaScript, the frontend roadmap, Ubuntu Linux, networking and security, and coding with AI, plus practical Webino-Dev guides.",
         lessons: "lessons", minutes: "min", metaTitle: "Tutorials | HTML, CSS, JavaScript and AI | Webino-Dev",
         faNote: "The lessons are written in Persian.",
     },

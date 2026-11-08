@@ -6,6 +6,7 @@ export const COURSES_EN: Record<string, {title: string; description: string}> = 
     "JavaScript": {title: "JavaScript", description: "A complete JavaScript learning path: basics, built-in methods, intermediate and advanced topics."},
     "مسیر فرانت‌اند": {title: "Frontend roadmap", description: "Skills from the roadmap.sh/frontend roadmap: tooling, TypeScript, frameworks, testing, security, performance and deployment."},
     "لینوکس اوبونتو": {title: "Linux (Ubuntu)", description: "Terminal commands, package management, apps and Docker on Ubuntu."},
+    "شبکه و امنیت": {title: "Networking and security", description: "Networking basics, protocols and ports, cryptography, Linux server security, static IP and VPN with WireGuard, from beginner to advanced."},
     "کدنویسی با هوش مصنوعی": {title: "Coding with AI", description: "A workflow for programming with AI: LLM limits, planning, architecture and feedback."},
     "راهنما و مقاله": {title: "Guides and articles", description: "Practical guides for idea owners and businesses about AI and building products."},
 };

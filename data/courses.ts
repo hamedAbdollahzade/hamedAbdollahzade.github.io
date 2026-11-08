@@ -12,6 +12,7 @@ export const COURSES: Course[] = [
     {slug: "javascript", title: "JavaScript", description: "مسیر کامل یادگیری جاوااسکریپت: مبانی، متدهای داخلی، سطح متوسط و پیشرفته."},
     {slug: "frontend-roadmap", title: "مسیر فرانت‌اند", description: "مهارت‌های نقشه‌ی راه roadmap.sh/frontend: ابزارها، TypeScript، فریم‌ورک‌ها، تست، امنیت، عملکرد و استقرار."},
     {slug: "linux-ubuntu", title: "لینوکس اوبونتو", description: "دستورات ترمینال، مدیریت پکیج‌ها، برنامه‌ها و Docker روی Ubuntu."},
+    {slug: "networking-security", title: "شبکه و امنیت", description: "مبانی شبکه، پروتکل‌ها و پورت‌ها، رمزنگاری، امنیت سرور لینوکس، IP ثابت و VPN با WireGuard؛ از مبتدی تا پیشرفته."},
     {slug: "ai-coding", title: "کدنویسی با هوش مصنوعی", description: "جریان کاری برنامه‌نویسی با هوش مصنوعی: محدودیت‌های LLM، برنامه‌ریزی، معماری و بازخورد."},
     {slug: "articles", title: "راهنما و مقاله", description: "راهنمای عملی برای صاحبان ایده و کسب‌وکار درباره‌ی هوش مصنوعی و ساخت محصول."},
 ];

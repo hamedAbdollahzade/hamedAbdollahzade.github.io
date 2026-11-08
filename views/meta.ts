@@ -55,5 +55,5 @@ export function projectMeta(locale: Locale, slug: string): Metadata {
 
 export function blogMeta(locale: Locale): Metadata {
     const t = UI[locale];
-    return pageMeta({title: t.blog.metaTitle, description: t.blog.desc, path: "/blog/", locale, translated: true, keywords: locale === "fa" ? ["آموزش هوش مصنوعی", "آموزش HTML", "آموزش CSS", "آموزش جاوااسکریپت", "آموزش فرانت‌اند", "Docker"] : ["HTML tutorial", "CSS tutorial", "JavaScript tutorial", "frontend roadmap", "AI coding"]});
+    return pageMeta({title: t.blog.metaTitle, description: t.blog.desc, path: "/blog/", locale, translated: true, keywords: locale === "fa" ? ["آموزش هوش مصنوعی", "آموزش HTML", "آموزش CSS", "آموزش جاوااسکریپت", "آموزش فرانت‌اند", "آموزش شبکه", "آموزش امنیت", "WireGuard", "Docker"] : ["HTML tutorial", "CSS tutorial", "JavaScript tutorial", "frontend roadmap", "networking", "WireGuard", "AI coding"]});
 }
