@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, useEffect, useRef, useState} from "react";
 import type {ReactNode} from "react";
 import {BRAND} from "@/data/services";
 import Footer from "./Footer";
@@ -54,18 +54,60 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
             if (timer) clearTimeout(timer);
         };
     }, [pathname]);
+    const toggleRef = useRef<HTMLButtonElement>(null);
+
     useEffect(() => {
-        const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key !== "Escape") return;
+            setOpen((wasOpen) => {
+                if (wasOpen) toggleRef.current?.focus();
+                return false;
+            });
+        };
+        // Opening the chat (from the drawer or anywhere) must not leave the drawer open behind it.
+        const onChat = () => setOpen(false);
+        // Leaving the phone layout (rotation, resize) resets the drawer.
+        const mq = window.matchMedia("(min-width: 981px)");
+        const onMq = () => { if (mq.matches) setOpen(false); };
         document.addEventListener("keydown", onKey);
-        return () => document.removeEventListener("keydown", onKey);
+        window.addEventListener("webino:open-chat", onChat);
+        window.addEventListener("pagehide", onChat);
+        mq.addEventListener("change", onMq);
+        return () => {
+            document.removeEventListener("keydown", onKey);
+            window.removeEventListener("webino:open-chat", onChat);
+            window.removeEventListener("pagehide", onChat);
+            mq.removeEventListener("change", onMq);
+        };
     }, []);
+
+    // Lock page scroll behind the open drawer.
+    useEffect(() => {
+        document.body.style.overflow = open ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
+
+    // Swipe toward the right edge (the side the drawer lives on) closes it.
+    const touchX = useRef<number | null>(null);
 
     return (
         <>
-            <aside className={`sidebar${open ? " is-open" : ""}`} aria-label="منوی اصلی">
-                <Link className="brand" href="/" aria-label={`${BRAND.name}، صفحه اصلی`}>
-                    <span className="brand-mark"><Logo/></span><span>{BRAND.name}</span>
-                </Link>
+            <aside
+                id="site-sidebar"
+                className={`sidebar${open ? " is-open" : ""}`}
+                aria-label="منوی اصلی"
+                onTouchStart={(e) => { touchX.current = e.touches[0].clientX; }}
+                onTouchEnd={(e) => {
+                    if (touchX.current !== null && e.changedTouches[0].clientX - touchX.current > 60) setOpen(false);
+                    touchX.current = null;
+                }}
+            >
+                <div className="sidebar-head">
+                    <Link className="brand" href="/" aria-label={`${BRAND.name}، صفحه اصلی`} onClick={() => setOpen(false)}>
+                        <span className="brand-mark"><Logo/></span><span>{BRAND.name}</span>
+                    </Link>
+                    <button className="sidebar-close" type="button" aria-label="بستن منو" onClick={() => setOpen(false)}>×</button>
+                </div>
                 <nav>
                     {NAV.map(({href, label, icon: Icon, path, spy}) => {
                         const active = pathname === "/" ? spy.includes(section) : path(pathname);
@@ -96,7 +138,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
 
             <div className="main">
                 <header className="topbar">
-                    <button className="menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded={open} onClick={() => setOpen(!open)}><MenuIcon/></button>
+                    <button ref={toggleRef} className="menu-toggle" type="button" aria-label={open ? "بستن منو" : "باز کردن منو"} aria-controls="site-sidebar" aria-expanded={open} onClick={() => setOpen(!open)}><MenuIcon/></button>
                     <OpenChat className="search-pill"><SearchIcon/><span>ایده‌ات را بگو؛ با هوش مصنوعی می‌سازیمش…</span></OpenChat>
                     <div className="topbar-actions">
                         <Link className="btn btn--soft" href="/#contact"><PhoneIcon/>تماس با ما</Link>

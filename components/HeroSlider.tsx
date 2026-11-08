@@ -53,6 +53,7 @@ export default function HeroSlider() {
                             aria-roledescription="slide"
                             aria-label={`${i + 1} از ${SLIDES.length}`}
                             aria-hidden={!active}
+                            inert={!active}
                         >
                             <div className="slide-text">
                                 <span className="hero-badge">{s.badge}</span>
@@ -67,7 +68,7 @@ export default function HeroSlider() {
                             <div className="slide-media">
                                 <div className={`mock${s.contain ? " mock--phone" : ""}`}>
                                     {!s.contain && <div className="mock-bar"><i/><i/><i/></div>}
-                                    <Image src={`/${s.image}`} alt={s.imageAlt} width={1440} height={900} priority={i === 0} loading="eager"/>
+                                    <Image src={`/${s.image}`} alt={s.imageAlt} width={1440} height={900} priority={i === 0} loading="eager" decoding="sync"/>
                                 </div>
                                 <Link className="slide-caption" href={s.captionHref} tabIndex={active ? 0 : -1}>{s.caption} ←</Link>
                             </div>
