@@ -685,8 +685,10 @@ html.intro-on body { overflow: hidden; }
 .prog-pct { text-align: end; color: #f4f4f5; }
 
 @media (max-width: 640px) {
-    .dock { gap: 2px; padding: 6px; border-radius: 22px; }
-    .dock-item, .dock .icon-btn { width: 40px; height: 40px; min-width: 40px; border-radius: 13px; }
+    /* Phones: the dock spans the screen width and its items shrink to fit, so nine icons never overflow. */
+    .dock { gap: 2px; padding: 6px; border-radius: 22px; width: calc(100% - 16px); max-width: 440px; justify-content: space-between; }
+    .dock-item, .dock .icon-btn { flex: 1 1 0; width: auto; max-width: 42px; height: 40px; min-width: 0; border-radius: 13px; }
+    .dock-sep { flex: none; margin-inline: 2px; }
     .dock-item svg, .dock .icon-btn svg { width: 21px; height: 21px; }
     .dock-item::before { display: none; }
     .ut-body { height: 440px; font-size: 13px; padding: 14px; }
@@ -708,7 +710,7 @@ html.intro-on body { overflow: hidden; }
 
 @media (max-width: 380px) {
     .dock { gap: 1px; padding: 5px; }
-    .dock-item, .dock .icon-btn { width: 34px; height: 34px; min-width: 34px; border-radius: 11px; }
+    .dock-item, .dock .icon-btn { height: 36px; border-radius: 11px; }
     .dock-item svg, .dock .icon-btn svg { width: 19px; height: 19px; }
     .dock-sep { display: none; }
 }
