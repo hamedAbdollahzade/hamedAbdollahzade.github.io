@@ -42,26 +42,34 @@ export default function ExplorePostView({locale, slug}: {locale: Locale; slug: s
                     ]},
                 ],
             }}/>
-            <article className="xp-post card">
-                <div className="xp-media" tabIndex={0} role="group" aria-label={x.title}>
+            <article className="xp-post">
+                <div className="xp-main">
                     {post.aparat && (
-                        <div className="xp-slide xp-slide--video">
-                            <iframe
-                                src={`https://www.aparat.com/video/video/embed/videohash/${post.aparat}/vt/frame`}
-                                title={t.videoTitle}
-                                loading="lazy"
-                                allowFullScreen
-                                allow="fullscreen; picture-in-picture"
-                            />
-                        </div>
+                        <section className="xp-block" aria-labelledby="xp-video-h">
+                            <h2 className="xp-block-title" id="xp-video-h">{t.video}</h2>
+                            <div className="xp-video">
+                                <iframe
+                                    src={`https://www.aparat.com/video/video/embed/videohash/${post.aparat}/vt/frame`}
+                                    title={t.videoTitle}
+                                    loading="lazy"
+                                    allowFullScreen
+                                    allow="fullscreen; picture-in-picture"
+                                />
+                            </div>
+                        </section>
                     )}
-                    {post.images.map((img, i) => (
-                        <div className="xp-slide" key={img.src}>
-                            <Image src={`/${img.src}`} alt={img.alt[locale] || t.image(i + 1)} width={900} height={900} priority={i === 0 && !post.aparat}/>
+                    <section className="xp-block" aria-labelledby="xp-photos-h">
+                        <h2 className="xp-block-title" id="xp-photos-h">{t.photos} <small>({post.images.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")})</small></h2>
+                        <div className="xp-photos">
+                            {post.images.map((img, i) => (
+                                <a className="xp-photo" key={img.src} href={`/${img.src}`} target="_blank" rel="noopener noreferrer" aria-label={img.alt[locale] || t.image(i + 1)}>
+                                    <Image src={`/${img.src}`} alt={img.alt[locale] || t.image(i + 1)} width={600} height={600} loading={i === 0 ? "eager" : "lazy"}/>
+                                </a>
+                            ))}
                         </div>
-                    ))}
+                    </section>
                 </div>
-                <div className="xp-side">
+                <aside className="xp-side card">
                     <div className="xp-author">
                         <span className="xp-avatar xp-avatar--sm" aria-hidden="true"><Logo/></span>
                         <div><strong>Webino-Dev</strong><time dateTime={post.date}>{date}</time></div>
@@ -77,7 +85,7 @@ export default function ExplorePostView({locale, slug}: {locale: Locale; slug: s
                             <a className="btn btn--green" href={wa} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/> {t.whatsapp}</a>
                         </div>
                     </div>
-                </div>
+                </aside>
             </article>
             {others.length > 0 && (
                 <section className="section">
