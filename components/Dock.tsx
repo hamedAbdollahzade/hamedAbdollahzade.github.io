@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import type {ReactNode} from "react";
-import {BookIcon, FolderIcon, HomeIcon, InfoIcon, LayersIcon, UsersIcon} from "./Icons";
+import {BookIcon, FolderIcon, HomeIcon, InfoIcon, LayersIcon, UsersIcon, CompassIcon} from "./Icons";
 import LanguageSwitch from "./LanguageSwitch";
 import ThemeToggle from "./ThemeToggle";
 
 export interface DockItem {key: string; label: string; href: string; active: boolean; onClick?: () => void}
 
 const ICONS: Record<string, ReactNode> = {
-    home: <HomeIcon/>, services: <LayersIcon/>, projects: <FolderIcon/>, learn: <BookIcon/>, developers: <UsersIcon/>, about: <InfoIcon/>,
+    home: <HomeIcon/>, services: <LayersIcon/>, projects: <FolderIcon/>, learn: <BookIcon/>, developers: <UsersIcon/>, explore: <CompassIcon/>, about: <InfoIcon/>,
 };
 
 /** macOS-style floating dock at the bottom of the page: the main navigation plus the language and theme switches. */

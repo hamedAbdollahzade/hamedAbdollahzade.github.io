@@ -18,6 +18,7 @@ const NAV = [
     {key: "projects", href: "/#projects", path: (p: string) => p.startsWith("/projects"), spy: ["projects"]},
     {key: "learn", href: "/blog/", path: (p: string) => p.startsWith("/blog"), spy: ["learn"]},
     {key: "developers", href: "/developers/", path: (p: string) => p.startsWith("/developers"), spy: ["developers"]},
+    {key: "explore", href: "/explore/", path: (p: string) => p.startsWith("/explore"), spy: []},
     {key: "about", href: "/about/", path: (p: string) => p.startsWith("/about"), spy: []},
 ] as const;
 

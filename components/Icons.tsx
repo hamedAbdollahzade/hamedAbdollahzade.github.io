@@ -15,6 +15,7 @@ export const LayersIcon = make(<path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16
 export const FolderIcon = make(<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>);
 export const BookIcon = make(<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5Zm0 14a2 2 0 0 1 2-2h13M9 7h6"/>);
 export const UsersIcon = make(<><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.5A6.5 6.5 0 0 1 21.5 20"/></>);
+export const CompassIcon = make(<><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></>);
 export const InfoIcon = make(<><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></>);
 export const MailIcon = make(<><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></>);
 export const GlobeIcon = make(<><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></>);

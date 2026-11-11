@@ -13,18 +13,19 @@ const WIDE = {W: 1000, H: 560, rx: 255, ry: 150};
 const TALL = {W: 400, H: 540, rx: 128, ry: 205};
 type Layout = typeof WIDE;
 const rad = (deg: number) => (deg * Math.PI) / 180;
-const TALL_ANGLES: Record<string, number> = {services: -90, projects: -30, learn: 30, developers: 90, about: 150, contact: 210};
+const TALL_ANGLES: Record<string, number> = {services: -90, projects: -39, learn: 13, explore: 64, developers: 116, about: 167, contact: 219};
 const clip = (s: string, n = 15) => (s.length > n ? `${s.slice(0, n - 1).trim()}…` : s);
 
 /** Builds the site map: one hub per section around the centre, with the pages of that section around each hub. */
 function buildGraph(locale: "fa" | "en", labels: Record<string, string>, L: Layout, compact: boolean) {
     const CX = L.W / 2, CY = L.H / 2;
     const hubs: {id: string; angle: number; fan?: number; href: string; leaves: {label: string; href: string}[]}[] = [
-        {id: "services", angle: -125, fan: -170, href: "/#services", leaves: getServices(locale).map((s) => ({label: s.title, href: `/services/${s.slug}/`}))},
-        {id: "projects", angle: -55, fan: -15, href: "/#projects", leaves: getProjects(locale).map((p) => ({label: p.title, href: `/projects/${p.slug}/`}))},
-        {id: "learn", angle: 0, href: "/blog/", leaves: []},
-        {id: "developers", angle: 60, fan: 35, href: "/developers/", leaves: getDevelopers(locale).map((d) => ({label: d.name, href: `/developers/${d.slug}/`}))},
-        {id: "about", angle: 120, href: "/about/", leaves: []},
+        {id: "services", angle: -135, fan: -170, href: "/#services", leaves: getServices(locale).map((s) => ({label: s.title, href: `/services/${s.slug}/`}))},
+        {id: "projects", angle: -65, fan: -15, href: "/#projects", leaves: getProjects(locale).map((p) => ({label: p.title, href: `/projects/${p.slug}/`}))},
+        {id: "learn", angle: -15, href: "/blog/", leaves: []},
+        {id: "explore", angle: 35, href: "/explore/", leaves: []},
+        {id: "developers", angle: 85, fan: 60, href: "/developers/", leaves: getDevelopers(locale).map((d) => ({label: d.name, href: `/developers/${d.slug}/`}))},
+        {id: "about", angle: 135, href: "/about/", leaves: []},
         {id: "contact", angle: 180, href: "/#contact", leaves: []},
     ];
     const nodes: GNode[] = [];

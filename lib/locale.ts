@@ -26,7 +26,7 @@ export function parsePath(pathname: string): {locale: Locale; path: string} {
 }
 
 /** Paths that exist in both languages (articles exist only in Persian). */
-const TRANSLATED = [/^\/$/, /^\/about\/$/, /^\/developers\/$/, /^\/developers\/[^/]+\/$/, /^\/services\/[^/]+\/$/, /^\/projects\/[^/]+\/$/, /^\/blog\/$/];
+const TRANSLATED = [/^\/$/, /^\/about\/$/, /^\/developers\/$/, /^\/developers\/[^/]+\/$/, /^\/services\/[^/]+\/$/, /^\/projects\/[^/]+\/$/, /^\/blog\/$/, /^\/explore\/$/, /^\/explore\/[^/]+\/$/];
 
 /** The equivalent page in the other language; articles fall back to the tutorials index, other pages to the home page. */
 export function switchLocalePath(pathname: string, target: Locale): string {

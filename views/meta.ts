@@ -1,6 +1,7 @@
 /* Metadata (title, description, canonical, hreflang) for each page in each language. */
 
 import type {Metadata} from "next";
+import {exploreText, getExplorePost} from "@/data/explore";
 import {getDevelopers, getProjects, getServices} from "@/data/localized";
 import type {Locale} from "@/lib/locale";
 import {SITE, pageMeta, summarize} from "@/lib/site";
@@ -56,4 +57,16 @@ export function projectMeta(locale: Locale, slug: string): Metadata {
 export function blogMeta(locale: Locale): Metadata {
     const t = UI[locale];
     return pageMeta({title: t.blog.metaTitle, description: t.blog.desc, path: "/blog/", locale, translated: true, keywords: locale === "fa" ? ["آموزش هوش مصنوعی", "آموزش HTML", "آموزش CSS", "آموزش جاوااسکریپت", "آموزش فرانت‌اند", "آموزش شبکه", "آموزش امنیت", "WireGuard", "Docker"] : ["HTML tutorial", "CSS tutorial", "JavaScript tutorial", "frontend roadmap", "networking", "WireGuard", "AI coding"]});
+}
+
+export function exploreMeta(locale: Locale): Metadata {
+    const t = UI[locale].explore;
+    return pageMeta({title: t.metaTitle, description: t.desc, path: "/explore/", locale, translated: true});
+}
+
+export function explorePostMeta(locale: Locale, slug: string): Metadata {
+    const post = getExplorePost(slug);
+    if (!post) return {};
+    const x = exploreText(post, locale);
+    return pageMeta({title: `${x.title} | Webino-Dev`, description: summarize(x.caption), path: `/explore/${slug}/`, locale, translated: true, type: "article", keywords: [...x.tags, "Webino-Dev"]});
 }

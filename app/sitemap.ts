@@ -1,4 +1,5 @@
 import type {MetadataRoute} from "next";
+import {EXPLORE_POSTS} from "@/data/explore";
 import {PROJECTS} from "@/data/projects";
 import {SERVICES} from "@/data/services";
 import {DEVELOPERS} from "@/data/developers";
@@ -27,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         bilingual("/developers/", 0.8, now),
         ...DEVELOPERS.map((d) => bilingual(`/developers/${d.slug}/`, 0.7, now)),
         bilingual("/blog/", 0.8, now),
+        bilingual("/explore/", 0.7, now),
+        ...EXPLORE_POSTS.map((p) => bilingual(`/explore/${p.slug}/`, 0.6, now)),
         ...PROJECTS.map((p) => bilingual(`/projects/${p.slug}/`, 0.7, now)),
     ];
     // English URLs listed on their own as well, so crawlers that ignore alternates still find them.

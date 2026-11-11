@@ -5,7 +5,7 @@ import type {Locale} from "./locale";
 const fa = {
     arrow: "←",
     homeLabel: "خانه",
-    nav: {services: "خدمات", projects: "نمونه‌کارها", learn: "آموزش‌ها", developers: "برنامه‌نویسان", about: "درباره‌ی ما"},
+    nav: {services: "خدمات", projects: "نمونه‌کارها", learn: "آموزش‌ها", developers: "برنامه‌نویسان", explore: "اکسپلور", about: "درباره‌ی ما"},
     contactUs: "تماس با ما",
     requestProject: "ثبت درخواست پروژه",
     requestShort: "درخواست پروژه",
@@ -80,6 +80,12 @@ const fa = {
             description: "با تیم Webino-Dev آشنا شوید؛ تیمی کوچک و چابک در مشهد با تجربه‌ی کار روی پلتفرم CRM/ERP، دستگاه‌های وندینگ و برنامه‌های آفلاین، و مسیر همکاری ما با شما.",
         },
     },
+    explore: {
+        crumb: "اکسپلور", title: "اکسپلور", desc: "محصولات، ویدیوها و پست‌های متفرقه‌ی Webino-Dev؛ هر پست صفحه‌ی مخصوص خودش را دارد.",
+        metaTitle: "اکسپلور | محصولات و پست‌های Webino-Dev", posts: "پست", video: "ویدیو", photos: "تصاویر", watch: "ویدیوی محصول",
+        buy: "تماس برای خرید", call: "تماس تلفنی", whatsapp: "واتساپ", waText: (title: string) => `سلام، درباره‌ی «${title}» می‌خواهم اطلاعات بگیرم.`,
+        more: "پست‌های دیگر", backToFeed: "بازگشت به اکسپلور", videoTitle: "ویدیوی پست در آپارات", image: (i: number) => `تصویر ${i}`, empty: "به‌زودی پست‌های بیشتری اضافه می‌شود.",
+    },
     developers: {
         crumb: "برنامه‌نویسان", title: "برنامه‌نویسان", profile: "مشاهده‌ی پروفایل",
         desc: "با برنامه‌نویسان Webino-Dev آشنا شوید؛ مهارت‌ها، سوابق و نمونه‌کارهای افرادی که روی پروژه‌ی شما کار می‌کنند.",
@@ -107,7 +113,7 @@ const fa = {
 const en: typeof fa = {
     arrow: "→",
     homeLabel: "Home",
-    nav: {services: "Services", projects: "Projects", learn: "Tutorials", developers: "Developers", about: "About"},
+    nav: {services: "Services", projects: "Projects", learn: "Tutorials", developers: "Developers", explore: "Explore", about: "About"},
     contactUs: "Contact us",
     requestProject: "Request a project",
     requestShort: "Request project",
@@ -181,6 +187,12 @@ const en: typeof fa = {
             title: "About Webino-Dev | Web and software team in Mashhad",
             description: "Meet the Webino-Dev team: a small, agile team in Mashhad with experience in CRM/ERP platforms, vending machines and offline apps, and how we work with you.",
         },
+    },
+    explore: {
+        crumb: "Explore", title: "Explore", desc: "Products, videos and miscellaneous posts from Webino-Dev. Every post has its own page.",
+        metaTitle: "Explore | Webino-Dev products and posts", posts: "posts", video: "Video", photos: "Photos", watch: "Product video",
+        buy: "Call to buy", call: "Call now", whatsapp: "WhatsApp", waText: (title: string) => `Hi, I'd like more information about "${title}".`,
+        more: "More posts", backToFeed: "Back to Explore", videoTitle: "Post video on Aparat", image: (i: number) => `Image ${i}`, empty: "More posts are coming soon.",
     },
     developers: {
         crumb: "Developers", title: "Developers", profile: "View profile",
