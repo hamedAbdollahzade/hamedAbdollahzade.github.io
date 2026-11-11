@@ -738,8 +738,8 @@ html.intro-on body { overflow: hidden; }
 .xp-block { background: var(--card-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
 .xp-block-title { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 800; margin-bottom: 14px; }
 .xp-block-title small { font-weight: 500; font-size: 13px; color: var(--muted); }
-/* Video: one vertical player, fixed 9:16 frame, centred */
-.xp-video { width: min(100%, 340px); margin-inline: auto; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: #000; position: relative; }
+/* Video: one full-width 16:9 player */
+.xp-video { width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; position: relative; }
 .xp-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 /* Photos: identical square frames, whole picture visible */
 .xp-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
