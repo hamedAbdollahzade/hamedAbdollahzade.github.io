@@ -51,7 +51,7 @@ export default function BlogIndexView({locale}: {locale: Locale}) {
                 <TerminalWindow title="~/learn" steps={[...TERMINAL]} label={t.home.terminalLabel}/>
             </div>
             {sections.map(({course, copy, posts: list}) => (
-                <section className="card" id={course.slug} key={course.slug} aria-labelledby={`${course.slug}-title`}>
+                <section className="section" id={course.slug} key={course.slug} aria-labelledby={`${course.slug}-title`}>
                     <div className="block-head">
                         <div>
                             <h2 className="block-title" id={`${course.slug}-title`}>{copy.title}</h2>

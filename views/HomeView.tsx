@@ -1,13 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import CodeWindow from "@/components/animations/CodeWindow";
+import ProgressWindow from "@/components/animations/ProgressWindow";
 import Pipeline from "@/components/animations/Pipeline";
 import TerminalWindow from "@/components/animations/TerminalWindow";
-import HeroSlider from "@/components/HeroSlider";
+import NetworkHero from "@/components/NetworkHero";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
 import Shell from "@/components/Shell";
+import UbuntuTerminal from "@/components/UbuntuTerminal";
 import TechStrip from "@/components/TechStrip";
 import {getBrand, getCourseCopy, getCourses, getDevelopers, getFaq, getProcess, getProjects, getServices} from "@/data/localized";
 import {getPosts} from "@/lib/blog";
@@ -33,6 +35,37 @@ const TERMINAL_STEPS = [
     {kind: "out", text: "✓ Pages generated"},
     {kind: "cmd", text: "git push origin main"},
     {kind: "out", text: "✓ Deployed to webino-dev.ir"},
+] as const;
+
+const REACT_LINES = [
+    'export function Button({ label }) {',
+    "  const [n, setN] = useState(0);",
+    "  return (",
+    '    <button onClick={() => setN(n + 1)}>',
+    "      {label} {n}",
+    "    </button>",
+    "  );",
+    "}",
+];
+
+const CSS_LINES = [
+    ":root {",
+    "  --accent: #0e7490;",
+    "  --radius: 18px;",
+    "}",
+    ".card {",
+    "  border-radius: var(--radius);",
+    "  transition: transform .2s;",
+    "}",
+];
+
+const GIT_STEPS = [
+    {kind: "cmd", text: "git checkout -b feature/ai-chat"},
+    {kind: "out", text: "Switched to a new branch"},
+    {kind: "cmd", text: "git commit -m \"Add AI chat\""},
+    {kind: "out", text: "[feature/ai-chat 3f2a1c9] Add AI chat"},
+    {kind: "cmd", text: "git push -u origin feature/ai-chat"},
+    {kind: "out", text: "✓ Pull request ready"},
 ] as const;
 
 function graph(locale: Locale) {
@@ -84,10 +117,18 @@ export default function HomeView({locale}: {locale: Locale}) {
             <JsonLd data={graph(locale)}/>
             <JsonLd data={{"@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({"@type": "Question", name: q, acceptedAnswer: {"@type": "Answer", text: a}}))}}/>
 
-            <HeroSlider/>
+            <NetworkHero/>
             <TechStrip/>
 
-            <section className="card" aria-labelledby="showcase-title" data-reveal>
+            <section className="section" id="terminal" aria-labelledby="terminal-title" data-reveal>
+                <div className="block-head"><div>
+                    <h2 className="block-title" id="terminal-title">{locale === "fa" ? "ما را در ترمینال بشناسید" : "Meet us in the terminal"}</h2>
+                    <p className="block-desc">{locale === "fa" ? "معرفی کوتاه، پیشنهادهای ما و راه‌های تماس؛ همه در یک ترمینال اوبونتو." : "A short introduction, our offers and how to reach us, all in an Ubuntu terminal."}</p>
+                </div></div>
+                <UbuntuTerminal lessons={posts.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}/>
+            </section>
+
+            <section className="section" aria-labelledby="showcase-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="showcase-title">{t.home.showcaseTitle}</h2>
@@ -97,11 +138,15 @@ export default function HomeView({locale}: {locale: Locale}) {
                 <div className="showcase">
                     <CodeWindow file="idea.ts" lines={CODE_LINES} label={t.home.codeLabel}/>
                     <TerminalWindow title="~/webino-dev" steps={[...TERMINAL_STEPS]} label={t.home.terminalLabel}/>
+                    <CodeWindow file="Button.tsx" lines={REACT_LINES} label={t.home.codeLabel}/>
+                    <TerminalWindow title="git — main" steps={[...GIT_STEPS]} label={t.home.terminalLabel}/>
+                    <CodeWindow file="theme.css" lines={CSS_LINES} label={t.home.codeLabel}/>
+                    <ProgressWindow title="npm install" tasks={["react", "next", "typescript", "tailwindcss", "docker"]} label={t.home.terminalLabel}/>
                 </div>
                 <Pipeline/>
             </section>
 
-            <section className="card" id="services" aria-labelledby="services-title" data-reveal>
+            <section className="section" id="services" aria-labelledby="services-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="services-title">{t.home.servicesTitle}</h2>
@@ -120,7 +165,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
             </section>
 
-            <section className="card" id="projects" aria-labelledby="projects-title" data-reveal>
+            <section className="section" id="projects" aria-labelledby="projects-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="projects-title">{t.home.projectsTitle}</h2>
@@ -139,7 +184,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
             </section>
 
-            <section className="card" id="learn" aria-labelledby="learn-title" data-reveal>
+            <section className="section" id="learn" aria-labelledby="learn-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="learn-title">{t.home.learnTitle}</h2>
@@ -158,7 +203,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
             </section>
 
-            <section className="card" id="developers" aria-labelledby="devs-title" data-reveal>
+            <section className="section" id="developers" aria-labelledby="devs-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="devs-title">{t.home.devsTitle}</h2>
@@ -180,7 +225,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
             </section>
 
-            <section className="card" id="process" aria-labelledby="process-title" data-reveal>
+            <section className="section" id="process" aria-labelledby="process-title" data-reveal>
                 <div className="block-head"><h2 className="block-title" id="process-title">{t.home.processTitle}</h2></div>
                 <ol className="steps">
                     {getProcess(locale).map(([title, text], i) => (
@@ -189,7 +234,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </ol>
             </section>
 
-            <section className="card" id="faq" aria-labelledby="faq-title" data-reveal>
+            <section className="section" id="faq" aria-labelledby="faq-title" data-reveal>
                 <div className="block-head"><h2 className="block-title" id="faq-title">{t.home.faqTitle}</h2></div>
                 <div className="faq">
                     {faq.map(([q, a]) => <details className="faq-item" key={q}><summary>{q}</summary><p>{a}</p></details>)}

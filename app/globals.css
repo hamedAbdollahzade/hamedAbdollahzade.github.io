@@ -21,22 +21,29 @@
     --on-primary: #0a0a0b;
     --soft: rgba(255, 255, 255, .08);
     --soft-hover: rgba(255, 255, 255, .14);
+    --card-4: #303035;
+    --panel: #151517;
+    --g-slide: radial-gradient(ellipse 70% 90% at 50% 0%, #1c1c1f 0%, #121214 60%, #0a0a0b 100%);
+    --g-cta: radial-gradient(ellipse 80% 120% at 50% 0%, #1c1c1f 0%, #121214 60%, #0a0a0b 100%);
+    --g-chat: linear-gradient(160deg, #151517 0%, #0e0e10 70%);
+    --g-media: linear-gradient(135deg, #1c1c1f, #26262a);
+    --g-gallery: linear-gradient(160deg, #1c1c1f, #151517);
     --wa: #25d366;
     --wa-dark: #1ebe5a;
     --radius: 24px;
     --radius-sm: 14px;
     --strong: #ffffff;
     --on-strong: #0a0a0b;
-    --card-4: var(--card-4);
-    --panel: var(--panel);
+    
+    
     --nav-bg: rgba(16, 16, 18, .78);
     --nav-panel-bg: rgba(16, 16, 18, .96);
     --star: 255, 255, 255;
-    --g-slide: var(--g-slide);
-    --g-cta: var(--g-cta);
-    --g-chat: var(--g-chat);
-    --g-media: var(--g-media);
-    --g-gallery: var(--g-gallery);
+    
+    
+    
+    
+    
     --shadow: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 16px 40px rgba(0, 0, 0, .35);
     --nav-h: 68px;
     --font: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
@@ -552,4 +559,156 @@ html.intro-on body { overflow: hidden; }
     .intro { display: none !important; }
     html.intro-on body { overflow: auto; }
     * { transition-duration: .01ms !important; }
+}
+
+
+/* ==========================================================================
+   Section layout inspired by devsource.ir
+   Flat sections (no wrapper card): a header row with the title at the start and a
+   quiet "view all" link at the end, followed by a grid of light 18px cards.
+   Teal accent for links and small highlights.
+   ========================================================================== */
+:root { --accent: #4cc9d6; --accent-soft: rgba(76, 201, 214, .14); --radius-card: 18px; }
+:root[data-theme="light"] {
+    --accent: #0e7490;
+    --accent-soft: rgba(14, 116, 144, .1);
+    --bg: #f8f9fa;
+    --card-2: #ffffff;
+    --shadow: 0 1px 2px rgba(10, 10, 11, .04);
+}
+
+.section { display: grid; gap: 22px; scroll-margin-top: 96px; }
+.section > .block-head { margin-bottom: 0; align-items: center; flex-wrap: nowrap; }
+.section .block-title { font-size: clamp(20px, 2.4vw, 24px); font-weight: 700; }
+.section .block-desc { font-size: 14.5px; margin-top: 2px; }
+.section .link-more { display: inline-flex; align-items: center; gap: 4px; flex: none; border: 0; color: var(--muted); font-size: 14px; font-weight: 500; }
+.section .link-more:hover { color: var(--accent); }
+
+.section .tile-card, .section .project-card, .section .dev-card, .section .step, .section .faq-item {
+    background: var(--card); border-radius: var(--radius-card); box-shadow: var(--shadow);
+}
+.section .project-card { padding: 0 0 18px; gap: 14px; overflow: hidden; }
+.section .project-media { border-radius: 0; aspect-ratio: 16 / 10; }
+.section .tile-card:hover, .section .project-card:hover, .section .dev-card:hover { transform: translateY(-3px); background: var(--card); border-color: var(--line-strong); }
+.section .tile-icon { background: var(--accent-soft); border-color: transparent; color: var(--accent); border-radius: 14px; }
+.section .tile-more { color: var(--accent); font-weight: 500; font-size: 13.5px; }
+.section .step-num { background: var(--accent-soft); color: var(--accent); }
+.section .tags li { border-radius: 8px; font-size: 12.5px; }
+.hero-badge { color: var(--accent); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-weight: 500; letter-spacing: .02em; }
+
+@media (max-width: 640px) {
+    .section > .block-head { flex-wrap: wrap; }
+}
+
+
+/* ==========================================================================
+   Bottom dock, network-graph hero, Ubuntu terminal and coding animations
+   ========================================================================== */
+
+/* ---------- Slim top bar: brand + contact (navigation moved to the dock) ---------- */
+.nav-end { margin-inline-start: auto; }
+.main { padding-bottom: 104px; }
+
+/* ---------- Dock ---------- */
+.dock {
+    position: fixed; z-index: 75; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline: 0; margin-inline: auto; width: max-content; max-width: calc(100% - 24px);
+    display: flex; align-items: center; gap: 6px; padding: 8px; border-radius: 26px;
+    background: var(--nav-bg); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid var(--line-strong); box-shadow: 0 18px 50px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+:root[data-theme="light"] .dock { box-shadow: 0 14px 40px rgba(10, 10, 11, .16), inset 0 1px 0 rgba(255, 255, 255, .8); }
+.dock-item, .dock .icon-btn {
+    position: relative; width: 48px; height: 48px; min-width: 48px; display: grid; place-items: center; border-radius: 16px; border: 0; background: transparent;
+    color: var(--muted); text-decoration: none; transition: transform .22s cubic-bezier(.3, 1.6, .5, 1), background .2s, color .2s;
+}
+.dock .icon-btn { padding: 0; }
+.dock .icon-btn--text span { display: none; }
+.dock-item svg, .dock .icon-btn svg { width: 24px; height: 24px; }
+.dock-item:hover, .dock .icon-btn:hover { transform: translateY(-6px) scale(1.18); background: var(--soft); color: var(--strong); }
+.dock-item.is-active { background: var(--accent-soft); color: var(--accent); }
+.dock-item.is-active::after { content: ""; position: absolute; bottom: 3px; width: 16px; height: 3px; border-radius: 3px; background: var(--accent); }
+.dock-item::before {
+    content: attr(data-label); position: absolute; bottom: calc(100% + 12px); padding: 4px 12px; border-radius: 10px; background: var(--strong); color: var(--on-strong);
+    font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity .15s, transform .15s;
+}
+.dock-item:hover::before, .dock-item:focus-visible::before { opacity: 1; transform: none; }
+.dock-sep { width: 1px; height: 30px; margin-inline: 4px; background: var(--line-strong); }
+.chat-fab { bottom: calc(96px + env(safe-area-inset-bottom)); }
+.chat-tip { bottom: calc(170px + env(safe-area-inset-bottom)); }
+
+/* ---------- Network-graph hero ---------- */
+.net-hero { display: grid; justify-items: center; gap: 8px; text-align: center; }
+.net-text { display: grid; justify-items: center; max-width: 720px; }
+.net-title { font-size: clamp(28px, 4.4vw, 50px); font-weight: 800; line-height: 1.5; letter-spacing: -.01em; }
+.net-text p { margin: 12px 0 22px; color: var(--muted); font-size: clamp(16px, 1.6vw, 18.5px); }
+.net-wrap { width: 100%; border-radius: 28px; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); padding: 8px 8px 14px; overflow-x: auto;
+    background-image: radial-gradient(var(--line-strong) 1px, transparent 1.2px); background-size: 26px 26px; }
+.net { display: block; width: 100%; min-width: 620px; height: auto; }
+.net a { cursor: pointer; outline: none; }
+.edge { stroke: var(--line-strong); stroke-width: 1.6; stroke-dasharray: 5 7; animation: edge-flow 2.4s linear infinite; }
+.edge--leaf { stroke-width: 1.2; opacity: .8; }
+@keyframes edge-flow { to { stroke-dashoffset: -24; } }
+.gnode { animation: gfloat 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; transition: transform .2s; }
+@keyframes gfloat { 50% { transform: translateY(-5px); } }
+.gnode--core .core-dot { fill: var(--strong); }
+.gnode--core .core-ring { fill: none; stroke: var(--accent); stroke-width: 2; opacity: .5; animation: core-pulse 2.8s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes core-pulse { from { transform: scale(.78); opacity: .7; } to { transform: scale(1.15); opacity: 0; } }
+.core-label { fill: var(--on-strong); font: 800 15px var(--font); }
+.gnode--hub rect { fill: var(--card); stroke: var(--line-strong); stroke-width: 1.5; transition: fill .2s, stroke .2s; }
+.gnode--hub text { fill: var(--ink); font: 700 15px var(--font); }
+.gnode--leaf circle { fill: var(--accent); transition: r .2s; }
+.leaf-text { fill: var(--muted); font: 500 12.5px var(--font); direction: ltr; unicode-bidi: plaintext; }
+.net a:hover .gnode--hub rect, .net a:focus-visible .gnode--hub rect { fill: var(--accent); stroke: var(--accent); }
+.net a:hover .gnode--hub text, .net a:focus-visible .gnode--hub text { fill: #fff; }
+.net a:hover .gnode--leaf circle, .net a:focus-visible .gnode--leaf circle { r: 10; }
+.net a:hover .leaf-text, .net a:focus-visible .leaf-text { fill: var(--accent); font-weight: 700; }
+.net-hint { margin-top: 6px; font-size: 13.5px; color: var(--muted-2); }
+
+/* ---------- Ubuntu terminal ---------- */
+.ubuntu { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .1); box-shadow: 0 24px 60px rgba(48, 10, 36, .35); background: #300a24; }
+.ut-bar { display: flex; align-items: center; justify-content: center; position: relative; padding: 9px 14px; background: linear-gradient(#4a4540, #2c2a27); color: #dfdbd2; font: 500 13px "Ubuntu", system-ui, sans-serif; direction: ltr; }
+.ut-btns { position: absolute; inset-inline-end: 12px; display: flex; gap: 8px; }
+.ut-btns i { width: 14px; height: 14px; border-radius: 50%; background: #5c5853; }
+.ut-btns i:last-child { background: #e95420; }
+.ut-body { height: 400px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 16px 20px; color: #fff; font: 400 14.5px/1.8 "Ubuntu Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; text-align: left; overflow-x: auto; }
+.ut-prompt b { color: #8ae234; font-weight: 700; }
+.ut-prompt i { color: #729fcf; font-style: normal; font-weight: 700; }
+.ut-out { color: #eeeeec; padding-inline-start: 2px; margin-bottom: 4px; white-space: pre-wrap; font-family: "Vazirmatn", "Ubuntu Mono", ui-monospace, monospace; font-size: 14px; }
+.ut-ad { color: #fcaf3e; font-weight: 700; }
+.ut-caret { display: inline-block; width: 9px; height: 1.1em; vertical-align: text-bottom; background: #fff; animation: blink 1s steps(1) infinite; }
+
+/* ---------- Install-progress animation ---------- */
+.prog { display: grid; gap: 8px; align-content: start; }
+.prog-row { display: grid; grid-template-columns: 96px 1fr 38px; gap: 12px; align-items: center; color: #a1a1aa; font-size: 13px; }
+.prog-bar { height: 8px; border-radius: 8px; background: rgba(255, 255, 255, .1); overflow: hidden; }
+.prog-bar span { display: block; height: 100%; border-radius: 8px; background: linear-gradient(90deg, #22d3ee, #34d399); transition: width .09s linear; }
+.prog-pct { text-align: end; color: #f4f4f5; }
+
+@media (max-width: 640px) {
+    .dock { gap: 2px; padding: 6px; border-radius: 22px; }
+    .dock-item, .dock .icon-btn { width: 40px; height: 40px; min-width: 40px; border-radius: 13px; }
+    .dock-item svg, .dock .icon-btn svg { width: 21px; height: 21px; }
+    .dock-item::before { display: none; }
+    .ut-body { height: 440px; font-size: 13px; padding: 14px; }
+    .nav-cta { padding-inline: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .edge, .gnode, .core-ring { animation: none !important; }
+}
+
+/* Phones get a portrait graph with the section hubs only; wider screens get the full map. */
+.net--tall { display: none; min-width: 0; max-width: 460px; margin-inline: auto; }
+@media (max-width: 700px) {
+    .net--wide { display: none; }
+    .net--tall { display: block; }
+    .net-wrap { overflow-x: visible; padding-bottom: 10px; }
+    .gnode--hub text { font-size: 17px; }
+    .core-label { font-size: 16px; }
+}
+
+@media (max-width: 380px) {
+    .dock { gap: 1px; padding: 5px; }
+    .dock-item, .dock .icon-btn { width: 34px; height: 34px; min-width: 34px; border-radius: 11px; }
+    .dock-item svg, .dock .icon-btn svg { width: 19px; height: 19px; }
+    .dock-sep { display: none; }
 }
