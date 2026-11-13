@@ -4,12 +4,13 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Fragment, useEffect, useState} from "react";
 import type {ReactNode} from "react";
-import {getBrand} from "@/data/localized";
+import {getBrand, getProjects, getServices} from "@/data/localized";
 import {localePath, parsePath} from "@/lib/locale";
 import Footer from "./Footer";
-import Dock from "./Dock";
-import {ChevronIcon, Logo, PhoneIcon} from "./Icons";
+import {ChevronIcon, Logo, MenuIcon, PhoneIcon} from "./Icons";
+import LanguageSwitch from "./LanguageSwitch";
 import {useLocale} from "./LocaleProvider";
+import ThemeToggle from "./ThemeToggle";
 
 /* `spy` lists the home-page sections that highlight this item while they are on screen. */
 const NAV = [
@@ -60,29 +61,97 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
 
     const label = (key: (typeof NAV)[number]["key"]) => (key === "home" ? t.homeLabel : t.nav[key]);
 
-    const dockItems = NAV.map(({key, href, path, spy}) => ({
+    const [open, setOpen] = useState(false);
+    const [sub, setSub] = useState("");
+    const services = getServices(locale).map((x) => ({label: x.title, href: `/services/${x.slug}/`}));
+    const projects = getProjects(locale).map((x) => ({label: x.title, href: `/projects/${x.slug}/`}));
+    const children_: Record<string, {label: string; href: string}[]> = {services, projects};
+
+    const items = NAV.map(({key, href, path, spy}) => ({
         key,
         label: label(key),
-        href: localePath(locale, href),
+        href,
         active: isHome ? (spy as readonly string[]).includes(section) : path(currentPath),
-        // Same-page links don't change the route, so select the item right away.
-        onClick: () => {
-            if (isHome && href.startsWith("/#")) setSection(href.slice(2));
-            if (isHome && href === "/") setSection("");
-        },
+        sub: children_[key] ?? [],
     }));
+
+    // Close the mobile panel when the page changes, the chat opens, the screen grows or Escape is pressed.
+    useEffect(() => { setOpen(false); setSub(""); }, [pathname]);
+    useEffect(() => {
+        const close = () => setOpen(false);
+        const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+        const onResize = () => { if (window.innerWidth > 980) setOpen(false); };
+        window.addEventListener("webino:open-chat", close);
+        window.addEventListener("keydown", onKey);
+        window.addEventListener("resize", onResize);
+        window.addEventListener("pagehide", close);
+        return () => {
+            window.removeEventListener("webino:open-chat", close);
+            window.removeEventListener("keydown", onKey);
+            window.removeEventListener("resize", onResize);
+            window.removeEventListener("pagehide", close);
+        };
+    }, []);
+    useEffect(() => {
+        document.documentElement.classList.toggle("nav-open", open);
+        return () => document.documentElement.classList.remove("nav-open");
+    }, [open]);
+
+    const go = (key: string, href: string) => {
+        if (isHome && href.startsWith("/#")) setSection(href.slice(2));
+        if (isHome && href === "/") setSection("");
+        setOpen(false);
+        void key;
+    };
 
     return (
         <>
-            <header className="navbar">
-                <Link className="brand" href={localePath(locale, "/")} aria-label={`${brand.name}, ${t.brandHome}`}>
-                    <span className="brand-mark"><Logo/></span><span>{brand.name}</span>
-                </Link>
-                <div className="nav-end">
-                    <Link className="btn nav-cta" href={localePath(locale, "/#contact")}><PhoneIcon/>{t.contactUs}</Link>
+            <header className="topbar">
+                <div className="topbar-in">
+                    <Link className="brand" href={localePath(locale, "/")} aria-label={`${brand.name}, ${t.brandHome}`}>
+                        <span className="brand-mark"><Logo/></span><span>{brand.name}</span>
+                    </Link>
+                    <nav className="top-links" aria-label={t.mainNav}>
+                        {items.map((it) => (
+                            <div key={it.key} className={`top-item${it.sub.length ? " has-sub" : ""}`}>
+                                <Link className={`top-link${it.active ? " is-active" : ""}`} href={localePath(locale, it.href)} aria-current={it.active ? "page" : undefined} onClick={() => go(it.key, it.href)}>
+                                    {it.label}{it.sub.length > 0 && <ChevronIcon/>}
+                                </Link>
+                                {it.sub.length > 0 && (
+                                    <ul className="top-sub">
+                                        {it.sub.map((s) => <li key={s.href}><Link href={localePath(locale, s.href)} onClick={() => setOpen(false)}>{s.label}</Link></li>)}
+                                    </ul>
+                                )}
+                            </div>
+                        ))}
+                    </nav>
+                    <div className="top-end">
+                        <LanguageSwitch/>
+                        <ThemeToggle/>
+                        <Link className="btn top-cta" href={localePath(locale, "/#contact")}><PhoneIcon/>{t.contactUs}</Link>
+                        <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? t.closeMenu : t.openMenu} onClick={() => setOpen((v) => !v)}><MenuIcon/></button>
+                    </div>
                 </div>
+                <nav id="mobile-nav" className={`m-panel${open ? " is-open" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
+                    {items.map((it) => (
+                        <div key={it.key} className="m-item">
+                            <div className="m-row">
+                                <Link className={`m-link${it.active ? " is-active" : ""}`} href={localePath(locale, it.href)} onClick={() => go(it.key, it.href)}>{it.label}</Link>
+                                {it.sub.length > 0 && (
+                                    <button type="button" className="m-exp" aria-expanded={sub === it.key} aria-label={it.label} onClick={() => setSub(sub === it.key ? "" : it.key)}><ChevronIcon/></button>
+                                )}
+                            </div>
+                            {it.sub.length > 0 && sub === it.key && (
+                                <ul className="m-sub">
+                                    {it.sub.map((s) => <li key={s.href}><Link href={localePath(locale, s.href)} onClick={() => setOpen(false)}>{s.label}</Link></li>)}
+                                </ul>
+                            )}
+                        </div>
+                    ))}
+                    <Link className="btn btn--lg m-cta" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>
+                </nav>
             </header>
-            <Dock items={dockItems} label={t.mainNav}/>
+            <div className={`scrim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true"/>
 
             <div className="main">
                 <main className="content" id="main-content">

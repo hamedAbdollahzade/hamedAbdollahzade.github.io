@@ -98,6 +98,7 @@ export default function NetworkHero() {
     const hint = locale === "fa" ? "نقشه‌ی سایت؛ روی هر گره بزنید تا وارد همان بخش شوید." : "Site map: click any node to open that section.";
     const mapLabel = locale === "fa" ? "گراف شبکه‌ای بخش‌های سایت" : "Network graph of the site sections";
 
+    const href = (h: string) => localePath(locale, h);
     const go = (href: string) => (e: MouseEvent<Element>) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
         e.preventDefault();
@@ -110,7 +111,11 @@ export default function NetworkHero() {
                 <span className="hero-badge">{slide.badge}</span>
                 <h1 className="net-title" id="hero-title">{slide.title}</h1>
                 <p>{slide.text}</p>
-                <div className="btn-row"><OpenChat className="btn btn--lg" topic={slide.cta.chatTopic}>{slide.cta.label}</OpenChat></div>
+                <ul className="hero-points">{t.home.heroPoints.map((x: string) => <li key={x}>{x}</li>)}</ul>
+                <div className="btn-row">
+                    <OpenChat className="btn btn--lg" topic={slide.cta.chatTopic}>{slide.cta.label}</OpenChat>
+                    <a className="btn btn--lg btn--ghost" href={href("/#services")} onClick={go("/#services")}>{t.nav.services}</a>
+                </div>
             </div>
             <div className="net-wrap">
                 {([[WIDE, false, "net net--wide"], [TALL, true, "net net--tall"]] as const).map(([L, compact, cls]) => (

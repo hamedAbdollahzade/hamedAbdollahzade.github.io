@@ -48,6 +48,7 @@ const fa = {
     tech: {label: "فناوری‌هایی که با آن‌ها کار می‌کنیم"},
     intro: {label: (name: string) => `در حال بارگذاری ${name}`, skip: "رد کردن"},
     home: {
+        heroPoints: ["طراحی و توسعه وب، اپلیکیشن و ابزارهای هوش مصنوعی", "تحویل مرحله‌به‌مرحله و شفاف با پشتیبانی بعد از راه‌اندازی", "مشاوره‌ی رایگان از طریق واتساپ"],
         servicesTitle: "هوش مصنوعی و توسعه‌ی نرم‌افزار، از ایده تا اجرا",
         servicesDesc: "هر ایده‌ای که دارید را با هوش مصنوعی هوشمندتر و سریع‌تر پیاده می‌کنیم.",
         more: "اطلاعات بیشتر", projectsTitle: "نمونه‌کارها", projectsDesc: "پروژه‌های واقعی در حوزه‌ی CRM/ERP، وندینگ و آزمون آنلاین.",
@@ -156,6 +157,7 @@ const en: typeof fa = {
     tech: {label: "Technologies we work with"},
     intro: {label: (name: string) => `Loading ${name}`, skip: "Skip"},
     home: {
+        heroPoints: ["Web, app and AI tool design and development", "Clear step-by-step delivery with support after launch", "Free consultation on WhatsApp"],
         servicesTitle: "AI and software development, from idea to launch",
         servicesDesc: "Whatever your idea is, we build it smarter and faster with AI.",
         more: "Learn more", projectsTitle: "Projects", projectsDesc: "Real projects in CRM/ERP, vending and online exams.",
