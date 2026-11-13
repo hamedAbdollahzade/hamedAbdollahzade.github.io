@@ -12,6 +12,9 @@ export interface ExplorePost {
   aparat?: string;
   /** Up to any number of images; the first one is the tile in the grid. */
   images: {src: string; alt: {fa: string; en: string}}[];
+  /** Contact number for buying. */
+  phone: string;
+  phoneDisplay: string;
   title: {fa: string; en: string};
   /** Caption copied from Aparat. Extend it later. */
   caption: {fa: string; en: string};
@@ -28,6 +31,8 @@ export const EXPLORE_POSTS: ExplorePost[] = [
       {src: "assets/images/explore/aura-vent-2.jpg", alt: {fa: "دستگاه تهویه کراتین Aura Vent، تصویر ۲", en: "Aura Vent keratin ventilation unit, image 2"}},
       {src: "assets/images/explore/aura-vent-3.jpg", alt: {fa: "دستگاه تهویه کراتین Aura Vent، تصویر ۳", en: "Aura Vent keratin ventilation unit, image 3"}},
     ],
+    phone: "+989336341491",
+    phoneDisplay: "۰۹۳۳ ۶۳۴ ۱۴۹۱",
     title: {fa: "دستگاه تهویه کراتین Aura Vent", en: "Aura Vent keratin ventilation unit"},
     caption: {
       fa: "دستگاه تهویه کراتین مخصوص سالن‌های زیبایی",

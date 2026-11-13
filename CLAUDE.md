@@ -6,8 +6,9 @@ Read `AGENTS.md` first (Next.js 16 differs from older versions).
 
 - Every phone number, WhatsApp link, call button and contact form on the site goes to the owner only: use `BRAND` in `data/services.ts` (`phone`, `phoneDisplay`, `whatsapp`) and `waLink()` from `lib/site.ts`. Never hard-code a number.
 - Every GitHub link on the site is the owner's: `https://github.com/hamedAbdollahzade`.
-- Never put another person's phone number, username/ID or GitHub link anywhere on the site (team members, mentors, project authors, explore posts). Show their name only.
-- Team members and their projects may be listed by name; a project built by someone else shows the builder's name on its detail page (`author` in `data/projects.ts`), not in titles or cards.
+- Developers, mentors and project authors: show the name only. Never add their phone number, username/ID or GitHub link.
+- Exception: Explore posts are advertisements and keep the advertiser's own phone number (`phone` in `data/explore.ts`).
+- A project built by another team member shows the builder's name on its detail page (`author` in `data/projects.ts`), not in titles or cards.
 
 ## Workflow
 
