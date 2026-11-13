@@ -807,3 +807,85 @@ html.intro-on body { overflow: hidden; }
 .topbar { background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .band { background: color-mix(in srgb, var(--band) 78%, transparent); box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--band) 78%, transparent); }
 .net-hero .anim-window { width: 100%; }
+
+
+/* ==========================================================================
+   Glass: translucent surfaces with blur over the animated network and soft glows
+   ========================================================================== */
+:root {
+    --glass: rgba(255, 255, 255, .06);
+    --glass-strong: rgba(24, 24, 32, .72);
+    --glass-edge: rgba(255, 255, 255, .16);
+    --glass-shine: inset 0 1px 0 rgba(255, 255, 255, .14);
+    --glass-blur: blur(16px) saturate(150%);
+    --card: var(--glass);
+    --card-2: rgba(255, 255, 255, .07);
+    --line: var(--glass-edge);
+    --shadow: var(--glass-shine), 0 14px 40px rgba(0, 0, 0, .28);
+    --tint-lav: rgba(110, 110, 240, .1); --tint-mint: rgba(52, 201, 163, .09); --tint-peach: rgba(255, 122, 138, .09); --tint-sky: rgba(79, 179, 246, .09);
+    --band: var(--tint-lav);
+    --nav-bg: rgba(14, 14, 20, .55);
+    --panel: rgba(18, 18, 26, .78);
+}
+:root[data-theme="light"] {
+    --glass: rgba(255, 255, 255, .58);
+    --glass-strong: rgba(255, 255, 255, .86);
+    --glass-edge: rgba(255, 255, 255, .85);
+    --glass-shine: inset 0 1px 0 rgba(255, 255, 255, .9);
+    --card: var(--glass);
+    --card-2: rgba(255, 255, 255, .6);
+    --line: rgba(60, 60, 110, .14);
+    --shadow: var(--glass-shine), 0 10px 34px rgba(60, 60, 130, .12);
+    --tint-lav: rgba(110, 110, 240, .1); --tint-mint: rgba(52, 201, 163, .12); --tint-peach: rgba(255, 122, 138, .1); --tint-sky: rgba(79, 179, 246, .12);
+    --nav-bg: rgba(255, 255, 255, .6);
+    --panel: rgba(255, 255, 255, .8);
+}
+
+/* Soft colour glows behind everything so the glass has something to refract */
+body {
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 55% 45% at 12% 8%, rgba(110, 110, 240, .28), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 92% 22%, rgba(255, 122, 138, .18), transparent 70%),
+        radial-gradient(ellipse 60% 50% at 70% 95%, rgba(52, 201, 163, .16), transparent 70%);
+    background-attachment: fixed;
+}
+:root[data-theme="light"] body {
+    background-image:
+        radial-gradient(ellipse 55% 45% at 12% 8%, rgba(110, 110, 240, .22), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 92% 22%, rgba(255, 122, 138, .18), transparent 70%),
+        radial-gradient(ellipse 60% 50% at 70% 95%, rgba(52, 201, 163, .2), transparent 70%);
+}
+
+.card, .crumbs, .tile-card, .project-card, .step, .filter, .post-card, .lessons a, .dev-card, .mentor-card, .skill-card, .timeline-card, .sibling-nav a,
+.faq-item, .contact-card, .site-footer, .xp-block, .strip, .service-art, .prose blockquote, .icon-btn, .btn--ghost, .btn--soft, .tags li, .hero-badge {
+    -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-edge); box-shadow: var(--shadow);
+}
+:root[data-theme="light"] .card, :root[data-theme="light"] .crumbs, :root[data-theme="light"] .tile-card, :root[data-theme="light"] .project-card,
+:root[data-theme="light"] .dev-card, :root[data-theme="light"] .faq-item, :root[data-theme="light"] .site-footer, :root[data-theme="light"] .step { border-color: rgba(255, 255, 255, .9); }
+.section .tile-card, .section .project-card, .section .dev-card, .section .step, .section .faq-item, .band .card { background: var(--glass); box-shadow: var(--shadow); }
+:root[data-theme="light"] .section .tile-card, :root[data-theme="light"] .section .project-card, :root[data-theme="light"] .section .dev-card,
+:root[data-theme="light"] .section .step, :root[data-theme="light"] .section .faq-item { box-shadow: var(--shadow); border-color: rgba(255, 255, 255, .9); }
+.tile-card:hover, .project-card:hover, .dev-card:hover { background: color-mix(in srgb, var(--glass) 100%, white 6%); }
+.btn--ghost, .btn--soft, .icon-btn { background: var(--glass); }
+.btn { box-shadow: var(--glass-shine), 0 6px 18px rgba(91, 91, 214, .35); }
+.btn--ghost, .btn--soft { box-shadow: var(--glass-shine); }
+
+/* Header, menus, chat and code windows */
+.topbar { background: var(--nav-bg); -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%); border-bottom-color: var(--glass-edge); }
+.top-sub { background: var(--glass-strong); -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%); border-color: var(--glass-edge); box-shadow: var(--glass-shine), 0 18px 40px rgba(0, 0, 0, .3); }
+.m-panel { background: var(--glass-strong); -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%); }
+.chat-panel { background: var(--glass-strong); -webkit-backdrop-filter: blur(22px) saturate(160%); backdrop-filter: blur(22px) saturate(160%); border: 1px solid var(--glass-edge); }
+.anim-window, .ubuntu { -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: var(--glass-shine), 0 20px 50px rgba(0, 0, 0, .35); }
+.cta-card { background: linear-gradient(135deg, rgba(110, 110, 240, .78), rgba(139, 92, 246, .7) 55%, rgba(255, 122, 138, .6) 130%); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: var(--glass-shine), 0 20px 50px rgba(91, 91, 214, .3); border: 1px solid rgba(255, 255, 255, .25); }
+.band { background: var(--band); box-shadow: 0 0 0 100vmax var(--band); }
+
+@media (max-width: 700px) {
+    /* Lighter blur on phones keeps scrolling smooth over the moving background */
+    :root { --glass-blur: blur(8px) saturate(140%); }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :root { --glass: rgba(30, 30, 40, .9); }
+    :root[data-theme="light"] { --glass: rgba(255, 255, 255, .92); }
+}
