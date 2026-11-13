@@ -67,4 +67,35 @@ export const PROJECTS_EN: Record<string, ProjectCopy> = {
     linkLabels: ["WikiQ website", "WikiQ app"],
     galleryCaptions: ["App home: pack search and suggested packs", "Creating an online exam and answering questions", "Taking an online exam with a timer", "Exam result and score per course", "Detailed exam answer key", "Field and category list"],
   },
+  "university-student-portal": {
+    title: "Student portal (portfolio piece by Mohammad Ghorbani)",
+    description: "A demo of a university portal with role-based sign-in for a student, a training clerk and an admin. The interface is fully right-to-left and Persian, and the demo data stays in the browser only. Built by Mohammad Ghorbani, a developer of the Webino-Dev team.",
+    learned: [
+      "Designing sign-in and registration flows for several user roles",
+      "A right-to-left interface with light and dark themes",
+      "A server-free demo: data never leaves the browser",
+    ],
+    linkLabels: ["Open the demo"],
+  },
+  "personal-portfolio": {
+    title: "Bilingual personal portfolio (piece by Mohammad Ghorbani)",
+    description: "A demo resume website for a frontend developer with an animated background, a projects section, a career timeline, skills and contact, plus a Persian/English switch. The content is fictional and made only to show the work. Built by Mohammad Ghorbani.",
+    learned: [
+      "An animated background and a glass-style interface",
+      "A Persian and English language switch",
+      "Resume structure: projects, journey, skills and contact",
+    ],
+    linkLabels: ["Open the demo"],
+  },
+  "tasksnap": {
+    title: "TaskSnap: an Android planner (piece by Mohammad Ghorbani)",
+    description: "An Android planner for capturing tasks and ideas quickly, setting reminders and following the daily plan. Tasks can be open, partial or completed, and the Persian and English interfaces support the Solar Hijri and Gregorian calendars. Built by Mohammad Ghorbani; version 0.9.1 was submitted to Myket and Cafe Bazaar for review.",
+    learned: [
+      "A Flutter interface with on-device storage in SQLite",
+      "Reminders and the device calendar through Kotlin",
+      "Portable backups with photos and audio, and duplicate-safe restore",
+    ],
+    linkLabels: ["Read the case study on GitHub"],
+    galleryCaptions: ["Today view with progress and three task states", "Ideas", "Progress insights"],
+  },
 };

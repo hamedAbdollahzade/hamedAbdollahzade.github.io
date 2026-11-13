@@ -1,8 +1,8 @@
-import Image from "next/image";
 import {notFound} from "next/navigation";
 import CodeWindow from "@/components/animations/CodeWindow";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
+import Avatar from "@/components/Avatar";
 import Shell from "@/components/Shell";
 import {getDevelopers} from "@/data/localized";
 import {localePath} from "@/lib/locale";
@@ -33,7 +33,7 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
                     {"@type": "ProfilePage", "@id": `${url}#page`, url, inLanguage: locale, mainEntity: {"@id": `${SITE}/#person`}},
                     {
                         "@type": "Person", "@id": `${SITE}/#person`, name: d.name, alternateName: d.nameEn, jobTitle: "Frontend Developer",
-                        image: `${SITE}/${d.photo}`, url, description: d.bio, knowsAbout: d.skills, worksFor: {"@id": `${SITE}/#org`}, sameAs: d.links.map((l) => l.url),
+                        image: d.photo ? `${SITE}/${d.photo}` : undefined, url, description: d.bio, knowsAbout: d.skills, worksFor: {"@id": `${SITE}/#org`}, sameAs: d.links.map((l) => l.url),
                     },
                     {"@type": "BreadcrumbList", itemListElement: [
                         {"@type": "ListItem", position: 1, name: "Webino-Dev", item: `${SITE}${localePath(locale, "/")}`},
@@ -44,7 +44,7 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
             }}/>
             <div className="profile">
                 <aside className="card profile-side">
-                    <Image className="avatar" src={`/${d.photo}`} alt={d.name} width={128} height={128} priority/>
+                    <Avatar name={d.name} photo={d.photo} size={128} priority/>
                     <h1 className="block-title" style={{fontSize: 24}}>{d.name}</h1>
                     <div className="dev-role">{d.role}</div>
                     <ul className="tags" style={{justifyContent: "center"}}>{d.skills.map((s) => <li key={s}>{s}</li>)}</ul>

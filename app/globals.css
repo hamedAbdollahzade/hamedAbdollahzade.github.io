@@ -831,3 +831,5 @@ html.intro-on body { overflow: hidden; }
 .section .tile-card:hover, .section .project-card:hover, .section .dev-card:hover { border-color: var(--brand); }
 ::selection { background: var(--brand); color: #fff; }
 :focus-visible { outline-color: var(--brand); }
+
+.avatar--letter { display: inline-grid; place-items: center; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--brand), var(--lilac)); border-color: var(--accent-soft); }

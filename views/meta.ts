@@ -31,13 +31,13 @@ export function developerMeta(locale: Locale, slug: string): Metadata {
     const d = getDevelopers(locale).find((x) => x.slug === slug);
     if (!d) return {};
     return pageMeta({
-        title: `${d.name} (${d.nameEn}) | ${d.role} | Webino-Dev`,
+        title: `${d.name === d.nameEn ? d.name : `${d.name} (${d.nameEn})`} | ${d.role} | Webino-Dev`,
         description: summarize(d.bio),
         path: `/developers/${slug}/`,
         locale,
         translated: true,
         type: "profile",
-        image: `${SITE}/${d.photo}`,
+        image: d.photo ? `${SITE}/${d.photo}` : undefined,
         keywords: [d.name, d.nameEn, ...d.skills],
     });
 }

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import Avatar from "@/components/Avatar";
 import Shell from "@/components/Shell";
 import {getDevelopers} from "@/data/localized";
 import {localePath} from "@/lib/locale";
@@ -33,7 +33,7 @@ export default function DevelopersView({locale}: {locale: Locale}) {
                 {getDevelopers(locale).map((d) => (
                     <Link className="dev-card" href={localePath(locale, `/developers/${d.slug}/`)} key={d.slug}>
                         <div className="dev-top">
-                            <Image className="avatar" src={`/${d.photo}`} alt={d.name} width={72} height={72}/>
+                            <Avatar name={d.name} photo={d.photo} size={72}/>
                             <div><h2 style={{fontSize: 20, fontWeight: 800}}>{d.name}</h2><div className="dev-role">{d.role}</div></div>
                         </div>
                         <p>{summarize(d.bio, 160)}</p>

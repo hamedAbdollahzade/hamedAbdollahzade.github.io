@@ -6,6 +6,7 @@ import NetworkHero from "@/components/NetworkHero";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
+import Avatar from "@/components/Avatar";
 import Shell from "@/components/Shell";
 import UbuntuTerminal from "@/components/UbuntuTerminal";
 import TechStrip from "@/components/TechStrip";
@@ -221,7 +222,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                     {getDevelopers(locale).map((d) => (
                         <Link className="dev-card" href={to(`/developers/${d.slug}/`)} key={d.slug}>
                             <div className="dev-top">
-                                <Image className="avatar" src={`/${d.photo}`} alt={d.name} width={72} height={72}/>
+                                <Avatar name={d.name} photo={d.photo} size={72}/>
                                 <div><h3>{d.name}</h3><div className="dev-role">{d.role}</div></div>
                             </div>
                             <p>{summarize(d.bio, 150)}</p>

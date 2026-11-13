@@ -8,7 +8,7 @@ export interface Developer {
     name: string;
     nameEn: string;
     role: string;
-    photo: string;
+    photo?: string;
     bio: string;
     skills: string[];
     links: {label: string; url: string}[];
@@ -47,6 +47,19 @@ export const DEVELOPERS: Developer[] = [
                 url: "https://github.com/etg-dev",
                 linkLabel: "GitHub: etg-dev",
             },
+        ],
+    },
+    {
+        slug: "mohammad-ghorbani",
+        name: "محمد قربانی",
+        nameEn: "Mohammad Ghorbani",
+        role: "توسعه‌دهنده فرانت‌اند و اپلیکیشن",
+        bio: "توسعه‌دهنده‌ای که از رابط‌های وب راست‌به‌چپ تا اپلیکیشن اندروید می‌سازد. پورتال دانشجویی و پورتفولیوی دوزبانه را به‌صورت دمو ساخته و اپلیکیشن برنامه‌ریز TaskSnap را با Flutter و Kotlin توسعه داده است؛ نسخه‌ی ۰٫۹٫۱ آن برای بررسی در مایکت و کافه‌بازار ارسال شده.",
+        skills: ["Frontend", "Flutter", "Kotlin", "SQLite", "RTL UI"],
+        links: [
+            {label: "GitHub", url: "https://github.com/MohammadGhorbani-dev"},
+            {label: "TaskSnap", url: "https://github.com/MohammadGhorbani-dev/TaskSnap-showcase"},
+            {label: "Portfolio demo", url: "https://portfolio-demo.mohammadghorbani-dev.ir/"},
         ],
     },
 ];
