@@ -685,8 +685,8 @@ html.intro-on body { overflow: hidden; }
 .top-link:hover, .top-item:focus-within > .top-link { color: var(--strong); background: var(--soft); }
 .top-link.is-active { color: var(--strong); font-weight: 700; box-shadow: inset 0 -2px 0 var(--strong); border-radius: 10px 10px 0 0; }
 .top-sub { position: absolute; top: 100%; inset-inline-start: 0; min-width: 230px; padding: 8px; border-radius: 16px; background: var(--card); border: 1px solid var(--line-strong); box-shadow: 0 18px 40px rgba(10, 10, 11, .14);
-    display: grid; gap: 2px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .18s, transform .18s, visibility .18s; }
-.top-item:hover > .top-sub, .top-item:focus-within > .top-sub { opacity: 1; visibility: visible; transform: none; }
+    display: grid; gap: 2px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .18s .12s, transform .18s .12s, visibility 0s .3s; }
+.top-item:hover > .top-sub, .top-item:focus-within > .top-sub { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
 .top-sub a { display: block; padding: 9px 12px; border-radius: 10px; text-decoration: none; font-size: 14.5px; color: var(--ink-soft); }
 .top-sub a:hover { background: var(--soft); color: var(--strong); }
 .top-end { display: flex; align-items: center; gap: 8px; margin-inline-start: 0; }
@@ -803,7 +803,7 @@ html.intro-on body { overflow: hidden; }
 
 /* Full-page animated network behind everything */
 .net-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-.topbar, .main { position: relative; z-index: 1; }
+.main { position: relative; z-index: 1; }
 .topbar { background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .band { background: color-mix(in srgb, var(--band) 78%, transparent); box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--band) 78%, transparent); }
 .net-hero .anim-window { width: 100%; }
