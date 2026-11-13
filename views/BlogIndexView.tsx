@@ -1,5 +1,5 @@
 import Link from "next/link";
-import TerminalWindow from "@/components/animations/TerminalWindow";
+import CodeWindow from "@/components/animations/CodeWindow";
 import JsonLd from "@/components/JsonLd";
 import Shell from "@/components/Shell";
 import {getCourseCopy, getCourses} from "@/data/localized";
@@ -9,11 +9,14 @@ import type {Locale} from "@/lib/locale";
 import {SITE} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
-const TERMINAL = [
-    {kind: "cmd", text: "npm create learning-path"},
-    {kind: "out", text: "✓ HTML · CSS · JavaScript"},
-    {kind: "out", text: "✓ Frontend roadmap · Linux · AI coding"},
-] as const;
+const LEARN_CODE = [
+    "const path = [",
+    '  "HTML", "CSS", "JavaScript",',
+    '  "React", "Linux", "AI coding",',
+    "];",
+    "",
+    "path.forEach(learn); // step by step",
+]
 
 /** The tutorials index in the given language (lessons themselves are in Persian). */
 export default function BlogIndexView({locale}: {locale: Locale}) {
@@ -48,7 +51,7 @@ export default function BlogIndexView({locale}: {locale: Locale}) {
                         ))}
                     </div>
                 </div>
-                <TerminalWindow title="~/learn" steps={[...TERMINAL]} label={t.home.terminalLabel}/>
+                <CodeWindow file="learn.ts" lines={LEARN_CODE} label={t.home.codeLabel}/>
             </div>
             {sections.map(({course, copy, posts: list}) => (
                 <section className="section" id={course.slug} key={course.slug} aria-labelledby={`${course.slug}-title`}>

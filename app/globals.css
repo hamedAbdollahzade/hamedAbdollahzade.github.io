@@ -433,9 +433,9 @@ html.intro-on body { overflow: hidden; }
 .anim-bar span { margin-inline-start: 10px; font: 500 12.5px ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; color: #a1a1aa; }
 .anim-code { margin: 0; padding: 16px 18px; min-height: 190px; font: 400 14px/1.85 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; text-align: left; overflow: hidden; white-space: pre-wrap; }
 .code-line { display: inline; }
-.tok-kw { color: #ffffff; font-weight: 700; }
-.tok-str { color: #b4b4bc; }
-.tok-num { color: #d4d4d8; }
+.tok-kw { color: #ff8fa0; font-weight: 700; }
+.tok-str { color: #6fe3c1; }
+.tok-num { color: #ffcb6b; }
 .tok-com { color: #71717a; font-style: italic; }
 .caret { display: inline-block; width: 8px; height: 1.1em; margin-inline-start: 2px; vertical-align: text-bottom; background: #f4f4f5; animation: blink 1s steps(1) infinite; }
 .term-prompt { color: #71717a; }
@@ -619,12 +619,6 @@ html.intro-on body { overflow: hidden; }
 .ut-ad { color: #fcaf3e; font-weight: 700; }
 .ut-caret { display: inline-block; width: 9px; height: 1.1em; vertical-align: text-bottom; background: #fff; animation: blink 1s steps(1) infinite; }
 
-/* ---------- Install-progress animation ---------- */
-.prog { display: grid; gap: 8px; align-content: start; }
-.prog-row { display: grid; grid-template-columns: 96px 1fr 38px; gap: 12px; align-items: center; color: #a1a1aa; font-size: 13px; }
-.prog-bar { height: 8px; border-radius: 8px; background: rgba(255, 255, 255, .1); overflow: hidden; }
-.prog-bar span { display: block; height: 100%; border-radius: 8px; background: linear-gradient(90deg, #22d3ee, #34d399); transition: width .09s linear; }
-.prog-pct { text-align: end; color: #f4f4f5; }
 
 @media (max-width: 640px) {
         .ut-body { height: 440px; font-size: 13px; padding: 14px; }

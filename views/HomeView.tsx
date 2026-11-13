@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CodeWindow from "@/components/animations/CodeWindow";
-import ProgressWindow from "@/components/animations/ProgressWindow";
 import Pipeline from "@/components/animations/Pipeline";
-import TerminalWindow from "@/components/animations/TerminalWindow";
 import NetworkHero from "@/components/NetworkHero";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
@@ -29,14 +27,6 @@ const CODE_LINES = [
     "product.launch(); // from idea to production",
 ];
 
-const TERMINAL_STEPS = [
-    {kind: "cmd", text: "npm run build"},
-    {kind: "out", text: "✓ Compiled successfully"},
-    {kind: "out", text: "✓ Pages generated"},
-    {kind: "cmd", text: "git push origin main"},
-    {kind: "out", text: "✓ Deployed to webino-dev.ir"},
-] as const;
-
 const REACT_LINES = [
     'export function Button({ label }) {',
     "  const [n, setN] = useState(0);",
@@ -59,14 +49,30 @@ const CSS_LINES = [
     "}",
 ];
 
-const GIT_STEPS = [
-    {kind: "cmd", text: "git checkout -b feature/ai-chat"},
-    {kind: "out", text: "Switched to a new branch"},
-    {kind: "cmd", text: "git commit -m \"Add AI chat\""},
-    {kind: "out", text: "[feature/ai-chat 3f2a1c9] Add AI chat"},
-    {kind: "cmd", text: "git push -u origin feature/ai-chat"},
-    {kind: "out", text: "✓ Pull request ready"},
-] as const;
+const AI_LINES = [
+    "async function ask(prompt) {",
+    '  const res = await fetch("/api/ai", {',
+    '    method: "POST",',
+    "    body: JSON.stringify({ prompt }),",
+    "  });",
+    "  return res.json();",
+    "}",
+];
+
+const API_LINES = [
+    "app.get(\"/api/orders\", async (req, res) => {",
+    "  const rows = await db.orders.find();",
+    "  res.json({ ok: true, rows });",
+    "});",
+];
+
+const HTML_LINES = [
+    "<section class=\"hero\">",
+    "  <h1>Webino-Dev</h1>",
+    "  <p>Ideas into products</p>",
+    "  <button>Start</button>",
+    "</section>",
+];
 
 function graph(locale: Locale) {
     const brand = getBrand(locale);
@@ -137,11 +143,11 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
                 <div className="showcase">
                     <CodeWindow file="idea.ts" lines={CODE_LINES} label={t.home.codeLabel}/>
-                    <TerminalWindow title="~/webino-dev" steps={[...TERMINAL_STEPS]} label={t.home.terminalLabel}/>
+                    <CodeWindow file="ai.ts" lines={AI_LINES} label={t.home.codeLabel}/>
                     <CodeWindow file="Button.tsx" lines={REACT_LINES} label={t.home.codeLabel}/>
-                    <TerminalWindow title="git — main" steps={[...GIT_STEPS]} label={t.home.terminalLabel}/>
+                    <CodeWindow file="server.js" lines={API_LINES} label={t.home.codeLabel}/>
                     <CodeWindow file="theme.css" lines={CSS_LINES} label={t.home.codeLabel}/>
-                    <ProgressWindow title="npm install" tasks={["react", "next", "typescript", "tailwindcss", "docker"]} label={t.home.terminalLabel}/>
+                    <CodeWindow file="index.html" lines={HTML_LINES} label={t.home.codeLabel}/>
                 </div>
                 <Pipeline/>
             </section>

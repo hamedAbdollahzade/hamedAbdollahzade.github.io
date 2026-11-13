@@ -5,7 +5,7 @@ import {useReducedMotion} from "./useReducedMotion";
 
 const KEYWORDS = /\b(import|export|from|const|let|return|await|async|function|if|else|new|true|false|null)\b/g;
 
-/** Wraps keywords, strings, comments and numbers of one code line in colour spans (monochrome shades). */
+/** Wraps keywords, strings, comments and numbers of one code line in colour spans (pastel colours). */
 function highlight(line: string) {
     const parts: {text: string; cls: string}[] = [];
     const commentAt = line.indexOf("//");
