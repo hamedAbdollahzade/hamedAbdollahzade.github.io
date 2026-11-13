@@ -40,7 +40,6 @@ export const PROJECTS: Project[] = [
     tech: ["React", "Next.js", "PWA", "REST API", "WebSocket", "ESP32", "Orange Pi"],
     links: [{label: "وب‌سایت ربات مارکت", url: "https://my-rm.com/"}],
     img: "assets/images/robot-market.webp",
-    // Add real screenshots here: {src: "assets/images/filename.png", caption: "شرح تصویر"}.
     images: [{src: "assets/images/robot-market.webp", caption: "نمای پنل مدیریت ربات مارکت"}],
   },
   {
