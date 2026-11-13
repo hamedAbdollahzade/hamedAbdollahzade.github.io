@@ -43,6 +43,7 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
             }}/>
             <div className="card">
                 <h1 className="page-title">{p.title}</h1>
+                {p.author && <p className="page-lead" style={{marginTop: 8}}>{t.project.by} <strong>{p.author[locale]}</strong></p>}
                 <ul className="tags" style={{marginTop: 14}}>{p.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
             </div>
             <div className="card page-card">
@@ -69,7 +70,7 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                         </div>
                     </>
                 )}
-                <h2>{t.project.myPart}</h2>
+                <h2>{p.author ? t.project.about : t.project.myPart}</h2>
                 <ul className="list">{p.learned.map((l) => <li key={l}>{l}</li>)}</ul>
                 <div className="btn-row" style={{marginTop: 24}}>
                     {p.links.map((l) => <a className="btn" key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">{l.label}</a>)}

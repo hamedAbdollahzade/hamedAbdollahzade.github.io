@@ -424,7 +424,6 @@ html.intro-on body { overflow: hidden; }
 .icon-btn--text { padding-inline: 12px; }
 
 /* ---------- Animated visuals (GIF-style, built from real text and SVG) ---------- */
-.showcase { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .anim-window { margin: 0; border-radius: 18px; overflow: hidden; background: #0b0b0d; border: 1px solid rgba(255, 255, 255, .1); box-shadow: 0 20px 50px rgba(0, 0, 0, .35); color: #e4e4e7; }
 .anim-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #17171a; border-bottom: 1px solid rgba(255, 255, 255, .08); direction: ltr; }
 .anim-bar i { width: 11px; height: 11px; border-radius: 50%; background: #3f3f46; }
@@ -489,7 +488,6 @@ html.intro-on body { overflow: hidden; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
-    .showcase { grid-template-columns: minmax(0, 1fr); }
     .service-hero { grid-template-columns: minmax(0, 1fr); }
     .footer-cols { grid-template-columns: repeat(2, 1fr); }
     .profile { grid-template-columns: minmax(0, 1fr); }

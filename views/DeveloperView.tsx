@@ -72,11 +72,11 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
                             </div>
                             <div className="grid grid--cards">
                                 {d.mentors.map((m) => (
-                                    <article className="mentor-card" key={m.url}>
+                                    <article className="mentor-card" key={m.name}>
                                         <h3>{m.name}</h3>
                                         <div className="dev-role">{m.role}</div>
                                         <p>{m.text}</p>
-                                        <a className="link-more" href={m.url} target="_blank" rel="noopener noreferrer">{m.linkLabel} {t.arrow}</a>
+                                        {m.url && <a className="link-more" href={m.url} target="_blank" rel="noopener noreferrer">{m.linkLabel} {t.arrow}</a>}
                                     </article>
                                 ))}
                             </div>

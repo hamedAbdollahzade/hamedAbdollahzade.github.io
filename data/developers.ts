@@ -14,7 +14,7 @@ export interface Developer {
     links: {label: string; url: string}[];
     skillGroups?: SkillGroup[];
     timeline?: TimelineEntry[];
-    mentors?: {name: string; role: string; text: string; url: string; linkLabel: string}[];
+    mentors?: {name: string; role: string; text: string; url?: string; linkLabel?: string}[];
 }
 
 export const DEVELOPERS: Developer[] = [
@@ -44,8 +44,6 @@ export const DEVELOPERS: Developer[] = [
                 name: "عرفان تقی‌نیا",
                 role: "مدرس در فراوین · Senior Software Engineer",
                 text: "مهندس نرم‌افزار ارشد با تمرکز روی Go، Python و TypeScript. در گیت‌هاب مجموعه‌هایی مثل Clean_Code_QA، Golang_QA و JS_IS_FUN را منتشر کرده و شعارش این است: کنجکاو بمان، یاد بگیر و به دیگران کمک کن.",
-                url: "https://github.com/etg-dev",
-                linkLabel: "GitHub: etg-dev",
             },
         ],
     },
@@ -56,10 +54,6 @@ export const DEVELOPERS: Developer[] = [
         role: "توسعه‌دهنده فرانت‌اند و اپلیکیشن",
         bio: "توسعه‌دهنده‌ای که از رابط‌های وب راست‌به‌چپ تا اپلیکیشن اندروید می‌سازد. پورتال دانشجویی و پورتفولیوی دوزبانه را به‌صورت دمو ساخته و اپلیکیشن برنامه‌ریز TaskSnap را با Flutter و Kotlin توسعه داده است؛ نسخه‌ی ۰٫۹٫۱ آن برای بررسی در مایکت و کافه‌بازار ارسال شده.",
         skills: ["Frontend", "Flutter", "Kotlin", "SQLite", "RTL UI"],
-        links: [
-            {label: "GitHub", url: "https://github.com/MohammadGhorbani-dev"},
-            {label: "TaskSnap", url: "https://github.com/MohammadGhorbani-dev/TaskSnap-showcase"},
-            {label: "Portfolio demo", url: "https://portfolio-demo.mohammadghorbani-dev.ir/"},
-        ],
+        links: [],
     },
 ];

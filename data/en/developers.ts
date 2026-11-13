@@ -45,7 +45,7 @@ export const TIMELINE_EN: Pick<TimelineEntry, "period" | "role" | "org" | "text"
   },
 ];
 
-export const DEVELOPER_EN: Record<string, {role: string; bio: string; mentors: {name: string; role: string; text: string; linkLabel: string}[]}> = {
+export const DEVELOPER_EN: Record<string, {role: string; bio: string; mentors: {name: string; role: string; text: string; linkLabel?: string}[]}> = {
   "hamed-abdollahzade": {
     role: "Founder · Frontend Developer",
     bio: "A mid-level frontend developer. My experience ranges from enterprise CRM and ERP panels to the user interfaces of vending machines. I work with React, Next.js, TypeScript and Vue, and these days I focus on offline apps, PWAs and connecting user interfaces with hardware. An important part of my learning happened in the Faravin program, and I learned a lot from teachers such as Mojtaba Ghasemzadeh Tehrani and Erfan Taghinia.",
@@ -60,7 +60,6 @@ export const DEVELOPER_EN: Record<string, {role: string; bio: string; mentors: {
         name: "Erfan Taghinia",
         role: "Instructor at Faravin · Senior Software Engineer",
         text: "A senior software engineer focused on Go, Python and TypeScript. On GitHub he publishes collections such as Clean_Code_QA, Golang_QA and JS_IS_FUN, and his motto is: stay curious, keep learning, help others.",
-        linkLabel: "GitHub: etg-dev",
       },
     ],
   },

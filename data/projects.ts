@@ -14,6 +14,8 @@ export interface Project {
   images?: {src: string; caption: string}[];
   /** Phone/app screenshots shown in a grid instead of full-width figures. */
   gallery?: {src: string; caption: string; width: number; height: number}[];
+  /** Set when the project was built by another member of the team. */
+  author?: {fa: string; en: string};
   /** Use "contain" for transparent app mockups so they aren't cropped in cards. */
   imgFit?: "cover" | "contain";
 }
@@ -116,8 +118,8 @@ export const PROJECTS: Project[] = [
   {
     id: 5,
     slug: "university-student-portal",
-    title: "پورتال دانشجویی (نمونه‌کار محمد قربانی)",
-    description: "نمونه‌ی دمو از یک پورتال دانشگاهی با ورود چندنقشه‌ای برای دانشجو، کارمند آموزش و مدیر. رابط کاملاً راست‌به‌چپ و فارسی است و داده‌های نمایشی فقط در مرورگر ذخیره می‌شوند. این پروژه را محمد قربانی، توسعه‌دهنده‌ی تیم وبینو-دِو، ساخته است.",
+    title: "پورتال دانشجویی",
+    description: "نمونه‌ی دمو از یک پورتال دانشگاهی با ورود چندنقشه‌ای برای دانشجو، کارمند آموزش و مدیر. رابط کاملاً راست‌به‌چپ و فارسی است و داده‌های نمایشی فقط در مرورگر ذخیره می‌شوند. ",
     learned: [
       "طراحی جریان ورود و ثبت‌نام برای چند نقش کاربری",
       "رابط راست‌به‌چپ با تم روشن و تاریک",
@@ -125,13 +127,14 @@ export const PROJECTS: Project[] = [
     ],
     tech: ["Frontend", "RTL", "Dark mode", "Role-based UI"],
     links: [{label: "مشاهده‌ی دمو", url: "https://university-demo.mohammadghorbani-dev.ir/"}],
+    author: {fa: "محمد قربانی", en: "Mohammad Ghorbani"},
     img: "assets/images/mohammad/university.webp",
   },
   {
     id: 6,
     slug: "personal-portfolio",
-    title: "پورتفولیوی شخصی دوزبانه (نمونه‌کار محمد قربانی)",
-    description: "نمونه‌ی دمو از یک وب‌سایت رزومه برای توسعه‌دهنده‌ی فرانت‌اند با پس‌زمینه‌ی متحرک، بخش پروژه‌ها، مسیر کاری، مهارت‌ها و تماس، و سوییچ فارسی/انگلیسی. محتوای صفحه خیالی است و فقط برای نمایش کار ساخته شده. سازنده: محمد قربانی.",
+    title: "پورتفولیوی شخصی دوزبانه",
+    description: "نمونه‌ی دمو از یک وب‌سایت رزومه برای توسعه‌دهنده‌ی فرانت‌اند با پس‌زمینه‌ی متحرک، بخش پروژه‌ها، مسیر کاری، مهارت‌ها و تماس، و سوییچ فارسی/انگلیسی. محتوای صفحه خیالی است و فقط برای نمایش کار ساخته شده.",
     learned: [
       "پس‌زمینه‌ی متحرک و رابط شیشه‌ای",
       "سوییچ زبان فارسی و انگلیسی",
@@ -139,20 +142,22 @@ export const PROJECTS: Project[] = [
     ],
     tech: ["Frontend", "Animation", "FA / EN"],
     links: [{label: "مشاهده‌ی دمو", url: "https://portfolio-demo.mohammadghorbani-dev.ir/"}],
+    author: {fa: "محمد قربانی", en: "Mohammad Ghorbani"},
     img: "assets/images/mohammad/portfolio.webp",
   },
   {
     id: 7,
     slug: "tasksnap",
-    title: "TaskSnap؛ اپلیکیشن اندروید برنامه‌ریزی (نمونه‌کار محمد قربانی)",
-    description: "برنامه‌ریز اندرویدی برای ثبت سریع کارها و ایده‌ها، یادآور و پیگیری برنامه‌ی روزانه. کارها سه وضعیت دارند (باز، نیمه‌کاره، انجام‌شده) و رابط فارسی و انگلیسی با تقویم شمسی و میلادی پشتیبانی می‌شود. ساخته‌ی محمد قربانی؛ نسخه‌ی ۰٫۹٫۱ برای بررسی به مایکت و کافه‌بازار ارسال شده است.",
+    title: "TaskSnap؛ اپلیکیشن اندروید برنامه‌ریزی",
+    description: "برنامه‌ریز اندرویدی برای ثبت سریع کارها و ایده‌ها، یادآور و پیگیری برنامه‌ی روزانه. کارها سه وضعیت دارند (باز، نیمه‌کاره، انجام‌شده) و رابط فارسی و انگلیسی با تقویم شمسی و میلادی پشتیبانی می‌شود. نسخه‌ی ۰٫۹٫۱ برای بررسی به مایکت و کافه‌بازار ارسال شده است.",
     learned: [
       "رابط Flutter با ذخیره‌ی محلی در SQLite",
       "یادآور و تقویم دستگاه از طریق Kotlin",
       "پشتیبان‌گیری قابل حمل با عکس و صدا و بازیابی بدون تکرار",
     ],
     tech: ["Flutter", "Kotlin", "SQLite", "Android"],
-    links: [{label: "مطالعه‌ی پروژه در گیت‌هاب", url: "https://github.com/MohammadGhorbani-dev/TaskSnap-showcase"}],
+    links: [],
+    author: {fa: "محمد قربانی", en: "Mohammad Ghorbani"},
     img: "assets/images/mohammad/tasksnap-today.webp",
     imgFit: "contain",
     gallery: [

@@ -4,10 +4,11 @@ import {notFound} from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import {Logo, PhoneIcon, WhatsAppIcon} from "@/components/Icons";
 import Shell from "@/components/Shell";
+import {getBrand} from "@/data/localized";
 import {EXPLORE_POSTS, exploreText, getExplorePost} from "@/data/explore";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
-import {SITE} from "@/lib/site";
+import {SITE, waLink} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 /** One explore post: video and photos in a swipeable strip, caption and buy buttons beside it. */
@@ -19,7 +20,8 @@ export default function ExplorePostView({locale, slug}: {locale: Locale; slug: s
     const url = `${SITE}${localePath(locale, `/explore/${slug}/`)}`;
     const others = EXPLORE_POSTS.filter((p) => p.slug !== slug);
     const date = new Intl.DateTimeFormat(locale === "fa" ? "fa-IR" : "en-US", {dateStyle: "long"}).format(new Date(post.date));
-    const wa = `https://wa.me/${post.phone.replace("+", "")}?text=${encodeURIComponent(t.waText(x.title))}`;
+    const brand = getBrand(locale);
+    const wa = waLink(t.waText(x.title));
 
     return (
         <Shell crumbs={[{label: t.crumb, href: localePath(locale, "/explore/")}, {label: x.title}]}>
@@ -79,9 +81,9 @@ export default function ExplorePostView({locale, slug}: {locale: Locale; slug: s
                     <ul className="tags">{x.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                     <div className="xp-buy">
                         <div className="xp-buy-label">{t.buy}</div>
-                        <a className="xp-phone" href={`tel:${post.phone}`} dir="ltr">{post.phoneDisplay}</a>
+                        <a className="xp-phone" href={`tel:${brand.phone}`} dir="ltr">{brand.phoneDisplay}</a>
                         <div className="btn-row">
-                            <a className="btn" href={`tel:${post.phone}`}><PhoneIcon/> {t.call}</a>
+                            <a className="btn" href={`tel:${brand.phone}`}><PhoneIcon/> {t.call}</a>
                             <a className="btn btn--green" href={wa} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/> {t.whatsapp}</a>
                         </div>
                     </div>

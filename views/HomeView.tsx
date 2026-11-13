@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import CodeWindow from "@/components/animations/CodeWindow";
-import Pipeline from "@/components/animations/Pipeline";
 import NetworkHero from "@/components/NetworkHero";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
@@ -18,62 +16,6 @@ import {OG_IMAGE, SITE, summarize, waLink} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 const SAME_AS = ["https://github.com/hamedAbdollahzade", "https://www.linkedin.com/in/hamed-abdollahzade"];
-
-const CODE_LINES = [
-    'import { build } from "webino-dev";',
-    "",
-    'const idea = "your next product";',
-    "const product = await build(idea, { ai: true });",
-    "",
-    "product.launch(); // from idea to production",
-];
-
-const REACT_LINES = [
-    'export function Button({ label }) {',
-    "  const [n, setN] = useState(0);",
-    "  return (",
-    '    <button onClick={() => setN(n + 1)}>',
-    "      {label} {n}",
-    "    </button>",
-    "  );",
-    "}",
-];
-
-const CSS_LINES = [
-    ":root {",
-    "  --accent: #0e7490;",
-    "  --radius: 18px;",
-    "}",
-    ".card {",
-    "  border-radius: var(--radius);",
-    "  transition: transform .2s;",
-    "}",
-];
-
-const AI_LINES = [
-    "async function ask(prompt) {",
-    '  const res = await fetch("/api/ai", {',
-    '    method: "POST",',
-    "    body: JSON.stringify({ prompt }),",
-    "  });",
-    "  return res.json();",
-    "}",
-];
-
-const API_LINES = [
-    "app.get(\"/api/orders\", async (req, res) => {",
-    "  const rows = await db.orders.find();",
-    "  res.json({ ok: true, rows });",
-    "});",
-];
-
-const HTML_LINES = [
-    "<section class=\"hero\">",
-    "  <h1>Webino-Dev</h1>",
-    "  <p>Ideas into products</p>",
-    "  <button>Start</button>",
-    "</section>",
-];
 
 function graph(locale: Locale) {
     const brand = getBrand(locale);
@@ -133,24 +75,6 @@ export default function HomeView({locale}: {locale: Locale}) {
                     <p className="block-desc">{locale === "fa" ? "معرفی کوتاه، پیشنهادهای ما و راه‌های تماس؛ همه در یک ترمینال اوبونتو." : "A short introduction, our offers and how to reach us, all in an Ubuntu terminal."}</p>
                 </div></div>
                 <UbuntuTerminal lessons={posts.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}/>
-            </section>
-
-            <section className="section band band--lav" aria-labelledby="showcase-title" data-reveal>
-                <div className="block-head">
-                    <div>
-                        <h2 className="block-title" id="showcase-title">{t.home.showcaseTitle}</h2>
-                        <p className="block-desc">{t.home.showcaseDesc}</p>
-                    </div>
-                </div>
-                <div className="showcase">
-                    <CodeWindow file="idea.ts" lines={CODE_LINES} label={t.home.codeLabel}/>
-                    <CodeWindow file="ai.ts" lines={AI_LINES} label={t.home.codeLabel}/>
-                    <CodeWindow file="Button.tsx" lines={REACT_LINES} label={t.home.codeLabel}/>
-                    <CodeWindow file="server.js" lines={API_LINES} label={t.home.codeLabel}/>
-                    <CodeWindow file="theme.css" lines={CSS_LINES} label={t.home.codeLabel}/>
-                    <CodeWindow file="index.html" lines={HTML_LINES} label={t.home.codeLabel}/>
-                </div>
-                <Pipeline/>
             </section>
 
             <section className="section" id="services" aria-labelledby="services-title" data-reveal>

@@ -59,8 +59,7 @@ const fa = {
         ctaText: "موضوع و ایده‌ات را در چت بنویس؛ درخواست در واتساپ برای ما ارسال می‌شود و به‌زودی تماس می‌گیریم. بررسی اولیه و پیشنهاد، رایگان است.",
         startChat: "شروع گفتگو", callPhone: "تماس تلفنی",
         pipeline: ["ایده", "طراحی", "کد", "انتشار"],
-        codeLabel: "ویرایشگر کد که یک برنامه را تایپ می‌کند", terminalLabel: "ترمینالی که ساخت و انتشار پروژه را اجرا می‌کند",
-        showcaseTitle: "این‌طور می‌سازیم", showcaseDesc: "کدنویسی تمیز، خروجی سریع و استقرار مطمئن؛ از اولین خط تا انتشار.",
+        codeLabel: "ویرایشگر کد که یک برنامه را تایپ می‌کند",
         meta: {
             title: "Webino-Dev | هوش مصنوعی، طراحی سایت و پنل مدیریتی در مشهد",
             description: "Webino-Dev تیم توسعه وب و نرم‌افزار در مشهد با تمرکز بر هوش مصنوعی: چت‌بات و دستیار هوشمند، طراحی سایت، پنل مدیریتی CRM/ERP، اپلیکیشن وب و PWA. ایده‌ات را بگو، با هوش مصنوعی می‌سازیمش. مشاوره‌ی اولیه رایگان.",
@@ -100,7 +99,7 @@ const fa = {
         ctaTitle: "ایده‌ات را برایمان بگو", ctaText: "مشاوره و پیشنهاد اولیه رایگان است. گفتگو را شروع کن یا تماس بگیر.",
     },
     project: {
-        crumb: "نمونه‌کارها", kind: "پروژه", appImages: "تصاویر اپلیکیشن", myPart: "تجربه و سهم من در پروژه", similar: "پروژه‌ای مشابه می‌خواهم", others: "پروژه‌های دیگر",
+        crumb: "نمونه‌کارها", kind: "پروژه", appImages: "تصاویر اپلیکیشن", myPart: "تجربه و سهم من در پروژه", similar: "پروژه‌ای مشابه می‌خواهم", others: "پروژه‌های دیگر", by: "ساخته‌ی", about: "درباره‌ی پروژه",
     },
     blog: {
         crumb: "آموزش‌ها و مقالات", title: "آموزش‌ها و مقالات",
@@ -168,8 +167,7 @@ const en: typeof fa = {
         ctaText: "Write your topic and idea in the chat; the request is sent to us on WhatsApp and we will contact you soon. The first review and proposal are free.",
         startChat: "Start a chat", callPhone: "Call us",
         pipeline: ["Idea", "Design", "Code", "Launch"],
-        codeLabel: "A code editor typing a small program", terminalLabel: "A terminal running a project build and deploy",
-        showcaseTitle: "This is how we build", showcaseDesc: "Clean code, fast output and reliable deployment, from the first line to launch.",
+        codeLabel: "A code editor typing a small program",
         meta: {
             title: "Webino-Dev | AI, websites and admin panels in Mashhad, Iran",
             description: "Webino-Dev is a web and software team in Mashhad, Iran, focused on AI: chatbots and smart assistants, website design, CRM/ERP admin panels, web apps and PWAs. Tell us your idea; we build it with AI. Free first consultation.",
@@ -209,7 +207,7 @@ const en: typeof fa = {
         ctaTitle: "Tell us your idea", ctaText: "The first consultation and proposal are free. Start a chat or call us.",
     },
     project: {
-        crumb: "Projects", kind: "Project", appImages: "App screenshots", myPart: "My experience and contribution", similar: "I want a similar project", others: "Other projects",
+        crumb: "Projects", kind: "Project", appImages: "App screenshots", myPart: "My experience and contribution", similar: "I want a similar project", others: "Other projects", by: "Built by", about: "About the project",
     },
     blog: {
         crumb: "Tutorials", title: "Tutorials and articles",
