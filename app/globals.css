@@ -731,6 +731,7 @@ html.intro-on body { overflow: hidden; }
 .scrim { z-index: 70; }
 
 .brand-mark { border-radius: 10px; }
+.brand { white-space: nowrap; flex: none; }
 :root[data-theme="light"] .brand-mark { background: #0a0a0b; }
 
 /* Bands: full-bleed gray sections without changing the page structure */
@@ -757,7 +758,7 @@ html.intro-on body { overflow: hidden; }
 .cta-card .btn { background: var(--on-strong); color: var(--strong); }
 .cta-card .btn--ghost { background: transparent; color: var(--on-strong); box-shadow: inset 0 0 0 1.5px currentColor; }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
     .top-links, .top-cta { display: none; }
     .top-end { margin-inline-start: auto; }
     .menu-toggle { display: inline-grid; }
@@ -781,3 +782,58 @@ html.intro-on body { overflow: hidden; }
     .top-end .icon-btn--text { padding-inline: 0; min-width: 40px; }
     .brand { font-size: 17px; }
 }
+
+
+/* ==========================================================================
+   Soft cheerful palette: indigo brand + coral, mint, sun, sky and lilac pastels
+   ========================================================================== */
+:root {
+    --brand: #6e6ef0; --brand-dark: #5959dc; --on-brand: #ffffff;
+    --coral: #ff7a8a; --mint: #34c9a3; --sun: #ffb83d; --sky: #4fb3f6; --lilac: #b095ff;
+    --accent: #9a9aff; --accent-soft: rgba(154, 154, 255, .16);
+    --primary: var(--brand); --primary-dark: var(--brand-dark); --on-primary: var(--on-brand);
+    --tint-lav: #17172b; --tint-mint: #102321; --tint-peach: #261a1a; --tint-sky: #121f2c;
+    --band: #141420;
+}
+:root[data-theme="light"] {
+    --brand: #5b5bd6; --brand-dark: #4747c2;
+    --primary: var(--brand); --primary-dark: var(--brand-dark); --on-primary: #ffffff;
+    --accent: #5b5bd6; --accent-soft: rgba(91, 91, 214, .12);
+    --tint-lav: #f0eeff; --tint-mint: #e8f8f2; --tint-peach: #fff1ea; --tint-sky: #eaf5ff;
+    --band: #f0eeff;
+}
+.band--lav { --band: var(--tint-lav); }
+.band--mint { --band: var(--tint-mint); }
+.band--peach { --band: var(--tint-peach); }
+.band--sky { --band: var(--tint-sky); }
+
+:root[data-theme="light"] .brand-mark, .brand-mark { background: var(--brand); border-color: var(--brand); color: #fff; }
+.top-link.is-active { box-shadow: inset 0 -2px 0 var(--brand); color: var(--brand); }
+:root[data-theme="dark"] .top-link.is-active { color: var(--accent); }
+.hero-badge { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.hero-points li::before { background: var(--mint); color: #fff; }
+.net-wrap { background-color: var(--tint-lav); }
+.gnode--core .core-dot { fill: var(--brand); }
+.core-label { fill: #fff; }
+.gnode--hub rect { stroke: var(--brand); stroke-opacity: .35; }
+.gnode--leaf circle { fill: var(--coral); }
+.step-num { background: var(--brand); color: #fff; }
+.section .step-num { background: var(--accent-soft); color: var(--accent); }
+.msg--user { background: var(--brand); color: #fff; }
+.btn--ghost { color: var(--strong); }
+.btn--ghost:hover { background: var(--accent-soft); }
+.top-sub a:hover, .top-link:hover, .top-item:focus-within > .top-link { background: var(--accent-soft); }
+.cta-card { background: linear-gradient(135deg, var(--brand) 0%, #8b5cf6 55%, var(--coral) 130%); color: #fff; }
+.cta-card .btn { background: #fff; color: #3b3b9a; }
+.cta-card .btn--ghost { background: transparent; color: #fff; }
+
+/* Service icons cycle through the pastel colours */
+.section .tile-card:nth-child(5n+1) .tile-icon { background: rgba(255, 122, 138, .16); color: #e5485f; }
+.section .tile-card:nth-child(5n+2) .tile-icon { background: rgba(52, 201, 163, .18); color: #0f9a78; }
+.section .tile-card:nth-child(5n+3) .tile-icon { background: rgba(255, 184, 61, .22); color: #b87400; }
+.section .tile-card:nth-child(5n+4) .tile-icon { background: rgba(79, 179, 246, .18); color: #1b83cc; }
+.section .tile-card:nth-child(5n+5) .tile-icon { background: rgba(176, 149, 255, .22); color: #7a55e0; }
+:root[data-theme="dark"] .section .tile-card .tile-icon { filter: brightness(1.25); }
+.section .tile-card:hover, .section .project-card:hover, .section .dev-card:hover { border-color: var(--brand); }
+::selection { background: var(--brand); color: #fff; }
+:focus-visible { outline-color: var(--brand); }

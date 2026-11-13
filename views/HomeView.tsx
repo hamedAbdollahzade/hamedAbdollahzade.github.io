@@ -128,7 +128,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 <UbuntuTerminal lessons={posts.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}/>
             </section>
 
-            <section className="section band" aria-labelledby="showcase-title" data-reveal>
+            <section className="section band band--lav" aria-labelledby="showcase-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="showcase-title">{t.home.showcaseTitle}</h2>
@@ -165,7 +165,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
             </section>
 
-            <section className="section band" id="projects" aria-labelledby="projects-title" data-reveal>
+            <section className="section band band--mint" id="projects" aria-labelledby="projects-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="projects-title">{t.home.projectsTitle}</h2>
@@ -203,7 +203,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </div>
             </section>
 
-            <section className="section band" id="developers" aria-labelledby="devs-title" data-reveal>
+            <section className="section band band--peach" id="developers" aria-labelledby="devs-title" data-reveal>
                 <div className="block-head">
                     <div>
                         <h2 className="block-title" id="devs-title">{t.home.devsTitle}</h2>
@@ -234,7 +234,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                 </ol>
             </section>
 
-            <section className="section band" id="faq" aria-labelledby="faq-title" data-reveal>
+            <section className="section band band--sky" id="faq" aria-labelledby="faq-title" data-reveal>
                 <div className="block-head"><h2 className="block-title" id="faq-title">{t.home.faqTitle}</h2></div>
                 <div className="faq">
                     {faq.map(([q, a]) => <details className="faq-item" key={q}><summary>{q}</summary><p>{a}</p></details>)}

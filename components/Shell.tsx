@@ -80,7 +80,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
     useEffect(() => {
         const close = () => setOpen(false);
         const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-        const onResize = () => { if (window.innerWidth > 980) setOpen(false); };
+        const onResize = () => { if (window.innerWidth > 1100) setOpen(false); };
         window.addEventListener("webino:open-chat", close);
         window.addEventListener("keydown", onKey);
         window.addEventListener("resize", onResize);
