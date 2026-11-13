@@ -576,33 +576,11 @@ html.intro-on body { overflow: hidden; }
 
 /* ---------- Dock ---------- */
 
-/* ---------- Network-graph hero ---------- */
+/* ---------- Hero ---------- */
 .net-hero { display: grid; justify-items: center; gap: 8px; text-align: center; }
 .net-text { display: grid; justify-items: center; max-width: 720px; }
 .net-title { font-size: clamp(28px, 4.4vw, 50px); font-weight: 800; line-height: 1.5; letter-spacing: -.01em; }
 .net-text p { margin: 12px 0 22px; color: var(--muted); font-size: clamp(16px, 1.6vw, 18.5px); }
-.net-wrap { width: 100%; border-radius: 28px; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); padding: 8px 8px 14px; overflow-x: auto;
-    background-image: radial-gradient(var(--line-strong) 1px, transparent 1.2px); background-size: 26px 26px; }
-.net { display: block; width: 100%; min-width: 620px; height: auto; }
-.net a { cursor: pointer; outline: none; }
-.edge { stroke: var(--line-strong); stroke-width: 1.6; stroke-dasharray: 5 7; animation: edge-flow 2.4s linear infinite; }
-.edge--leaf { stroke-width: 1.2; opacity: .8; }
-@keyframes edge-flow { to { stroke-dashoffset: -24; } }
-.gnode { animation: gfloat 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; transition: transform .2s; }
-@keyframes gfloat { 50% { transform: translateY(-5px); } }
-.gnode--core .core-dot { fill: var(--strong); }
-.gnode--core .core-ring { fill: none; stroke: var(--accent); stroke-width: 2; opacity: .5; animation: core-pulse 2.8s ease-out infinite; transform-box: fill-box; transform-origin: center; }
-@keyframes core-pulse { from { transform: scale(.78); opacity: .7; } to { transform: scale(1.15); opacity: 0; } }
-.core-label { fill: var(--on-strong); font: 800 15px var(--font); }
-.gnode--hub rect { fill: var(--card); stroke: var(--line-strong); stroke-width: 1.5; transition: fill .2s, stroke .2s; }
-.gnode--hub text { fill: var(--ink); font: 700 15px var(--font); }
-.gnode--leaf circle { fill: var(--accent); transition: r .2s; }
-.leaf-text { fill: var(--muted); font: 500 12.5px var(--font); direction: ltr; unicode-bidi: plaintext; }
-.net a:hover .gnode--hub rect, .net a:focus-visible .gnode--hub rect { fill: var(--accent); stroke: var(--accent); }
-.net a:hover .gnode--hub text, .net a:focus-visible .gnode--hub text { fill: #fff; }
-.net a:hover .gnode--leaf circle, .net a:focus-visible .gnode--leaf circle { r: 10; }
-.net a:hover .leaf-text, .net a:focus-visible .leaf-text { fill: var(--accent); font-weight: 700; }
-.net-hint { margin-top: 6px; font-size: 13.5px; color: var(--muted-2); }
 
 /* ---------- Ubuntu terminal ---------- */
 .ubuntu { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .1); box-shadow: 0 24px 60px rgba(48, 10, 36, .35); background: #300a24; }
@@ -622,17 +600,10 @@ html.intro-on body { overflow: hidden; }
         .ut-body { height: 440px; font-size: 13px; padding: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-    .edge, .gnode, .core-ring { animation: none !important; }
 }
 
 /* Phones get a portrait graph with the section hubs only; wider screens get the full map. */
-.net--tall { display: none; min-width: 0; max-width: 460px; margin-inline: auto; }
 @media (max-width: 700px) {
-    .net--wide { display: none; }
-    .net--tall { display: block; }
-    .net-wrap { overflow-x: visible; padding-bottom: 10px; }
-    .gnode--hub text { font-size: 17px; }
-    .core-label { font-size: 16px; }
 }
 
 @media (max-width: 380px) {
@@ -742,8 +713,6 @@ html.intro-on body { overflow: hidden; }
 .net-text .hero-points { display: grid; gap: 8px; margin: 0 0 22px; font-size: 15px; color: var(--ink-soft); }
 .hero-points li { position: relative; padding-inline-start: 28px; }
 .hero-points li::before { content: "✓"; position: absolute; inset-inline-start: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--strong); color: var(--on-strong); font-size: 12px; line-height: 1; font-weight: 800; }
-.net-wrap { border-radius: 28px; background-color: var(--band); box-shadow: none; }
-.net-hint { text-align: center; }
 
 .cta-card { border-radius: 28px; background: var(--strong); color: var(--on-strong); border: 0; }
 .cta-card p { color: inherit; opacity: .8; }
@@ -804,11 +773,6 @@ html.intro-on body { overflow: hidden; }
 :root[data-theme="dark"] .top-link.is-active { color: var(--accent); }
 .hero-badge { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
 .hero-points li::before { background: var(--mint); color: #fff; }
-.net-wrap { background-color: var(--tint-lav); }
-.gnode--core .core-dot { fill: var(--brand); }
-.core-label { fill: #fff; }
-.gnode--hub rect { stroke: var(--brand); stroke-opacity: .35; }
-.gnode--leaf circle { fill: var(--coral); }
 .step-num { background: var(--brand); color: #fff; }
 .section .step-num { background: var(--accent-soft); color: var(--accent); }
 .msg--user { background: var(--brand); color: #fff; }
@@ -831,3 +795,10 @@ html.intro-on body { overflow: hidden; }
 :focus-visible { outline-color: var(--brand); }
 
 .avatar--letter { display: inline-grid; place-items: center; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--brand), var(--lilac)); border-color: var(--accent-soft); }
+
+/* Full-page animated network behind everything */
+.net-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.topbar, .main { position: relative; z-index: 1; }
+.topbar { background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.band { background: color-mix(in srgb, var(--band) 78%, transparent); box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--band) 78%, transparent); }
+.net-hero .anim-window { width: 100%; }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import NetworkHero from "@/components/NetworkHero";
+import Hero from "@/components/Hero";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
@@ -66,7 +66,7 @@ export default function HomeView({locale}: {locale: Locale}) {
             <JsonLd data={graph(locale)}/>
             <JsonLd data={{"@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(([q, a]) => ({"@type": "Question", name: q, acceptedAnswer: {"@type": "Answer", text: a}}))}}/>
 
-            <NetworkHero/>
+            <Hero/>
             <TechStrip/>
 
             <section className="section" id="terminal" aria-labelledby="terminal-title" data-reveal>

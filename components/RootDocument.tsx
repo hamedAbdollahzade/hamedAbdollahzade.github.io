@@ -2,6 +2,7 @@ import type {ReactNode} from "react";
 import {DIR} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
 import ChatWidget from "./ChatWidget";
+import NetworkBackground from "./NetworkBackground";
 import IntroLoader from "./IntroLoader";
 import {LocaleProvider} from "./LocaleProvider";
 import RevealInit from "./RevealInit";
@@ -28,6 +29,7 @@ export default function RootDocument({locale, children}: {locale: Locale; childr
         <body>
         <LocaleProvider locale={locale}>
             <IntroLoader/>
+            <NetworkBackground/>
             <a className="skip-link" href="#main-content">{UI[locale].skipToContent}</a>
             {children}
             <ChatWidget/>
