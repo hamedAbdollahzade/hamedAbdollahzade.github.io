@@ -9,7 +9,7 @@ type Theme = "dark" | "light";
 /** Switches between the dark and light theme and remembers the choice (the initial value is set by an inline script). */
 export default function ThemeToggle() {
     const {t} = useLocale();
-    const [theme, setTheme] = useState<Theme>("dark");
+    const [theme, setTheme] = useState<Theme>("light");
 
     useEffect(() => {
         setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");

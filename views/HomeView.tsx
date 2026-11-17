@@ -60,6 +60,7 @@ export default function HomeView({locale}: {locale: Locale}) {
         .map((c) => ({...c, ...getCourseCopy(c.title, locale), count: posts.filter((p) => p.category === c.title).length}))
         .filter((c) => c.count > 0);
     const faq = getFaq(locale);
+    const lead = getDevelopers(locale)[0];
 
     return (
         <Shell>
@@ -73,7 +74,6 @@ export default function HomeView({locale}: {locale: Locale}) {
                 <div className="lr-split-text">
                     <h2 className="lr-h2" id="terminal-title">{t.home.terminalTitle}<br/><span className="lr-title-dim">{t.home.terminalTitle2}</span></h2>
                     <p>{t.home.terminalDesc}</p>
-                    <ul className="lr-checks">{t.home.heroPoints.map((x: string) => <li key={x}>{x}</li>)}</ul>
                 </div>
                 <UbuntuTerminal lessons={posts.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}/>
             </section>
@@ -174,13 +174,21 @@ export default function HomeView({locale}: {locale: Locale}) {
             </section>
 
             <section className="cta-card" id="contact" aria-labelledby="contact-title" data-reveal>
-                <h2 id="contact-title">{t.home.ctaTitle}</h2>
-                <p>{t.home.ctaText}</p>
-                <div className="btn-row">
-                    <OpenChat className="btn btn--lg">{t.home.startChat}</OpenChat>
-                    <a className="btn btn--lg btn--wa" href={waLink(t.chat.defaultWa)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>{t.footer.whatsapp}</a>
-                    <a className="btn btn--lg btn--ghost" href={`tel:${brand.phone}`}><PhoneIcon/>{t.home.callPhone}</a>
+                <div className="cta-text">
+                    <h2 id="contact-title">{t.home.ctaTitle}</h2>
+                    <p>{t.home.ctaText}</p>
+                    <div className="btn-row">
+                        <OpenChat className="btn btn--lg">{t.home.startChat}</OpenChat>
+                        <a className="btn btn--lg btn--wa" href={waLink(t.chat.defaultWa)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon/>{t.footer.whatsapp}</a>
+                        <a className="btn btn--lg btn--ghost" href={`tel:${brand.phone}`}><PhoneIcon/>{t.home.callPhone}</a>
+                    </div>
                 </div>
+                {lead && (
+                    <div className="cta-bubble" aria-hidden="true">
+                        <Avatar name={lead.name} photo={lead.photo} size={56}/>
+                        <div><strong>{lead.name}</strong><span>{t.chat.tipTitle}</span><small>{t.chat.status}</small></div>
+                    </div>
+                )}
             </section>
         </Shell>
     );
