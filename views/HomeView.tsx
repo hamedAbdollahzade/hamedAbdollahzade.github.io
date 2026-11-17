@@ -69,11 +69,12 @@ export default function HomeView({locale}: {locale: Locale}) {
             <Hero/>
             <TechStrip/>
 
-            <section className="section" id="terminal" aria-labelledby="terminal-title" data-reveal>
-                <div className="block-head"><div>
-                    <h2 className="block-title" id="terminal-title">{locale === "fa" ? "ما را در ترمینال بشناسید" : "Meet us in the terminal"}</h2>
-                    <p className="block-desc">{locale === "fa" ? "معرفی کوتاه، پیشنهادهای ما و راه‌های تماس؛ همه در یک ترمینال اوبونتو." : "A short introduction, our offers and how to reach us, all in an Ubuntu terminal."}</p>
-                </div></div>
+            <section className="lr-split" id="terminal" aria-labelledby="terminal-title" data-reveal>
+                <div className="lr-split-text">
+                    <h2 className="lr-h2" id="terminal-title">{t.home.terminalTitle}<br/><span className="lr-title-dim">{t.home.terminalTitle2}</span></h2>
+                    <p>{t.home.terminalDesc}</p>
+                    <ul className="lr-checks">{t.home.heroPoints.map((x: string) => <li key={x}>{x}</li>)}</ul>
+                </div>
                 <UbuntuTerminal lessons={posts.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}/>
             </section>
 

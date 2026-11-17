@@ -10,6 +10,7 @@ export default function TechStrip() {
     const items = [...TECH, ...TECH];
     return (
         <div className="strip" aria-label={t.tech.label} role="group">
+            <p className="strip-title" aria-hidden="true">{t.home.trusted}</p>
             <div className="strip-track" aria-hidden="true">
                 {items.map((t, i) => <span className="strip-item" key={i}>{t}</span>)}
             </div>

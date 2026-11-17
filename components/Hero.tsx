@@ -1,38 +1,42 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import {getSlides} from "@/data/localized";
 import {localePath} from "@/lib/locale";
-import CodeWindow from "./animations/CodeWindow";
 import {useLocale} from "./LocaleProvider";
 import OpenChat from "./OpenChat";
 
-const HERO_CODE = [
-    'import { build } from "webino-dev";',
-    "",
-    'const idea = "your next product";',
-    "const product = await build(idea, { ai: true });",
-    "",
-    "product.launch(); // from idea to production",
-];
-
-/** Home hero: the pitch with a checklist and a typing code editor; the network lives in the page background. */
+/** Home hero: a centred two-tone headline over a starfield, then a browser window showing a real project. */
 export default function Hero() {
     const {locale, t} = useLocale();
     const slide = getSlides(locale)[0];
 
     return (
-        <section className="net-hero" aria-labelledby="hero-title">
-            <div className="net-text">
+        <section className="lr-hero" aria-labelledby="hero-title">
+            <div className="lr-stars" aria-hidden="true"><i/><i/><i/></div>
+            <div className="lr-hero-text">
                 <span className="hero-badge">{slide.badge}</span>
-                <h1 className="net-title" id="hero-title">{slide.title}</h1>
-                <p>{slide.text}</p>
-                <ul className="hero-points">{t.home.heroPoints.map((x: string) => <li key={x}>{x}</li>)}</ul>
-                <div className="btn-row">
-                    <OpenChat className="btn btn--lg" topic={slide.cta.chatTopic}>{slide.cta.label}</OpenChat>
-                    <a className="btn btn--lg btn--ghost" href={localePath(locale, "/#services")}>{t.nav.services}</a>
+                <h1 className="lr-title" id="hero-title">
+                    <span>{t.home.heroLine1}</span>
+                    <span className="lr-title-dim">{t.home.heroLine2}</span>
+                </h1>
+                <p className="lr-lead">{slide.text}</p>
+                <div className="lr-pill">
+                    <span><b>{t.home.heroPill}</b></span>
+                    <OpenChat className="lr-pill-btn" topic={slide.cta.chatTopic}>{t.home.heroPillCta}</OpenChat>
                 </div>
             </div>
-            <CodeWindow file="idea.ts" lines={HERO_CODE} label={t.home.codeLabel}/>
+
+            <div className="lr-browser">
+                <div className="lr-browser-bar" dir="ltr">
+                    <span className="lr-dots" aria-hidden="true"><i/><i/><i/></span>
+                    <span className="lr-url">https://webino-dev.ir{localePath(locale, slide.captionHref)}</span>
+                </div>
+                <Link className="lr-browser-body" href={localePath(locale, slide.captionHref)} aria-label={slide.caption}>
+                    <Image src={`/${slide.image}`} alt={slide.imageAlt} width={1280} height={760} priority/>
+                </Link>
+            </div>
         </section>
     );
 }
