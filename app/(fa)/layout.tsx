@@ -1,13 +1,15 @@
 import type {Metadata, Viewport} from "next";
 import type {ReactNode} from "react";
 import RootDocument from "@/components/RootDocument";
-import {ORG, SITE} from "@/lib/site";
+import {AUTHOR, AUTHOR_URL, ORG, SITE} from "@/lib/site";
 import "../globals.css";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE),
     applicationName: "Webino-Dev",
-    authors: [{name: "Webino-Dev"}],
+    authors: [{name: AUTHOR, url: AUTHOR_URL}],
+    creator: AUTHOR,
+    publisher: "Webino-Dev",
     manifest: "/manifest.json",
     icons: {icon: [{url: "/assets/icons/favicon.svg", type: "image/svg+xml"}]},
     robots: {index: true, follow: true, "max-image-preview": "large", "max-snippet": -1},

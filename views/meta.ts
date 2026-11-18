@@ -3,12 +3,12 @@
 import type {Metadata} from "next";
 import {getDevelopers, getProjects, getServices} from "@/data/localized";
 import type {Locale} from "@/lib/locale";
-import {SITE, pageMeta, summarize} from "@/lib/site";
+import {AUTHOR, AUTHOR_EN, AUTHOR_NAMES, SITE, pageMeta, summarize} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 const KEYWORDS = {
-    fa: ["Webino-Dev", "وبینو دو", "هوش مصنوعی", "چت‌بات هوش مصنوعی", "افزودن هوش مصنوعی به سایت", "برنامه‌نویسی با هوش مصنوعی", "طراحی سایت مشهد", "توسعه پنل مدیریتی", "CRM", "ERP", "اپلیکیشن وب", "PWA", "برنامه‌نویس React", "Next.js", "سفارش نرم‌افزار"],
-    en: ["Webino-Dev", "AI", "AI chatbot", "add AI to website", "web development Mashhad", "admin panel", "CRM", "ERP", "web app", "PWA", "React developer", "Next.js", "custom software"],
+    fa: [...AUTHOR_NAMES, "طراح سایت مشهد", "برنامه‌نویس فرانت‌اند مشهد", "Webino-Dev", "وبینو دو", "هوش مصنوعی", "چت‌بات هوش مصنوعی", "افزودن هوش مصنوعی به سایت", "برنامه‌نویسی با هوش مصنوعی", "طراحی سایت مشهد", "توسعه پنل مدیریتی", "CRM", "ERP", "اپلیکیشن وب", "PWA", "برنامه‌نویس React", "Next.js", "سفارش نرم‌افزار"],
+    en: [AUTHOR_EN, "Hamed Abdollahzade web developer", "Webino-Dev", "AI", "AI chatbot", "add AI to website", "web development Mashhad", "admin panel", "CRM", "ERP", "web app", "PWA", "React developer", "Next.js", "custom software"],
 };
 
 export function homeMeta(locale: Locale): Metadata {
@@ -44,13 +44,13 @@ export function developerMeta(locale: Locale, slug: string): Metadata {
 export function serviceMeta(locale: Locale, slug: string): Metadata {
     const s = getServices(locale).find((x) => x.slug === slug);
     if (!s) return {};
-    return pageMeta({title: s.seoTitle, description: summarize(s.description, 160), path: `/services/${slug}/`, locale, translated: true, keywords: [...s.tech, "Webino-Dev", s.title]});
+    return pageMeta({title: s.seoTitle, description: summarize(s.description, 160), path: `/services/${slug}/`, locale, translated: true, keywords: [...s.tech, locale === "fa" ? AUTHOR : AUTHOR_EN, "Webino-Dev", s.title]});
 }
 
 export function projectMeta(locale: Locale, slug: string): Metadata {
     const p = getProjects(locale).find((x) => x.slug === slug);
     if (!p) return {};
-    return pageMeta({title: `${p.title} | Webino-Dev`, description: summarize(p.description), path: `/projects/${slug}/`, locale, translated: true, image: `${SITE}/${p.img}`, type: "article", keywords: [...p.tech, "Webino-Dev"]});
+    return pageMeta({title: `${p.title} | Webino-Dev`, description: summarize(p.description), path: `/projects/${slug}/`, locale, translated: true, image: `${SITE}/${p.img}`, type: "article", keywords: [...p.tech, locale === "fa" ? AUTHOR : AUTHOR_EN, "Webino-Dev"]});
 }
 
 export function blogMeta(locale: Locale): Metadata {

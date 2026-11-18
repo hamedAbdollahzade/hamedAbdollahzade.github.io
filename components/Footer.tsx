@@ -3,7 +3,7 @@
 import Link from "next/link";
 import {getBrand, getProjects, getServices} from "@/data/localized";
 import {localePath} from "@/lib/locale";
-import {waLink} from "@/lib/site";
+import {AUTHOR, AUTHOR_EN, waLink} from "@/lib/site";
 import {Logo} from "./Icons";
 import {useLocale} from "./LocaleProvider";
 
@@ -40,7 +40,9 @@ export default function Footer() {
                     <li><a href="https://www.linkedin.com/in/hamed-abdollahzade" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                 </ul></div>
             </div>
-            <p className="footer-copy">© {new Date().getFullYear()} {brand.name}. {t.footer.rights}</p>
+            <p className="footer-copy">
+                © {new Date().getFullYear()} {brand.name}. {t.footer.rights} {t.footer.madeBy} <Link href={to("/developers/hamed-abdollahzade/")}>{locale === "fa" ? AUTHOR : AUTHOR_EN}</Link>
+            </p>
         </footer>
     );
 }

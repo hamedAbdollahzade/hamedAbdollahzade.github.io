@@ -6,13 +6,12 @@ import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
 import Avatar from "@/components/Avatar";
 import Shell from "@/components/Shell";
-import UbuntuTerminal from "@/components/UbuntuTerminal";
 import TechStrip from "@/components/TechStrip";
 import {getBrand, getCourseCopy, getCourses, getDevelopers, getFaq, getProcess, getProjects, getServices} from "@/data/localized";
 import {getPosts} from "@/lib/blog";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
-import {OG_IMAGE, SITE, summarize, waLink} from "@/lib/site";
+import {AUTHOR, AUTHOR_EN, AUTHOR_NAMES, AUTHOR_URL, OG_IMAGE, SITE, summarize, waLink} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 const SAME_AS = ["https://github.com/hamedAbdollahzade", "https://www.linkedin.com/in/hamed-abdollahzade"];
@@ -41,11 +40,16 @@ function graph(locale: Locale) {
                 knowsAbout: ["Artificial intelligence", "هوش مصنوعی", "Web development", "Admin panels", "CRM", "ERP", "PWA", "React", "Next.js", "TypeScript"],
             },
             {
-                "@type": "Person", "@id": `${SITE}/#person`, name: "حامد عبداله زاده",
-                alternateName: ["Hamed Abdollahzade", "حامد عبدالله‌زاده"], jobTitle: "Frontend Developer",
-                image: `${SITE}/assets/images/me.jpg`, url: `${SITE}/developers/hamed-abdollahzade/`, worksFor: {"@id": `${SITE}/#org`}, sameAs: SAME_AS,
+                "@type": "Person", "@id": `${SITE}/#person`, name: locale === "fa" ? AUTHOR : AUTHOR_EN,
+                alternateName: AUTHOR_NAMES.filter((n) => n !== (locale === "fa" ? AUTHOR : AUTHOR_EN)),
+                jobTitle: locale === "fa" ? "طراح و توسعه‌دهنده‌ی وب" : "Web designer and frontend developer",
+                description: t.home.meta.description,
+                image: `${SITE}/assets/images/me.jpg`, url: AUTHOR_URL, mainEntityOfPage: `${SITE}${localePath(locale, "/")}`,
+                homeLocation: {"@type": "Place", name: locale === "fa" ? "مشهد، ایران" : "Mashhad, Iran"},
+                knowsAbout: ["Web design", "طراحی سایت", "Frontend development", "React", "Next.js", "TypeScript", "PWA", "Admin panels", "Artificial intelligence"],
+                worksFor: {"@id": `${SITE}/#org`}, sameAs: SAME_AS,
             },
-            {"@type": "WebSite", "@id": `${SITE}/#website`, url: `${SITE}/`, name: "Webino-Dev", inLanguage: ["fa", "en"], publisher: {"@id": `${SITE}/#org`}},
+            {"@type": "WebSite", "@id": `${SITE}/#website`, url: `${SITE}/`, name: "Webino-Dev", alternateName: AUTHOR_NAMES, inLanguage: ["fa", "en"], publisher: {"@id": `${SITE}/#org`}, author: {"@id": `${SITE}/#person`}},
         ],
     };
 }
@@ -69,14 +73,6 @@ export default function HomeView({locale}: {locale: Locale}) {
 
             <Hero/>
             <TechStrip/>
-
-            <section className="lr-split" id="terminal" aria-labelledby="terminal-title" data-reveal>
-                <div className="lr-split-text">
-                    <h2 className="lr-h2" id="terminal-title">{t.home.terminalTitle}<br/><span className="lr-title-dim">{t.home.terminalTitle2}</span></h2>
-                    <p>{t.home.terminalDesc}</p>
-                </div>
-                <UbuntuTerminal lessons={posts.length.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}/>
-            </section>
 
             <section className="section" id="services" aria-labelledby="services-title" data-reveal>
                 <div className="block-head">

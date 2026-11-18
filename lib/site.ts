@@ -6,6 +6,10 @@ import type {Locale} from "./locale";
 export const SITE = "https://webino-dev.ir";
 export const OG_IMAGE = `${SITE}/assets/images/og-image.jpg`;
 export const AUTHOR = "حامد عبداله زاده";
+export const AUTHOR_EN = "Hamed Abdollahzade";
+/** Spellings people search for; used in keywords and structured data. */
+export const AUTHOR_NAMES = [AUTHOR, "حامد عبدالله زاده", "حامد عبداله‌زاده", "حامد عبدالله‌زاده", AUTHOR_EN];
+export const AUTHOR_URL = `${SITE}/developers/hamed-abdollahzade/`;
 export const ORG = `${BRAND.name} | وبینو دِو`;
 
 export const waLink = (text = "سلام، می‌خواهم درباره‌ی یک ایده/پروژه مشورت بگیرم.") =>

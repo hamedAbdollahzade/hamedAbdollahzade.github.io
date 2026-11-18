@@ -7,15 +7,12 @@ import {COURSES_EN} from "./en/courses";
 import {DEVELOPER_EN, SKILL_TITLES_EN, TIMELINE_EN} from "./en/developers";
 import {PROJECTS_EN} from "./en/projects";
 import {BRAND_EN, FAQ_EN, PROCESS_EN, SERVICES_EN} from "./en/services";
-import {SLIDES_EN} from "./en/slides";
 import {DEVELOPERS} from "./developers";
 import type {Developer} from "./developers";
 import {PROJECTS} from "./projects";
 import type {Project} from "./projects";
 import {BRAND, FAQ, PROCESS, SERVICES} from "./services";
 import type {Service} from "./services";
-import {SLIDES} from "./slides";
-import type {Slide} from "./slides";
 
 /** Services in the given language. */
 export function getServices(locale: Locale): Service[] {
@@ -83,17 +80,6 @@ export function getDevelopers(locale: Locale): Developer[] {
             skillGroups: dev.skillGroups?.map((g) => ({...g, title: SKILL_TITLES_EN[g.title] ?? g.title})),
             timeline: dev.timeline?.map((entry, i) => ({...entry, ...TIMELINE_EN[i]})),
         };
-    });
-}
-
-/** Hero slides with texts in the given language. */
-export function getSlides(locale: Locale): Slide[] {
-    if (locale === "fa") return SLIDES;
-    return SLIDES.map((slide) => {
-        const copy = SLIDES_EN[slide.id];
-        if (!copy) return slide;
-        const {ctaLabel, ...rest} = copy;
-        return {...slide, ...rest, cta: {...slide.cta, label: ctaLabel}};
     });
 }
 
