@@ -20,6 +20,8 @@ A `Dockerfile` and `docker-compose.yml` are included to serve the built site wit
 docker compose up -d --build
 ```
 
+Project requests from the chat go to WhatsApp. To also POST them to your own backend, set `NEXT_PUBLIC_FORM_ENDPOINT` at build time (the `FORM_ENDPOINT` repository variable in GitHub Actions, or a Docker build arg).
+
 ## Content
 
 The site is bilingual: Persian at `/` and English at `/en/`, with a dark and a light theme. Persian content lives in `data/`, English copy in `data/en/`, interface strings in `lib/ui.ts`, and the tutorials in `content/blog/*.md` (Persian only).
