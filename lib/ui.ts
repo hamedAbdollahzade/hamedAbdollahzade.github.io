@@ -47,7 +47,6 @@ const fa = {
     tech: {label: "فناوری‌هایی که با آن‌ها کار می‌کنیم"},
     intro: {label: (name: string) => `در حال بارگذاری ${name}`, skip: "رد کردن"},
     announce: {text: "مشاوره و پیشنهاد اولیه‌ی پروژه", strong: "رایگان است", cta: "شروع گفتگو"},
-    serviceBar: "خدمات ما",
     home: {
         heroEyebrow: "حامد عبداله زاده · طراح و توسعه‌دهنده‌ی وب در مشهد",
         heroTitle: "سایتی که",
@@ -160,7 +159,6 @@ const en: typeof fa = {
     tech: {label: "Technologies we work with"},
     intro: {label: (name: string) => `Loading ${name}`, skip: "Skip"},
     announce: {text: "Your first consultation and project proposal", strong: "are free", cta: "Start a chat"},
-    serviceBar: "Our services",
     home: {
         heroEyebrow: "Hamed Abdollahzade · Web designer and developer in Mashhad",
         heroTitle: "A website that",

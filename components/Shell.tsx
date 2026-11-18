@@ -7,7 +7,7 @@ import type {ReactNode} from "react";
 import {getBrand, getProjects, getServices} from "@/data/localized";
 import {localePath, parsePath} from "@/lib/locale";
 import Footer from "./Footer";
-import {ChevronIcon, Logo, MenuIcon, PhoneIcon, ServiceIcon} from "./Icons";
+import {ChevronIcon, Logo, MenuIcon, PhoneIcon} from "./Icons";
 import LanguageSwitch from "./LanguageSwitch";
 import OpenChat from "./OpenChat";
 import {useLocale} from "./LocaleProvider";
@@ -24,15 +24,6 @@ const NAV = [
 ] as const;
 
 const SPY_IDS = ["services", "projects", "learn", "developers", "process", "faq", "contact"];
-
-/* Short labels for the services row under the header: a name and a small Latin tag, like a product menu. */
-const SERVICE_TAGS: Record<string, {fa: string; en: string; tag: string}> = {
-    "ai-solutions": {fa: "هوش مصنوعی", en: "AI solutions", tag: "AI"},
-    "website-design": {fa: "طراحی سایت", en: "Websites", tag: "Web"},
-    "admin-panel-crm": {fa: "پنل مدیریتی", en: "Admin panels", tag: "CRM / ERP"},
-    "web-app-pwa": {fa: "اپلیکیشن وب", en: "Web apps", tag: "PWA"},
-    "device-interface": {fa: "رابط سخت‌افزار", en: "Hardware UI", tag: "IoT"},
-};
 
 export interface Crumb { label: string; href?: string }
 
@@ -165,20 +156,6 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                     <Link className="btn btn--lg m-cta" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>
                 </nav>
             </header>
-            <nav className="svc-bar" aria-label={t.serviceBar}>
-                <div className="svc-bar-in">
-                    {getServices(locale).map((s) => {
-                        const tag = SERVICE_TAGS[s.slug];
-                        const href = `/services/${s.slug}/`;
-                        return (
-                            <Link key={s.slug} className={`svc-link${currentPath === href ? " is-active" : ""}`} href={localePath(locale, href)}>
-                                <span className="svc-icon"><ServiceIcon slug={s.slug}/></span>
-                                <span className="svc-text"><span>{tag ? tag[locale] : s.title}</span>{tag && <small dir="ltr">({tag.tag})</small>}</span>
-                            </Link>
-                        );
-                    })}
-                </div>
-            </nav>
             <div className={`scrim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true"/>
 
             <div className="main">
