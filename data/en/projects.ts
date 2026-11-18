@@ -5,6 +5,8 @@ export interface ProjectCopy {
   description: string;
   learned: string[];
   story?: {title: string; text: string}[];
+  /** Same order as `parts` in data/projects.ts; captions follow the screenshot order. */
+  parts?: {title: string; text: string; points?: string[]; desktopCaptions?: string[]; mobileCaptions?: string[]}[];
   linkLabels: string[];
   imageCaptions?: string[];
   galleryCaptions?: string[];
@@ -16,14 +18,78 @@ export const PROJECTS_EN: Record<string, ProjectCopy> = {
     description: "At Robot Market I work on a set of products connected to vending machines. The shared problem is giving people a usable way to manage and work with a machine, both online and offline. My role is frontend development for several parts of this set, from the interface on the device to the panels and the main website.",
     learned: [
       "Building interfaces that respect offline and hardware limits",
+      "Rewriting an old HTML/JavaScript interface in React while keeping it light enough for the ESP32",
       "Implementing pricing, user and wallet management flows",
-      "Working on several related products with different needs and runtime environments",
+      "Building an installable PWA with a local lock, biometric sign-in and encrypted device data",
+      "Working on several related products with different runtime environments, from a hardware board to a 3D game and video",
     ],
-    story: [
-      {title: "Connecting to devices: PWA and online panel", text: "I work on a PWA that connects automatically to offline vending machines, and on the online panel: two parts with different connection conditions that each need their own interface and flow."},
-      {title: "Local management: React on ESP32", text: "Another part of my work is an offline React app for the ESP32 module. In it I work on pricing, adding users and the wallet of vending machines."},
-      {title: "Next-generation vending: Orange Pi", text: "In the new devices project I work on an Orange Pi board and an offline React app so the device's user interface runs locally."},
-      {title: "Product website: Next.js", text: "Next to device software and panels, frontend development of the main Robot Market website with Next.js is also part of my work."},
+    parts: [
+      {
+        title: "ESP32 interface, first version: plain HTML and JavaScript",
+        text: "The first version of the device admin interface (ESP-DEFAULT-V1) was thirteen HTML pages with plain CSS and JavaScript, stored as strings inside the ESP32 firmware. The firmware filled in the labels and values when it served each page. The pages were simple and separate: login, the name, quantity and price of the product in each row, customer wallet balances, Wi-Fi and card reader settings, and a live log. This version was the starting point for the React rewrite.",
+        desktopCaptions: ["First version: product, quantity and price per row", "First version: customer wallet balances"],
+        mobileCaptions: ["First version: login page", "First version: settings menu"],
+      },
+      {
+        title: "ESP32 interface, rewritten in React",
+        text: "I rewrote the first version from scratch in React (robot-market-ui-offline-Esp32). It still runs on the ESP32 itself without internet, but it is now a full responsive panel with a sidebar on desktop and a drawer on mobile. The build output is deliberately one HTML, one JavaScript and one CSS file so the board's small memory can serve it easily. The project has reached version 2.4 with more than 140 commits.",
+        points: [
+          "Sign-in with a password or a one-time code, password recovery and a forced change on first login",
+          "Dashboard for sales, transactions, inventory and device health",
+          "Channel price and inventory management, users and wallets",
+          "Wi-Fi, access point, date and time, card reader, MQTT and OTA update settings",
+          "Pages and buttons follow the permissions the device sends",
+          "A mock backend for development without a real device",
+        ],
+        desktopCaptions: ["Sales dashboard and device status", "Channel price and inventory management", "Hardware, firmware and network information"],
+        mobileCaptions: ["Sign-in with a password or one-time code", "Dashboard on mobile", "Product management", "Network and device settings"],
+      },
+      {
+        title: "Next-generation vending: Orange Pi",
+        text: "In the new devices project I work on an Orange Pi board and an offline React app so the device's user interface runs locally.",
+      },
+      {
+        title: "PWA launcher for managing devices",
+        text: "An installable app that takes the admin to the online panel and to the offline panels of devices on the local network. It only runs when installed; in a normal browser tab it shows an install guide.",
+        points: [
+          "A 6-digit PIN stored as a SHA-256 hash, plus fingerprint, Face ID or Windows Hello sign-in",
+          "Automatic lock after two minutes in the background",
+          "Register local devices with DHCP/mDNS or a fixed IP and open their panel inside the app",
+          "Device and online panel passwords encrypted with AES-GCM",
+          "Persian and English, light and dark themes, Persian calendar and a real internet check",
+        ],
+        desktopCaptions: ["Hub: online panel and offline devices", "Install guide in a normal browser tab"],
+        mobileCaptions: ["Start screen", "Setting the 6-digit PIN", "Device management hub", "Install guide"],
+      },
+      {
+        title: "Online admin panel",
+        text: "The frontend of the Robot Market admin panel with Next.js: login, dashboard, products and devices, orders, users and permissions, support tickets and settings. The code is split by feature and tested with Vitest and Playwright. The data is sample data until the backend is ready.",
+        desktopCaptions: ["Admin dashboard", "Products and devices", "Support tickets", "Panel login"],
+        mobileCaptions: ["Dashboard on mobile", "Orders", "Users and permissions"],
+      },
+      {
+        title: "Product showcase and shop website",
+        text: "The Robot Market vending machine website with Next.js: an animated showcase of the machines, a page for each model, a cart that survives a reload, sign-in with a one-time code or a password, and a customer dashboard. The site is bilingual, has light and dark themes and is ready to run with Docker.",
+        desktopCaptions: ["Home page", "Model showcase", "Machine list", "48-channel model page"],
+        mobileCaptions: ["Home page on mobile", "Model showcase", "Machine list", "Model page"],
+      },
+      {
+        title: "Robot Market link hub",
+        text: "A light, responsive page that gathers all the ways to reach Robot Market in one grid: website, phone orders, Instagram, messenger channel and addresses. The output is fully static and published on GitHub Pages.",
+        desktopCaptions: ["Link hub on desktop"],
+        mobileCaptions: ["Link hub on mobile"],
+      },
+      {
+        title: "3D game “Operation Mashhad”",
+        text: "A non-violent 3D browser game for the brand: a father and child leave the factory, find Robot Market vending machines in the streets of Mashhad and earn points with every purchase. The guide robot comes out of the machine and helps them. The Three.js engine is separate from the React interface, the game has touch controls on mobile and runs offline as a PWA.",
+        desktopCaptions: ["Game start screen", "Walking through the city to a machine"],
+        mobileCaptions: ["Start screen on mobile", "Playing with touch controls"],
+      },
+      {
+        title: "Promo videos with Remotion",
+        text: "Vertical 1080×1920 videos for Instagram Reels, built in code with Remotion: an introduction to the 35, 48 and 60-channel models with the robot character, voice-over and music, plus a fantasy version with new scenes and voices.",
+        mobileCaptions: ["Intro reel opening", "35-channel model", "Fantasy version: 35-channel model", "Fantasy version: snacks"],
+      },
     ],
     linkLabels: ["Robot Market website"],
     imageCaptions: ["Robot Market admin panel"],

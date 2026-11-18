@@ -20,7 +20,8 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
     const prev = projects[(index - 1 + projects.length) % projects.length];
     const next = projects[(index + 1) % projects.length];
     const images = p.images ?? (p.gallery ? [] : [{src: p.img, caption: p.title}]);
-    const allImages = [...images, ...(p.gallery ?? [])];
+    const partImages = (p.parts ?? []).flatMap((part) => [...(part.desktop ?? []), ...(part.mobile ?? [])]);
+    const allImages = [...images, ...(p.gallery ?? []), ...partImages];
     const url = `${SITE}${localePath(locale, `/projects/${slug}/`)}`;
     const rtl = locale === "fa";
 
@@ -57,6 +58,43 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                 {(p.story ?? []).map((c) => (
                     <section key={c.title}><h2>{c.title}</h2><p>{c.text}</p></section>
                 ))}
+                {(p.parts ?? []).map((part) => {
+                    const both = Boolean(part.desktop?.length && part.mobile?.length);
+                    return (
+                        <section className="part" key={part.title}>
+                            <h2>{part.title}</h2>
+                            <p>{part.text}</p>
+                            {part.points && <ul className="list">{part.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>}
+                            {part.tech && <ul className="tags">{part.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>}
+                            {part.desktop && (
+                                <>
+                                    {both && <h3 className="part-label">{t.project.desktop}</h3>}
+                                    <div className="shots">
+                                        {part.desktop.map((s) => (
+                                            <figure className="shot" key={s.src}>
+                                                <a href={`/${s.src}`} target="_blank" rel="noopener"><Image src={`/${s.src}`} alt={s.caption} width={s.width} height={s.height} loading="lazy"/></a>
+                                                <figcaption>{s.caption}</figcaption>
+                                            </figure>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                            {part.mobile && (
+                                <>
+                                    {both && <h3 className="part-label">{t.project.mobile}</h3>}
+                                    <div className="gallery">
+                                        {part.mobile.map((s) => (
+                                            <figure className="gallery-item" key={s.src}>
+                                                <a href={`/${s.src}`} target="_blank" rel="noopener"><Image src={`/${s.src}`} alt={s.caption} width={s.width} height={s.height} loading="lazy"/></a>
+                                                <figcaption>{s.caption}</figcaption>
+                                            </figure>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                        </section>
+                    );
+                })}
                 {p.gallery && (
                     <>
                         <h2>{t.project.appImages}</h2>

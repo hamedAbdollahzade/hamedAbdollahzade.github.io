@@ -1,6 +1,30 @@
 /* Project data: single source for the home page cards and the generated project pages
    (rendered by app/projects/[slug]/page.tsx). */
 
+export interface Screenshot {
+  src: string;
+  caption: string;
+  width: number;
+  height: number;
+}
+
+/** One sub-project of a larger project, with its own text and screenshots. */
+export interface ProjectPart {
+  title: string;
+  text: string;
+  points?: string[];
+  tech?: string[];
+  /** Wide (desktop) screenshots. */
+  desktop?: Screenshot[];
+  /** Tall (phone) screenshots or vertical video frames. */
+  mobile?: Screenshot[];
+}
+
+const RM = "assets/images/robot-market";
+const desk = (dir: string, name: string, caption: string): Screenshot => ({src: `${RM}/${dir}/${name}-desktop.webp`, caption, width: 1440, height: 900});
+const phone = (dir: string, name: string, caption: string): Screenshot => ({src: `${RM}/${dir}/${name}-mobile.webp`, caption, width: 600, height: 1298});
+const frame = (name: string, caption: string): Screenshot => ({src: `${RM}/video/${name}.webp`, caption, width: 600, height: 1066});
+
 export interface Project {
   id: number;
   slug: string;
@@ -8,6 +32,8 @@ export interface Project {
   description: string;
   learned: string[];
   story?: {title: string; text: string}[];
+  /** Sub-projects shown one after another, each with text and screenshots. */
+  parts?: ProjectPart[];
   tech: string[];
   links: {label: string; url: string}[];
   img: string;
@@ -28,16 +54,142 @@ export const PROJECTS: Project[] = [
     description: "در ربات مارکت روی مجموعه‌ای از محصولات متصل به دستگاه‌های وندینگ کار می‌کنم. مسئله مشترک این محصولات، فراهم‌کردن تجربه‌ای قابل استفاده برای مدیریت و کار با دستگاه، هم در دسترسی آنلاین و هم در محیط آفلاین است. نقش من توسعه فرانت‌اند چند بخش از این مجموعه، از رابط روی دستگاه تا پنل و وب‌سایت اصلی است.",
     learned: [
       "توسعه رابط‌های کاربری متناسب با محدودیت‌های اجرای آفلاین و سخت‌افزار",
+      "بازنویسی یک رابط قدیمی HTML/JavaScript با React بدون ازدست‌دادن سبکی آن روی ESP32",
       "پیاده‌سازی جریان‌های مدیریت قیمت‌گذاری، کاربران و کیف پول",
-      "کار روی چند محصول مرتبط با نیازها و محیط‌های اجرای متفاوت",
+      "ساخت PWA نصب‌شونده با قفل محلی، ورود بیومتریک و رمزنگاری اطلاعات دستگاه‌ها",
+      "کار روی چند محصول مرتبط با نیازها و محیط‌های اجرای متفاوت، از برد سخت‌افزاری تا بازی سه‌بعدی و ویدیو",
     ],
-    story: [
-      {title: "اتصال به دستگاه؛ PWA و پنل آنلاین", text: "روی برنامه PWA برای اتصال خودکار به دستگاه‌های وندینگ آفلاین و همچنین پنل آنلاین کار می‌کنم؛ دو بخش با شرایط اتصال متفاوت که هرکدام به رابط و جریان کار متناسب نیاز دارند."},
-      {title: "مدیریت محلی؛ React و ESP32", text: "بخش دیگری از کارم، توسعه برنامه React آفلاین برای ماژول ESP32 است. در این برنامه روی مدیریت قیمت‌گذاری، افزودن کاربر و کیف پول دستگاه‌های وندینگ کار می‌کنم."},
-      {title: "نسل جدید وندینگ؛ Orange Pi", text: "در پروژه دستگاه‌های جدید، روی برد Orange Pi و برنامه React آفلاین کار می‌کنم تا رابط کاربری مورد نیاز دستگاه در محیط محلی اجرا شود."},
-      {title: "معرفی محصول؛ وب‌سایت Next.js", text: "در کنار نرم‌افزارهای دستگاه و پنل‌ها، توسعه فرانت‌اند سایت اصلی ربات مارکت با Next.js نیز بخشی از حوزه کاری من است."},
+    parts: [
+      {
+        title: "رابط ESP32، نسخه‌ی اول: HTML و JavaScript خالص",
+        text: "نسخه‌ی اول رابط مدیریت دستگاه (ESP-DEFAULT-V1) سیزده صفحه‌ی HTML با CSS و JavaScript خالص بود که به‌صورت رشته داخل فریمور ESP32 قرار می‌گرفت. فریمور هنگام ارسال هر صفحه، برچسب‌ها و مقدارها را جای‌گذاری می‌کرد. صفحه‌ها ساده و جدا از هم بودند: ورود، تنظیم نام، تعداد و قیمت کالای هر ردیف، موجودی کیف پول مشتریان، تنظیمات وای‌فای و کارتخوان، و گزارش لحظه‌ای. همین نسخه پایه‌ی بازنویسی بعدی با React شد.",
+        tech: ["HTML", "CSS", "JavaScript", "ESP32"],
+        desktop: [
+          desk("esp-v1", "products", "نسخه‌ی اول: تنظیم کالا، تعداد و قیمت هر ردیف"),
+          desk("esp-v1", "balance", "نسخه‌ی اول: موجودی کیف پول مشتریان"),
+        ],
+        mobile: [
+          phone("esp-v1", "login", "نسخه‌ی اول: صفحه‌ی ورود"),
+          phone("esp-v1", "settings", "نسخه‌ی اول: منوی تنظیمات"),
+        ],
+      },
+      {
+        title: "رابط ESP32، بازنویسی با React",
+        text: "نسخه‌ی اول را از پایه با React بازنویسی کردم (robot-market-ui-offline-Esp32). برنامه همچنان روی خود ESP32 و بدون اینترنت اجرا می‌شود، اما حالا یک پنل کامل و واکنش‌گرا با منوی کناری در دسکتاپ و منوی کشویی در موبایل است. خروجی ساخت عمداً فقط یک فایل HTML، یک JavaScript و یک CSS است تا حافظه‌ی محدود برد آن را به‌راحتی سرو کند. این پروژه تا نسخه‌ی ۲.۴ و بیش از ۱۴۰ کامیت پیش رفته است.",
+        points: [
+          "ورود با رمز عبور یا رمز یک‌بارمصرف، بازیابی رمز و تغییر رمز در اولین ورود",
+          "داشبورد فروش، تراکنش‌ها، موجودی و سلامت دستگاه",
+          "مدیریت قیمت و موجودی کانال‌ها، کاربران و کیف پول",
+          "تنظیمات وای‌فای، نقطه‌ی دسترسی، تاریخ و ساعت، کارتخوان، MQTT و به‌روزرسانی OTA",
+          "نمایش صفحه‌ها و دکمه‌ها بر اساس دسترسی‌هایی که دستگاه می‌فرستد",
+          "بک‌اند شبیه‌ساز برای توسعه بدون دستگاه واقعی",
+        ],
+        tech: ["React", "Vite", "Redux Toolkit", "Axios", "Tailwind CSS", "ESP32"],
+        desktop: [
+          desk("esp32", "dashboard", "داشبورد فروش و وضعیت دستگاه"),
+          desk("esp32", "prices", "مدیریت قیمت و موجودی کانال‌ها"),
+          desk("esp32", "info", "اطلاعات سخت‌افزار، فریمور و شبکه"),
+        ],
+        mobile: [
+          phone("esp32", "login", "ورود با رمز یا کد یک‌بارمصرف"),
+          phone("esp32", "dashboard", "داشبورد در موبایل"),
+          phone("esp32", "prices", "مدیریت کالاها"),
+          phone("esp32", "settings", "تنظیمات شبکه و دستگاه"),
+        ],
+      },
+      {
+        title: "نسل جدید وندینگ: Orange Pi",
+        text: "در پروژه‌ی دستگاه‌های جدید، روی برد Orange Pi و برنامه‌ی React آفلاین کار می‌کنم تا رابط کاربری مورد نیاز دستگاه در محیط محلی اجرا شود.",
+        tech: ["React", "Orange Pi"],
+      },
+      {
+        title: "لانچر PWA برای مدیریت دستگاه‌ها",
+        text: "یک برنامه‌ی نصب‌شونده که مدیر را به پنل آنلاین و به پنل آفلاین دستگاه‌های داخل شبکه‌ی محلی می‌رساند. برنامه فقط در حالت نصب‌شده اجرا می‌شود و در تب معمولی مرورگر راهنمای نصب را نشان می‌دهد.",
+        points: [
+          "رمز ۶ رقمی با هش SHA-256 و ورود با اثرانگشت، Face ID یا Windows Hello",
+          "قفل خودکار بعد از دو دقیقه ماندن برنامه در پس‌زمینه",
+          "ثبت دستگاه محلی با DHCP/mDNS یا IP ثابت و بازکردن پنل دستگاه داخل برنامه",
+          "رمزنگاری رمز دستگاه‌ها و پنل آنلاین با AES-GCM",
+          "فارسی و انگلیسی، تم روشن و تیره، تاریخ شمسی و بررسی واقعی اتصال اینترنت",
+        ],
+        tech: ["React", "Vite", "PWA", "Redux Toolkit", "Ant Design", "Tailwind CSS"],
+        desktop: [
+          desk("launcher", "hub", "هاب: پنل آنلاین و دستگاه‌های آفلاین"),
+          desk("launcher", "install", "راهنمای نصب در تب معمولی مرورگر"),
+        ],
+        mobile: [
+          phone("launcher", "splash", "صفحه‌ی شروع"),
+          phone("launcher", "auth", "تعیین رمز ۶ رقمی"),
+          phone("launcher", "hub", "هاب مدیریت دستگاه‌ها"),
+          phone("launcher", "install", "راهنمای نصب"),
+        ],
+      },
+      {
+        title: "پنل مدیریت آنلاین",
+        text: "فرانت‌اند پنل مدیریت ربات مارکت با Next.js: ورود، داشبورد، محصولات و دستگاه‌ها، سفارش‌ها، کاربران و دسترسی‌ها، تیکت‌های پشتیبانی و تنظیمات. ساختار پروژه بر اساس بخش‌ها (feature) جدا شده و با Vitest و Playwright تست می‌شود. داده‌ها فعلاً نمونه هستند تا بک‌اند آماده شود.",
+        tech: ["Next.js", "Ant Design", "Tailwind CSS", "Redux Toolkit", "Axios", "Vitest", "Playwright"],
+        desktop: [
+          desk("admin", "dashboard", "داشبورد مدیریت"),
+          desk("admin", "products", "محصولات و دستگاه‌ها"),
+          desk("admin", "tickets", "تیکت‌های پشتیبانی"),
+          desk("admin", "login", "ورود به پنل"),
+        ],
+        mobile: [
+          phone("admin", "dashboard", "داشبورد در موبایل"),
+          phone("admin", "orders", "سفارش‌ها"),
+          phone("admin", "users", "کاربران و دسترسی‌ها"),
+        ],
+      },
+      {
+        title: "سایت معرفی و فروش دستگاه‌ها",
+        text: "سایت معرفی دستگاه‌های وندینگ ربات مارکت با Next.js: ویترین متحرک دستگاه‌ها، صفحه‌ی هر مدل، سبد خریدی که بعد از بارگذاری دوباره هم حفظ می‌شود، ورود با کد یک‌بارمصرف یا رمز عبور و داشبورد مشتری. سایت دوزبانه است، تم روشن و تیره دارد و برای اجرا با Docker آماده شده است.",
+        tech: ["Next.js", "Ant Design", "Tailwind CSS", "Redux Toolkit", "Axios", "Docker"],
+        desktop: [
+          desk("showcase", "home", "صفحه‌ی اصلی"),
+          desk("showcase", "home2", "ویترین مدل‌ها"),
+          desk("showcase", "products", "فهرست دستگاه‌ها"),
+          desk("showcase", "product", "صفحه‌ی مدل ۴۸ کانال"),
+        ],
+        mobile: [
+          phone("showcase", "home", "صفحه‌ی اصلی در موبایل"),
+          phone("showcase", "home2", "ویترین مدل‌ها"),
+          phone("showcase", "products", "فهرست دستگاه‌ها"),
+          phone("showcase", "product", "صفحه‌ی مدل"),
+        ],
+      },
+      {
+        title: "لینک‌هاب ربات مارکت",
+        text: "یک صفحه‌ی سبک و واکنش‌گرا که راه‌های ارتباط با ربات مارکت را در یک گرید جمع می‌کند: وب‌سایت، سفارش تلفنی، اینستاگرام، کانال پیام‌رسان و آدرس‌ها. خروجی کاملاً استاتیک است و روی GitHub Pages منتشر می‌شود.",
+        tech: ["Next.js", "PWA", "GitHub Pages"],
+        desktop: [desk("hub", "home", "لینک‌هاب در دسکتاپ")],
+        mobile: [phone("hub", "home", "لینک‌هاب در موبایل")],
+      },
+      {
+        title: "بازی سه‌بعدی «عملیات مشهد»",
+        text: "یک بازی مرورگری سه‌بعدی و بدون خشونت برای معرفی برند: پدر و فرزندی از کارخانه راه می‌افتند، در خیابان‌های مشهد دستگاه‌های وندینگ ربات مارکت را پیدا می‌کنند و با هر خرید امتیاز می‌گیرند. روبات راهنما از دستگاه بیرون می‌آید و آن‌ها را راهنمایی می‌کند. موتور Three.js از رابط React جداست، بازی روی موبایل کنترل لمسی دارد و به‌صورت PWA آفلاین هم اجرا می‌شود.",
+        tech: ["React", "Three.js", "Redux Toolkit", "Tailwind CSS", "PWA"],
+        desktop: [
+          desk("game", "start", "صفحه‌ی شروع بازی"),
+          desk("game", "play", "گشت‌وگذار در شهر و رسیدن به دستگاه"),
+        ],
+        mobile: [
+          phone("game", "start", "صفحه‌ی شروع در موبایل"),
+          phone("game", "play2", "بازی با کنترل لمسی"),
+        ],
+      },
+      {
+        title: "ویدیوهای معرفی با Remotion",
+        text: "ویدیوهای عمودی ۱۰۸۰×۱۹۲۰ برای ریلز اینستاگرام که با کد و Remotion ساخته شده‌اند: معرفی مدل‌های ۳۵، ۴۸ و ۶۰ کانال با کاراکتر روبات، گویندگی و موسیقی، و یک نسخه‌ی فانتزی با صحنه‌ها و صداهای تازه.",
+        tech: ["Remotion", "React", "TypeScript"],
+        mobile: [
+          frame("intro", "شروع ریلز معرفی"),
+          frame("model-35", "مدل ۳۵ کانال"),
+          frame("fantasy-35", "نسخه‌ی فانتزی: مدل ۳۵ کانال"),
+          frame("fantasy-snacks", "نسخه‌ی فانتزی: تنقلات"),
+        ],
+      },
     ],
-    tech: ["React", "Next.js", "PWA", "REST API", "WebSocket", "ESP32", "Orange Pi"],
+    tech: ["React", "Next.js", "Vite", "PWA", "Redux Toolkit", "Ant Design", "Tailwind CSS", "Three.js", "Remotion", "ESP32", "Orange Pi"],
     links: [{label: "وب‌سایت ربات مارکت", url: "https://my-rm.com/"}],
     img: "assets/images/robot-market.webp",
     images: [{src: "assets/images/robot-market.webp", caption: "نمای پنل مدیریت ربات مارکت"}],

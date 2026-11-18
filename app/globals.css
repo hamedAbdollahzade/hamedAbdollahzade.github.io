@@ -189,6 +189,16 @@ button { font: inherit; color: inherit; }
 .gallery-item { margin: 0; padding: 14px 14px 12px; border-radius: 20px; background: var(--g-gallery); border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
 .gallery-item img { width: 100%; height: 360px; object-fit: contain; }
 .gallery-item figcaption { font-size: 13.5px; color: var(--muted); text-align: center; line-height: 1.7; }
+.part { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+.part > .tags { margin: 4px 0 14px; }
+.part .gallery { grid-template-columns: repeat(auto-fill, minmax(min(200px, calc(50% - 8px)), 1fr)); }
+.part .gallery-item img { height: auto; max-height: 420px; }
+@media (max-width: 560px) { .part .gallery { gap: 10px; } .part .gallery-item { padding: 8px 8px 6px; border-radius: 14px; } }
+.part-label { font-size: 15px; font-weight: 700; color: var(--muted); margin: 18px 0 10px; }
+.shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(420px, 100%), 1fr)); gap: 16px; margin: 6px 0 12px; }
+.shot { margin: 0; }
+.shot img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+.shot figcaption { margin-top: 8px; font-size: 13.5px; color: var(--muted); text-align: center; line-height: 1.7; }
 .project-card h3 { padding-inline: 10px; font-size: 18px; font-weight: 800; line-height: 1.7; }
 .project-card p { padding-inline: 10px; color: var(--muted); font-size: 14.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .project-card .tile-more { padding-inline: 10px; }

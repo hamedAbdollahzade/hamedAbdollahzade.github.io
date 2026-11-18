@@ -49,6 +49,18 @@ export function getProjects(locale: Locale): Project[] {
             description: copy.description,
             learned: copy.learned,
             story: copy.story ?? project.story,
+            parts: project.parts?.map((part, i) => {
+                const c = copy.parts?.[i];
+                if (!c) return part;
+                return {
+                    ...part,
+                    title: c.title,
+                    text: c.text,
+                    points: c.points ?? part.points,
+                    desktop: part.desktop?.map((s, j) => ({...s, caption: c.desktopCaptions?.[j] ?? s.caption})),
+                    mobile: part.mobile?.map((s, j) => ({...s, caption: c.mobileCaptions?.[j] ?? s.caption})),
+                };
+            }),
             links: project.links.map((link, i) => ({...link, label: copy.linkLabels[i] ?? link.label})),
             images: project.images?.map((image, i) => ({...image, caption: copy.imageCaptions?.[i] ?? image.caption})),
             gallery: project.gallery?.map((image, i) => ({...image, caption: copy.galleryCaptions?.[i] ?? image.caption})),
