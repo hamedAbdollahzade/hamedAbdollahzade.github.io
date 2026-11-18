@@ -1,11 +1,15 @@
 /* English copy for services, FAQ and process. Same slugs and shape as data/services.ts. */
 
+import {BRAND} from "../services";
 import type {Service} from "../services";
+
+/** "+989107902735" -> "+98 910 790 2735", always built from BRAND.phone. */
+const intlPhone = (phone: string) => phone.replace(/^\+(\d{2})(\d{3})(\d{3})(\d+)$/, "+$1 $2 $3 $4");
 
 export const BRAND_EN = {
     tagline: "Tell us your idea; we build it with AI",
     city: "Mashhad",
-    phoneDisplay: "+98 910 790 2735",
+    phoneDisplay: intlPhone(BRAND.phone),
 };
 
 export const SERVICES_EN: Service[] = [
