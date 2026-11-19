@@ -5,7 +5,7 @@ import Shell from "@/components/Shell";
 import {getDevelopers} from "@/data/localized";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
-import {SITE, summarize} from "@/lib/site";
+import {SITE, summarize, photoAlt} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 /** The developers list in the given language. */
@@ -33,7 +33,7 @@ export default function DevelopersView({locale}: {locale: Locale}) {
                 {getDevelopers(locale).map((d) => (
                     <Link className="dev-card" href={localePath(locale, `/developers/${d.slug}/`)} key={d.slug}>
                         <div className="dev-top">
-                            <Avatar name={d.name} photo={d.photo} size={72}/>
+                            <Avatar name={d.name} photo={d.photo} size={72} alt={d.slug === "hamed-abdollahzade" ? photoAlt(locale) : `${d.name}، ${d.role}`}/>
                             <div><h2 style={{fontSize: 20, fontWeight: 800}}>{d.name}</h2><div className="dev-role">{d.role}</div></div>
                         </div>
                         <p>{summarize(d.bio, 160)}</p>

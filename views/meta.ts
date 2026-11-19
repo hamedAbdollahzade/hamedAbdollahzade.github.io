@@ -36,7 +36,8 @@ export function developerMeta(locale: Locale, slug: string): Metadata {
         locale,
         translated: true,
         type: "profile",
-        image: d.photo ? `${SITE}/${d.photo}` : undefined,
+        // Hamed's page shares the site image (his photo and name at 1200x630); others share their photo.
+        image: slug === "hamed-abdollahzade" ? undefined : d.photo ? `${SITE}/${d.photo}` : undefined,
         keywords: [d.name, d.nameEn, ...d.skills],
     });
 }

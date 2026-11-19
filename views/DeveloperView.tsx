@@ -7,7 +7,7 @@ import Shell from "@/components/Shell";
 import {getDevelopers} from "@/data/localized";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
-import {SITE} from "@/lib/site";
+import {AUTHOR_NAMES, SITE, photoAlt, photoObject} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 /** One developer profile in the given language. */
@@ -16,6 +16,9 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
     const d = getDevelopers(locale).find((x) => x.slug === slug);
     if (!d) notFound();
     const url = `${SITE}${localePath(locale, `/developers/${slug}/`)}`;
+    // Only Hamed is the site-wide person (#person); every other developer gets an id of their own.
+    const isAuthor = slug === "hamed-abdollahzade";
+    const personId = isAuthor ? `${SITE}/#person` : `${url}#person`;
     const snippet = [
         "const developer = {",
         `  name: "${d.nameEn}",`,
@@ -30,10 +33,11 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
             <JsonLd data={{
                 "@context": "https://schema.org",
                 "@graph": [
-                    {"@type": "ProfilePage", "@id": `${url}#page`, url, inLanguage: locale, mainEntity: {"@id": `${SITE}/#person`}},
+                    {"@type": "ProfilePage", "@id": `${url}#page`, url, inLanguage: locale, mainEntity: {"@id": personId}, ...(isAuthor && {primaryImageOfPage: {"@id": `${SITE}/#photo`}})},
+                    ...(isAuthor ? [photoObject(locale)] : []),
                     {
-                        "@type": "Person", "@id": `${SITE}/#person`, name: d.name, alternateName: d.nameEn, jobTitle: "Frontend Developer",
-                        image: d.photo ? `${SITE}/${d.photo}` : undefined, url, description: d.bio, knowsAbout: d.skills, worksFor: {"@id": `${SITE}/#org`}, sameAs: d.links.map((l) => l.url),
+                        "@type": "Person", "@id": personId, name: d.name, alternateName: isAuthor ? AUTHOR_NAMES.filter((n) => n !== d.name) : d.nameEn, jobTitle: d.role,
+                        image: isAuthor ? {"@id": `${SITE}/#photo`} : d.photo ? `${SITE}/${d.photo}` : undefined, url, description: d.bio, knowsAbout: d.skills, worksFor: {"@id": `${SITE}/#org`}, sameAs: d.links.map((l) => l.url),
                     },
                     {"@type": "BreadcrumbList", itemListElement: [
                         {"@type": "ListItem", position: 1, name: "Webino-Dev", item: `${SITE}${localePath(locale, "/")}`},
@@ -44,7 +48,7 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
             }}/>
             <div className="profile">
                 <aside className="card profile-side">
-                    <Avatar name={d.name} photo={d.photo} size={128} priority/>
+                    <Avatar name={d.name} photo={d.photo} size={128} priority alt={isAuthor ? photoAlt(locale) : `${d.name}، ${d.role}`}/>
                     <h1 className="block-title" style={{fontSize: 24}}>{d.name}</h1>
                     <div className="dev-role">{d.role}</div>
                     <ul className="tags" style={{justifyContent: "center"}}>{d.skills.map((s) => <li key={s}>{s}</li>)}</ul>

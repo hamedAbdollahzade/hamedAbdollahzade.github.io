@@ -11,7 +11,7 @@ import {getBrand, getCourseCopy, getCourses, getDevelopers, getFaq, getProcess, 
 import {getPosts} from "@/lib/blog";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
-import {AUTHOR, AUTHOR_EN, AUTHOR_NAMES, AUTHOR_URL, OG_IMAGE, SITE, summarize, waLink} from "@/lib/site";
+import {AUTHOR, AUTHOR_EN, AUTHOR_NAMES, AUTHOR_URL, OG_IMAGE, SITE, photoAlt, photoObject, summarize, waLink} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 const SAME_AS = ["https://github.com/hamedAbdollahzade", "https://www.linkedin.com/in/hamed-abdollahzade"];
@@ -44,11 +44,12 @@ function graph(locale: Locale) {
                 alternateName: AUTHOR_NAMES.filter((n) => n !== (locale === "fa" ? AUTHOR : AUTHOR_EN)),
                 jobTitle: locale === "fa" ? "طراح و توسعه‌دهنده‌ی وب" : "Web designer and frontend developer",
                 description: t.home.meta.description,
-                image: `${SITE}/assets/images/me.jpg`, url: AUTHOR_URL, mainEntityOfPage: `${SITE}${localePath(locale, "/")}`,
+                image: {"@id": `${SITE}/#photo`}, url: AUTHOR_URL, mainEntityOfPage: `${SITE}${localePath(locale, "/")}`,
                 homeLocation: {"@type": "Place", name: locale === "fa" ? "مشهد، ایران" : "Mashhad, Iran"},
                 knowsAbout: ["Web design", "طراحی سایت", "Frontend development", "React", "Next.js", "TypeScript", "PWA", "Admin panels", "Artificial intelligence"],
                 worksFor: {"@id": `${SITE}/#org`}, sameAs: SAME_AS,
             },
+            photoObject(locale),
             {"@type": "WebSite", "@id": `${SITE}/#website`, url: `${SITE}/`, name: "Webino-Dev", alternateName: AUTHOR_NAMES, inLanguage: ["fa", "en"], publisher: {"@id": `${SITE}/#org`}, author: {"@id": `${SITE}/#person`}},
         ],
     };
@@ -143,7 +144,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                     {getDevelopers(locale).map((d) => (
                         <Link className="dev-card" href={to(`/developers/${d.slug}/`)} key={d.slug}>
                             <div className="dev-top">
-                                <Avatar name={d.name} photo={d.photo} size={72}/>
+                                <Avatar name={d.name} photo={d.photo} size={72} alt={d.slug === "hamed-abdollahzade" ? photoAlt(locale) : `${d.name}، ${d.role}`}/>
                                 <div><h3>{d.name}</h3><div className="dev-role">{d.role}</div></div>
                             </div>
                             <p>{summarize(d.bio, 150)}</p>

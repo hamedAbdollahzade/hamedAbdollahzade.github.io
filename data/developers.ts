@@ -23,7 +23,7 @@ export const DEVELOPERS: Developer[] = [
         name: "حامد عبداله زاده",
         nameEn: "Hamed Abdollahzade",
         role: "مؤسس · توسعه‌دهنده فرانت‌اند",
-        photo: "assets/images/me.jpg",
+        photo: "assets/images/hamed-abdollahzade.jpg",
         bio: "توسعه‌دهنده فرانت‌اند در سطح میدلول؛ تجربه‌ام از پنل‌های سازمانی CRM و ERP تا رابط‌های کاربری دستگاه‌های وندینگ را در بر می‌گیرد. با React، Next.js، TypeScript و Vue کار می‌کنم و تمرکزم این روزها روی برنامه‌های آفلاین، PWA و ارتباط رابط کاربری با سخت‌افزار است. بخش مهمی از مسیر یادگیری‌ام را در دوره‌ی فراوین گذرانده‌ام و از اساتیدی مثل مجتبی قاسم‌زاده تهرانی و عرفان تقی‌نیا چیزهای زیادی یاد گرفته‌ام.",
         skills: ["React", "Next.js", "TypeScript", "Vue", "Redux Toolkit", "PWA", "REST API", "WebSocket"],
         links: [

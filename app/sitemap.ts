@@ -4,16 +4,17 @@ import {SERVICES} from "@/data/services";
 import {DEVELOPERS} from "@/data/developers";
 import {getPosts} from "@/lib/blog";
 import {localePath} from "@/lib/locale";
-import {SITE} from "@/lib/site";
+import {AUTHOR_PHOTO, OG_IMAGE, SITE} from "@/lib/site";
 
 export const dynamic = "force-static";
 
 /** One entry per translated page, with hreflang alternates for both languages. */
-function bilingual(path: string, priority: number, lastModified: Date): MetadataRoute.Sitemap[number] {
+function bilingual(path: string, priority: number, lastModified: Date, images?: string[]): MetadataRoute.Sitemap[number] {
     return {
         url: `${SITE}${localePath("fa", path)}`,
         lastModified,
         priority,
+        ...(images && {images}),
         alternates: {languages: {fa: `${SITE}${localePath("fa", path)}`, en: `${SITE}${localePath("en", path)}`}},
     };
 }
@@ -21,16 +22,16 @@ function bilingual(path: string, priority: number, lastModified: Date): Metadata
 export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
     const pages: MetadataRoute.Sitemap = [
-        bilingual("/", 1, now),
+        bilingual("/", 1, now, [AUTHOR_PHOTO, OG_IMAGE]),
         ...SERVICES.map((s) => bilingual(`/services/${s.slug}/`, 0.9, now)),
         bilingual("/about/", 0.8, now),
         bilingual("/developers/", 0.8, now),
-        ...DEVELOPERS.map((d) => bilingual(`/developers/${d.slug}/`, 0.7, now)),
+        ...DEVELOPERS.map((d) => bilingual(`/developers/${d.slug}/`, 0.7, now, d.photo ? [`${SITE}/${d.photo}`] : undefined)),
         bilingual("/blog/", 0.8, now),
         ...PROJECTS.map((p) => bilingual(`/projects/${p.slug}/`, 0.7, now)),
     ];
     // English URLs listed on their own as well, so crawlers that ignore alternates still find them.
-    const englishOnly: MetadataRoute.Sitemap = pages.map((entry) => ({url: entry.url.replace(SITE, `${SITE}/en`).replace(`${SITE}/en/`, `${SITE}/en/`), lastModified: now, priority: entry.priority}));
+    const englishOnly: MetadataRoute.Sitemap = pages.map((entry) => ({url: entry.url.replace(SITE, `${SITE}/en`).replace(`${SITE}/en/`, `${SITE}/en/`), lastModified: now, priority: entry.priority, ...(entry.images && {images: entry.images})}));
     return [
         ...pages,
         ...englishOnly,
