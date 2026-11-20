@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>رزومه حامد عبداله زاده (Hamed Abdollahzade) | توسعه‌دهنده فرانت‌اند</title>
-  <meta name="description" content="رزومه حامد عبداله زاده؛ توسعه‌دهنده فرانت‌اند با تجربه React، Vue، TypeScript و پنل‌های مدیریتی." />
+  <meta name="description" content="رزومه حامد عبداله زاده؛ توسعه‌دهنده فرانت‌اند با تجربه React، Next.js، TypeScript، پنل‌های CRM/ERP، رابط دستگاه‌های وندینگ (ESP32)، PWA و فروشگاه‌های آنلاین با Three.js." />
   <link rel="canonical" href="https://webino-dev.ir/resume.html" />
   <meta name="theme-color" content="#0a0a0b" />
   <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
@@ -258,6 +258,9 @@
         break-inside: avoid;
       }
     }
+  
+    .entry ul { margin: 6px 0 0; padding-inline-start: 20px; display: grid; gap: 4px; color: var(--color-muted); line-height: 1.9; }
+    .projects-list .entry a { display: inline-block; margin-top: 4px; font-size: 12.5px; color: var(--color-accent); text-decoration: none; border-bottom: 1px dashed var(--color-border); }
   </style>
 </head>
 <body>
@@ -270,7 +273,7 @@
     <header class="resume-header">
       <div>
         <h1>حامد عبداله زاده</h1>
-        <p class="role">Frontend Developer — React · Vue · TypeScript</p>
+        <p class="role">Frontend Developer — React · Next.js · TypeScript</p>
       </div>
       <div class="resume-contact">
         <span dir="ltr">hamedabdollahzade.ab@gmail.com</span>
@@ -283,7 +286,7 @@
     <section>
       <h2>معرفی</h2>
       <p>
-        توسعه‌دهنده فرانت‌اند با بیش از چهار سال تجربه‌ی حرفه‌ای، متمرکز بر ساخت رابط‌های کاربری مدرن، سریع و مقیاس‌پذیر با React، Vue و TypeScript.
+        توسعه‌دهنده فرانت‌اند با بیش از چهار سال تجربه‌ی حرفه‌ای، متمرکز بر ساخت رابط‌های کاربری مدرن، سریع و مقیاس‌پذیر با React، Next.js و TypeScript؛ از پنل‌های سازمانی CRM/ERP تا رابط آفلاین دستگاه‌های وندینگ روی ESP32، اپلیکیشن‌های PWA و فروشگاه‌های آنلاین با انیمیشن سه‌بعدی.
       </p>
     </section>
 
@@ -317,6 +320,9 @@
             <span class="tag">React Router</span>
             <span class="tag">GSAP</span>
             <span class="tag">Framer Motion</span>
+            <span class="tag">Three.js</span>
+            <span class="tag">Canvas</span>
+            <span class="tag">Vite</span>
           </div>
         </div>
         <div class="group">
@@ -326,6 +332,7 @@
             <span class="tag">Jest</span>
             <span class="tag">RTL</span>
             <span class="tag">Cypress</span>
+            <span class="tag">Playwright</span>
           </div>
         </div>
         <div class="group">
@@ -341,6 +348,10 @@
             <span class="tag">Prettier</span>
             <span class="tag">Figma</span>
             <span class="tag">GitHub Pages</span>
+            <span class="tag">Docker</span>
+            <span class="tag">ESP32</span>
+            <span class="tag">Orange Pi</span>
+            <span class="tag">Remotion</span>
           </div>
         </div>
         <div class="group">
@@ -380,18 +391,29 @@
       <h2>سابقه کاری</h2>
       <div class="entry">
         <div class="top"><strong>Frontend Developer</strong><span class="period">خرداد ۱۴۰۵ — اکنون</span></div>
-        <div class="org">Robot Market</div>
-        <p>توسعه داشبورد مدیریت دستگاه‌های ESP32 با WebSocket، REST API و Embedded UI.</p>
+        <div class="org">Robot Market (ربات مارکت)</div>
+        <p>توسعه‌ی فرانت‌اند چند محصول از اکوسیستم دستگاه‌های وندینگ:</p>
+        <ul>
+          <li>بازنویسی رابط مدیریت آفلاین ESP32 از HTML و JavaScript خالص به React (تا نسخه‌ی ۲٫۴)؛ قیمت و موجودی کانال‌ها، کاربران و کیف پول، تنظیمات شبکه، کارتخوان، MQTT و OTA، با خروجی تک‌فایلی برای حافظه‌ی محدود برد.</li>
+          <li>لانچر PWA نصب‌شونده برای ورود به پنل آنلاین و پنل دستگاه‌های شبکه‌ی محلی؛ رمز با هش SHA-256، ورود بیومتریک و رمزنگاری AES-GCM.</li>
+          <li>پنل مدیریت آنلاین و سایت معرفی و فروش دستگاه‌ها با Next.js، Ant Design و Redux Toolkit، همراه با تست Vitest و Playwright.</li>
+          <li>بازی سه‌بعدی مرورگری برند با Three.js و ویدیوهای معرفی با Remotion؛ رابط آفلاین نسل جدید دستگاه‌ها روی Orange Pi.</li>
+        </ul>
       </div>
       <div class="entry">
         <div class="top"><strong>Frontend Developer</strong><span class="period">دی ۱۴۰۳ — فروردین ۱۴۰۵</span></div>
-        <div class="org">Kandoo CRM / ERP</div>
-        <p>توسعه داشبورد بزرگ‌مقیاس با React، Redux Toolkit، Ant Design و کامپوننت‌های قابل استفاده مجدد.</p>
+        <div class="org">Kandoo؛ لینک CRM / ERP</div>
+        <p>توسعه‌ی بخش‌های اصلی پنل لینک با React، Redux Toolkit و Ant Design: جریان فروش، صندوق یکپارچه‌ی پیام‌ها، مخاطبین، امور مالی و فاکتور، گزارش‌ها، یادآورها، فرم‌ساز و صفحه‌ساز؛ با کامپوننت‌های قابل استفاده‌ی مجدد و رابطی یکسان در دسکتاپ و موبایل.</p>
       </div>
       <div class="entry">
         <div class="top"><strong>Frontend Developer</strong><span class="period">۱۴۰۳</span></div>
-        <div class="org">WikiQ</div>
-        <p>یکپارچه‌سازی API با React و مشارکت در جریان کاری Git.</p>
+        <div class="org">WikiQ (ویکی‌کیو)</div>
+        <p>همکاری در توسعه‌ی پنل مدیریت پلتفرم آزمون آنلاین و بانک سؤالات؛ مدیریت محتوا و گردش‌های کاری داخلی با React، Vite و Tailwind CSS و یکپارچه‌سازی با API.</p>
+      </div>
+      <div class="entry">
+        <div class="top"><strong>بنیان‌گذار و توسعه‌دهنده</strong></div>
+        <div class="org">Webino-Dev</div>
+        <p>طراحی و توسعه‌ی سایت و فروشگاه برای کسب‌وکارها، از ایده تا انتشار؛ از جمله فروشگاه اورا و سایت webino-dev.ir.</p>
       </div>
       <div class="entry">
         <div class="top"><strong>کارآموز برنامه‌نویس فرانت‌اند</strong><span class="period">دی ۱۴۰۱ — دی ۱۴۰۲</span></div>
@@ -416,16 +438,29 @@
       <h2>پروژه‌ها</h2>
       <div class="projects-list">
         <div class="entry">
-          <strong>Robot Market</strong>
-          <p>داشبورد مدیریت دستگاه‌های ESP32 با WebSocket و REST API.</p>
+          <strong>فروشگاه اورا (Aura Shop)</strong>
+          <p>سایت فروش دستگاه تهویه کراتین برای سالن‌های زیبایی؛ لودینگ سه‌بعدی دستگاه با Three.js، ویدیوی تمام‌صفحه، انیمیشن اسکرول و سئوی کامل. Next.js 16، TypeScript، GitHub Pages.</p>
+          <a href="/projects/aura-shop/" dir="ltr">webino-dev.ir/projects/aura-shop</a>
         </div>
         <div class="entry">
-          <strong>Kandoo CRM / ERP</strong>
-          <p>داشبورد بزرگ‌مقیاس با React و Redux Toolkit.</p>
+          <strong>اکوسیستم وندینگ ربات مارکت</strong>
+          <p>رابط ESP32 با React، لانچر PWA، پنل مدیریت، سایت معرفی، بازی سه‌بعدی و ویدیوهای Remotion. React، Next.js، Vite، Three.js.</p>
+          <a href="/projects/robot-market/" dir="ltr">webino-dev.ir/projects/robot-market</a>
         </div>
         <div class="entry">
-          <strong>WikiQ</strong>
-          <p>پلتفرم پرسش و پاسخ با یکپارچه‌سازی API.</p>
+          <strong>لینک CRM / ERP</strong>
+          <p>پنل سازمانی مدیریت مشتری، فروش، پیام‌رسانی و امور مالی. React، Redux Toolkit، Ant Design.</p>
+          <a href="/projects/link-crm/" dir="ltr">webino-dev.ir/projects/link-crm</a>
+        </div>
+        <div class="entry">
+          <strong>ویکی‌کیو</strong>
+          <p>پنل مدیریت پلتفرم آزمون آنلاین و بانک سؤالات. React، Vite، Tailwind CSS.</p>
+          <a href="/projects/wikiq/" dir="ltr">webino-dev.ir/projects/wikiq</a>
+        </div>
+        <div class="entry">
+          <strong>سایت Webino-Dev</strong>
+          <p>سایت دوزبانه‌ی تیم با ویدیوی فانتزی، منوی تمام‌صفحه، متن تایپ‌شونده و سئو. Next.js 16، TypeScript.</p>
+          <a href="/" dir="ltr">webino-dev.ir</a>
         </div>
       </div>
     </section>

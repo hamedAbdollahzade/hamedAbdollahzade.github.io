@@ -36,6 +36,11 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                         author: {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
                         publisher: {"@id": `${SITE}/#org`},
                     },
+                    ...(p.videos ?? []).map((v) => ({
+                        "@type": "VideoObject", name: `${p.title} | ${v.caption}`, description: v.caption, inLanguage: locale,
+                        thumbnailUrl: `${SITE}/${v.poster}`, contentUrl: `${SITE}/${v.src}`, uploadDate: "2026-11-20",
+                        creator: {"@id": `${SITE}/#person`},
+                    })),
                     {"@type": "BreadcrumbList", itemListElement: [
                         {"@type": "ListItem", position: 1, name: "Webino-Dev", item: `${SITE}${localePath(locale, "/")}`},
                         {"@type": "ListItem", position: 2, name: p.title, item: url},
@@ -48,6 +53,16 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                 <ul className="tags" style={{marginTop: 14}}>{p.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
             </div>
             <div className="card page-card">
+                {p.videos && (
+                    <div className="videos">
+                        {p.videos.map((v) => (
+                            <figure className={`video${v.height > v.width ? " video--tall" : ""}`} key={v.src}>
+                                <video src={`/${v.src}`} poster={`/${v.poster}`} width={v.width} height={v.height} autoPlay muted loop playsInline controls preload="metadata" aria-label={v.caption}/>
+                                <figcaption>{v.caption}</figcaption>
+                            </figure>
+                        ))}
+                    </div>
+                )}
                 {images.map((img, i) => (
                     <figure className="figure" key={img.src}>
                         <Image src={`/${img.src}`} alt={img.caption} width={1440} height={900} priority={i === 0}/>

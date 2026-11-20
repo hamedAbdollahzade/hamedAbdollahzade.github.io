@@ -61,6 +61,7 @@ export function getProjects(locale: Locale): Project[] {
             links: project.links.map((link, i) => ({...link, label: copy.linkLabels[i] ?? link.label})),
             images: project.images?.map((image, i) => ({...image, caption: copy.imageCaptions?.[i] ?? image.caption})),
             gallery: project.gallery?.map((image, i) => ({...image, caption: copy.galleryCaptions?.[i] ?? image.caption})),
+            videos: project.videos?.map((video, i) => ({...video, caption: copy.videoCaptions?.[i] ?? video.caption})),
         };
     });
 }

@@ -10,9 +10,30 @@ export interface ProjectCopy {
   linkLabels: string[];
   imageCaptions?: string[];
   galleryCaptions?: string[];
+  videoCaptions?: string[];
 }
 
 export const PROJECTS_EN: Record<string, ProjectCopy> = {
+  "aura-shop": {
+    title: "Aura Shop: a store for a keratin ventilation device",
+    description: "Aura Shop is a single-product store for the Aura Vent keratin ventilation device, made for beauty salons. I built it myself from design to launch: Next.js 16 and TypeScript, a static export on GitHub Pages, Persian and right-to-left, with a dark glass theme and a light option. Orders go through phone and WhatsApp, so there is no cart or online payment.",
+    learned: [
+      "Building a full 3D model of a device in Three.js code alone, with a 7-second animated loading intro",
+      "A full-screen hero of several clips played back to back, buffered during the intro",
+      "Light scroll animations without a library, respecting the reduced-motion setting",
+      "Full SEO for a static store: sitemap, canonical links and structured data",
+    ],
+    story: [
+      {title: "A 3D loading intro with Three.js", text: "The site opens with a 3D model of the device itself: a black cabinet with a blue filter stripe, a corrugated hose and an LED ring, all built in code with no model file to download. The 7-second intro is not only decoration: the hero videos buffer during it, so they play without pauses afterwards."},
+      {title: "Full-screen video and vapour", text: "The first screen is filled with salon clips that play one after another, colour-graded in CSS. Over them a canvas vapour layer lifts glowing particles into the device's light ring, as if the air is being pulled into it. The animation pauses when the page is not visible."},
+      {title: "Word-by-word intro and scroll animation", text: "The intro text lights up word by word as it scrolls, and sections ease into view. All of these effects are a few lines of JavaScript with no library, and the content is complete without JavaScript too."},
+      {title: "Product page and ordering", text: "The product page has an image gallery, features, the device video and an order section. Because sales go through a conversation, call and WhatsApp buttons take the place of a cart. One settings file holds the store name, number and products for every page."},
+    ],
+    linkLabels: [],
+    videoCaptions: ["The site on desktop: 3D intro, first screen and sections", "The site on a phone"],
+    imageCaptions: ["3D loading intro", "First screen with full-screen video", "Intro that lights up word by word", "Device features", "Photos and specifications", "Price and ordering (the seller's number is blurred)", "Product page"],
+    galleryCaptions: ["Loading on a phone", "First screen on a phone", "Features", "Ordering", "Product page", "Footer with the designer's name"],
+  },
   "robot-market": {
     title: "Frontend for the Robot Market vending ecosystem",
     description: "At Robot Market I work on a set of products connected to vending machines. The shared problem is giving people a usable way to manage and work with a machine, both online and offline. My role is frontend development for several parts of this set, from the interface on the device to the panels and the main website.",

@@ -38,6 +38,8 @@ export interface Project {
   links: {label: string; url: string}[];
   img: string;
   images?: {src: string; caption: string}[];
+  /** Screen recordings shown at the top of the project page (a wide one and/or a phone one). */
+  videos?: {src: string; poster: string; caption: string; width: number; height: number}[];
   /** Phone/app screenshots shown in a grid instead of full-width figures. */
   gallery?: {src: string; caption: string; width: number; height: number}[];
   /** Set when the project was built by another member of the team. */
@@ -47,6 +49,48 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    id: 8,
+    slug: "aura-shop",
+    title: "فروشگاه اورا؛ سایت فروش دستگاه تهویه کراتین",
+    description: "فروشگاه اورا یک سایت فروش تک‌محصولی برای دستگاه تهویه کراتین Aura Vent است که مخصوص سالن‌های زیبایی ساخته شده. سایت را از طراحی تا انتشار خودم ساخته‌ام: با Next.js 16 و TypeScript، به‌صورت خروجی استاتیک روی GitHub Pages، فارسی و راست‌چین، با تم شیشه‌ای تیره و حالت روشن. سفارش از راه تلفن و واتساپ انجام می‌شود و سایت سبد خرید و پرداخت آنلاین ندارد.",
+    learned: [
+      "ساخت مدل سه‌بعدی کامل یک دستگاه فقط با کد Three.js و یک لودینگ انیمیشنی ۷ ثانیه‌ای",
+      "ویدیوی تمام‌صفحه با چند کلیپ پشت سر هم که در زمان لودینگ از قبل بارگذاری می‌شوند",
+      "انیمیشن‌های اسکرول سبک بدون کتابخانه، با احترام به تنظیم «کاهش حرکت» کاربر",
+      "سئوی کامل یک فروشگاه استاتیک: نقشه‌ی سایت، لینک canonical و داده‌های ساخت‌یافته",
+    ],
+    story: [
+      {title: "لودینگ سه‌بعدی با Three.js", text: "سایت با یک مدل سه‌بعدی از خود دستگاه شروع می‌شود: بدنه‌ی مشکی با نوار فیلتر آبی، لوله‌ی خرطومی و حلقه‌ی نور LED، همه با کد ساخته شده‌اند و هیچ فایل مدلی دانلود نمی‌شود. این مقدمه‌ی ۷ ثانیه‌ای فقط تزئینی نیست؛ در همین مدت ویدیوهای صفحه‌ی اول بافر می‌شوند تا بعد از آن بی‌وقفه پخش شوند."},
+      {title: "ویدیوی تمام‌صفحه و بخار", text: "صفحه‌ی اول با کلیپ‌های سالن پر می‌شود که پشت سر هم پخش و با CSS رنگ‌بندی می‌شوند. روی آن یک لایه‌ی بخار روی canvas ذرات نورانی را بالا می‌برد و به حلقه‌ی نور دستگاه می‌رساند؛ انگار هوا به داخل دستگاه کشیده می‌شود. وقتی صفحه دیده نمی‌شود، انیمیشن متوقف می‌شود."},
+      {title: "معرفی کلمه‌به‌کلمه و انیمیشن اسکرول", text: "متن معرفی هنگام اسکرول کلمه‌به‌کلمه روشن می‌شود و بخش‌ها با حرکتی نرم وارد صفحه می‌شوند. همه‌ی این افکت‌ها بدون کتابخانه و با چند خط JavaScript ساخته شده‌اند و بدون JavaScript هم محتوا کامل دیده می‌شود."},
+      {title: "صفحه‌ی محصول و سفارش", text: "صفحه‌ی محصول گالری تصاویر، ویژگی‌ها، ویدیوی دستگاه و بخش سفارش دارد. چون فروش با مشاوره انجام می‌شود، به‌جای سبد خرید، دکمه‌های تماس و واتساپ در دسترس هستند. یک خانه‌ی تنظیمات، نام فروشگاه، شماره و محصولات را برای همه‌ی صفحه‌ها نگه می‌دارد."},
+    ],
+    tech: ["Next.js", "TypeScript", "Three.js", "CSS", "Canvas", "SEO", "GitHub Pages"],
+    links: [],
+    img: "assets/images/aura-shop/hero-desktop.webp",
+    videos: [
+      {src: "assets/video/projects/aura-shop-desktop.mp4", poster: "assets/images/aura-shop/hero-desktop.webp", caption: "ویدیوی سایت در دسکتاپ: لودینگ سه‌بعدی، صفحه‌ی اول و بخش‌ها", width: 1280, height: 720},
+      {src: "assets/video/projects/aura-shop-mobile.mp4", poster: "assets/images/aura-shop/hero-mobile.webp", caption: "ویدیوی سایت در موبایل", width: 600, height: 1298},
+    ],
+    images: [
+      {src: "assets/images/aura-shop/loader-desktop.webp", caption: "لودینگ سه‌بعدی دستگاه"},
+      {src: "assets/images/aura-shop/hero-desktop.webp", caption: "صفحه‌ی اول با ویدیوی تمام‌صفحه"},
+      {src: "assets/images/aura-shop/about-desktop.webp", caption: "معرفی که کلمه‌به‌کلمه روشن می‌شود"},
+      {src: "assets/images/aura-shop/features-desktop.webp", caption: "ویژگی‌های دستگاه"},
+      {src: "assets/images/aura-shop/product-desktop.webp", caption: "تصاویر و مشخصات"},
+      {src: "assets/images/aura-shop/order-desktop.webp", caption: "قیمت و سفارش (شماره‌ی فروشنده محو شده است)"},
+      {src: "assets/images/aura-shop/product-page-desktop.webp", caption: "صفحه‌ی محصول"},
+    ],
+    gallery: [
+      {src: "assets/images/aura-shop/loader-mobile.webp", caption: "لودینگ در موبایل", width: 600, height: 1298},
+      {src: "assets/images/aura-shop/hero-mobile.webp", caption: "صفحه‌ی اول در موبایل", width: 600, height: 1298},
+      {src: "assets/images/aura-shop/features-mobile.webp", caption: "ویژگی‌ها", width: 600, height: 1298},
+      {src: "assets/images/aura-shop/order-mobile.webp", caption: "سفارش", width: 600, height: 1298},
+      {src: "assets/images/aura-shop/product-page-mobile.webp", caption: "صفحه‌ی محصول", width: 600, height: 1298},
+      {src: "assets/images/aura-shop/footer-mobile.webp", caption: "فوتر با نام طراح", width: 600, height: 1298},
+    ],
+  },
   {
     id: 1,
     slug: "robot-market",
