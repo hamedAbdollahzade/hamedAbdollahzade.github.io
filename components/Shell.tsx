@@ -123,7 +123,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
             </header>
             {/* Full-screen menu: everything that used to sit in the header, on every screen size. It sits outside <header>
                 because the header's backdrop-filter would trap a fixed element inside it. */}
-            <nav id="site-menu" className={`m-panel${open ? " is-open" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
+            <nav id="site-menu" className={`m-panel${open ? " is-open" : ""}${sub ? " has-sub" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
                 <div className="m-inner">
                     <div className="m-tools" style={{"--i": 0} as CSSProperties}>
                         <LanguageSwitch/>
@@ -140,7 +140,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                             </div>
                             {it.sub.length > 0 && sub === it.key && (
                                 <ul className="m-sub">
-                                    {it.sub.map((s) => <li key={s.href}><Link href={localePath(locale, s.href)} onClick={() => setOpen(false)}>{s.label}</Link></li>)}
+                                    {it.sub.map((s) => <li key={s.href}><Link href={localePath(locale, s.href)} title={s.label} onClick={() => setOpen(false)}>{s.label}</Link></li>)}
                                 </ul>
                             )}
                         </div>
@@ -150,6 +150,9 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                         <OpenChat className="btn btn--lg">{t.announce.cta}</OpenChat>
                         <Link className="btn btn--lg btn--ghost" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>
                     </div>
+                    <button type="button" className="m-close" style={{"--i": items.length + 2} as CSSProperties} onClick={() => setOpen(false)}>
+                        <span aria-hidden="true">✕</span>{t.closeMenu}
+                    </button>
                 </div>
             </nav>
 

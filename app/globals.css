@@ -406,32 +406,45 @@ html.nav-open :is(.chat-fab, .chat-tip) { opacity: 0; visibility: hidden; pointe
     clip-path: circle(0 at var(--menu-x, 40px) var(--menu-y, 36px)); visibility: hidden;
     transition: clip-path .6s cubic-bezier(.7, 0, .2, 1) .1s, visibility 0s linear .7s; }
 .m-panel.is-open { clip-path: circle(150vmax at var(--menu-x, 40px) var(--menu-y, 36px)); visibility: visible; transition: clip-path .75s cubic-bezier(.7, 0, .2, 1), visibility 0s; }
-.m-inner { width: 100%; max-width: 640px; min-height: 100%; margin-inline: auto; display: grid; align-content: center; padding: calc(var(--topbar-h) + 20px) 24px 40px; }
+.m-inner { width: 100%; max-width: 640px; min-height: 100%; margin-inline: auto; display: grid; align-content: center; padding: calc(var(--topbar-h) + clamp(4px, 1.6vh, 18px)) 24px clamp(10px, 2.4vh, 28px); }
 /* Items rise in one after another (--i is each item's place in the list). */
 .m-inner > * { opacity: 0; transform: translateY(30px); transition: opacity .25s, transform .25s; }
 .m-panel.is-open .m-inner > * { opacity: 1; transform: none; transition: opacity .5s ease calc(.3s + var(--i, 0) * .07s), transform .7s cubic-bezier(.2, .7, .2, 1) calc(.3s + var(--i, 0) * .07s); }
-.m-tools { display: flex; align-items: center; gap: 8px; padding-bottom: 16px; margin-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, .14); }
+.m-tools { display: flex; align-items: center; gap: 8px; padding-bottom: clamp(6px, 1.4vh, 16px); margin-bottom: clamp(0px, .6vh, 6px); border-bottom: 1px solid rgba(255, 255, 255, .14); }
 .m-panel .icon-btn { background: rgba(255, 255, 255, .1); color: #fff; border: 0; }
 .m-panel .icon-btn:hover { background: rgba(255, 255, 255, .2); }
 .m-phone { display: inline-flex; align-items: center; gap: 8px; margin-inline-start: auto; color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; white-space: nowrap; }
 .m-phone svg { width: 34px; height: 34px; padding: 8px; border-radius: 10px; background: rgba(126, 240, 197, .16); color: #7ef0c5; }
 .m-row { display: flex; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, .1); }
-.m-link { flex: 1; padding: 12px 4px; text-decoration: none; color: #fff; font-size: clamp(24px, 4vw, 38px); font-weight: 800; line-height: 1.6; transition: color .25s, padding .3s cubic-bezier(.2, .7, .2, 1); }
+/* Sizes follow the screen height, so the whole menu fits without scrolling. */
+.m-link { flex: 1; padding: clamp(3px, 1vh, 12px) 4px; text-decoration: none; color: #fff; font-size: clamp(17px, min(4vw, 3.5vh), 36px); font-weight: 800; line-height: 1.55; transition: color .25s, padding .3s cubic-bezier(.2, .7, .2, 1); }
 .m-link:hover { color: #a9b6ff; padding-inline-start: 14px; }
 .m-link.is-active { color: #7ef0c5; }
-.m-exp { width: 46px; height: 46px; border: 0; border-radius: 12px; background: rgba(255, 255, 255, .08); color: #fff; display: grid; place-items: center; cursor: pointer; }
+.m-exp { width: clamp(34px, 5vh, 46px); height: clamp(34px, 5vh, 46px); border: 0; border-radius: 12px; background: rgba(255, 255, 255, .08); color: #fff; display: grid; place-items: center; cursor: pointer; }
 .m-exp svg { width: 18px; height: 18px; transform: rotate(90deg); transition: transform .3s; }
 .m-exp[aria-expanded="true"] svg { transform: rotate(-90deg); }
-.m-sub { display: grid; gap: 2px; padding: 6px 8px 12px; animation: m-sub-in .35s ease both; }
+/* Sub-items as small chips side by side, so an open sub-menu takes little room. */
+.m-sub { display: flex; flex-wrap: wrap; gap: 6px; padding: clamp(4px, 1vh, 10px) 2px clamp(6px, 1.2vh, 12px); animation: m-sub-in .35s ease both; }
 @keyframes m-sub-in { from { opacity: 0; transform: translateY(-6px); } }
-.m-sub a { display: block; padding: 8px 10px; border-radius: 10px; text-decoration: none; color: rgba(255, 255, 255, .75); font-size: 16px; }
-.m-sub a:hover { background: rgba(255, 255, 255, .08); color: #fff; }
-.m-announce { display: grid; gap: 10px; margin-top: 24px; padding: 18px; border-radius: 18px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); text-align: center; }
-.m-announce p { margin: 0; font-size: 15px; color: rgba(255, 255, 255, .85); }
+.m-sub a { display: block; padding: 4px 12px; border-radius: 99px; background: rgba(255, 255, 255, .07); text-decoration: none; color: rgba(255, 255, 255, .82); font-size: clamp(12.5px, 1.7vh, 15px); line-height: 1.8; }
+.m-sub a:hover { background: rgba(255, 255, 255, .16); color: #fff; }
+/* Two chips per row; long names are cut with an ellipsis (the full name is the link's title). */
+.m-sub li { max-width: calc(50% - 3px); }
+.m-sub a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* With a sub-menu open, drop the short notice text so everything still fits. */
+.m-panel.has-sub .m-announce p { display: none; }
+.m-panel.has-sub .m-link { padding-block: clamp(2px, .6vh, 8px); }
+.m-announce { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(6px, 1vh, 10px); margin-top: clamp(10px, 2.2vh, 24px); padding: clamp(10px, 1.8vh, 18px); border-radius: 18px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); text-align: center; }
+.m-announce p { grid-column: 1 / -1; }
+.m-announce .btn { min-height: clamp(38px, 5.2vh, 52px); padding-inline: 12px; font-size: clamp(13.5px, 1.8vh, 16px); }
+.m-close { justify-self: center; display: inline-flex; align-items: center; gap: 8px; margin-top: clamp(8px, 1.8vh, 18px); padding: clamp(5px, .9vh, 9px) 22px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, .3); background: transparent; color: #fff; font: 600 clamp(13.5px, 1.8vh, 15.5px)/1.6 var(--font); cursor: pointer; transition: background .2s; }
+.m-close:hover { background: rgba(255, 255, 255, .12); }
+.m-close span { font-size: 1.1em; }
+.m-announce p { margin: 0; font-size: clamp(13px, 1.8vh, 15px); color: rgba(255, 255, 255, .85); }
 .m-announce b { color: #7ef0c5; }
 .m-announce .btn--ghost { background: transparent; background-image: none; color: #fff; border: 1px solid rgba(255, 255, 255, .4); }
 @media (max-width: 640px) {
-    .m-inner { padding-inline: 18px; align-content: start; }
+    .m-inner { padding-inline: 18px; }
     .m-phone { font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
