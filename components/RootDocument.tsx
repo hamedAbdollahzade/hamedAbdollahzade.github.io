@@ -5,10 +5,11 @@ import ChatWidget from "./ChatWidget";
 import IntroLoader from "./IntroLoader";
 import {LocaleProvider} from "./LocaleProvider";
 import RevealInit from "./RevealInit";
+import TypeInit from "./TypeInit";
 import {UI} from "@/lib/ui";
 
-/* Runs before first paint: marks JS support, applies the saved/system theme and decides whether to show the intro. */
-const BOOT_SCRIPT = '(function(){var d=document.documentElement;d.classList.add("js");try{var s=localStorage.getItem("webino-theme");d.dataset.theme=s||"light"}catch(e){d.dataset.theme="light"}try{var p=location.pathname;if((p==="/"||p==="/en"||p==="/en/")&&!sessionStorage.getItem("webino-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("intro-on")}}catch(e){}})();';
+/* Runs before first paint: marks JS support, applies the saved/system theme and shows the intro on every page load (not with reduced motion). */
+const BOOT_SCRIPT = '(function(){var d=document.documentElement;d.classList.add("js");try{var s=localStorage.getItem("webino-theme");d.dataset.theme=s||"light"}catch(e){d.dataset.theme="light"}try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("intro-on")}}catch(e){}})();';
 
 const PRELOAD: Record<Locale, string[]> = {
     fa: ["vazirmatn-arabic-wght-normal.woff2", "vazirmatn-latin-wght-normal.woff2"],
@@ -30,6 +31,7 @@ export default function RootDocument({locale, children}: {locale: Locale; childr
             {children}
             <ChatWidget/>
             <RevealInit/>
+            <TypeInit/>
         </LocaleProvider>
         </body>
         </html>

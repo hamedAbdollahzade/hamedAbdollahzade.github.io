@@ -13,8 +13,8 @@ const HOLD = 700;             // ms the finished name stays on screen
 const FADE = 700;             // ms of the fade-out
 
 /**
- * Matrix-style intro for the home page: small letters rain down, then the brand name
- * resolves letter by letter. Shown once per session; skippable; not shown with reduced motion.
+ * Matrix-style intro: small letters rain down, then the brand name resolves letter by letter.
+ * Shown on every full page load; skippable; not shown with reduced motion.
  * The overlay is only displayed when <html> carries the "intro-on" class (set by an inline script).
  */
 export default function IntroLoader() {
@@ -65,7 +65,6 @@ export default function IntroLoader() {
             root.classList.add("is-out");
             if (fast) root.style.transitionDuration = ".35s";
             endTimer = setTimeout(() => {
-                try { sessionStorage.setItem("webino-intro", "1"); } catch { /* storage may be blocked */ }
                 html.classList.remove("intro-on");
                 cleanup();
             }, fast ? 380 : FADE + 40);

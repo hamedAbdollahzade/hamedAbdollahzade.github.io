@@ -75,20 +75,17 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
         sub: children_[key] ?? [],
     }));
 
-    // Close the mobile panel when the page changes, the chat opens, the screen grows or Escape is pressed.
+    // Close the menu when the page changes, the chat opens or Escape is pressed.
     useEffect(() => { setOpen(false); setSub(""); }, [pathname]);
     useEffect(() => {
         const close = () => setOpen(false);
         const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-        const onResize = () => { if (window.innerWidth > 1100) setOpen(false); };
         window.addEventListener("webino:open-chat", close);
         window.addEventListener("keydown", onKey);
-        window.addEventListener("resize", onResize);
         window.addEventListener("pagehide", close);
         return () => {
             window.removeEventListener("webino:open-chat", close);
             window.removeEventListener("keydown", onKey);
-            window.removeEventListener("resize", onResize);
             window.removeEventListener("pagehide", close);
         };
     }, []);
@@ -106,38 +103,20 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
 
     return (
         <>
-            <div className="announce">
-                <span>{t.announce.text} <b>{t.announce.strong}</b></span>
-                <OpenChat className="announce-btn">{t.announce.cta}</OpenChat>
-            </div>
             <header className="topbar">
                 <div className="topbar-in">
                     <Link className="brand" href={localePath(locale, "/")} aria-label={`${brand.name}, ${t.brandHome}`}>
                         <span className="brand-mark"><Logo/></span><span>{brand.name}</span>
                     </Link>
-                    <nav className="top-links" aria-label={t.mainNav}>
-                        {items.map((it) => (
-                            <div key={it.key} className={`top-item${it.sub.length ? " has-sub" : ""}`}>
-                                <Link className={`top-link${it.active ? " is-active" : ""}`} href={localePath(locale, it.href)} aria-current={it.active ? "page" : undefined} onClick={() => go(it.key, it.href)}>
-                                    {it.label}{it.sub.length > 0 && <ChevronIcon/>}
-                                </Link>
-                                {it.sub.length > 0 && (
-                                    <ul className="top-sub">
-                                        {it.sub.map((s) => <li key={s.href}><Link href={localePath(locale, s.href)} onClick={() => setOpen(false)}>{s.label}</Link></li>)}
-                                    </ul>
-                                )}
-                            </div>
-                        ))}
-                    </nav>
-                    <div className="top-end">
+                    <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.closeMenu : t.openMenu} onClick={() => setOpen((v) => !v)}><MenuIcon/></button>
+                </div>
+                {/* Everything that used to sit in the header lives in this menu, on every screen size. */}
+                <nav id="site-menu" className={`m-panel${open ? " is-open" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
+                    <div className="m-tools">
                         <LanguageSwitch/>
                         <ThemeToggle/>
-                        <a className="top-phone" href={`tel:${brand.phone}`} dir="ltr"><PhoneIcon/>{brand.phoneDisplay}</a>
-                        <Link className="btn top-cta" href={localePath(locale, "/#contact")}>{t.contactUs}</Link>
-                        <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? t.closeMenu : t.openMenu} onClick={() => setOpen((v) => !v)}><MenuIcon/></button>
+                        <a className="m-phone" href={`tel:${brand.phone}`} dir="ltr"><PhoneIcon/>{brand.phoneDisplay}</a>
                     </div>
-                </div>
-                <nav id="mobile-nav" className={`m-panel${open ? " is-open" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
                     {items.map((it) => (
                         <div key={it.key} className="m-item">
                             <div className="m-row">
@@ -153,7 +132,11 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                             )}
                         </div>
                     ))}
-                    <Link className="btn btn--lg m-cta" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>
+                    <div className="m-announce">
+                        <p>{t.announce.text} <b>{t.announce.strong}</b></p>
+                        <OpenChat className="btn btn--lg">{t.announce.cta}</OpenChat>
+                        <Link className="btn btn--lg btn--ghost" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>
+                    </div>
                 </nav>
             </header>
             <div className={`scrim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true"/>

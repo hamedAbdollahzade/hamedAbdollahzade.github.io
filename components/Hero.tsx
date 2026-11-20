@@ -24,11 +24,6 @@ export default function Hero() {
         if (reduce.matches) video.pause();
         else video.play().catch(() => { /* autoplay blocked: the poster stays */ });
 
-        // Fill the screen below the header: measure where the hero starts.
-        const fit = () => section.style.setProperty("--hero-top", `${Math.max(0, section.getBoundingClientRect().top + window.scrollY)}px`);
-        fit();
-        window.addEventListener("resize", fit);
-
         // Fade and lift the hero text while the page scrolls past it.
         let frame = 0;
         const onScroll = () => {
@@ -45,7 +40,6 @@ export default function Hero() {
         return () => {
             cancelAnimationFrame(frame);
             window.removeEventListener("scroll", onScroll);
-            window.removeEventListener("resize", fit);
         };
     }, []);
 
