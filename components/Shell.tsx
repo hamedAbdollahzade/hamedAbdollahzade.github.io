@@ -3,11 +3,11 @@
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Fragment, useEffect, useState} from "react";
-import type {ReactNode} from "react";
+import type {CSSProperties, MouseEvent, ReactNode} from "react";
 import {getBrand, getProjects, getServices} from "@/data/localized";
 import {localePath, parsePath} from "@/lib/locale";
 import Footer from "./Footer";
-import {ChevronIcon, Logo, MenuIcon, PhoneIcon} from "./Icons";
+import {ChevronIcon, Logo, PhoneIcon} from "./Icons";
 import LanguageSwitch from "./LanguageSwitch";
 import OpenChat from "./OpenChat";
 import {useLocale} from "./LocaleProvider";
@@ -94,6 +94,14 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
         return () => document.documentElement.classList.remove("nav-open");
     }, [open]);
 
+    // The menu opens as a circle growing out of the button, so remember where the button is.
+    const toggleMenu = (e: MouseEvent<HTMLButtonElement>) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        document.documentElement.style.setProperty("--menu-x", `${r.left + r.width / 2}px`);
+        document.documentElement.style.setProperty("--menu-y", `${r.top + r.height / 2}px`);
+        setOpen((v) => !v);
+    };
+
     const go = (key: string, href: string) => {
         if (isHome && href.startsWith("/#")) setSection(href.slice(2));
         if (isHome && href === "/") setSection("");
@@ -108,17 +116,22 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                     <Link className="brand" href={localePath(locale, "/")} aria-label={`${brand.name}, ${t.brandHome}`}>
                         <span className="brand-mark"><Logo/></span><span>{brand.name}</span>
                     </Link>
-                    <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.closeMenu : t.openMenu} onClick={() => setOpen((v) => !v)}><MenuIcon/></button>
+                    <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.closeMenu : t.openMenu} onClick={toggleMenu}>
+                        <span className="burger" aria-hidden="true"><i/><i/><i/></span>
+                    </button>
                 </div>
-                {/* Everything that used to sit in the header lives in this menu, on every screen size. */}
-                <nav id="site-menu" className={`m-panel${open ? " is-open" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
-                    <div className="m-tools">
+            </header>
+            {/* Full-screen menu: everything that used to sit in the header, on every screen size. It sits outside <header>
+                because the header's backdrop-filter would trap a fixed element inside it. */}
+            <nav id="site-menu" className={`m-panel${open ? " is-open" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
+                <div className="m-inner">
+                    <div className="m-tools" style={{"--i": 0} as CSSProperties}>
                         <LanguageSwitch/>
                         <ThemeToggle/>
                         <a className="m-phone" href={`tel:${brand.phone}`} dir="ltr"><PhoneIcon/>{brand.phoneDisplay}</a>
                     </div>
-                    {items.map((it) => (
-                        <div key={it.key} className="m-item">
+                    {items.map((it, i) => (
+                        <div key={it.key} className="m-item" style={{"--i": i + 1} as CSSProperties}>
                             <div className="m-row">
                                 <Link className={`m-link${it.active ? " is-active" : ""}`} href={localePath(locale, it.href)} onClick={() => go(it.key, it.href)}>{it.label}</Link>
                                 {it.sub.length > 0 && (
@@ -132,14 +145,13 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                             )}
                         </div>
                     ))}
-                    <div className="m-announce">
+                    <div className="m-announce" style={{"--i": items.length + 1} as CSSProperties}>
                         <p>{t.announce.text} <b>{t.announce.strong}</b></p>
                         <OpenChat className="btn btn--lg">{t.announce.cta}</OpenChat>
                         <Link className="btn btn--lg btn--ghost" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>
                     </div>
-                </nav>
-            </header>
-            <div className={`scrim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true"/>
+                </div>
+            </nav>
 
             <div className="main">
                 <main className="content" id="main-content">
