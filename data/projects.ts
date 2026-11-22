@@ -37,7 +37,7 @@ export interface Project {
   tech: string[];
   links: {label: string; url: string}[];
   img: string;
-  images?: {src: string; caption: string}[];
+  images?: {src: string; caption: string; width?: number; height?: number}[];
   /** Screen recordings shown at the top of the project page (a wide one and/or a phone one). */
   videos?: {src: string; poster: string; caption: string; width: number; height: number}[];
   /** Phone/app screenshots shown in a grid instead of full-width figures. */
@@ -311,19 +311,28 @@ export const PROJECTS: Project[] = [
   },
 
   {
-    id: 5,
-    slug: "university-student-portal",
-    title: "پورتال دانشجویی",
-    description: "نمونه‌ی دمو از یک پورتال دانشگاهی با ورود چندنقشه‌ای برای دانشجو، کارمند آموزش و مدیر. رابط کاملاً راست‌به‌چپ و فارسی است و داده‌های نمایشی فقط در مرورگر ذخیره می‌شوند. ",
+    id: 9,
+    slug: "beauty-store",
+    title: "بیوتی استور؛ فروشگاه لوازم مراقبت شخصی",
+    description: "بیوتی استور یک فروشگاه اینترنتی نمایشی برای لوازم مراقبت شخصی است که محمد قربانی با Next.js ساخته است. رابط فارسی و راست‌چین، کاتالوگ قابل جست‌وجو، سبد خرید و پرداخت آزمایشی دارد.",
     learned: [
-      "طراحی جریان ورود و ثبت‌نام برای چند نقش کاربری",
-      "رابط راست‌به‌چپ با تم روشن و تاریک",
-      "نسخه‌ی نمایشی بدون سرور؛ داده‌ها فقط در مرورگر می‌مانند",
+      "توسعهٔ فول‌استک فروشگاه و پنل مدیریت با Next.js",
+      "رابط فارسی و راست‌چین با حالت روشن و تاریک",
+      "نسخهٔ نصب‌شدنی PWA و دستیار هوشمند پشتیبانی",
     ],
-    tech: ["Frontend", "RTL", "Dark mode", "Role-based UI"],
-    links: [{label: "مشاهده‌ی دمو", url: "https://university-demo.mohammadghorbani-dev.ir/"}],
+    story: [
+      {title: "جست‌وجو و انتخاب محصول", text: "کاربر می‌تواند محصولات را جست‌وجو کند یا با فیلتر دسته‌بندی، بازهٔ قیمت و تخفیف به گزینه‌های دلخواه برسد. صفحهٔ هر محصول تصویر، مشخصات فنی، قیمت و موجودی را نشان می‌دهد و امکان انتخاب تعداد و افزودن به سبد خرید یا علاقه‌مندی‌ها را دارد."},
+      {title: "خرید آزمایشی و پشتیبانی", text: "درگاه پرداخت آزمایشی برای نمایش مسیر خرید در نسخهٔ دمو در نظر گرفته شده است. فروشگاه همچنین پنل مدیریت، نسخهٔ نصب‌شدنی و دستیار هوشمند پشتیبانی دارد."},
+    ],
+    tech: ["Next.js", "PWA", "RTL"],
+    links: [{label: "مشاهدهٔ فروشگاه آزمایشی", url: "https://beautystore.mohammadghorbani-dev.ir/"}],
     author: {fa: "محمد قربانی", en: "Mohammad Ghorbani"},
-    img: "assets/images/mohammad/university.webp",
+    img: "assets/images/mohammad/beauty-store/home-desktop.jpg",
+    images: [
+      {src: "assets/images/mohammad/beauty-store/home-desktop.jpg", caption: "صفحهٔ اصلی فروشگاه و بنر معرفی محصولات", width: 1272, height: 716},
+      {src: "assets/images/mohammad/beauty-store/catalog-desktop.jpg", caption: "فهرست محصولات با فیلترها و مرتب‌سازی", width: 1272, height: 716},
+      {src: "assets/images/mohammad/beauty-store/product-desktop.jpg", caption: "صفحهٔ محصول با قیمت، موجودی و انتخاب تعداد", width: 1272, height: 716},
+    ],
   },
   {
     id: 6,
@@ -344,14 +353,17 @@ export const PROJECTS: Project[] = [
     id: 7,
     slug: "tasksnap",
     title: "TaskSnap؛ اپلیکیشن اندروید برنامه‌ریزی",
-    description: "برنامه‌ریز اندرویدی برای ثبت سریع کارها و ایده‌ها، یادآور و پیگیری برنامه‌ی روزانه. کارها سه وضعیت دارند (باز، نیمه‌کاره، انجام‌شده) و رابط فارسی و انگلیسی با تقویم شمسی و میلادی پشتیبانی می‌شود. نسخه‌ی ۰٫۹٫۱ برای بررسی به مایکت و کافه‌بازار ارسال شده است.",
+    description: "برنامه‌ریز اندرویدی برای ثبت سریع کارها و ایده‌ها، تنظیم یادآور و پیگیری برنامهٔ روزانه. کارها سه وضعیت دارند (باز، نیمه‌کاره، انجام‌شده) و اپلیکیشن از رابط فارسی و انگلیسی و تقویم شمسی و میلادی پشتیبانی می‌کند.",
     learned: [
       "رابط Flutter با ذخیره‌ی محلی در SQLite",
       "یادآور و تقویم دستگاه از طریق Kotlin",
       "پشتیبان‌گیری قابل حمل با عکس و صدا و بازیابی بدون تکرار",
     ],
     tech: ["Flutter", "Kotlin", "SQLite", "Android"],
-    links: [],
+    links: [
+      {label: "تسک اسنپ در کافه‌بازار", url: "https://cafebazaar.ir/app/dev.tasksnap.tasksnap"},
+      {label: "تسک اسنپ در مایکت", url: "https://myket.ir/app/dev.tasksnap.tasksnap"},
+    ],
     author: {fa: "محمد قربانی", en: "Mohammad Ghorbani"},
     img: "assets/images/mohammad/tasksnap-today.webp",
     imgFit: "contain",

@@ -52,8 +52,8 @@ export const DEVELOPERS: Developer[] = [
         name: "محمد قربانی",
         nameEn: "Mohammad Ghorbani",
         role: "توسعه‌دهنده فرانت‌اند و اپلیکیشن",
-        bio: "توسعه‌دهنده‌ای که از رابط‌های وب راست‌به‌چپ تا اپلیکیشن اندروید می‌سازد. پورتال دانشجویی و پورتفولیوی دوزبانه را به‌صورت دمو ساخته و اپلیکیشن برنامه‌ریز TaskSnap را با Flutter و Kotlin توسعه داده است؛ نسخه‌ی ۰٫۹٫۱ آن برای بررسی در مایکت و کافه‌بازار ارسال شده.",
-        skills: ["Frontend", "Flutter", "Kotlin", "SQLite", "RTL UI"],
+        bio: "محمد قربانی رابط‌های وب فارسی و اپلیکیشن اندروید می‌سازد. نمونه‌کارهای او شامل فروشگاه آزمایشی بیوتی استور با Next.js، پورتفولیوی دوزبانه و برنامه‌ریز اندرویدی TaskSnap با Flutter و Kotlin است.",
+        skills: ["Frontend", "Next.js", "Flutter", "Kotlin", "SQLite", "RTL UI"],
         links: [],
     },
 ];

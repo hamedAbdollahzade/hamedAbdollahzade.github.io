@@ -3,8 +3,9 @@ import CodeWindow from "@/components/animations/CodeWindow";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
 import Avatar from "@/components/Avatar";
+import ProjectCard from "@/components/ProjectCard";
 import Shell from "@/components/Shell";
-import {getDevelopers} from "@/data/localized";
+import {getDevelopers, getProjects} from "@/data/localized";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
 import {AUTHOR_NAMES, SITE, photoAlt, photoObject} from "@/lib/site";
@@ -15,6 +16,7 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
     const t = UI[locale];
     const d = getDevelopers(locale).find((x) => x.slug === slug);
     if (!d) notFound();
+    const projects = getProjects(locale).filter((project) => project.author?.en === d.nameEn);
     const url = `${SITE}${localePath(locale, `/developers/${slug}/`)}`;
     // Only Hamed is the site-wide person (#person); every other developer gets an id of their own.
     const isAuthor = slug === "hamed-abdollahzade";
@@ -66,6 +68,14 @@ export default function DeveloperView({locale, slug}: {locale: Locale; slug: str
                         <p>{d.bio}</p>
                         <div style={{marginTop: 22}}><CodeWindow file="developer.ts" lines={snippet} label={t.home.codeLabel}/></div>
                     </section>
+                    {projects.length > 0 && (
+                        <section className="card" aria-labelledby="developer-projects-title">
+                            <div className="block-head"><h2 className="block-title" id="developer-projects-title">{t.home.projectsTitle}</h2></div>
+                            <div className="grid grid--cards">
+                                {projects.map((project) => <ProjectCard key={project.slug} project={project} locale={locale}/>)}
+                            </div>
+                        </section>
+                    )}
                     {d.mentors && (
                         <section className="card" aria-labelledby="mentors-title">
                             <div className="block-head">

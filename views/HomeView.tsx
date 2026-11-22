@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import {PhoneIcon, ServiceIcon, WhatsAppIcon} from "@/components/Icons";
 import JsonLd from "@/components/JsonLd";
 import OpenChat from "@/components/OpenChat";
 import Avatar from "@/components/Avatar";
+import ProjectCard from "@/components/ProjectCard";
 import Shell from "@/components/Shell";
 import TechStrip from "@/components/TechStrip";
 import {getBrand, getCourseCopy, getCourses, getDevelopers, getFaq, getProcess, getProjects, getServices} from "@/data/localized";
@@ -102,14 +102,7 @@ export default function HomeView({locale}: {locale: Locale}) {
                     </div>
                 </div>
                 <div className="grid grid--cards">
-                    {getProjects(locale).map((p) => (
-                        <Link className="project-card" href={to(`/projects/${p.slug}/`)} key={p.slug}>
-                            <div className={`project-media${p.imgFit === "contain" ? " project-media--contain" : ""}`}><Image src={`/${p.img}`} alt={p.title} width={720} height={540}/></div>
-                            <h3>{p.title}</h3>
-                            <p>{summarize(p.description, 140)}</p>
-                            <span className="tile-more">{t.home.viewDetails} {t.arrow}</span>
-                        </Link>
-                    ))}
+                    {getProjects(locale).map((project) => <ProjectCard key={project.slug} project={project} locale={locale}/>)}
                 </div>
             </section>
 

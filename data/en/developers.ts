@@ -65,7 +65,7 @@ export const DEVELOPER_EN: Record<string, {role: string; bio: string; mentors: {
   },
   "mohammad-ghorbani": {
     role: "Frontend and App Developer",
-    bio: "A developer who builds everything from right-to-left web interfaces to Android apps. He built a student portal and a bilingual portfolio as demos, and developed the TaskSnap planner with Flutter and Kotlin; version 0.9.1 was submitted to Myket and Cafe Bazaar for review.",
+    bio: "Mohammad Ghorbani builds Persian web interfaces and Android apps. His work includes Beauty Store, a demo storefront built with Next.js, a bilingual portfolio and TaskSnap, an Android planner built with Flutter and Kotlin.",
     mentors: [],
   },
 };

@@ -33,7 +33,7 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                     {
                         "@type": "CreativeWork", "@id": `${url}#project`, name: p.title, description: p.description, url,
                         image: allImages.map((i) => `${SITE}/${i.src}`), keywords: p.tech.join(", "), inLanguage: locale,
-                        author: {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
+                        author: p.author ? {"@type": "Person", name: p.author[locale]} : {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
                         publisher: {"@id": `${SITE}/#org`},
                     },
                     ...(p.videos ?? []).map((v) => ({
@@ -65,7 +65,7 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                 )}
                 {images.map((img, i) => (
                     <figure className="figure" key={img.src}>
-                        <Image src={`/${img.src}`} alt={img.caption} width={1440} height={900} priority={i === 0}/>
+                        <Image src={`/${img.src}`} alt={img.caption} width={img.width ?? 1440} height={img.height ?? 900} priority={i === 0}/>
                         <figcaption>{img.caption}</figcaption>
                     </figure>
                 ))}

@@ -154,15 +154,20 @@ export const PROJECTS_EN: Record<string, ProjectCopy> = {
     linkLabels: ["WikiQ website", "WikiQ app"],
     galleryCaptions: ["App home: pack search and suggested packs", "Creating an online exam and answering questions", "Taking an online exam with a timer", "Exam result and score per course", "Detailed exam answer key", "Field and category list"],
   },
-  "university-student-portal": {
-    title: "Student portal",
-    description: "A demo of a university portal with role-based sign-in for a student, a training clerk and an admin. The interface is fully right-to-left and Persian, and the demo data stays in the browser only.",
+  "beauty-store": {
+    title: "Beauty Store: a personal care storefront",
+    description: "Beauty Store is a demo e-commerce site for personal care products, built by Mohammad Ghorbani with Next.js. It has a Persian right-to-left interface, a searchable catalog, a shopping cart and a test checkout.",
     learned: [
-      "Designing sign-in and registration flows for several user roles",
-      "A right-to-left interface with light and dark themes",
-      "A server-free demo: data never leaves the browser",
+      "Full-stack development of the storefront and admin panel with Next.js",
+      "A Persian right-to-left interface with light and dark themes",
+      "An installable PWA and a smart support assistant",
     ],
-    linkLabels: ["Open the demo"],
+    story: [
+      {title: "Finding and choosing products", text: "Shoppers can search the catalog or filter by category, price range and discounts. Each product page shows a photo, specifications, price and stock, with controls to select a quantity and add the item to the cart or wishlist."},
+      {title: "Test checkout and support", text: "A test payment gateway demonstrates the checkout flow. The project also includes an admin panel, an installable web app and a smart support assistant."},
+    ],
+    linkLabels: ["Open the demo store"],
+    imageCaptions: ["Storefront home page with a featured product banner", "Product catalog with filters and sorting", "Product detail page with pricing, stock and quantity controls"],
   },
   "personal-portfolio": {
     title: "Bilingual personal portfolio",
@@ -176,13 +181,13 @@ export const PROJECTS_EN: Record<string, ProjectCopy> = {
   },
   "tasksnap": {
     title: "TaskSnap: an Android planner",
-    description: "An Android planner for capturing tasks and ideas quickly, setting reminders and following the daily plan. Tasks can be open, partial or completed, and the Persian and English interfaces support the Solar Hijri and Gregorian calendars. Version 0.9.1 was submitted to Myket and Cafe Bazaar for review.",
+    description: "An Android planner for capturing tasks and ideas, setting reminders and keeping track of the daily plan. Tasks can be open, in progress or completed, and the app supports Persian and English as well as the Solar Hijri and Gregorian calendars.",
     learned: [
       "A Flutter interface with on-device storage in SQLite",
       "Reminders and the device calendar through Kotlin",
       "Portable backups with photos and audio, and duplicate-safe restore",
     ],
-    linkLabels: [],
+    linkLabels: ["TaskSnap on Cafe Bazaar", "TaskSnap on Myket"],
     galleryCaptions: ["Today view with progress and three task states", "Ideas", "Progress insights"],
   },
 };
