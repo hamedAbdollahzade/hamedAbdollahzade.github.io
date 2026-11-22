@@ -471,8 +471,11 @@ html.nav-open :is(.chat-fab, .chat-tip) { opacity: 0; visibility: hidden; pointe
 .vh-shade { position: absolute; inset: 0; z-index: -1;
     background: radial-gradient(ellipse 62% 58% at 50% 50%, rgba(7, 9, 20, .82) 0%, rgba(7, 9, 20, .62) 55%, rgba(7, 9, 20, .38) 100%),
         linear-gradient(180deg, rgba(7, 9, 20, .25) 0%, rgba(7, 9, 20, 0) 30%, rgba(7, 9, 20, .55) 100%); }
-.vh-content { width: 100%; max-width: 860px; margin-inline: auto; display: grid; justify-items: center; text-align: center; gap: 6px;
-    opacity: calc(1 - var(--hero-p) * 1.3); transform: translateY(calc(var(--hero-p) * -60px)); }
+.vh-layout { direction: ltr; width: 100%; max-width: 1180px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: center; gap: clamp(28px, 5vw, 70px); opacity: calc(1 - var(--hero-p) * 1.3); transform: translateY(calc(var(--hero-p) * -60px)); }
+.vh-portrait { display: block; width: 100%; max-width: 390px; height: auto; justify-self: center; border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, .28); box-shadow: 0 18px 64px rgba(0, 0, 0, .42); }
+.vh-content { display: grid; justify-items: start; text-align: start; gap: 6px; }
 .vh-content > * { animation: vh-in .9s cubic-bezier(.2, .7, .2, 1) both; }
 .vh-content > :nth-child(2) { animation-delay: .12s; }
 .vh-content > :nth-child(3) { animation-delay: .24s; }
@@ -484,17 +487,24 @@ html.nav-open :is(.chat-fab, .chat-tip) { opacity: 0; visibility: hidden; pointe
 .vh-title { margin: 12px 0 2px; font-size: clamp(32px, 5.2vw, 62px); font-weight: 900; line-height: 1.35; letter-spacing: -.015em; text-wrap: balance; text-shadow: 0 4px 30px rgba(0, 0, 0, .35); }
 .vh-accent { display: inline-block; background: linear-gradient(90deg, #7ef0c5, #8fa0ff 60%, #ffc36b); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .vh-lead { max-width: 640px; margin: 8px 0 18px; color: rgba(255, 255, 255, .86); font-size: clamp(16px, 1.8vw, 19.5px); line-height: 2; text-wrap: pretty; }
-.vh-actions { justify-content: center; }
+.vh-actions { justify-content: start; }
 .btn.vh-ghost { background: rgba(255, 255, 255, .1); background-image: none; color: #fff; border: 1px solid rgba(255, 255, 255, .45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .btn.vh-ghost:hover { background: rgba(255, 255, 255, .2); color: #fff; }
-.vh-points { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 16px; font-size: 14.5px; color: rgba(255, 255, 255, .8); }
+.vh-points { display: flex; flex-wrap: wrap; justify-content: start; gap: 8px 22px; margin-top: 16px; font-size: 14.5px; color: rgba(255, 255, 255, .8); }
 .vh-points li { position: relative; padding-inline-start: 22px; }
 .vh-points li::before { content: "✓"; position: absolute; inset-inline-start: 0; color: #7ef0c5; font-weight: 800; }
-.vh-scroll { position: absolute; inset-block-end: 22px; inset-inline-start: 50%; translate: -50% 0; width: 30px; height: 48px; border-radius: 999px; border: 2px solid rgba(255, 255, 255, .6); display: grid; justify-items: center; padding-top: 8px; }
+.vh-scroll { position: absolute; inset-block-end: 22px; left: 50%; translate: -50% 0; width: 30px; height: 48px; border-radius: 999px; border: 2px solid rgba(255, 255, 255, .6); display: grid; justify-items: center; padding-top: 8px; }
 .vh-scroll span { width: 4px; height: 9px; border-radius: 4px; background: #fff; animation: vh-wheel 1.8s ease-in-out infinite; }
 @keyframes vh-wheel { 0% { opacity: 0; transform: translateY(-4px); } 40% { opacity: 1; } 80% { opacity: 0; transform: translateY(12px); } 100% { opacity: 0; } }
+@media (max-width: 760px) {
+    .vh-layout { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .vh-portrait { width: clamp(120px, 31vw, 210px); border-radius: 22px; }
+    .vh-content { justify-items: center; text-align: center; }
+    .vh-actions, .vh-points { justify-content: center; }
+    .vh-hero { padding-bottom: 80px; }
+}
 @media (max-width: 640px) {
-    .vh-hero { min-height: max(480px, calc(100svh - var(--topbar-h) - 1px)); padding-block: 22px 56px; }
+    .vh-hero { padding-top: 22px; }
     .vh-title { font-size: clamp(28px, 8.4vw, 36px); margin-top: 10px; }
     .vh-lead { margin: 6px 0 14px; font-size: 15px; line-height: 1.9; }
     .vh-actions .btn { min-height: 46px; }

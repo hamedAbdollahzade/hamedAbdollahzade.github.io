@@ -10,8 +10,9 @@ export const AUTHOR_EN = "Hamed Abdollahzade";
 /** Spellings people search for; used in keywords and structured data. */
 export const AUTHOR_NAMES = [AUTHOR, "حامد عبدالله زاده", "حامد عبداله‌زاده", "حامد عبدالله‌زاده", AUTHOR_EN];
 export const AUTHOR_URL = `${SITE}/developers/hamed-abdollahzade/`;
-export const AUTHOR_PHOTO = `${SITE}/assets/images/hamed-abdollahzade.jpg`;
-const PHOTO_SIZE = 460;
+export const AUTHOR_PHOTO_PATH = "/assets/images/hamed-abdollahzade.jpg";
+export const AUTHOR_PHOTO = `${SITE}${AUTHOR_PHOTO_PATH}`;
+export const AUTHOR_PHOTO_SIZE = 460;
 
 /** Alt text and caption for Hamed's photo, with his name in both scripts for image search. */
 export const photoAlt = (locale: Locale) =>
@@ -20,7 +21,7 @@ export const photoAlt = (locale: Locale) =>
 /** schema.org ImageObject for Hamed's photo. */
 export const photoObject = (locale: Locale) => ({
     "@type": "ImageObject", "@id": `${SITE}/#photo`, url: AUTHOR_PHOTO, contentUrl: AUTHOR_PHOTO,
-    width: PHOTO_SIZE, height: PHOTO_SIZE, caption: photoAlt(locale), name: locale === "fa" ? AUTHOR : AUTHOR_EN,
+    width: AUTHOR_PHOTO_SIZE, height: AUTHOR_PHOTO_SIZE, caption: photoAlt(locale), name: locale === "fa" ? AUTHOR : AUTHOR_EN,
     creditText: AUTHOR_EN, copyrightNotice: AUTHOR_EN,
 });
 export const ORG = `${BRAND.name} | وبینو دِو`;
