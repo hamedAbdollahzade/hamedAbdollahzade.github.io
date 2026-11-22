@@ -42,7 +42,7 @@ export interface Project {
   videos?: {src: string; poster: string; caption: string; width: number; height: number}[];
   /** Phone/app screenshots shown in a grid instead of full-width figures. */
   gallery?: {src: string; caption: string; width: number; height: number}[];
-  /** Set when the project was built by another member of the team. */
+  /** Internal attribution used to group projects on developer profiles. */
   author?: {fa: string; en: string};
   /** Use "contain" for transparent app mockups so they aren't cropped in cards. */
   imgFit?: "cover" | "contain";
@@ -314,7 +314,7 @@ export const PROJECTS: Project[] = [
     id: 9,
     slug: "beauty-store",
     title: "بیوتی استور؛ فروشگاه لوازم مراقبت شخصی",
-    description: "بیوتی استور یک فروشگاه اینترنتی نمایشی برای لوازم مراقبت شخصی است که محمد قربانی با Next.js ساخته است. رابط فارسی و راست‌چین، کاتالوگ قابل جست‌وجو، سبد خرید و پرداخت آزمایشی دارد.",
+    description: "بیوتی استور یک فروشگاه اینترنتی نمایشی برای لوازم مراقبت شخصی است که با Next.js ساخته شده. رابط فارسی و راست‌چین، کاتالوگ قابل جست‌وجو، سبد خرید و پرداخت آزمایشی دارد.",
     learned: [
       "توسعهٔ فول‌استک فروشگاه و پنل مدیریت با Next.js",
       "رابط فارسی و راست‌چین با حالت روشن و تاریک",

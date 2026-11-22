@@ -156,7 +156,7 @@ export const PROJECTS_EN: Record<string, ProjectCopy> = {
   },
   "beauty-store": {
     title: "Beauty Store: a personal care storefront",
-    description: "Beauty Store is a demo e-commerce site for personal care products, built by Mohammad Ghorbani with Next.js. It has a Persian right-to-left interface, a searchable catalog, a shopping cart and a test checkout.",
+    description: "Beauty Store is a demo e-commerce site for personal care products built with Next.js. It has a Persian right-to-left interface, a searchable catalog, a shopping cart and a test checkout.",
     learned: [
       "Full-stack development of the storefront and admin panel with Next.js",
       "A Persian right-to-left interface with light and dark themes",

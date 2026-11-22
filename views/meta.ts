@@ -51,8 +51,11 @@ export function serviceMeta(locale: Locale, slug: string): Metadata {
 export function projectMeta(locale: Locale, slug: string): Metadata {
     const p = getProjects(locale).find((x) => x.slug === slug);
     if (!p) return {};
-    const author = p.author?.[locale] ?? (locale === "fa" ? AUTHOR : AUTHOR_EN);
-    return pageMeta({title: `${p.title} | Webino-Dev`, description: summarize(p.description), path: `/projects/${slug}/`, locale, translated: true, image: `${SITE}/${p.img}`, type: "article", keywords: [...p.tech, author, "Webino-Dev"]});
+    return {
+        ...pageMeta({title: `${p.title} | Webino-Dev`, description: summarize(p.description), path: `/projects/${slug}/`, locale, translated: true, image: `${SITE}/${p.img}`, type: "article", keywords: [...p.tech, "Webino-Dev"]}),
+        authors: null,
+        creator: null,
+    };
 }
 
 export function blogMeta(locale: Locale): Metadata {

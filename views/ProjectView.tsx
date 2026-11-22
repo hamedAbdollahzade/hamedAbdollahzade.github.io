@@ -7,7 +7,7 @@ import Shell from "@/components/Shell";
 import {getProjects} from "@/data/localized";
 import {localePath} from "@/lib/locale";
 import type {Locale} from "@/lib/locale";
-import {AUTHOR, SITE} from "@/lib/site";
+import {SITE} from "@/lib/site";
 import {UI} from "@/lib/ui";
 
 /** One project page in the given language. */
@@ -33,13 +33,11 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
                     {
                         "@type": "CreativeWork", "@id": `${url}#project`, name: p.title, description: p.description, url,
                         image: allImages.map((i) => `${SITE}/${i.src}`), keywords: p.tech.join(", "), inLanguage: locale,
-                        author: p.author ? {"@type": "Person", name: p.author[locale]} : {"@type": "Person", "@id": `${SITE}/#person`, name: AUTHOR},
                         publisher: {"@id": `${SITE}/#org`},
                     },
                     ...(p.videos ?? []).map((v) => ({
                         "@type": "VideoObject", name: `${p.title} | ${v.caption}`, description: v.caption, inLanguage: locale,
                         thumbnailUrl: `${SITE}/${v.poster}`, contentUrl: `${SITE}/${v.src}`, uploadDate: "2026-11-20",
-                        creator: {"@id": `${SITE}/#person`},
                     })),
                     {"@type": "BreadcrumbList", itemListElement: [
                         {"@type": "ListItem", position: 1, name: "Webino-Dev", item: `${SITE}${localePath(locale, "/")}`},
@@ -49,7 +47,6 @@ export default function ProjectView({locale, slug}: {locale: Locale; slug: strin
             }}/>
             <div className="card">
                 <h1 className="page-title">{p.title}</h1>
-                {p.author && <p className="page-lead" style={{marginTop: 8}}>{t.project.by} <strong>{p.author[locale]}</strong></p>}
                 <ul className="tags" style={{marginTop: 14}}>{p.tech.map((tech) => <li key={tech}>{tech}</li>)}</ul>
             </div>
             <div className="card page-card">

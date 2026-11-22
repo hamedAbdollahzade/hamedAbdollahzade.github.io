@@ -103,7 +103,7 @@ const fa = {
         ctaTitle: "ایده‌ات را برایمان بگو", ctaText: "مشاوره و پیشنهاد اولیه رایگان است. گفتگو را شروع کن یا تماس بگیر.",
     },
     project: {
-        crumb: "نمونه‌کارها", kind: "پروژه", appImages: "تصاویر اپلیکیشن", myPart: "تجربه و سهم من در پروژه", similar: "پروژه‌ای مشابه می‌خواهم", others: "پروژه‌های دیگر", by: "ساخته‌ی", about: "درباره‌ی پروژه", desktop: "نسخه‌ی دسکتاپ", mobile: "نسخه‌ی موبایل",
+        crumb: "نمونه‌کارها", kind: "پروژه", appImages: "تصاویر اپلیکیشن", myPart: "تجربه و سهم من در پروژه", similar: "پروژه‌ای مشابه می‌خواهم", others: "پروژه‌های دیگر", about: "درباره‌ی پروژه", desktop: "نسخه‌ی دسکتاپ", mobile: "نسخه‌ی موبایل",
     },
     blog: {
         crumb: "آموزش‌ها و مقالات", title: "آموزش‌ها و مقالات",
@@ -215,7 +215,7 @@ const en: typeof fa = {
         ctaTitle: "Tell us your idea", ctaText: "The first consultation and proposal are free. Start a chat or call us.",
     },
     project: {
-        crumb: "Projects", kind: "Project", appImages: "App screenshots", myPart: "My experience and contribution", similar: "I want a similar project", others: "Other projects", by: "Built by", about: "About the project", desktop: "Desktop", mobile: "Mobile",
+        crumb: "Projects", kind: "Project", appImages: "App screenshots", myPart: "My experience and contribution", similar: "I want a similar project", others: "Other projects", about: "About the project", desktop: "Desktop", mobile: "Mobile",
     },
     blog: {
         crumb: "Tutorials", title: "Tutorials and articles",
