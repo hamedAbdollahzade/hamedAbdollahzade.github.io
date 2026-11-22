@@ -82,7 +82,7 @@ export default function TypeInit() {
             jobs.forEach((_, el) => io?.observe(el));
         };
 
-        // Wait for the matrix intro to finish so the hero is typed where it can be seen.
+        // Wait for the intro to finish so the hero is typed where it can be seen.
         if (html.classList.contains("intro-on")) {
             waiter = new MutationObserver(() => {
                 if (!html.classList.contains("intro-on")) { waiter?.disconnect(); begin(); }

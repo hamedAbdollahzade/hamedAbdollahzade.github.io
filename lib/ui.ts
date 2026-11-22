@@ -45,7 +45,7 @@ const fa = {
         serviceWa: (title: string) => `سلام، درباره‌ی «${title}» می‌خواهم مشورت بگیرم.`,
     },
     tech: {label: "فناوری‌هایی که با آن‌ها کار می‌کنیم"},
-    intro: {label: (name: string) => `در حال بارگذاری ${name}`, skip: "رد کردن"},
+    intro: {label: (name: string) => `در حال بارگذاری ${name}`, skip: "رد کردن", coding: "کدنویسی", website: "ساخت وب‌سایت", application: "ساخت اپلیکیشن"},
     announce: {text: "مشاوره و پیشنهاد اولیه‌ی پروژه", strong: "رایگان است", cta: "شروع گفتگو"},
     home: {
         heroEyebrow: "حامد عبداله زاده · طراح و توسعه‌دهنده‌ی وب در مشهد",
@@ -156,7 +156,7 @@ const en: typeof fa = {
         serviceWa: (title: string) => `Hello, I would like advice about "${title}".`,
     },
     tech: {label: "Technologies we work with"},
-    intro: {label: (name: string) => `Loading ${name}`, skip: "Skip"},
+    intro: {label: (name: string) => `Loading ${name}`, skip: "Skip", coding: "Writing code", website: "Building a website", application: "Building an app"},
     announce: {text: "Your first consultation and project proposal", strong: "are free", cta: "Start a chat"},
     home: {
         heroEyebrow: "Hamed Abdollahzade · Web designer and developer in Mashhad",

@@ -1,146 +1,79 @@
 "use client";
 
-import {useEffect, useRef} from "react";
-import {getBrand} from "@/data/localized";
+import {useEffect} from "react";
+import {BRAND} from "@/data/services";
+import {Logo} from "./Icons";
 import {useLocale} from "./LocaleProvider";
 
-const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789ابپتجدرزسشعفقکلمنهی";
-const GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789<>/{}=+-*";
-const BRAND_START = 700;      // ms until the brand name starts to appear
-const LETTER_GAP = 110;       // ms between letters
-const SCRAMBLE = 420;         // ms a letter flickers before it locks
-const HOLD = 700;             // ms the finished name stays on screen
-const FADE = 700;             // ms of the fade-out
+function skipIntro() {
+    document.documentElement.classList.remove("intro-on");
+}
 
-/**
- * Matrix-style intro: small letters rain down, then the brand name resolves letter by letter.
- * Shown on every full page load; skippable; not shown with reduced motion.
- * The overlay is only displayed when <html> carries the "intro-on" class (set by an inline script).
- */
 export default function IntroLoader() {
-    const {locale, t} = useLocale();
-    const BRAND = getBrand(locale);
-    const rootRef = useRef<HTMLDivElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
-    const subRef = useRef<HTMLParagraphElement>(null);
+    const {t} = useLocale();
 
     useEffect(() => {
-        const html = document.documentElement;
-        const root = rootRef.current;
-        const canvas = canvasRef.current;
-        if (!html.classList.contains("intro-on") || !root || !canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) { html.classList.remove("intro-on"); return; }
-
-        const name = BRAND.name;
-        const fontSize = window.innerWidth < 640 ? 14 : 17;
-        let width = 0, height = 0, columns: {y: number; speed: number; delay: number}[] = [];
-
-        const resize = () => {
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            ctx.fillStyle = "#050505";
-            ctx.fillRect(0, 0, width, height);
-            const count = Math.ceil(width / fontSize);
-            columns = Array.from({length: count}, () => ({y: -Math.random() * height * 0.6, speed: 0.55 + Math.random() * 1.1, delay: Math.random() * 900}));
+        if (!document.documentElement.classList.contains("intro-on")) return;
+        const onKey = (event: KeyboardEvent) => {
+            if (event.key === "Escape") skipIntro();
         };
-        resize();
-        window.addEventListener("resize", resize);
-
-        const start = performance.now();
-        let finished = false;
-        let fadeTimer: ReturnType<typeof setTimeout> | undefined;
-        let endTimer: ReturnType<typeof setTimeout> | undefined;
-        const lockAt = (i: number) => BRAND_START + i * LETTER_GAP + SCRAMBLE;
-        const doneAt = lockAt(name.length - 1);
-
-        const finish = (fast: boolean) => {
-            if (finished) return;
-            finished = true;
-            root.classList.add("is-out");
-            if (fast) root.style.transitionDuration = ".35s";
-            endTimer = setTimeout(() => {
-                html.classList.remove("intro-on");
-                cleanup();
-            }, fast ? 380 : FADE + 40);
-        };
-
-        const tick = () => {
-            const now = performance.now() - start;
-
-            // Rain: fade the previous frame, then draw the head and a bright tail character per column.
-            ctx.fillStyle = "rgba(5, 5, 5, 0.09)";
-            ctx.fillRect(0, 0, width, height);
-            ctx.font = `${fontSize}px ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace`;
-            ctx.textAlign = "center";
-            columns.forEach((col, i) => {
-                if (now < col.delay) return;
-                const x = i * fontSize + fontSize / 2;
-                const step = col.speed * fontSize * 0.95;
-                // Draw a glyph at every cell the column moved through, so fast columns stay continuous.
-                for (let y = col.y; y < col.y + step; y += fontSize) {
-                    ctx.fillStyle = "rgba(161, 161, 170, 0.95)";
-                    ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, y - fontSize);
-                    ctx.fillStyle = "#ffffff";
-                    ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], x, y);
-                }
-                col.y += step;
-                if (col.y > height + fontSize && Math.random() > 0.97) col.y = -fontSize * Math.random() * 6;
-                else if (col.y > height + fontSize * 20) col.y = -fontSize;
-            });
-
-            // Brand name: each letter flickers through random glyphs, then locks.
-            name.split("").forEach((final, i) => {
-                const el = letterRefs.current[i];
-                if (!el) return;
-                const begin = BRAND_START + i * LETTER_GAP;
-                if (now < begin) return;
-                el.style.opacity = "1";
-                if (now >= lockAt(i)) {
-                    if (el.textContent !== final) el.textContent = final;
-                    el.classList.add("is-locked");
-                } else {
-                    el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
-                }
-            });
-            if (now >= doneAt && subRef.current) subRef.current.classList.add("is-visible");
-            if (now >= doneAt + HOLD) finish(false);
-        };
-
-        const timer = setInterval(tick, 42);
-        const onSkip = () => finish(true);
-        const onKey = (e: KeyboardEvent) => { if (e.key === "Escape" || e.key === "Enter" || e.key === " ") finish(true); };
-        root.addEventListener("click", onSkip);
         document.addEventListener("keydown", onKey);
-
-        function cleanup() {
-            clearInterval(timer);
-            if (fadeTimer) clearTimeout(fadeTimer);
-            if (endTimer) clearTimeout(endTimer);
-            window.removeEventListener("resize", resize);
-            root!.removeEventListener("click", onSkip);
-            document.removeEventListener("keydown", onKey);
-        }
-        return cleanup;
+        return () => document.removeEventListener("keydown", onKey);
     }, []);
 
     return (
-        <div className="intro" ref={rootRef} role="status" aria-label={t.intro.label(BRAND.name)}>
-            <canvas ref={canvasRef} aria-hidden="true"/>
-            <div className="intro-center">
-                <div className="intro-brand" aria-hidden="true" dir="ltr">
-                    {BRAND.name.split("").map((c, i) => (
-                        <span key={i} className="intro-letter" ref={(el) => { letterRefs.current[i] = el; }}>{c}</span>
-                    ))}
-                </div>
-                <p className="intro-sub" ref={subRef}>{BRAND.tagline}</p>
+        <div className="intro" id="site-intro">
+            <div className="intro-brand" role="status" aria-label={t.intro.label(BRAND.name)}>
+                <span className="intro-brand-icon"><Logo/></span>
+                <span dir="ltr">{BRAND.name}</span>
             </div>
-            <button type="button" className="intro-skip">{t.intro.skip}</button>
+
+            <div className="intro-stage" aria-hidden="true">
+                <div className="intro-scene intro-scene--code">
+                    <div className="intro-window" dir="ltr">
+                        <div className="intro-window-bar"><i/><i/><i/><span>app.tsx</span></div>
+                        <pre className="intro-code"><code>
+                            <span><b>export function</b> App() {"{"}</span>
+                            <span>{"  "}<b>return</b> (</span>
+                            <span>{"    "}<em>{"<main>"}</em></span>
+                            <span>{"      "}<em>{"<Hero />"}</em></span>
+                            <span>{"      "}<em>{"<Projects />"}</em></span>
+                            <span>{"    "}<em>{"</main>"}</em></span>
+                            <span>{"  );"}</span>
+                            <span>{"}"}</span>
+                        </code></pre>
+                    </div>
+                    <p className="intro-caption">{t.intro.coding}</p>
+                </div>
+
+                <div className="intro-scene intro-scene--web">
+                    <div className="intro-window" dir="ltr">
+                        <div className="intro-window-bar"><i/><i/><i/><span>webino-dev.ir</span></div>
+                        <div className="intro-web">
+                            <div className="intro-web-nav"><Logo/><i/><i/></div>
+                            <div className="intro-web-hero">
+                                <div><i/><i/><i/></div>
+                                <span className="intro-web-art"/>
+                            </div>
+                            <div className="intro-web-cards"><i/><i/><i/></div>
+                        </div>
+                    </div>
+                    <p className="intro-caption">{t.intro.website}</p>
+                </div>
+
+                <div className="intro-scene intro-scene--app">
+                    <div className="intro-phone" dir="ltr">
+                        <div className="intro-phone-camera"/>
+                        <div className="intro-phone-head"><Logo/><i/></div>
+                        <div className="intro-phone-chart"><i/><i/><i/><i/><i/></div>
+                        <div className="intro-phone-list"><i/><i/><i/></div>
+                    </div>
+                    <p className="intro-caption">{t.intro.application}</p>
+                </div>
+            </div>
+
+            <div className="intro-progress" aria-hidden="true"><i/></div>
+            <button type="button" className="intro-skip" onClick={skipIntro}>{t.intro.skip}</button>
         </div>
     );
 }
