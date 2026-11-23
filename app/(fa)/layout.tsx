@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     creator: AUTHOR,
     publisher: "Webino-Dev",
     manifest: "/manifest.json",
-    icons: {icon: [{url: "/assets/icons/favicon.svg", type: "image/svg+xml"}]},
+    icons: {icon: [{url: "/assets/icons/webino.png", type: "image/png"}]},
     robots: {index: true, follow: true, "max-image-preview": "large", "max-snippet": -1},
     openGraph: {siteName: ORG, locale: "fa_IR"},
 };

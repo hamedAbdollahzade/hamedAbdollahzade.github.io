@@ -28,7 +28,7 @@ function graph(locale: Locale) {
                 name: "Webino-Dev",
                 alternateName: "وبینو دِو",
                 url: `${SITE}/`,
-                logo: `${SITE}/assets/icons/favicon.svg`,
+                logo: `${SITE}/assets/icons/webino.png`,
                 image: OG_IMAGE,
                 description: t.home.meta.description,
                 telephone: brand.phone,

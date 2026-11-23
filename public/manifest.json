@@ -12,9 +12,9 @@
   "theme_color": "#0a0a0b",
   "icons": [
     {
-      "src": "/assets/icons/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/assets/icons/webino.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any"
     }
   ]

@@ -3,7 +3,9 @@ import type {ReactNode} from "react";
 const base = {viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.9, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true} as const;
 const make = (d: ReactNode) => function Icon() { return <svg {...base}>{d}</svg>; };
 
-export const Logo = make(<path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>);
+export function Logo() {
+    return <img src="/assets/icons/webino.png" width="42" height="42" alt=""/>;
+}
 export const PhoneIcon = make(<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.99.36 1.96.68 2.9a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.18-1.18a2 2 0 0 1 2.11-.45c.94.32 1.91.55 2.9.68A2 2 0 0 1 22 16.92z"/>);
 export const ChatIcon = make(<><path d="M21 12a8.5 8.5 0 0 1-12.4 7.5L3 21l1.6-5.1A8.5 8.5 0 1 1 21 12Z"/><path d="M8.5 11h7M8.5 14h4"/></>);
 export const SendIcon = make(<path d="m21 3-9.5 18-2.2-7.8L2 11 21 3Zm-11.7 10.2L21 3"/>);
