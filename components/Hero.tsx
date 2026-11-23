@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import {localePath} from "@/lib/locale";
-import {photoAlt} from "@/lib/site";
 import {useLocale} from "./LocaleProvider";
 import OpenChat from "./OpenChat";
 
@@ -12,8 +10,10 @@ export default function Hero() {
 
     return (
         <section className="vh-hero" aria-labelledby="hero-title">
-            <div className="vh-backdrop">
-                <Image src="/assets/images/home-hero.webp" alt={photoAlt(locale)} fill sizes="100vw" fetchPriority="high"/>
+            <div className="vh-backdrop" aria-hidden="true">
+                <video autoPlay muted loop playsInline poster="/assets/images/home-hero.webp">
+                    <source src="/assets/videos/programming-landing-loop-v2.mp4" type="video/mp4"/>
+                </video>
             </div>
             <div className="vh-layout">
                 <div className="vh-content">
@@ -22,7 +22,7 @@ export default function Hero() {
                     <p className="vh-lead">{h.heroLead}</p>
                     <div className="btn-row vh-actions">
                         <OpenChat className="btn btn--lg" topic={h.heroCtaTopic}>{h.heroCta}</OpenChat>
-                        <a className="btn btn--lg vh-ghost" href={localePath(locale, "/#projects")}>{h.heroSecondary}</a>
+                        <a className="btn btn--lg vh-ghost" href={localePath(locale, "/#learn")}>{h.heroSecondary}</a>
                     </div>
                     <ul className="vh-points">{h.heroPoints.map((x: string) => <li key={x}>{x}</li>)}</ul>
                 </div>
