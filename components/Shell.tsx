@@ -46,6 +46,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                 const el = document.getElementById(id);
                 if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) current = id;
             }
+            document.body.dataset.homeSection = current || "hero";
             setSection(current);
         };
         const onScroll = () => { if (!timer) timer = setTimeout(update, 60); };
@@ -56,6 +57,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
             window.removeEventListener("scroll", onScroll);
             window.removeEventListener("resize", onScroll);
             if (timer) clearTimeout(timer);
+            delete document.body.dataset.homeSection;
         };
     }, [isHome]);
 
@@ -116,6 +118,14 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                     <Link className="brand" href={localePath(locale, "/")} aria-label={`${brand.name}, ${t.brandHome}`}>
                         <span className="brand-mark"><Logo/></span><span>{brand.name}</span>
                     </Link>
+                    <div className="header-tools">
+                        <LanguageSwitch/>
+                        <ThemeToggle/>
+                        <a className="icon-btn header-phone" href={`tel:${brand.phone}`} dir="ltr"
+                           aria-label={`${t.contactUs} ${brand.phoneDisplay}`}>
+                            <PhoneIcon/>{brand.phoneDisplay}
+                        </a>
+                    </div>
                     <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="site-menu" aria-label={open ? t.closeMenu : t.openMenu} onClick={toggleMenu}>
                         <span className="burger" aria-hidden="true"><i/><i/><i/></span>
                     </button>
@@ -125,13 +135,8 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                 because the header's backdrop-filter would trap a fixed element inside it. */}
             <nav id="site-menu" className={`m-panel${open ? " is-open" : ""}${sub ? " has-sub" : ""}`} aria-label={t.mainNav} aria-hidden={!open} inert={!open}>
                 <div className="m-inner">
-                    <div className="m-tools" style={{"--i": 0} as CSSProperties}>
-                        <LanguageSwitch/>
-                        <ThemeToggle/>
-                        <a className="m-phone" href={`tel:${brand.phone}`} dir="ltr"><PhoneIcon/>{brand.phoneDisplay}</a>
-                    </div>
                     {items.map((it, i) => (
-                        <div key={it.key} className="m-item" style={{"--i": i + 1} as CSSProperties}>
+                        <div key={it.key} className="m-item" style={{"--i": i} as CSSProperties}>
                             <div className="m-row">
                                 <Link className={`m-link${it.active ? " is-active" : ""}`} href={localePath(locale, it.href)} onClick={() => go(it.key, it.href)}>{it.label}</Link>
                                 {it.sub.length > 0 && (
@@ -145,7 +150,7 @@ export default function Shell({children, crumbs}: {children: ReactNode; crumbs?:
                             )}
                         </div>
                     ))}
-                    <div className="m-announce" style={{"--i": items.length + 1} as CSSProperties}>
+                    <div className="m-announce" style={{"--i": items.length} as CSSProperties}>
                         <p>{t.announce.text} <b>{t.announce.strong}</b></p>
                         <OpenChat className="btn btn--lg">{t.announce.cta}</OpenChat>
                         <Link className="btn btn--lg btn--ghost" href={localePath(locale, "/#contact")} onClick={() => setOpen(false)}><PhoneIcon/>{t.contactUs}</Link>

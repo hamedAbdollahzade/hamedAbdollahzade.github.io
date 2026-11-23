@@ -7,11 +7,10 @@ import {useEffect} from "react";
 export default function RevealInit() {
     const pathname = usePathname();
     useEffect(() => {
-        const targets = document.querySelectorAll("[data-reveal]:not(.is-in)");
-        if (!("IntersectionObserver" in window)) {
-            targets.forEach((el) => el.classList.add("is-in"));
-            return;
-        }
+        if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const targets = document.querySelectorAll(
+            "[data-reveal], [data-reveal] :is(.grid, .steps, .faq) > *"
+        );
         const io = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -20,8 +19,15 @@ export default function RevealInit() {
                 }
             });
         }, {rootMargin: "0px 0px -8% 0px"});
-        targets.forEach((el) => io.observe(el));
-        return () => io.disconnect();
+        targets.forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight) return;
+            el.classList.add("reveal-ready");
+            io.observe(el);
+        });
+        return () => {
+            io.disconnect();
+            targets.forEach(el => el.classList.remove("reveal-ready", "is-in"));
+        };
     }, [pathname]);
     return null;
 }

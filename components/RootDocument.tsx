@@ -5,7 +5,6 @@ import ChatWidget from "./ChatWidget";
 import IntroLoader from "./IntroLoader";
 import {LocaleProvider} from "./LocaleProvider";
 import RevealInit from "./RevealInit";
-import TypeInit from "./TypeInit";
 import {UI} from "@/lib/ui";
 
 /* Runs before first paint: marks JS support, applies the saved/system theme and shows the intro on every page load (not with reduced motion). */
@@ -54,7 +53,6 @@ export default function RootDocument({locale, children}: {locale: Locale; childr
             {children}
             <ChatWidget/>
             <RevealInit/>
-            <TypeInit/>
         </LocaleProvider>
         </body>
         </html>
