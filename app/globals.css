@@ -963,7 +963,8 @@ body[data-home-section] .band { background: transparent; box-shadow: none; }
     body[data-home-section] { transition: background-color .45s ease; }
 }
 
-.header-tools { margin-inline-start: auto; display: flex; align-items: center; gap: 8px; }
+.topbar .brand { direction: inherit; }
+.header-tools { display: flex; align-items: center; gap: 8px; }
 .header-phone { padding-inline: 12px; white-space: nowrap; }
 html.nav-open .header-tools .icon-btn { color: white; background: #30394a; }
 @media (max-width: 600px) {
